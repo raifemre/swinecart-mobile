@@ -11,7 +11,7 @@ const navigator = createStackNavigator({
   Login: Login,
   Register: Register
 }, {
-  initialRouteName: 'Login',
+  initialRouteName: 'Shop',
   navigationOptions: ({ navigation }) => {
     return {
       header: null
