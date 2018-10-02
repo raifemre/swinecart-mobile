@@ -16,6 +16,8 @@ import {
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
+import Products from '../components/Products';
+
 class Shop extends PureComponent {
 
   constructor() {
@@ -30,9 +32,9 @@ class Shop extends PureComponent {
   }
 
   filter = () => {
-    this.delay(() => {
+    // this.delay(() => {
       alert('Filter!');
-    }, 10);
+    // }, 10);
   }
 
   onChangeText = value => {
@@ -81,8 +83,8 @@ class Shop extends PureComponent {
             </Body>
           </Header>
           <Content>
-            <Text styles={[openSansSemiBold]}>
-            </Text>
+            <Products 
+            />
           </Content>
         </Container>
       </StyleProvider>

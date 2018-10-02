@@ -151,6 +151,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fast-image')
     compile project(':react-native-spinkit')
     compile project(':react-native-splash-screen')
     implementation fileTree(dir: "libs", include: ["*.jar"])
