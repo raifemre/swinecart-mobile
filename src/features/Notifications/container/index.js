@@ -20,7 +20,6 @@ import getTheme from '../../../../native-base-theme/components';
 
 import Notification from '../components/Notification';
 
-const data = Array(100).fill({ message: 'Hello' });
 @inject(['NotificationStore'])
 @observer
 class Notifications extends Component {

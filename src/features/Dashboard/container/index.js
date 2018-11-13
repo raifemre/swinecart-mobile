@@ -1,18 +1,103 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
-  StyleSheet, View, Text
+  StyleSheet
 } from 'react-native';
 
-class Dashboard extends PureComponent {
+import {
+  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text
+} from 'native-base';
+
+import {
+  observer, inject
+} from 'mobx-react';
+
+import {
+  toJS
+} from 'mobx';
+
+import commonColor from '../../../../native-base-theme/variables/commonColor';
+import getTheme from '../../../../native-base-theme/components';
+
+import ProductStats from '../components/ProductStats';
+import Reviews from '../components/Reviews';
+import Sales from '../components/Sales';
+
+class Dashboard extends Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currSeg: 1
+    }
+  }
+
+  changeSeg = (segNum) => {
+    this.setState({
+      currSeg: segNum
+    });
+  }
 
   render() {
-    return(
-      <View>
-        <Text>Dashboard</Text>
-      </View>
+    const {
+    } = this.props;
+
+    const {
+      container, openSansBold, openSansSemiBold
+    } = styles;
+
+    return (
+      <StyleProvider style={getTheme(commonColor)}>
+        <Container>
+          <Header noShadow androidStatusBarColor='#ffffff' hasSegment>
+            <Body style={[container]}>
+              <Title style={[openSansBold, { color: '#000000' }]}>
+                Dashboard
+              </Title>
+            </Body>
+          </Header>
+          <Segment>
+            <Button first onPress={() => this.changeSeg(1)} active={this.state.currSeg === 1}>
+              <Text style={[openSansSemiBold]}>Sales</Text>
+            </Button>
+            <Button onPress={() => this.changeSeg(2)} active={this.state.currSeg === 2}>
+              <Text style={[openSansSemiBold]}>Product Status</Text>
+            </Button>
+            <Button last onPress={() => this.changeSeg(3)} active={this.state.currSeg === 3}>
+              <Text style={[openSansSemiBold]}> Reviews</Text>
+            </Button>
+          </Segment>
+          <Content padder>
+            { this.state.currSeg === 1 && <Sales /> }
+            { this.state.currSeg === 2 && <ProductStats /> }
+            { this.state.currSeg === 3 && <Reviews /> }
+          </Content>
+        </Container>
+      </StyleProvider>
     );
   }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentStyle: {
+    flex: 1,
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  openSansBold: {
+    fontFamily: 'OpenSans-Bold'
+  },
+  openSansSemiBold: {
+    fontFamily: 'OpenSans-SemiBold'
+  }
+});
 
 export default Dashboard;

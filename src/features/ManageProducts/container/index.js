@@ -17,6 +17,10 @@ import getTheme from '../../../../native-base-theme/components';
 
 import Products from '../components/Products';
 
+import {
+  Navigation
+} from '../../../services';
+
 @inject(['ProductsStore'])
 @observer
 class ManageProducts extends Component {
@@ -25,9 +29,8 @@ class ManageProducts extends Component {
     this.props.ProductsStore.getProducts(1);
   }
 
-  handleSelectAll = () => {
-    const { ProductsStore } = this.props;
-    ProductsStore.setIsChecked(true);
+  navigate = () => {
+    Navigation.navigate('AddProduct');
   }
 
   render() {
@@ -41,7 +44,7 @@ class ManageProducts extends Component {
         <Container>
           <Header noShadow androidStatusBarColor='#ffffff'>
             <Left style={[contentStyle]}>
-              <Button transparent onPress={this.handleSelectAll}>
+              <Button transparent onPress={this.navigate}>
                 <Icon type='Feather' name='plus' style={{ color: '#000000' }}/>
               </Button>
             </Left>

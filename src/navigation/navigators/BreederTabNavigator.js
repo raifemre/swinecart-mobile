@@ -9,10 +9,10 @@ import {
 
 import Profile from '../../features/Profile';
 import Notifications from '../../features/Notifications';
-import ManageProducts from '../../features/ManageProducts';
 import Dashboard from '../../features/Dashboard';
 
 import MessagingStackNavigator from './MessagingStackNavigator';
+import ManageProductsStackNavigator from './ManageProductsStackNavigator';
 
 const iconMapping = {
   ManageProducts: 'credit-card',
@@ -35,7 +35,7 @@ MessagingStackNavigator.navigationOptions = ({ navigation }) => {
 
 const navigator = createBottomTabNavigator({
   'ManageProducts': {
-    screen: ManageProducts
+    screen: ManageProductsStackNavigator
   },
   'Dashboard': {
     screen: Dashboard
