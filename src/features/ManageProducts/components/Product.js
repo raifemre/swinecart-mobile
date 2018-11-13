@@ -6,7 +6,7 @@ import {
 
 import {
   View, Text, Card, CardItem, Body, Left, Right, Button, ListItem, CheckBox,
-  Icon
+  Icon, Grid, Col
 } from 'native-base';
 
 import FastImage from 'react-native-fast-image';
@@ -89,21 +89,23 @@ class Product extends Component {
           </Right>
         </CardItem>
         <CardItem>
-          <Left style={{ flex: 1 }}>
-            <Text style={[openSansBold, { fontSize: 13 }]}>Average Daily Gain (g):
-              <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {adg}</Text>
-            </Text>
-          </Left>
-          <Body style={{ flex: 1 }}>
-            <Text style={[openSansBold, { fontSize: 13 }]}>Feed Conversion Ratio:
-              <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {fcr}</Text>
-            </Text>
-          </Body>
-          <Right style={{ flex: 1 }}>
-            <Text style={[openSansBold, { fontSize: 13 }]}>Backfat Thickness (mm):
-              <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {backfat_thickness}</Text>
-            </Text>
-          </Right>
+          <Grid>
+            <Col>
+              <Text style={[openSansBold, { fontSize: 13 }]}>Average Daily Gain (g):
+                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {adg}</Text>
+              </Text>
+            </Col>
+            <Col>
+              <Text style={[openSansBold, { fontSize: 13 }]}>Feed Conversion Ratio:
+                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {fcr}</Text>
+              </Text>
+            </Col>
+            <Col>
+              <Text style={[openSansBold, { fontSize: 13 }]}>Average Daily Gain (g):
+                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {adg}</Text>
+              </Text>
+            </Col>
+          </Grid>
         </CardItem>
         <CardItem>
           <Left style={{ flex: 1 }}>
