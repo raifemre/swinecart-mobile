@@ -60,6 +60,10 @@ class AddProduct extends Component {
     });
   }
 
+  addNewProduct = () => {
+    console.log('Add Product!');
+  }
+
   render() {
     const {
       openSansBold, contentStyle, container, openSansSemiBold, flatButton
@@ -117,11 +121,11 @@ class AddProduct extends Component {
                       selectedValue={this.state.selected2}
                       onValueChange={this.onValueChange}
                     >
-                      <Picker.Item label="Wallet" value="key0" />
-                      <Picker.Item label="ATM Card" value="key1" />
-                      <Picker.Item label="Debit Card" value="key2" />
-                      <Picker.Item label="Credit Card" value="key3" />
-                      <Picker.Item label="Net Banking" value="key4" />
+                      <Picker.Item label="Farm 1" value="key0" />
+                      <Picker.Item label="Farm 2" value="key1" />
+                      <Picker.Item label="Farm 3" value="key2" />
+                      <Picker.Item label="Farm 4" value="key3" />
+                      <Picker.Item label="Farm 5" value="key4" />
                     </Picker>
                   </Item>
                   <Item>
@@ -237,7 +241,7 @@ class AddProduct extends Component {
               <View style={{ marginTop: 20 }}>
                 <Button
                   block
-                  onPress={this.login}
+                  onPress={this.addNewProduct}
                   style={[flatButton, { backgroundColor: '#00af66' }]}
                 >
                   <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Add Product</Text>
