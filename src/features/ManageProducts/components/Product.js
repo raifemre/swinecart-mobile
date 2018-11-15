@@ -101,8 +101,8 @@ class Product extends Component {
               </Text>
             </Col>
             <Col>
-              <Text style={[openSansBold, { fontSize: 13 }]}>Average Daily Gain (g):
-                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {adg}</Text>
+              <Text style={[openSansBold, { fontSize: 13 }]}>Backfat Thickness (mm):
+                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {backfat_thickness}</Text>
               </Text>
             </Col>
           </Grid>
