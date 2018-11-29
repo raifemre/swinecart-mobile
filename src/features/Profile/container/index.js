@@ -19,12 +19,13 @@ import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
 import UserInfo from '../components/UserInfo';
+import ChangePassword from '../components/ChangePassword';
 class Profile extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      currSeg: 1
+      currSeg: 3
     }
   }
 
@@ -63,6 +64,7 @@ class Profile extends Component {
           </Segment>
           <Content padder>
             {this.state.currSeg === 1 && <UserInfo />}
+            {this.state.currSeg === 3 && <ChangePassword />}
           </Content>
         </Container>
       </StyleProvider>
