@@ -5,11 +5,15 @@ import {
 import {
   Auth, Profile
 } from '../../services';
+
+import BreederProfile from '../models/BreederProfile';
 class UserStore {
 
   @observable user;
   @observable loadinguser;
   @observable updatingUser;
+  @observable breederProfile = new BreederProfile({});
+  @observable provinces = [];
 
   @action async getUser() {
     const { data: { user }  } = await Auth.me();
@@ -24,6 +28,16 @@ class UserStore {
 
   @action async changePassword({ currentPassword, newPassword, newPasswordConfirmation }) {
     const data = await Profile.changePassword({ currentPassword, newPassword, newPasswordConfirmation });
+  }
+
+  @action async getProfile() {
+    const { data: { data: { breeder, provinces } } } = await Profile.getProfile();
+    if(this.userRole === 'Breeder') {
+      runInAction(() => {
+        this.provinces = provinces;
+        this.breederProfile = new BreederProfile(breeder);
+      });
+    }
   }
 
   @computed get userId() {

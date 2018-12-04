@@ -14,7 +14,7 @@ import {
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
-import UserInfo from '../components/UserInfo';
+import OfficeInfo from '../components/OfficeInfo';
 import Farms from '../components/Farms';
 import ChangePassword from '../components/ChangePassword';
 @inject('UserStore', 'AuthStore')
@@ -24,8 +24,13 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currSeg: 3
+      currSeg: 1
     }
+  }
+
+  componentDidMount() {
+    const { UserStore } = this.props;
+    UserStore.getProfile();
   }
 
   changeSeg = (segNum) => {
@@ -57,7 +62,7 @@ class Profile extends Component {
           </Header>
           <Segment>
             <Button first onPress={() => this.changeSeg(1)} active={this.state.currSeg === 1}>
-              <Text style={[openSansSemiBold]}>User Info</Text>
+              <Text style={[openSansSemiBold]}>Office Info</Text>
             </Button>
             <Button onPress={() => this.changeSeg(2)} active={this.state.currSeg === 2}>
               <Text style={[openSansSemiBold]}>Farms</Text>
@@ -74,7 +79,7 @@ class Profile extends Component {
             >
               <Text uppercase={true} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
             </Button> 
-            {this.state.currSeg === 1 && <UserInfo />}
+            {this.state.currSeg === 1 && <OfficeInfo />}
             {this.state.currSeg === 2 && <Farms />}
             {this.state.currSeg === 3 && <ChangePassword />}
           </Content>

@@ -11,6 +11,14 @@ const service = {
     }
     return API.post(`${URL_PREFIX}/change-password`, data);
   },
+  getProfile() {
+    const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/edit-profile`;
+    return API.get(`${URL_PREFIX}/get`);
+  },
+  updateProfile(data) {
+    const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/edit-profile`;
+    return API.post(`${URL_PREFIX}/update-personal`, data);
+  }
 }
 
 export default service;
