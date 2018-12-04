@@ -22,14 +22,21 @@ import ProductStats from '../components/ProductStats';
 import Reviews from '../components/Reviews';
 import Sales from '../components/Sales';
 
+@inject('DashboardStore')
+@observer
 class Dashboard extends Component {
 
 
   constructor(props) {
     super(props);
     this.state = {
-      currSeg: 1
+      currSeg: 2
     }
+  }
+
+  componentDidMount() {
+    const { DashboardStore } = this.props;
+    DashboardStore.getStats();
   }
 
   changeSeg = (segNum) => {
@@ -40,6 +47,7 @@ class Dashboard extends Component {
 
   render() {
     const {
+      DashboardStore
     } = this.props;
 
     const {
@@ -69,7 +77,7 @@ class Dashboard extends Component {
           </Segment>
           <Content padder>
             { this.state.currSeg === 1 && <Sales /> }
-            { this.state.currSeg === 2 && <ProductStats /> }
+            { this.state.currSeg === 2 && <ProductStats stats={DashboardStore.stats}/> }
             { this.state.currSeg === 3 && <Reviews /> }
           </Content>
         </Container>

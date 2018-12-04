@@ -41,7 +41,8 @@ instance.interceptors.response.use(
         Navigation.navigate('Public');
       }
       else {
-        return err.response;
+        Promise.reject(err);
+        return err;
       }
     }
     return err;

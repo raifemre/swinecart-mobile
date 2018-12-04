@@ -4,6 +4,7 @@ import CommonStore from './CommonStore';
 import ProductsStore from './ProductsStore';
 import MessageStore from './MessageStore';
 import NotificationStore from './NotificationStore';
+import DashboardStore from './DashboardStore';
 
 const stores = {
   AuthStore,
@@ -11,7 +12,8 @@ const stores = {
   CommonStore,
   ProductsStore,
   MessageStore,
-  NotificationStore
+  NotificationStore,
+  DashboardStore
 }
 
 export default stores;
