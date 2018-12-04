@@ -10,7 +10,7 @@ const service = {
     return API.get(`${URL_PREFIX}/me`);
   },
   logout() {
-    return API.get(`${URL_PREFIX}/logout`);
+    return API.post(`${URL_PREFIX}/logout`);
   }
 }
 

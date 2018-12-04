@@ -48,6 +48,7 @@ class AuthStore {
     await Auth.logout();
     CommonStore.setToken(null);
     UserStore.forgetUser();
+    Navigation.navigate('AuthChecker');
   }
 
 }

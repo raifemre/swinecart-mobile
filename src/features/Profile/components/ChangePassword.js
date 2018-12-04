@@ -7,6 +7,12 @@ import {
   Form, Item, Input, Label, View
 } from 'native-base';
 
+import {
+  observer, inject
+} from 'mobx-react';
+
+@inject(['UserStore'])
+@observer
 class ChangePassword extends Component {
 
   constructor(props) {
@@ -14,7 +20,7 @@ class ChangePassword extends Component {
     this.state = {
       currentPassword: '',
       newPassword: '',
-      confirmNewPassword: ''
+      newPasswordConfirmation: ''
     }
   }
 
@@ -24,15 +30,13 @@ class ChangePassword extends Component {
     });
   }
 
-  toggleisEditable = () => {
-    this.setState(prevState => ({
-      isEditable: !prevState.isEditable
-    }));
-  }
-
-  saveInfo = () => {
-    this.setState({
-      isEditable: false
+  saveInfo = async () => {
+    const {
+      currentPassword, newPassword, newPasswordConfirmation
+    } = this.state;
+    const { UserStore } = this.props;
+    await UserStore.changePassword({ 
+      currentPassword, newPassword, newPasswordConfirmation 
     });
   }
 
@@ -44,7 +48,7 @@ class ChangePassword extends Component {
     } = styles;
 
     const {
-      currentPassword, newPassword, confirmNewPassword
+      currentPassword, newPassword, newPasswordConfirmation
     } = this.state;
 
     return (
@@ -57,13 +61,13 @@ class ChangePassword extends Component {
             <Input placeholder='New Password' secureTextEntry={true} value={newPassword} style={[openSansSemiBold]} onChangeText={(value) => this.handleChangeText('newPassword', value)} />
           </Item>
           <Item>
-            <Input placeholder='Confirm New Password' secureTextEntry={true} value={confirmNewPassword} style={[openSansSemiBold]} onChangeText={(value) => this.handleChangeText('confirmNewPassword', value)} />
+            <Input placeholder='Confirm New Password' secureTextEntry={true} value={newPasswordConfirmation} style={[openSansSemiBold]} onChangeText={(value) => this.handleChangeText('newPasswordConfirmation', value)} />
           </Item>
         </Form>
         <View style={{ marginTop: 20 }}>
           <Button
             block
-            onPress={this.toggleisEditable}
+            onPress={this.saveInfo}
             style={[flatButton, { backgroundColor: '#00af66' }]}
           >
             <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Change Password</Text>

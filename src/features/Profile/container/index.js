@@ -7,19 +7,18 @@ import {
   Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text
 } from 'native-base';
 
-// import {
-//   observer, inject
-// } from 'mobx-react';
-
-// import {
-//   toJS
-// } from 'mobx';
+import {
+  observer, inject
+} from 'mobx-react';
 
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
 import UserInfo from '../components/UserInfo';
+import Farms from '../components/Farms';
 import ChangePassword from '../components/ChangePassword';
+@inject('UserStore', 'AuthStore')
+@observer
 class Profile extends Component {
 
   constructor(props) {
@@ -35,10 +34,15 @@ class Profile extends Component {
     });
   }
 
+  logout = async () => {
+    const { AuthStore } = this.props;
+    await AuthStore.logout();
+  }
+
   render() {
 
     const {
-      container, openSansBold, openSansSemiBold
+      container, openSansBold, openSansSemiBold, flatButton
     } = styles;
 
     return (
@@ -63,7 +67,15 @@ class Profile extends Component {
             </Button>
           </Segment>
           <Content padder>
+            <Button
+              block
+              onPress={this.logout}
+              style={[flatButton, { backgroundColor: '#EF5350' }]}
+            >
+              <Text uppercase={true} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
+            </Button> 
             {this.state.currSeg === 1 && <UserInfo />}
+            {this.state.currSeg === 2 && <Farms />}
             {this.state.currSeg === 3 && <ChangePassword />}
           </Content>
         </Container>
@@ -91,7 +103,12 @@ const styles = StyleSheet.create({
   },
   openSansSemiBold: {
     fontFamily: 'OpenSans-SemiBold'
-  }
+  },
+  flatButton: {
+    elevation: 0,
+    borderColor: 'transparent',
+    borderBottomWidth: 0
+  },
 });
 
 export default Profile;

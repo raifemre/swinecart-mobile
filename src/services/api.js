@@ -34,12 +34,17 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => response,
   async (err) => {
-    if(err && err.response && err.response.status === 401) {
-      await CommonStore.removeToken(null);
-      await UserStore.forgetUser();
-      Navigation.navigate('Public');
+    if(err && err.response) {
+      if (err.response.status === 401) {
+        await CommonStore.removeToken(null);
+        await UserStore.forgetUser();
+        Navigation.navigate('Public');
+      }
+      else {
+        return err.response;
+      }
     }
-    return Promise.reject(err);
+    return err;
   }
 );
 

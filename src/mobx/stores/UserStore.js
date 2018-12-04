@@ -3,7 +3,7 @@ import {
 } from 'mobx';
 
 import {
-  Auth
+  Auth, Profile
 } from '../../services';
 class UserStore {
 
@@ -22,13 +22,17 @@ class UserStore {
     this.user = undefined;
   }
 
+  @action async changePassword({ currentPassword, newPassword, newPasswordConfirmation }) {
+    const data = await Profile.changePassword({ currentPassword, newPassword, newPasswordConfirmation });
+  }
+
   @computed get userId() {
     return this.user && this.user.id;
   }
 
   @computed get userRole() {
     if(this.user) {
-      const role = this.user.userable_type.split('\\')[2]
+      const role = this.user.userable_type.split('\\')[2];
       return role;
     }
     return undefined;
