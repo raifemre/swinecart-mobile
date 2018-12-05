@@ -13,38 +13,47 @@ import {
   observer, inject
 } from 'mobx-react';
 
+import  {
+  toJS
+} from 'mobx';
+
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
 import {
   Navigation
 } from '../../../services';
+import UserStore from '../../../mobx/stores/UserStore';
 
+@inject('UserStore', 'ProductsStore')
+@observer
 class AddProduct extends Component {
 
+
+  componentDidMount() {
+    const {
+      UserStore, ProductsStore
+    } = this.props;
+
+    const {
+      breederProfile
+    } = UserStore;
+
+    const {
+      newProduct
+    } = ProductsStore;
+    
+    newProduct.setValue('farm_from_id', breederProfile.farm_addresses[0].id);
+  }
+
   state = {
-    selected2: undefined,
     chosenDate: new Date(),
     breed: 'Pure',
+    motherBreed: '',
+    fatherBreed: '',
     otherDetails: [
       { characteristic: '', value: '' }
     ]
-  }
-
-  onValueChange = value => {
-    this.setState({
-      selected2: value
-    });
-  }
-
-  setDate = (newDate) => {
-    this.setState({ chosenDate: newDate });
-  }
-
-  setBreed = value => {
-    this.setState({
-      breed: value
-    });
   }
 
   addMoreCharac = () => {
@@ -60,14 +69,58 @@ class AddProduct extends Component {
     });
   }
 
-  addNewProduct = () => {
-    console.log('Add Product!');
+  toggleRadio = breed => {
+    this.setState({ breed });
+  }
+
+  handleBreedChange = (parent, value) => {
+    const { ProductsStore } = this.props;
+    const { fatherBreed, motherBreed } = this.state;
+    const { newProduct } = ProductsStore;
+
+    this.setState({
+      [parent === 'f' ? 'fatherBreed' : 'motherBreed']: value
+    });
+    newProduct.setValue('breed', 
+      `${fatherBreed.toLowerCase().trim()}+${motherBreed.toLowerCase().trim()}`
+    );
+  }
+
+  handleTextChange = (i, field, value) => {
+    const otherDetails = JSON.parse(JSON.stringify(this.state.otherDetails));
+    otherDetails[i][field] = value;
+    this.setState({ otherDetails });
+  }
+  
+  addNewProduct = async () => {
+    const { ProductsStore } = this.props;
+    const { newProduct } = ProductsStore;
+    const { otherDetails } = this.state;
+    const detailString = 
+      otherDetails
+        .filter(({ characteristic: c, value: v }) => c.trim() !== '' && v.trim() !== '')
+        .map(({ characteristic: c, value: v }) => `${c}=${v}`)
+        .join(',');
+        newProduct.setValue('other_details', detailString);
+    await ProductsStore.addProduct();
   }
 
   render() {
     const {
       openSansBold, contentStyle, container, openSansSemiBold, flatButton
     } = styles;
+
+    const { 
+      UserStore, ProductsStore
+    } = this.props;
+
+    const {
+      breederProfile
+    } = UserStore;
+
+    const {
+      newProduct
+    } = ProductsStore;
 
     return (
       <StyleProvider style={getTheme(commonColor)}>
@@ -93,7 +146,7 @@ class AddProduct extends Component {
               <View>
                 <Form>
                   <Item>
-                    <Input placeholder='Name' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                    <Input placeholder='Name' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('name', value)} />
                   </Item>
                   <Item >
                     <Picker
@@ -101,8 +154,8 @@ class AddProduct extends Component {
                       iosIcon={<Icon name="ios-arrow-down-outline" />}
                       placeholder='Choose Type'
                       placeholderStyle={[openSansSemiBold]}
-                      selectedValue={this.state.selected2}
-                      onValueChange={this.onValueChange}
+                      selectedValue={newProduct.type}
+                      onValueChange={value => newProduct.setValue('type', value)}
                       textStyle={[openSansSemiBold]}
                       itemTextStyle={[openSansSemiBold]}
                     >
@@ -114,28 +167,22 @@ class AddProduct extends Component {
                   </Item>
                   <Item >
                     <Picker
-                      mode="dropdown"
-                      iosIcon={<Icon name="ios-arrow-down-outline" />}
                       placeholder='Choose Farm From'
                       placeholderStyle={[openSansSemiBold]}
-                      selectedValue={this.state.selected2}
-                      onValueChange={this.onValueChange}
+                      selectedValue={newProduct.farm_from_id}
+                      onValueChange={value => newProduct.setValue('farm_from_id', value)}
                     >
-                      <Picker.Item label="Farm 1" value="key0" />
-                      <Picker.Item label="Farm 2" value="key1" />
-                      <Picker.Item label="Farm 3" value="key2" />
-                      <Picker.Item label="Farm 4" value="key3" />
-                      <Picker.Item label="Farm 5" value="key4" />
+                      {breederProfile.farm_addresses.map(f => <Picker.Item label={f.name} value={f.id} key={f.id} />)}
                     </Picker>
                   </Item>
                   <Item>
-                    <Input placeholder='Price' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                    <Input placeholder='Price' keyboardType='numeric' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('price', value)} />
                   </Item>
                 </Form>
               </View>
             </View>
             <View style={{ marginTop: 20 }}>
-              <View style={[container]}>
+              <View style={[container, { marginBottom: 20 }]}>
                 <Text style={[openSansBold, { color: '#000000', fontSize: 22 }]}>Breed Information</Text>
               </View>
               <View>
@@ -145,7 +192,7 @@ class AddProduct extends Component {
                       <Radio
                         selectedColor='#00af66'
                         selected={this.state.breed === 'Pure'}
-                        onPress={() => this.setBreed('Pure')}
+                        onPress={() => this.toggleRadio('Pure')} 
                       />
                       <Text style={[openSansBold, { color: '#000000', fontSize: 16, marginLeft: 5 }]}>Pure Breed</Text>
                     </View>
@@ -155,7 +202,7 @@ class AddProduct extends Component {
                       <Radio
                         selectedColor='#00af66'
                         selected={this.state.breed === 'Cross'}
-                        onPress={() => this.setBreed('Cross')}
+                        onPress={() => this.toggleRadio('Cross')}
                       />
                       <Text style={[openSansBold, { color: '#000000', fontSize: 16, marginLeft: 5 }]}>Cross Breed</Text>
                     </View>
@@ -164,16 +211,16 @@ class AddProduct extends Component {
                 <Form>
                   {
                     this.state.breed === 'Pure' && <Item>
-                      <Input placeholder="Breed" style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                      <Input placeholder="Breed" style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('breed', value)} />
                     </Item>
                   }
                  {
                     this.state.breed === 'Cross' && <React.Fragment>
                       <Item>
-                        <Input placeholder="Father's Breed" style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                        <Input value={this.state.fatherBreed} placeholder="Father's Breed" style={[openSansSemiBold]} onChangeText={value => this.handleBreedChange('f', value)} />
                       </Item>
                       <Item>
-                        <Input placeholder="Mother's Breed" style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                        <Input value={this.state.motherBreed} placeholder="Mother's Breed" style={[openSansSemiBold]} onChangeText={value => this.handleBreedChange('m', value)} />
                       </Item>
                     </React.Fragment>
                  } 
@@ -186,17 +233,17 @@ class AddProduct extends Component {
                       placeHolderText="Birth Date"
                       textStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       placeHolderTextStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
-                      onDateChange={this.setDate}
+                      onDateChange={value => newProduct.setValue('birthdate', value)}
                     />
                   </Item>
                   <Item>
-                    <Input keyboardType='numeric' placeholder='Average Daily Gain (grams)' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                    <Input keyboardType='numeric' placeholder='Average Daily Gain (grams)' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('adg', value)} />
                   </Item>
                   <Item>
-                    <Input keyboardType='numeric' placeholder='Feed Conversion Ratio' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                    <Input keyboardType='numeric' placeholder='Feed Conversion Ratio' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('fcr', value)} />
                   </Item>
                   <Item>
-                    <Input keyboardType='numeric' placeholder='Backfat Thickness (mm)' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                    <Input keyboardType='numeric' placeholder='Backfat Thickness (mm)' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('backfat_thickness', value)} />
                   </Item>
                 </Form>
               </View>
@@ -218,14 +265,14 @@ class AddProduct extends Component {
                         <Col>
                           <Form>
                             <Item>
-                              <Input placeholder='Characteristic' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                                <Input placeholder='Characteristic' style={[openSansSemiBold]} onChangeText={value => this.handleTextChange(i, 'characteristic', value)} />
                             </Item>
                           </Form>
                         </Col>
                         <Col>
                           <Form>
                             <Item>
-                              <Input placeholder='Value' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} />
+                                <Input placeholder='Value' style={[openSansSemiBold]} onChangeText={value => this.handleTextChange(i, 'value', value)} />
                             </Item>
                           </Form>
                         </Col>

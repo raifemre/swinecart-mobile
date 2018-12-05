@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction
+  observable, action, runInAction
 } from 'mobx';
 
 class Product {
@@ -19,7 +19,7 @@ class Product {
   @observable breed;
   @observable breed_id;
   @observable breeder_id;
-  @observable farm_from_id;
+  @observable farm_from_id = undefined;
   @observable fcr;
   @observable id;
   @observable img_path;
@@ -32,6 +32,10 @@ class Product {
   @observable type;
   @observable isChecked = false;
 
+  @action setValue(field, value) {
+    this[field] = value;
+    console.log(field, value);
+  }
 
   @action setStatus(status) {
     runInAction(() => {

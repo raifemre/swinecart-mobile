@@ -21,12 +21,13 @@ import {
   Navigation
 } from '../../../services';
 
-@inject(['ProductsStore'])
+@inject('ProductsStore')
 @observer
 class ManageProducts extends Component {
 
   componentDidMount() {
-    this.props.ProductsStore.getProducts(1);
+    const { ProductsStore } = this.props;
+    ProductsStore.getProducts(1);
   }
 
   navigate = () => {

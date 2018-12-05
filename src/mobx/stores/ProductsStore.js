@@ -11,6 +11,7 @@ import Product from '../models/Product';
 class ProductsStore {
 
   @observable _products = [];
+  @observable newProduct = new Product({});
 
   @action async getProducts(page = 1) {
     const { data: { data: { data } } } = await BreederProducts.getProducts(page);
@@ -20,6 +21,9 @@ class ProductsStore {
     });
   }
 
+  @action async addProduct() {
+    console.log(toJS(this.newProduct));
+  }
 
   @action async deleteProduct({ id }) {
     this._products = this._products.filter(product => product.id !== id);
