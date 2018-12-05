@@ -41,11 +41,10 @@ instance.interceptors.response.use(
         Navigation.navigate('Public');
       }
       else {
-        Promise.reject(err);
-        return err;
+        return Promise.reject(err.response);
       }
     }
-    return err;
+    return Promise.reject(err);
   }
 );
 

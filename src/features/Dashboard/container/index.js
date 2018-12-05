@@ -30,7 +30,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currSeg: 2
+      currSeg: 3
     }
   }
 

@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 
 import {
-  StyleSheet, FlatList, ScrollView
+  StyleSheet
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Card, CardItem, Text,
-  List, ListItem, Grid, Col, View
+ Body, Card, CardItem, Text, Grid, Col, View
 } from 'native-base';
 
+import {
+  observer, inject
+} from 'mobx-react';
+
+@inject('DashboardStore')
+@observer
 class Reviews extends Component {
 
   render() {
@@ -17,6 +22,10 @@ class Reviews extends Component {
       container, openSansBold, openSansSemiBold
     } = styles;
 
+    const {
+      DashboardStore
+    } = this.props
+
     return (
       <React.Fragment>
         <Card>
@@ -24,22 +33,22 @@ class Reviews extends Component {
             <Text style={[openSansBold, { color: '#000000', fontSize: 20 }]}>Overall Average Rating</Text>
           </CardItem>
           <CardItem header style={[container]}>
-            <Text style={[openSansBold, { color: '#000000', fontSize: 30 }]}>0 / 5</Text>
+            <Text style={[openSansBold, { color: '#000000', fontSize: 30 }]}>{DashboardStore.overall} / 5</Text>
           </CardItem>
           <CardItem header style={[container]}>
-            <Text style={[openSansBold, { color: '#000000', fontSize: 20 }]}>Number of Reviews: 0</Text>
+            <Text style={[openSansBold, { color: '#000000', fontSize: 20 }]}>Number of Reviews: {DashboardStore.reviewsSize}</Text>
           </CardItem>
           <CardItem>
             <Body style={[container]}>
               <Grid>
                 <Col>
-                  <Text style={[openSansSemiBold]}>Delivery: 0</Text>
+                  <Text style={[openSansSemiBold]}>Delivery: {DashboardStore.delivery}</Text>
                 </Col>
                 <Col>
-                  <Text style={[openSansSemiBold]}>Transaction: 0</Text>
+                  <Text style={[openSansSemiBold]}>Transaction: {DashboardStore.transaction}</Text>
                 </Col>
                 <Col>
-                  <Text style={[openSansSemiBold]}>Product Quality: 0</Text>
+                  <Text style={[openSansSemiBold]}>Product Quality: {DashboardStore.productQuality}</Text>
                 </Col>
               </Grid>
             </Body>
