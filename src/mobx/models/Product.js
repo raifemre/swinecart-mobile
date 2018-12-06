@@ -31,10 +31,11 @@ class Product {
   @observable status;
   @observable type;
   @observable isChecked = false;
+  @observable motherBreed = '';
+  @observable fatherBreed = '';
 
   @action setValue(field, value) {
     this[field] = value;
-    console.log(field, value);
   }
 
   @action setStatus(status) {

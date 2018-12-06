@@ -8,6 +8,9 @@ const service = {
   },
   toggleStatus(id){
     return API.post(`${URL_PREFIX}/product/display/${id}`);
+  },
+  addNewProduct(data) {
+    return API.post(`${URL_PREFIX}/product/store`, data);
   }
 }
 

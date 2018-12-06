@@ -17,6 +17,8 @@ import  {
   toJS
 } from 'mobx';
 
+import moment from 'moment';
+
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
@@ -44,13 +46,12 @@ class AddProduct extends Component {
     } = ProductsStore;
     
     newProduct.setValue('farm_from_id', breederProfile.farm_addresses[0].id);
+    newProduct.setValue('type', 'Boar');
   }
 
   state = {
     chosenDate: new Date(),
     breed: 'Pure',
-    motherBreed: '',
-    fatherBreed: '',
     otherDetails: [
       { characteristic: '', value: '' }
     ]
@@ -72,20 +73,7 @@ class AddProduct extends Component {
   toggleRadio = breed => {
     this.setState({ breed });
   }
-
-  handleBreedChange = (parent, value) => {
-    const { ProductsStore } = this.props;
-    const { fatherBreed, motherBreed } = this.state;
-    const { newProduct } = ProductsStore;
-
-    this.setState({
-      [parent === 'f' ? 'fatherBreed' : 'motherBreed']: value
-    });
-    newProduct.setValue('breed', 
-      `${fatherBreed.toLowerCase().trim()}+${motherBreed.toLowerCase().trim()}`
-    );
-  }
-
+  
   handleTextChange = (i, field, value) => {
     const otherDetails = JSON.parse(JSON.stringify(this.state.otherDetails));
     otherDetails[i][field] = value;
@@ -150,7 +138,7 @@ class AddProduct extends Component {
                   </Item>
                   <Item >
                     <Picker
-                      mode="dropdown"
+                      mode='dropdown'
                       iosIcon={<Icon name="ios-arrow-down-outline" />}
                       placeholder='Choose Type'
                       placeholderStyle={[openSansSemiBold]}
@@ -159,14 +147,15 @@ class AddProduct extends Component {
                       textStyle={[openSansSemiBold]}
                       itemTextStyle={[openSansSemiBold]}
                     >
-                      <Picker.Item label="Boar" value="Boar" />
-                      <Picker.Item label="Sow" value="Sow" />
-                      <Picker.Item label="Gilt" value="Gilt" />
-                      <Picker.Item label="Semen" value="Semen" />
+                      <Picker.Item label="Boar" value="boar" />
+                      <Picker.Item label="Sow" value="bow" />
+                      <Picker.Item label="Gilt" value="gilt" />
+                      <Picker.Item label="Semen" value="semen" />
                     </Picker>
                   </Item>
                   <Item >
                     <Picker
+                      mode='dropdown'
                       placeholder='Choose Farm From'
                       placeholderStyle={[openSansSemiBold]}
                       selectedValue={newProduct.farm_from_id}
@@ -217,10 +206,10 @@ class AddProduct extends Component {
                  {
                     this.state.breed === 'Cross' && <React.Fragment>
                       <Item>
-                        <Input value={this.state.fatherBreed} placeholder="Father's Breed" style={[openSansSemiBold]} onChangeText={value => this.handleBreedChange('f', value)} />
+                        <Input placeholder="Father's Breed" style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('fatherBreed', value.trim())} />
                       </Item>
                       <Item>
-                        <Input value={this.state.motherBreed} placeholder="Mother's Breed" style={[openSansSemiBold]} onChangeText={value => this.handleBreedChange('m', value)} />
+                        <Input placeholder="Mother's Breed" style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('motherBreed', value.trim())} />
                       </Item>
                     </React.Fragment>
                  } 
@@ -228,22 +217,22 @@ class AddProduct extends Component {
                     <DatePicker
                       defaultDate={new Date()}
                       locale={"ph"}
-                      animationType={"fade"}
                       androidMode={"default"}
                       placeHolderText="Birth Date"
+                      formatChosenDate={date => { return moment(date).format('LL'); }}
                       textStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       placeHolderTextStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       onDateChange={value => newProduct.setValue('birthdate', value)}
                     />
                   </Item>
                   <Item>
-                    <Input keyboardType='numeric' placeholder='Average Daily Gain (grams)' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('adg', value)} />
+                    <Input keyboardType='numeric' placeholder='Average Daily Gain (grams)' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('adg', Number.parseFloat(value))} />
                   </Item>
                   <Item>
-                    <Input keyboardType='numeric' placeholder='Feed Conversion Ratio' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('fcr', value)} />
+                    <Input keyboardType='numeric' placeholder='Feed Conversion Ratio' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('fcr', Number.parseFloat(value))} />
                   </Item>
                   <Item>
-                    <Input keyboardType='numeric' placeholder='Backfat Thickness (mm)' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('backfat_thickness', value)} />
+                    <Input keyboardType='numeric' placeholder='Backfat Thickness (mm)' style={[openSansSemiBold]} onChangeText={value => newProduct.setValue('backfat_thickness', Number.parseFloat(value))} />
                   </Item>
                 </Form>
               </View>

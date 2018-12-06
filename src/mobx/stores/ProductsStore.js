@@ -22,7 +22,24 @@ class ProductsStore {
   }
 
   @action async addProduct() {
-    console.log(toJS(this.newProduct));
+    const {
+      adg, birthdate, backfat_thickness, breed, farm_from_id, fcr,
+      name, other_details, price, type, fatherBreed, motherBreed
+    } = this.newProduct;
+    const data = { 
+      adg, birthdate, backfat_thickness, breed, farm_from_id, fcr,
+      name, other_details, price, type,
+    };
+    const fb = fatherBreed.toLowerCase().trim();
+    const mb = motherBreed.toLowerCase().trim();
+    data.breed = fb !== '' && mb !== '' ? `${fb}+${mb}` : breed;
+
+    const { 
+      data: { data: { product, productDetail } } 
+    } = await BreederProducts.addNewProduct(data);
+    runInAction(() => {
+      this._products.unshift(new Product(product));
+    });
   }
 
   @action async deleteProduct({ id }) {
