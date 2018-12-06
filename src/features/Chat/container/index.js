@@ -47,8 +47,13 @@ class Chat extends Component {
   }
 
   onSend(messages = []) {
-    console.log(messages);
-    this.props.MessageStore.addMessage(messages);
+    const { MessageStore } = this.props;
+    if(MessageStore.socket) {
+      MessageStore.addMessage(messages);
+    }
+    else {
+      alert('Not connected to chat!');
+    }
   }
 
   render() {

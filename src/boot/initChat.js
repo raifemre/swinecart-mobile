@@ -36,11 +36,12 @@ const connect = () => {
   };
 
   ws.onclose = (e) => {
+    MessageStore.setSocket(null);
     if (UserStore.userId) {
       setTimeout(() => {
         console.log('WebSocket:', 'Reconnecting!...');
         connect();
-      }, 1000);
+      }, 3000);
     }
   };
 }
