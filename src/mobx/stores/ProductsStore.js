@@ -12,6 +12,7 @@ class ProductsStore {
 
   @observable _products = [];
   @observable newProduct = new Product({});
+  @observable selectedProduct;
 
   @action async getProducts(page = 1) {
     const { data: { data: { data } } } = await BreederProducts.getProducts(page);
@@ -75,6 +76,12 @@ class ProductsStore {
   @action toggleCheck({ id }) {
     const product = this._products.find(product => product.id === id);
     product.toggleChecked();
+  }
+
+  @action setSelectedProduct(product) {
+    runInAction(() => {
+      this.selectedProduct = product;
+    });
   }
 
   @action setIsChecked(isChecked) {

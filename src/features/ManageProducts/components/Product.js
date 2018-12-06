@@ -15,6 +15,7 @@ import {
   observer, inject
 } from 'mobx-react';
 
+import { Navigation } from '../../../services/';
 
 @inject('ProductsStore')
 @observer
@@ -33,6 +34,12 @@ class Product extends Component {
   handleChecked = () => {
     const { ProductsStore, product } = this.props;
     ProductsStore.toggleCheck(product);
+  }
+
+  handleEdit = () => {
+    const { ProductsStore, product } = this.props;
+    ProductsStore.setSelectedProduct(product);
+    Navigation.navigate('EditProduct');
   }
 
   render() {
@@ -113,7 +120,7 @@ class Product extends Component {
           </Left>
           <Right style={{ flex: 1 }}>
             <View style={{ flexDirection: 'row' }}>
-              <Button transparent>
+              <Button transparent onPress={this.handleEdit}>
                 <Icon type='Feather' name='edit' style={{ color: '#000000', fontSize: 22 }} />
               </Button>
               {

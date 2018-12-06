@@ -18,11 +18,19 @@ import Product from './Product';
 @observer
 class Products extends Component {
 
+  state = {
+    refreshing: false
+  }
+
   renderProduct = ({ item }) => {
     return (
       <Product product={item}/>
     );
   }
+
+  handleOnRefresh = () => {
+    console.log('Burat');
+  };
 
   render() {
 
@@ -35,6 +43,8 @@ class Products extends Component {
         data={_products.slice()}
         renderItem={this.renderProduct}
         keyExtractor={product => `${product.id}`}
+        refreshing={this.state.refreshing}
+        onRefresh={this.handleOnRefresh}
       />
     );
   }
