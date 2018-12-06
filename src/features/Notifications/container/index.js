@@ -30,9 +30,9 @@ class Notifications extends Component {
   }
 
   renderItem = ({ item }) => {
-    const { data } = item;
-    const description = data.description.replace(/(<b>|<\/b>)/g, '');
-    return <Notification message={description} />
+    const { data: { description, time: { date } } } = item;
+    const message = description.replace(/(<b>|<\/b>)/g, '');
+    return <Notification message={message} date={date}/>
   }
 
   render() {

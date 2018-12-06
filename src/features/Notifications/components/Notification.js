@@ -5,23 +5,27 @@ import {
 } from 'react-native';
 
 import {
-  Text, Card, CardItem, Body, Left, Icon, Right, View
+  Text, Card, CardItem, Body, Left
 } from 'native-base'
+
+import moment from 'moment';
 
 class Notification extends PureComponent {
 
   render() {
-    const { message } = this.props;
-
+    const { message, date } = this.props;
     const {
       openSansBold, openSansSemiBold, cardStyle, container
     } = styles;
+
+    const ago = moment(date).fromNow();
 
     return (
       <Card style={[cardStyle]}>
         <CardItem>
           <Body>
             <Text style={[openSansSemiBold]}>{message}</Text>
+            <Text style={[openSansSemiBold]}>{ago}</Text>
           </Body>
         </CardItem>
       </Card>
