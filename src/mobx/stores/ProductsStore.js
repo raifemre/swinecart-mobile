@@ -43,7 +43,27 @@ class ProductsStore {
   }
 
   @action async deleteProduct({ id }) {
-    this._products = this._products.filter(product => product.id !== id);
+    const checkedProducts = this._products.reduce((acc, product) => {
+      if (product.isChecked) {
+        acc.push(product.id);
+      }
+      return acc;
+    }, []);
+    if(checkedProducts.length === 0) {
+      await BreederProducts.deleteSelected([id]);
+      runInAction(() => {
+        this._products = this._products.filter(product => product.id !== id);
+      });
+    }
+    else {
+      await BreederProducts.deleteSelected(checkedProducts);
+      runInAction(() => {
+        this._products = this._products.filter(product => (
+          checkedProducts.indexOf(product.id) === -1
+        ));
+      });
+    }
+    
   }
 
   @action async toggleStatus({ id }) {

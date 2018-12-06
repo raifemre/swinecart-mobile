@@ -11,6 +11,9 @@ const service = {
   },
   addNewProduct(data) {
     return API.post(`${URL_PREFIX}/product/store`, data);
+  },
+  deleteSelected(ids) {
+    return API.post(`${URL_PREFIX}/product/delete-selected`, { product_ids: ids });
   }
 }
 
