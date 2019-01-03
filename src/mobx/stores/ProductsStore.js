@@ -16,6 +16,7 @@ class ProductsStore {
 
   @action async getProducts(page = 1) {
     const { data: { data: { data } } } = await BreederProducts.getProducts(page);
+    console.log(data);
     runInAction(() => {
       const products = data.map(p => new Product(p));
       this._products.push(...products);
@@ -38,6 +39,9 @@ class ProductsStore {
     const { 
       data: { data: { product, productDetail } } 
     } = await BreederProducts.addNewProduct(data);
+
+    console.log(product);
+
     runInAction(() => {
       this._products.unshift(new Product(product));
     });

@@ -139,14 +139,13 @@ class EditProduct extends Component {
                       iosIcon={<Icon name="ios-arrow-down-outline" />}
                       placeholder='Choose Type'
                       placeholderStyle={[openSansSemiBold]}
-                      value={selectedProduct.type}
-                      selectedValue={selectedProduct.type}
+                      selectedValue={selectedProduct.type.toLowerCase()}
                       onValueChange={value => selectedProduct.setValue('type', value)}
                       textStyle={[openSansSemiBold]}
                       itemTextStyle={[openSansSemiBold]}
                     >
                       <Picker.Item label="Boar" value="boar" />
-                      <Picker.Item label="Sow" value="bow" />
+                      <Picker.Item label="Sow" value="sow" />
                       <Picker.Item label="Gilt" value="gilt" />
                       <Picker.Item label="Semen" value="semen" />
                     </Picker>
@@ -163,7 +162,7 @@ class EditProduct extends Component {
                     </Picker>
                   </Item>
                   <Item>
-                    <Input value={selectedProduct.price.toString()} placeholder='Price' keyboardType='numeric' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('price', value)} />
+                    <Input value={(selectedProduct.price && selectedProduct.price.toString()) || ''} placeholder='Price' keyboardType='numeric' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('price', value)} />
                   </Item>
                 </Form>
               </View>

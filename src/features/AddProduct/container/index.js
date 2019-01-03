@@ -147,10 +147,10 @@ class AddProduct extends Component {
                       textStyle={[openSansSemiBold]}
                       itemTextStyle={[openSansSemiBold]}
                     >
-                      <Picker.Item label="Boar" value="boar" />
-                      <Picker.Item label="Sow" value="bow" />
-                      <Picker.Item label="Gilt" value="gilt" />
-                      <Picker.Item label="Semen" value="semen" />
+                      <Picker.Item label="Boar" value="Boar" />
+                      <Picker.Item label="Sow" value="Sow" />
+                      <Picker.Item label="Gilt" value="Gilt" />
+                      <Picker.Item label="Semen" value="Semen" />
                     </Picker>
                   </Item>
                   <Item >

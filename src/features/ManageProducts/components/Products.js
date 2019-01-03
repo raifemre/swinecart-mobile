@@ -29,7 +29,7 @@ class Products extends Component {
   }
 
   handleOnRefresh = () => {
-    console.log('Burat');
+    console.log('Test');
   };
 
   render() {
