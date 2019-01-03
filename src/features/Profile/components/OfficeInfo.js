@@ -16,7 +16,7 @@ import  {
 
 
 import UserField from './UserField';
-
+import EditButton from './EditButton';
 @inject(['UserStore'])
 @observer
 class OfficeInfo extends Component {
@@ -46,6 +46,10 @@ class OfficeInfo extends Component {
     this.setState({
       isEditable: false
     });
+  }
+
+  cancelEdit = () => {
+    this.toggleisEditable();
   }
 
 
@@ -145,30 +149,12 @@ class OfficeInfo extends Component {
           />
         </Form>
         <View style={{ marginTop: 20 }}>
-          { !isEditable && <Button
-            block
-            onPress={this.toggleisEditable}
-            style={[flatButton, { backgroundColor: '#00af66' }]}
-          >
-            <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Edit Info</Text>
-          </Button> }
-          { isEditable && <React.Fragment>
-              <Button
-                block
-                onPress={this.saveInfo}
-                style={[flatButton, { backgroundColor: '#00af66' }]}
-              >
-                <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Save</Text>
-              </Button>
-            <Button
-              block
-              onPress={this.toggleisEditable}
-              style={[flatButton, { backgroundColor: '#EF5350', marginTop: 10 }]}
-            >
-              <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Cancel</Text>
-            </Button>
-            </React.Fragment>
-          }
+          <EditButton 
+            isEditable={isEditable}
+            toggleisEditable={this.toggleisEditable}
+            saveInfo={this.saveInfo}
+            cancelEdit={this.cancelEdit}
+          />
         </View>
       </React.Fragment>
     );

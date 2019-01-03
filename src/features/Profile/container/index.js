@@ -24,7 +24,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currSeg: 1
+      currSeg: 2
     }
   }
 

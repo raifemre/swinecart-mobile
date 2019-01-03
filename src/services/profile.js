@@ -18,7 +18,11 @@ const service = {
   updateProfile(data) {
     const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/edit-profile`;
     return API.post(`${URL_PREFIX}/update-personal`, data);
-  }
+  },
+  updateFarmInfo(data, id) {
+    const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/edit-profile`;
+    return API.post(`${URL_PREFIX}/farm/update/${id}`, data);
+  } 
 }
 
 export default service;

@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS
+  observable, action
 } from 'mobx';
 
 import {

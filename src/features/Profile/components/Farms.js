@@ -1,51 +1,82 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, FlatList
+  StyleSheet, Dimensions
 } from 'react-native';
+
+import Carousel, { Pagination } from 'react-native-snap-carousel';
+
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text,
-  Form, Item, Input, Label, View
+  Text, View, Form
 } from 'native-base';
 
+import {
+  observer, inject
+} from 'mobx-react';
+
+import {
+  toJS
+} from 'mobx';
+
+import Farm from './Farm';
+import UserStore from '../../../mobx/stores/UserStore';
+
+
+const wp = percentage => Math.round((percentage * viewportWidth) / 100);
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+const slideWidth = wp(100);
+const itemHorizontalMargin = wp(1);
+const sliderWidth = viewportWidth;
+const itemWidth = slideWidth + itemHorizontalMargin * 2;
+
+@inject('UserStore')
+@observer
 class Farms extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentPassword: '',
-      newPassword: '',
-      confirmNewPassword: ''
-    }
+  state = {
+    activeSlide: 0,
+    carousel: null
   }
 
-  handleChangeText = (field, value) => {
-    this.setState({
-      [field]: value
-    });
+  renderItem({ item, index }) {
+    return (
+      <Farm farm={item}/>
+    );
   }
-
-  toggleisEditable = () => {
-    this.setState(prevState => ({
-      isEditable: !prevState.isEditable
-    }));
-  }
-
-  saveInfo = () => {
-    this.setState({
-      isEditable: false
-    });
-  }
-
 
   render() {
 
     const {
-      container, openSansBold, openSansSemiBold, flatButton
+      container, openSansSemiBold, paginationDot
     } = styles;
+
+    const { activeSlide } = this.state;
+
     return (
       <React.Fragment>
-        <View>
-          <Text>Hello</Text>
+        <View style={[container]}>
+          <View style={[{ marginTop: 15 }]}>
+            <Pagination
+              dotsLength={toJS(UserStore.farms).length}
+              activeDotIndex={activeSlide}
+              dotColor={'#00af66'}
+              dotStyle={paginationDot}
+              inactiveDotColor={'#1a1917'}
+              inactiveDotOpacity={0.4}
+              inactiveDotScale={0.6}
+              carouselRef={this.carousel}
+              tappableDots={!!this.carousel}
+              vertical={false}
+            />
+            <Carousel
+              ref={c => { this.carousel = c; }}
+              data={UserStore.farms}
+              renderItem={this.renderItem}
+              sliderWidth={sliderWidth}
+              itemWidth={itemWidth}
+              firstItem={0}
+              onSnapToItem={index => this.setState({ activeSlide: index })}
+            />
+          </View>
         </View>
       </React.Fragment>
     );
@@ -77,6 +108,19 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderBottomWidth: 0
   },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  wrapper: {
+    flex: 1
+  },
+  paginationDot: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+  }
 });
 
 export default Farms;

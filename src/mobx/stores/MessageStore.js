@@ -35,8 +35,9 @@ class MessageStore {
   }
 
   @action addMessage(messages) {
-    this.messages.unshift(...messages);
     messages.map(message => {
+      delete message.createdAt;
+      this.messages.unshift(message);
       const m = new Message(message);
       this.socket.send(JSON.stringify(m.DBFormat));
     });

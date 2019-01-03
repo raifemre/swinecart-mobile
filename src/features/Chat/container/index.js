@@ -35,7 +35,7 @@ class Chat extends Component {
       <Bubble {...props}
         wrapperStyle={{
           left: {
-            backgroundColor: 'white',
+            backgroundColor: '#f1f0f0',
           },
           right: {
             backgroundColor: '#00af66'
@@ -85,6 +85,9 @@ class Chat extends Component {
           </Header>
           <View style={[contentStyle]}>
             <GiftedChat
+              textInputProps={{
+                autoFocus: false
+              }}
               renderBubble={this.renderBubble}
               showAvatarForEveryMessage={false}
               renderAvatar={null}

@@ -7,6 +7,7 @@ import {
 } from '../../services';
 
 import BreederProfile from '../models/BreederProfile';
+import Farm from '../models/Farm';
 class UserStore {
 
   @observable user;
@@ -14,6 +15,7 @@ class UserStore {
   @observable updatingUser;
   @observable breederProfile = new BreederProfile({});
   @observable provinces = [];
+  @observable farms = [];
 
   @action async getUser() {
     const { data: { user }  } = await Auth.me();
@@ -31,11 +33,12 @@ class UserStore {
   }
 
   @action async getProfile() {
-    const { data: { data: { breeder, provinces } } } = await Profile.getProfile();
     if(this.userRole === 'Breeder') {
+      const { data: { data: { breeder, farmAddresses, provinces } } } = await Profile.getProfile();
       runInAction(() => {
-        this.provinces = provinces;
         this.breederProfile = new BreederProfile(breeder);
+        this.farms = farmAddresses.map(f => new Farm(f));
+        this.provinces = provinces;
       });
     }
   }
