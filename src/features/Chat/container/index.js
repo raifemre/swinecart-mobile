@@ -4,8 +4,7 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Form, Item, Text,
-  Input, Button, View, Icon, ScrollView
+  Container, Header, Body, Title, StyleProvider, Button, View, Icon, Left, Right
 } from 'native-base';
 
 import { 
@@ -23,7 +22,11 @@ import {
 import commonColor from '../../../../native-base-theme/variables/commonColor';
 import getTheme from '../../../../native-base-theme/components';
 
-@inject(['MessageStore'])
+import {
+  Navigation
+} from '../../../services';
+
+@inject('MessageStore', 'UserStore')
 @observer
 class Chat extends Component {
 
@@ -58,7 +61,7 @@ class Chat extends Component {
 
   render() {
 
-    const { MessageStore } = this.props;
+    const { MessageStore, UserStore } = this.props;
 
     const {
       contentStyle, openSansBold
@@ -68,11 +71,17 @@ class Chat extends Component {
       <StyleProvider style={getTheme(commonColor)}>
         <Container>
           <Header noShadow androidStatusBarColor='#ffffff'>
+            <Left style={[contentStyle]}>
+              <Button transparent onPress={Navigation.back}>
+                <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
+              </Button>
+            </Left>
             <Body style={{ flex: 1, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
+              <Title style={[openSansBold, { color: '#000000', fontSize: 15 }]}>
                 {MessageStore.selectedUser.name}
               </Title>
             </Body>
+            <Right></Right>
           </Header>
           <View style={[contentStyle]}>
             <GiftedChat
@@ -82,8 +91,8 @@ class Chat extends Component {
               messages={toJS(this.props.MessageStore.messages)}
               onSend={messages => this.onSend(messages)}
               user={{
-                _id: 42,
-                name: 'PigCard'
+                _id: UserStore.userId,
+                name: UserStore.user.name
               }}
             />
           </View>

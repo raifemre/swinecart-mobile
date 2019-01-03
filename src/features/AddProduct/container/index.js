@@ -25,6 +25,7 @@ import getTheme from '../../../../native-base-theme/components';
 import {
   Navigation
 } from '../../../services';
+
 import UserStore from '../../../mobx/stores/UserStore';
 
 @inject('UserStore', 'ProductsStore')
