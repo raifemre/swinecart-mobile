@@ -29,13 +29,12 @@ class AddProduct extends Component {
   componentDidMount() {
     const { ProductsStore } = this.props;
     ProductsStore.resetData('newProduct');
-    ProductsStore.newProduct.setValue('type', 'Boar');
   }
 
   state = {
     chosenDate: new Date(),
     breed: 'Pure',
-    otherDetails: []
+    otherDetails: [{ characteristic: '', value: '' }]
   }
 
   addMoreCharac = () => {
@@ -72,6 +71,7 @@ class AddProduct extends Component {
         .join(',');
         newProduct.setValue('other_details', detailString);
     await ProductsStore.addProduct();
+    Navigation.navigate('Products');
   }
 
   render() {
@@ -138,9 +138,7 @@ class AddProduct extends Component {
                       selectedValue={newProduct.farm_from_id}
                       onValueChange={value => newProduct.setValue('farm_from_id', value)}
                     >
-                      {
-                        UserStore.breederProfile.farm_addresses.map(f => <Picker.Item label={f.name} value={f.id} key={f.id} />)
-                      }
+                      {UserStore.breederProfile.farm_addresses.map(f => <Picker.Item label={f.name} value={f.id} key={f.id} />)}
                     </Picker>
                   </Item>
                   <Item>
@@ -195,9 +193,10 @@ class AddProduct extends Component {
                   <Item>
                     <DatePicker
                       defaultDate={new Date()}
-                      locale={"ph"}
-                      androidMode={"default"}
-                      placeHolderText="Birth Date"
+                      timeZoneOffsetInMinutes={480}
+                      androidMode={'default'}
+                      locale={'ph'}
+                      placeHolderText='Birth Date'
                       formatChosenDate={date => { return moment(date).format('LL'); }}
                       textStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       placeHolderTextStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet} from 'react-native';
 
 import { 
-  Container, Content, Header, Body, Title, Icon, Left, Button, Right,
+  Container, View, Header, Body, Title, Icon, Left, Button, Right,
 } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
@@ -50,9 +50,9 @@ class ManageProducts extends Component {
               </Button>
             </Right>
           </Header>
-          <Content padder>
+          <View style={[contentStyle, { padding: 15 }]}>
             <Products />
-          </Content>
+          </View>
         </Container>
       </StyleProviderWrapper>
     );

@@ -28,7 +28,7 @@ class Product {
   @observable primary_img_id;
   @observable quantity;
   @observable status;
-  @observable type;
+  @observable type = 'Boar';
   @observable isChecked = false;
   @observable motherBreed = '';
   @observable fatherBreed = '';

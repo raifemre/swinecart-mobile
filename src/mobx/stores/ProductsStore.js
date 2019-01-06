@@ -2,6 +2,8 @@ import {
   observable, action, toJS, runInAction
 } from 'mobx';
 
+import moment from 'moment';
+
 import { 
   BreederProducts
 } from '../../services';
@@ -55,8 +57,8 @@ class ProductsStore {
       name, other_details, price, type, fatherBreed, motherBreed
     } = this.newProduct;
     const data = { 
-      adg, birthdate, backfat_thickness, breed, farm_from_id, fcr,
-      name, other_details, price, type,
+      adg, birthdate: moment(birthdate).format(), backfat_thickness, breed, 
+      farm_from_id, fcr, name, other_details, price, type,
     };
     const fb = fatherBreed.toLowerCase().trim();
     const mb = motherBreed.toLowerCase().trim();
@@ -65,9 +67,7 @@ class ProductsStore {
     const { 
       data: { data: { product, productDetail } } 
     } = await BreederProducts.addNewProduct(data);
-
     console.log(product);
-
     runInAction(() => {
       this._products.unshift(new Product(product));
     });

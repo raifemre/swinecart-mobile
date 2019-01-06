@@ -25,7 +25,12 @@ class Products extends Component {
   }
 
   handleOnRefresh = () => {
-    console.log('Test');
+    this.setState({
+      refreshing: true
+    }, async () => {
+      await this.props.ProductsStore.getProducts();
+      this.setState({ refreshing: false });
+    });
   };
 
   render() {
@@ -39,7 +44,7 @@ class Products extends Component {
         renderItem={this.renderProduct}
         keyExtractor={product => `${product.id}`}
         refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
+        onRefresh={() => this.handleOnRefresh()}
       />
     );
   }
