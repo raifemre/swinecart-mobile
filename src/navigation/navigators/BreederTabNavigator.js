@@ -3,13 +3,13 @@ import {
   createBottomTabNavigator
 } from 'react-navigation';
 
-import {
-  Icon, Badge, View, Text
-} from 'native-base';
+import { Icon } from 'native-base';
 
 import Profile from '../../features/Profile';
 import Notifications from '../../features/Notifications';
 import Dashboard from '../../features/Dashboard';
+
+import NotificationsIcon from '../../shared/NotificationsIcon';
 
 import MessagingStackNavigator from './MessagingStackNavigator';
 import ManageProductsStackNavigator from './ManageProductsStackNavigator';
@@ -58,17 +58,7 @@ const navigator = createBottomTabNavigator({
       tabBarIcon: ({ focused }) => {
         if(routeName === 'Notifications') {
           return (
-            <View>
-              {
-                // <Badge style={{ width: 21, height: 21, marginTop: -9, marginBottom: -15, marginLeft: -15 }}>
-                // <Text style={{ fontSize: 14, lineHeight: 21 }}>10</Text>
-                // </Badge>
-              }
-              <Icon
-                type='Feather'
-                name={iconMapping[routeName]}
-                style={{ color: focused ? '#00af66' : '#000000' }} />
-            </View>
+            <NotificationsIcon focused={focused} />
           );
         }
         else {

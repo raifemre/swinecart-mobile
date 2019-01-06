@@ -15,12 +15,21 @@ class NotificationStore {
     runInAction(() => {
       this.notifs = notifs;
     });
-    console.log(notifs);
+  }
+
+  @action async seeNotifs() {
+    const id = this.unreadNotifs.map(n => Notifications.seeNotif(n.id));
+    await Promise.all(id);
+    await this.getNotifs();
+  }
+
+  @computed get unreadNotifs() {
+    const unread = this.notifs.filter(n => !n.read_at);
+    return unread;
   }
 
   @computed get unreadCount() {
-    const unread = this.notifs.filter(n => !n.read_at);
-    return unread.length;
+    return this.unreadNotifs.length;
   }
 
 

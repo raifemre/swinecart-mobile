@@ -3,6 +3,8 @@ import {
   StyleSheet, FlatList
 } from 'react-native';
 
+import { NavigationEvents } from 'react-navigation';
+
 import {
   Container, Content, Header, Body, Title, StyleProvider
 } from 'native-base';
@@ -24,11 +26,6 @@ import Notification from '../components/Notification';
 @observer
 class Notifications extends Component {
 
-
-  componentDidMount() {
-    this.props.NotificationStore.getNotifs();
-  }
-
   renderItem = ({ item }) => {
     const { data: { description, time: { date } } } = item;
     const message = description.replace(/(<b>|<\/b>)/g, '');
@@ -46,24 +43,29 @@ class Notifications extends Component {
     } = styles;
 
     return (
-      <StyleProvider style={getTheme(commonColor)}>
-        <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
-            <Body style={[container]}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
-                Notifications
+      <React.Fragment>
+        <NavigationEvents
+          onDidFocus={() => NotificationStore.seeNotifs()}
+        />
+        <StyleProvider style={getTheme(commonColor)}>
+          <Container>
+            <Header noShadow androidStatusBarColor='#ffffff'>
+              <Body style={[container]}>
+                <Title style={[openSansBold, { color: '#000000' }]}>
+                  Notifications
               </Title>
-            </Body>
-          </Header>
-          <Content padder>
-            <FlatList
-              data={toJS(NotificationStore.notifs)}
-              renderItem={this.renderItem}
-              keyExtractor={item => item.id}
-            />
-          </Content>
-        </Container>
-      </StyleProvider>
+              </Body>
+            </Header>
+            <Content padder>
+              <FlatList
+                data={toJS(NotificationStore.notifs)}
+                renderItem={this.renderItem}
+                keyExtractor={item => item.id}
+              />
+            </Content>
+          </Container>
+        </StyleProvider>
+      </React.Fragment>
     );
   }
 
