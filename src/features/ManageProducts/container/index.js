@@ -27,15 +27,14 @@ class ManageProducts extends Component {
 
   componentDidMount() {
     const { ProductsStore } = this.props;
-    ProductsStore.getProducts(1);
+    ProductsStore.getProducts();
   }
 
-  navigate = () => {
+  navigate = () => {  
     Navigation.navigate('AddProduct');
   }
 
   render() {
-
     const {
       openSansBold, contentStyle
     } = styles;

@@ -16,6 +16,7 @@ import ManageProductsStackNavigator from './ManageProductsStackNavigator';
 
 const iconMapping = {
   ManageProducts: 'credit-card',
+  ProductInventory: 'menu',
   Dashboard: 'bar-chart-2',
   Messaging: 'message-square',
   Notifications: 'bell',
@@ -37,6 +38,9 @@ const navigator = createBottomTabNavigator({
   'ManageProducts': {
     screen: ManageProductsStackNavigator
   },
+  'ProductInventory': {
+    screen: ManageProductsStackNavigator
+  },
   'Dashboard': {
     screen: Dashboard
   },
@@ -51,7 +55,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'Messaging',
+  initialRouteName: 'ManageProducts',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

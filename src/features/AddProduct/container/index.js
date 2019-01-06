@@ -53,9 +53,7 @@ class AddProduct extends Component {
   state = {
     chosenDate: new Date(),
     breed: 'Pure',
-    otherDetails: [
-      { characteristic: '', value: '' }
-    ]
+    otherDetails: []
   }
 
   addMoreCharac = () => {

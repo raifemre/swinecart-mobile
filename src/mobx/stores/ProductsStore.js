@@ -13,13 +13,28 @@ class ProductsStore {
   @observable _products = [];
   @observable newProduct = new Product({});
   @observable selectedProduct;
+  @observable page = 1;
 
-  @action async getProducts(page = 1) {
-    const { data: { data: { data } } } = await BreederProducts.getProducts(page);
-    console.log(data);
+
+  @action resetData() {
+    this._products = [];
+    this.newProduct = new Product({});
+    this.selectedProduct;
+    this.page = 1;
+  }
+
+  @action async getProducts() {
+    const { data: { data: { data } } } = await BreederProducts.getProducts(this.page);
     runInAction(() => {
-      const products = data.map(p => new Product(p));
-      this._products.push(...products);
+      this._products = data.map(p => new Product(p));
+    });
+  }
+
+  @action async getMoreProducts() {
+    const { data: { data: { data } } } = await BreederProducts.getProducts(this.page);
+    runInAction(() => {
+      this._products = data.map(p => new Product(p));
+      this.page = this.page + 1;
     });
   }
 

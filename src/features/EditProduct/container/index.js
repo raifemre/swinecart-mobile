@@ -30,7 +30,6 @@ import {
 @observer
 class EditProduct extends Component {
 
-
   componentDidMount() {
     const { ProductsStore } = this.props;
     const {
@@ -49,9 +48,7 @@ class EditProduct extends Component {
   state = {
     chosenDate: new Date(),
     breed: 'Pure',
-    otherDetails: [
-      { characteristic: '', value: '' }
-    ]
+    otherDetails: []
   }
 
   addMoreCharac = () => {
@@ -77,17 +74,17 @@ class EditProduct extends Component {
     this.setState({ otherDetails });
   }
 
-  addNewProduct = async () => {
-    const { ProductsStore } = this.props;
-    const { newProduct } = ProductsStore;
-    const { otherDetails } = this.state;
-    const detailString =
-      otherDetails
-        .filter(({ characteristic: c, value: v }) => c.trim() !== '' && v.trim() !== '')
-        .map(({ characteristic: c, value: v }) => `${c}=${v}`)
-        .join(',');
-    newProduct.setValue('other_details', detailString);
-    await ProductsStore.addProduct();
+  editProduct = async () => {
+    // const { ProductsStore } = this.props;
+    // const { newProduct } = ProductsStore;
+    // const { otherDetails } = this.state;
+    // const detailString =
+    //   otherDetails
+    //     .filter(({ characteristic: c, value: v }) => c.trim() !== '' && v.trim() !== '')
+    //     .map(({ characteristic: c, value: v }) => `${c}=${v}`)
+    //     .join(',');
+    // newProduct.setValue('other_details', detailString);
+    // await ProductsStore.addProduct();
   }
 
   render() {
@@ -274,10 +271,10 @@ class EditProduct extends Component {
               <View style={{ marginTop: 20 }}>
                 <Button
                   block
-                  onPress={this.addNewProduct}
+                  onPress={this.editProduct}
                   style={[flatButton, { backgroundColor: '#00af66' }]}
                 >
-                  <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Add Product</Text>
+                  <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Edit Product</Text>
                 </Button>
               </View>
             </View>
