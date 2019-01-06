@@ -33,7 +33,6 @@ class UserStore {
   }
 
   @action async getProfile() {
-    console.log('Called!');
     if(this.userRole === 'Breeder') {
       const { data: { data: { breeder, farmAddresses, provinces } } } = await Profile.getProfile();
       runInAction(() => {
