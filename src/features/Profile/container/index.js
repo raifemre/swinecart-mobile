@@ -29,8 +29,6 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    const { UserStore } = this.props;
-    UserStore.getProfile();
   }
 
   changeSeg = (segNum) => {

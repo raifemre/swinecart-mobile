@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-import {
-  StyleSheet, Image
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
-  View, Text, Card, CardItem, Body, Left, Right, Button, ListItem, CheckBox,
+  View, Text, Card, CardItem, Left, Right, Button, CheckBox,
   Icon, Grid, Col
 } from 'native-base';
 
@@ -44,18 +42,14 @@ class Product extends Component {
 
   render() {
 
-    const {
-      product
-    } = this.props;
+    const { openSansBold, cardStyle, container } = styles;
+
+    const { product } = this.props;
 
     const {
       name, type, breed, age, adg, backfat_thickness, fcr, img_path, status,
       isChecked
     } = product;
-
-    const {
-      openSansBold, openSansSemiBold, cardStyle, container
-    } = styles;
 
     return (
       <Card style={[cardStyle]}>

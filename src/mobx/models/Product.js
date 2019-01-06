@@ -1,7 +1,6 @@
-import {
-  observable, action, runInAction
-} from 'mobx';
+import { observable, action, runInAction } from 'mobx';
 
+import UserStore from '../stores/UserStore';
 class Product {
 
   constructor(props) {
@@ -19,7 +18,7 @@ class Product {
   @observable breed;
   @observable breed_id;
   @observable breeder_id;
-  @observable farm_from_id = undefined;
+  @observable farm_from_id = UserStore.breederProfile.farm_addresses[0].id;
   @observable fcr;
   @observable id;
   @observable img_path;

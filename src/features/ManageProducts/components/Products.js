@@ -4,17 +4,13 @@ import {
   FlatList
 } from 'react-native';
 
-import  {
- View, Text
-} from 'native-base';
+import { observer, inject } from 'mobx-react';
 
-import {
-  observer, inject
-} from 'mobx-react';
+import { toJS } from 'mobx';
 
 import Product from './Product';
 
-@inject(['ProductsStore'])
+@inject('ProductsStore', 'UserStore')
 @observer
 class Products extends Component {
 
@@ -24,7 +20,7 @@ class Products extends Component {
 
   renderProduct = ({ item }) => {
     return (
-      <Product product={item}/>
+      <Product product={item} />
     );
   }
 
@@ -34,13 +30,12 @@ class Products extends Component {
 
   render() {
 
-    const {
-      _products
-    } = this.props.ProductsStore;
+    const { ProductsStore } = this.props;
+    const { _products } = ProductsStore;
 
     return (
       <FlatList
-        data={_products.slice()}
+        data={toJS(_products)}
         renderItem={this.renderProduct}
         keyExtractor={product => `${product.id}`}
         refreshing={this.state.refreshing}

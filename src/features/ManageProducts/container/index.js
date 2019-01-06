@@ -1,33 +1,24 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet
-} from 'react-native';
+import { StyleSheet} from 'react-native';
 
-import {
-  Container, Content, Header, Body, Title, StyleProvider, Text, Icon, Left, 
-  Button, Right,
+import { 
+  Container, Content, Header, Body, Title, Icon, Left, Button, Right,
 } from 'native-base';
 
-import {
-  observer, inject
-} from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
 
 import Products from '../components/Products';
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
-import {
-  Navigation
-} from '../../../services';
+import { Navigation } from '../../../services';
 
 @inject('ProductsStore')
 @observer
 class ManageProducts extends Component {
 
   componentDidMount() {
-    const { ProductsStore } = this.props;
-    ProductsStore.getProducts();
+    this.props.ProductsStore.getProducts();
   }
 
   navigate = () => {  
@@ -40,7 +31,7 @@ class ManageProducts extends Component {
     } = styles;
 
     return (
-      <StyleProvider style={getTheme(commonColor)}>
+      <StyleProviderWrapper>
         <Container>
           <Header noShadow androidStatusBarColor='#ffffff'>
             <Left style={[contentStyle]}>
@@ -63,30 +54,18 @@ class ManageProducts extends Component {
             <Products />
           </Content>
         </Container>
-      </StyleProvider>
+      </StyleProviderWrapper>
     );
   }
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   contentStyle: {
     flex: 1,
   },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   openSansBold: {
     fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
   }
 });
 

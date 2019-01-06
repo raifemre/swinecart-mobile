@@ -24,7 +24,7 @@ class CommonStore {
     });
   }
 
-  reactToTokenChange = autorun(() => { console.log('Token: ', this.token) });
+  // reactToTokenChange = autorun(() => { console.log('Token: ', this.token) });
 
 }
 

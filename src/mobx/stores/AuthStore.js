@@ -37,6 +37,7 @@ class AuthStore {
       const { data: { data: { access_token : token } } } = await Auth.login(this.values);
       await CommonStore.setToken(token);
       await UserStore.getUser();
+      await UserStore.getProfile();
       Navigation.navigate(UserStore.userRole);
     }
     catch(e) {

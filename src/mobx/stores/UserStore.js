@@ -13,7 +13,7 @@ class UserStore {
   @observable user;
   @observable loadinguser;
   @observable updatingUser;
-  @observable breederProfile = new BreederProfile({});
+  @observable breederProfile = new BreederProfile();
   @observable provinces = [];
   @observable farms = [];
 
@@ -33,12 +33,13 @@ class UserStore {
   }
 
   @action async getProfile() {
+    console.log('Called!');
     if(this.userRole === 'Breeder') {
       const { data: { data: { breeder, farmAddresses, provinces } } } = await Profile.getProfile();
       runInAction(() => {
         this.breederProfile = new BreederProfile(breeder);
-        this.farms = farmAddresses.map(f => new Farm(f));
         this.provinces = provinces;
+        this.farms = farmAddresses.map(f => new Farm(f));
       });
     }
   }
@@ -55,7 +56,7 @@ class UserStore {
     return undefined;
   }
 
-  reactToUserChange = autorun(() => { console.log('User:', toJS(this.user)) });
+  // reactToUserChange = autorun(() => { console.log('User:', toJS(this.user)) });
 
 }
 

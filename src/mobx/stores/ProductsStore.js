@@ -10,13 +10,24 @@ import Product from '../models/Product';
 
 class ProductsStore {
 
+
+  defaultState = {
+    _products: [],
+    newProduct: new Product({}),
+    selectedProduct: undefined,
+    page: 1,
+  }
+
   @observable _products = [];
   @observable newProduct = new Product({});
   @observable selectedProduct;
   @observable page = 1;
 
+  @action resetData(prop) {
+    this[prop] = this.defaultState[prop];
+  }
 
-  @action resetData() {
+  @action resetAll() {
     this._products = [];
     this.newProduct = new Product({});
     this.selectedProduct;

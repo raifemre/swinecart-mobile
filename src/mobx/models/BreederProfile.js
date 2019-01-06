@@ -27,7 +27,7 @@ class BreederProfile {
   @observable contactPerson_name;
   @observable contactPerson_mobile;
 
-  @observable farm_addresses = [{ }];
+  @observable farm_addresses;
 
   @action setValue(field, value) {
     this[field] = value;
