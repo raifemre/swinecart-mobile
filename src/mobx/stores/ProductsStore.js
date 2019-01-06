@@ -5,7 +5,7 @@ import {
 import moment from 'moment';
 
 import { 
-  BreederProducts
+  BreederProducts, Navigation
 } from '../../services';
 
 import Product from '../models/Product';
@@ -70,7 +70,6 @@ class ProductsStore {
     const { 
       data: { data: { product, productDetail } } 
     } = await BreederProducts.addNewProduct(data);
-    console.log(product);
     runInAction(() => {
       this._products.unshift(new Product(product));
     });
@@ -98,6 +97,26 @@ class ProductsStore {
       });
     }
     
+  }
+
+  @action async updateProduct() {
+    const {
+      adg, birthdate, backfat_thickness, breed, farm_from_id, fcr,
+      name, other_details, price, type, fatherBreed, motherBreed, id
+    } = this.selectedProduct;
+    const bd = new Date(birthdate);
+    const data = {
+      adg, birthdate: moment(bd).format(), backfat_thickness, breed,
+      farm_from_id, fcr, name, other_details, price, type, id
+    };
+    const fb = fatherBreed.toLowerCase().trim();
+    const mb = motherBreed.toLowerCase().trim();
+    data.breed = fb !== '' && mb !== '' ? `${fb}+${mb}` : breed;
+
+    const {
+      data: { data: { product } }
+    } = await BreederProducts.updateProduct(data);
+    Navigation.navigate('Products');
   }
 
   @action async toggleStatus({ id }) {

@@ -14,6 +14,9 @@ const service = {
   },
   deleteSelected(ids) {
     return API.post(`${URL_PREFIX}/product/delete-selected`, { product_ids: ids });
+  },
+  updateProduct(data) {
+    return API.post(`${URL_PREFIX}/product/update/${data.id}`, data);
   }
 }
 

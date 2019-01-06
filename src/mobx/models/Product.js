@@ -11,15 +11,15 @@ class Product {
     }
   }
 
-  @observable adg;
-  @observable age;
-  @observable backfat_thickness;
+  @observable adg = 0;
+  @observable age = 0;
+  @observable backfat_thickness = 0;
   @observable birthdate;
-  @observable breed;
+  @observable breed = '';
   @observable breed_id;
   @observable breeder_id;
   @observable farm_from_id = UserStore.breederProfile.farm_addresses[0].id;
-  @observable fcr;
+  @observable fcr = 0;
   @observable id;
   @observable img_path;
   @observable name;

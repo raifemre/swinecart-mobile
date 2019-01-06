@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Text, Icon, Left,
+  Container, Content, Header, Body, Title, Text, Icon, Left,
   Button, Right, Form, Input, View, Item, Picker, DatePicker, Grid, Col, Radio,
   Row
 } from 'native-base';
@@ -13,18 +13,11 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import { 
-  toJS
-} from 'mobx';
-
+import { toJS } from 'mobx';
 import moment from 'moment';
 
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
-
-import {
-  Navigation
-} from '../../../services';
+import { Navigation } from '../../../services';
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 @inject('UserStore', 'ProductsStore')
 @observer
@@ -32,9 +25,7 @@ class EditProduct extends Component {
 
   componentDidMount() {
     const { ProductsStore } = this.props;
-    const {
-      selectedProduct
-    } = ProductsStore;
+    const { selectedProduct } = ProductsStore;
 
     if(selectedProduct.breed.includes('+')) {
       const [ fatherBreed, motherBreed ] = selectedProduct.breed.split('+');
@@ -42,7 +33,19 @@ class EditProduct extends Component {
       selectedProduct.motherBreed = motherBreed;
     }
 
-    console.log(toJS(ProductsStore.selectedProduct));
+    const otherDetails = selectedProduct.other_details.split(',').reduce((a, e) => {
+      const [characteristic, value] = e.split('=');
+      if(characteristic && value) {
+        a.push({
+          characteristic: characteristic.replace(/<[^>]+>/g, '').trim(),
+          value: value.replace(/<[^>]+>/g, '').trim()
+        });
+      }
+      return a;
+    }, []);
+
+    this.setState({ otherDetails });
+
   }
 
   state = {
@@ -75,16 +78,16 @@ class EditProduct extends Component {
   }
 
   editProduct = async () => {
-    // const { ProductsStore } = this.props;
-    // const { newProduct } = ProductsStore;
-    // const { otherDetails } = this.state;
-    // const detailString =
-    //   otherDetails
-    //     .filter(({ characteristic: c, value: v }) => c.trim() !== '' && v.trim() !== '')
-    //     .map(({ characteristic: c, value: v }) => `${c}=${v}`)
-    //     .join(',');
-    // newProduct.setValue('other_details', detailString);
-    // await ProductsStore.addProduct();
+    const { ProductsStore } = this.props;
+    const { selectedProduct } = ProductsStore;
+    const { otherDetails } = this.state;
+    const detailString =
+      otherDetails
+        .filter(({ characteristic: c, value: v }) => c.trim() !== '' && v.trim() !== '')
+        .map(({ characteristic: c, value: v }) => `${c}=${v}`)
+        .join(',');
+    selectedProduct.setValue('other_details', detailString);
+    await ProductsStore.updateProduct();
   }
 
   render() {
@@ -96,6 +99,8 @@ class EditProduct extends Component {
       UserStore, ProductsStore
     } = this.props;
 
+    const { otherDetails } = this.state;
+
     const {
       breederProfile
     } = UserStore;
@@ -105,7 +110,7 @@ class EditProduct extends Component {
     } = ProductsStore;
 
     return (
-      <StyleProvider style={getTheme(commonColor)}>
+      <StyleProviderWrapper>
         <Container>
           <Header noShadow androidStatusBarColor='#ffffff'>
             <Left style={[contentStyle]}>
@@ -136,15 +141,15 @@ class EditProduct extends Component {
                       iosIcon={<Icon name="ios-arrow-down-outline" />}
                       placeholder='Choose Type'
                       placeholderStyle={[openSansSemiBold]}
-                      selectedValue={selectedProduct.type.toLowerCase()}
+                      selectedValue={selectedProduct.type}
                       onValueChange={value => selectedProduct.setValue('type', value)}
                       textStyle={[openSansSemiBold]}
                       itemTextStyle={[openSansSemiBold]}
                     >
-                      <Picker.Item label="Boar" value="boar" />
-                      <Picker.Item label="Sow" value="sow" />
-                      <Picker.Item label="Gilt" value="gilt" />
-                      <Picker.Item label="Semen" value="semen" />
+                      <Picker.Item label="Boar" value="Boar" />
+                      <Picker.Item label="Sow" value="Sow" />
+                      <Picker.Item label="Gilt" value="Gilt" />
+                      <Picker.Item label="Semen" value="Semen" />
                     </Picker>
                   </Item>
                   <Item >
@@ -210,6 +215,8 @@ class EditProduct extends Component {
                   <Item>
                     <DatePicker
                       defaultDate={new Date(selectedProduct.birthdate)}
+                      maximumDate={new Date()}
+                      minimumDate={new Date(1970, 0, 1)}
                       locale={"ph"}
                       androidMode={"default"}
                       placeHolderText={selectedProduct.birthdate}
@@ -220,13 +227,13 @@ class EditProduct extends Component {
                     />
                   </Item>
                   <Item>
-                    <Input value={selectedProduct.adg.toString()} keyboardType='numeric' placeholder='Average Daily Gain (grams)' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('adg', Number.parseFloat(value))} />
+                    <Input value={selectedProduct.adg.toString()} keyboardType='numeric' placeholder='Average Daily Gain (grams)' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('adg', value)} />
                   </Item>
                   <Item>
-                    <Input value={selectedProduct.fcr.toString()} keyboardType='numeric' placeholder='Feed Conversion Ratio' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('fcr', Number.parseFloat(value))} />
+                    <Input value={selectedProduct.fcr.toString()} keyboardType='numeric' placeholder='Feed Conversion Ratio' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('fcr', value)} />
                   </Item>
                   <Item>
-                    <Input value={selectedProduct.backfat_thickness.toString()} keyboardType='numeric' placeholder='Backfat Thickness (mm)' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('backfat_thickness', Number.parseFloat(value))} />
+                    <Input value={selectedProduct.backfat_thickness.toString()} keyboardType='numeric' placeholder='Backfat Thickness (mm)' style={[openSansSemiBold]} onChangeText={value => selectedProduct.setValue('backfat_thickness', value)} />
                   </Item>
                 </Form>
               </View>
@@ -243,19 +250,19 @@ class EditProduct extends Component {
                   </View>
                   <Grid>
                     {
-                      this.state.otherDetails.map((o, i) => (
+                      otherDetails.map((o, i) => (
                         <Row key={i}>
                           <Col>
                             <Form>
                               <Item>
-                                <Input placeholder='Characteristic' style={[openSansSemiBold]} onChangeText={value => this.handleTextChange(i, 'characteristic', value)} />
+                                <Input placeholder='Characteristic' value={otherDetails[i].characteristic} style={[openSansSemiBold]} onChangeText={value => this.handleTextChange(i, 'characteristic', value)} />
                               </Item>
                             </Form>
                           </Col>
                           <Col>
                             <Form>
                               <Item>
-                                <Input placeholder='Value' style={[openSansSemiBold]} onChangeText={value => this.handleTextChange(i, 'value', value)} />
+                                <Input placeholder='Value' value={otherDetails[i].value} style={[openSansSemiBold]} onChangeText={value => this.handleTextChange(i, 'value', value)} />
                               </Item>
                             </Form>
                           </Col>
@@ -280,7 +287,7 @@ class EditProduct extends Component {
             </View>
           </Content>
         </Container>
-      </StyleProvider>
+      </StyleProviderWrapper>
     );
   }
 }
