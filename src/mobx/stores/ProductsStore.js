@@ -44,11 +44,14 @@ class ProductsStore {
   }
 
   @action async getMoreProducts() {
-    const { data: { data: { data } } } = await BreederProducts.getProducts(this.page);
-    runInAction(() => {
-      this._products = data.map(p => new Product(p));
-      this.page = this.page + 1;
-    });
+    const { data: { data: { data } } } = await BreederProducts.getProducts(this.page + 1);
+   if(data.length > 0) {
+     runInAction(() => {
+       const newProducts = data.map(p => new Product(p));
+       this._products.unshift(...newProducts);
+       this.page = this.page + 1;
+     });
+   }
   }
 
   @action async addProduct() {
@@ -108,7 +111,8 @@ class ProductsStore {
     product.toggleChecked();
   }
 
-  @action setSelectedProduct(product) {
+  @action setSelectedProduct({ id }) {
+    const product = this._products.find(product => product.id === id); 
     runInAction(() => {
       this.selectedProduct = product;
     });

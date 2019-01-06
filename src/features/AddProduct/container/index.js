@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Text, Icon, Left,
+  Container, Content, Header, Body, Title, Text, Icon, Left,
   Button, Right, Form, Input, View, Item, Picker, DatePicker, Grid, Col, Radio, 
   Row
 } from 'native-base';
@@ -15,8 +15,7 @@ import {
 
 import moment from 'moment';
 
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import { Navigation } from '../../../services';
 
@@ -24,7 +23,6 @@ import { Navigation } from '../../../services';
 @inject('UserStore', 'ProductsStore')
 @observer
 class AddProduct extends Component {
-
 
   componentDidMount() {
     const { ProductsStore } = this.props;
@@ -88,7 +86,7 @@ class AddProduct extends Component {
     } = ProductsStore;
     
     return (
-      <StyleProvider style={getTheme(commonColor)}>
+      <StyleProviderWrapper>
         <Container>
           <Header noShadow androidStatusBarColor='#ffffff'>
             <Left style={[contentStyle]}>
@@ -193,6 +191,8 @@ class AddProduct extends Component {
                   <Item>
                     <DatePicker
                       defaultDate={new Date()}
+                      maximumDate={new Date()}
+                      minimumDate={new Date(1970, 0, 1)}
                       timeZoneOffsetInMinutes={480}
                       androidMode={'default'}
                       locale={'ph'}
@@ -264,7 +264,7 @@ class AddProduct extends Component {
             </View>
           </Content>
         </Container>
-      </StyleProvider>
+      </StyleProviderWrapper>
     );
   }
 }
