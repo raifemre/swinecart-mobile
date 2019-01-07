@@ -107,7 +107,7 @@ class Product extends Component {
               </Col>
               <Col>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 16 }]}>{age} years old</Text>
+                  <Text style={[openSansBold, { fontSize: 16 }]}>{age} days old</Text>
                 </View>
               </Col>
             </Row>
