@@ -21,6 +21,7 @@ class FilterProducts extends Component {
     const { ProductsStore } = this.props;
     ProductsStore.resetData('filters');
     await ProductsStore.getProducts();
+    Navigation.back();
   }
 
   filterProducts = async () => {
