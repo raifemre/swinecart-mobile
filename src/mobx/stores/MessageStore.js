@@ -9,7 +9,7 @@ import {
 import Message from '../models/Message';
 class MessageStore {
 
-  socket = null;
+  @observable socket = null;
 
   @observable threads = [];
   @observable messages = [];
@@ -55,7 +55,9 @@ class MessageStore {
   }
 
   setSocket(socket) {
-    this.socket = socket; 
+    runInAction(() => {
+      this.socket = socket; 
+    });
   }
 }
 

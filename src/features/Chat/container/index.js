@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 
 import {
-  Container, Header, Body, Title, StyleProvider, Button, View, Icon, Left, Right
+  Container, Header, Body, Title, StyleProvider, Button, View, Icon, Left,
+  Right, Text
 } from 'native-base';
 
 import { 
@@ -26,6 +27,7 @@ import {
   Navigation
 } from '../../../services';
 
+import StatusIndicator from '../components/StatusIndicator';
 @inject('MessageStore', 'UserStore')
 @observer
 class Chat extends Component {
@@ -66,7 +68,7 @@ class Chat extends Component {
     const {
       contentStyle, openSansBold
     } = styles;
-
+    
     return (
       <StyleProvider style={getTheme(commonColor)}>
         <Container>
@@ -84,6 +86,7 @@ class Chat extends Component {
             <Right></Right>
           </Header>
           <View style={[contentStyle]}>
+            <StatusIndicator />
             <GiftedChat
               textInputProps={{
                 autoFocus: false
