@@ -17,6 +17,9 @@ const service = {
   },
   updateProduct(data) {
     return API.post(`${URL_PREFIX}/product/update/${data.id}`, data);
+  },
+  filterProducts(data, page = 1) {
+    return API.post(`${URL_PREFIX}/get?page=${page}`, data);
   }
 }
 

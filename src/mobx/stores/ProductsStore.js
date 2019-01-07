@@ -18,12 +18,23 @@ class ProductsStore {
     newProduct: new Product({}),
     selectedProduct: undefined,
     page: 1,
+    filters: {
+      type: 'all',
+      status: 'all',
+      sort: 'none'
+    }
   }
 
   @observable _products = [];
   @observable newProduct = new Product({});
   @observable selectedProduct;
   @observable page = 1;
+  @observable filters = {
+    type: 'all',
+    status: 'all',
+    sort: 'none'
+  }
+
 
   @action resetData(prop) {
     this[prop] = this.defaultState[prop];
@@ -36,8 +47,12 @@ class ProductsStore {
     this.page = 1;
   }
 
+  @action setFilterValue(field, value) {
+    this.filters[field] = value;
+  }
+
   @action async getProducts() {
-    const { data: { data: { data } } } = await BreederProducts.getProducts(this.page);
+    const { data: { data: { data } } } = await BreederProducts.getProducts(1);
     runInAction(() => {
       this._products = data.map(p => new Product(p));
     });
@@ -45,13 +60,31 @@ class ProductsStore {
 
   @action async getMoreProducts() {
     const { data: { data: { data } } } = await BreederProducts.getProducts(this.page + 1);
-   if(data.length > 0) {
-     runInAction(() => {
-       const newProducts = data.map(p => new Product(p));
-       this._products.unshift(...newProducts);
-       this.page = this.page + 1;
-     });
-   }
+    if(data.length > 0) {
+      runInAction(() => {
+        const newProducts = data.map(p => new Product(p));
+        this._products.unshift(...newProducts);
+        this.page = this.page + 1;
+      });
+    }
+  }
+
+  @action async filterProducts() {
+    const { data: { data: { data } } } = await BreederProducts.filterProducts(this.filters, 1);
+    runInAction(() => {
+      this._products = data.map(p => new Product(p));
+    });
+  }
+
+  @action async filterMoreProducts() {
+    const { data: { data: { data } } } = await BreederProducts.filterProducts(this.filters, this.page + 1);
+    if (data.length > 0) {
+      runInAction(() => {
+        const newProducts = data.map(p => new Product(p));
+        this._products.unshift(...newProducts);
+        this.page = this.page + 1;
+      });
+    }
   }
 
   @action async addProduct() {

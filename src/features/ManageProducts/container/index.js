@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { 
-  Container, View, Header, Body, Title, Icon, Left, Button, Right,
+  Container, View, Header, Body, Title, Icon, Left, Button, Right
 } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
-
 
 import Products from '../components/Products';
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
@@ -21,8 +20,12 @@ class ManageProducts extends Component {
     this.props.ProductsStore.getProducts();
   }
 
-  navigate = () => {  
+  navigateToAdd = () => {  
     Navigation.navigate('AddProduct');
+  }
+
+  navigateToFilter = () => {
+    Navigation.navigate('FilterProducts');
   }
 
   render() {
@@ -35,18 +38,18 @@ class ManageProducts extends Component {
         <Container>
           <Header noShadow androidStatusBarColor='#ffffff'>
             <Left style={[contentStyle]}>
-              <Button transparent onPress={this.navigate}>
-                <Icon type='Feather' name='plus' style={{ color: '#000000' }}/>
+              <Button transparent onPress={this.navigateToAdd}>
+                <Icon type='Feather' name='plus' style={{ color: '#000000' }} />
               </Button>
             </Left>
             <Body style={{ flex: 1, alignItems: 'center' }}>
               <Title style={[openSansBold, { color: '#000000' }]}>
                 Products
-              </Title>
+            </Title>
             </Body>
             <Right style={[contentStyle]}>
-              <Button transparent>
-                <Icon type='Feather' name='filter' style={{ color: '#000000' }}/>
+              <Button transparent onPress={this.navigateToFilter}>
+                <Icon type='Feather' name='filter' style={{ color: '#000000' }} />
               </Button>
             </Right>
           </Header>
@@ -66,7 +69,20 @@ const styles = StyleSheet.create({
   },
   openSansBold: {
     fontFamily: 'OpenSans-Bold'
-  }
+  },
+  openSansSemiBold: {
+    fontFamily: 'OpenSans-SemiBold'
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 18,
+    borderColor: "rgba(0, 0, 0, 0.1)"
+  },
+  flatButton: {
+    elevation: 0,
+    borderColor: 'transparent',
+    borderBottomWidth: 0
+  },
 });
 
 export default ManageProducts;
