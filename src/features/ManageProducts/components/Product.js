@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import {
   View, Text, Card, CardItem, Left, Right, Button, CheckBox,
-  Icon, Grid, Col
+  Icon, Grid, Col, Row
 } from 'native-base';
 
 import FastImage from 'react-native-fast-image';
@@ -40,9 +40,15 @@ class Product extends Component {
     Navigation.navigate('EditProduct');
   }
 
+  navigateToDetails = () => {
+    const { ProductsStore, product } = this.props;
+    ProductsStore.setSelectedProduct(product);
+    Navigation.navigate('ProductDetails');
+  }
+
   render() {
 
-    const { openSansBold, cardStyle, container } = styles;
+    const { openSansBold, cardStyle, container, center } = styles;
 
     const { product } = this.props;
 
@@ -58,7 +64,7 @@ class Product extends Component {
             <Text style={[openSansBold, { fontSize: 21 }]}>{name}</Text>
           </Left>
           <Right>
-            <Button bordered small style={{ borderColor: '#000000' }}>
+            <Button onPress={this.navigateToDetails} bordered small style={{ borderColor: '#000000' }}>
               <Text style={[openSansBold, { color: '#000000' }]}>View All Info</Text>
             </Button>
           </Right>
@@ -74,38 +80,67 @@ class Product extends Component {
           />
         </CardItem>
         <CardItem>
-          <Left>
-            <Text style={[openSansBold, { fontSize: 16 }]}>{type}</Text>
-          </Left>
-          <Right>
-            <Text style={[openSansBold, { fontSize: 16 }]}>{breed}</Text>
-          </Right>
-        </CardItem>
-        <CardItem>
-          <Left>
-            <Text style={[openSansBold, { fontSize: 16 }]}>Age</Text>
-          </Left>
-          <Right>
-            <Text style={[openSansBold, { fontSize: 16 }]}>{age} years old</Text>
-          </Right>
-        </CardItem>
-        <CardItem>
           <Grid>
-            <Col>
-              <Text style={[openSansBold, { fontSize: 13 }]}>Average Daily Gain (g):
-                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {adg}</Text>
-              </Text>
-            </Col>
-            <Col>
-              <Text style={[openSansBold, { fontSize: 13 }]}>Feed Conversion Ratio:
-                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {fcr}</Text>
-              </Text>
-            </Col>
-            <Col>
-              <Text style={[openSansBold, { fontSize: 13 }]}>Backfat Thickness (mm):
-                <Text style={[openSansBold, { fontSize: 14, color: '#00af66' }]}> {backfat_thickness}</Text>
-              </Text>
-            </Col>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 15 }]}>Breed</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 16 }]}>{breed}</Text>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 15 }]}>Type</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 16 }]}>{type}</Text>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 20 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 15 }]}>Age</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 16 }]}>{age} years old</Text>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 14 }]}>Average Daily Gain (g):</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}> {adg}</Text>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 14 }]}>Feed Conversion Ratio:</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}> {fcr}</Text>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 14 }]}>Backfat Thickness (mm):</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}> {backfat_thickness}</Text>
+                </View>
+              </Col>
+            </Row>
           </Grid>
         </CardItem>
         <CardItem>

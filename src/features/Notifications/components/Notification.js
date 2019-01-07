@@ -25,7 +25,7 @@ class Notification extends PureComponent {
         <CardItem>
           <Body>
             <Text style={[openSansSemiBold]}>{message}</Text>
-            <Text style={[openSansSemiBold]}>{ago}</Text>
+            <Text style={[openSansSemiBold, { fontSize: 12 }]}>{ago}</Text>
           </Body>
         </CardItem>
       </Card>
