@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { FlatList } from 'react-native';
+import { SectionList, StyleSheet } from 'react-native';
+
+import { View, Text } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
@@ -8,6 +10,7 @@ import { toJS } from 'mobx';
 
 import RequestedCard from './RequestedCard';
 import ReservedCard from './ReservedCard';
+import OnDeliveryCard from './OnDeliveryCard';
 
 @inject('DashboardStore', 'UserStore')
 @observer
@@ -23,11 +26,18 @@ class Products extends Component {
   renderProduct = ({ item }) => {
     const { status } = item;
     switch(status) {
-      case 'requested' : return <RequestedCard product={item} />;
-      case 'reserved'  : return <ReservedCard product={item} />;
+      case 'requested'    : return <RequestedCard product={item} />;
+      case 'reserved'     : return <ReservedCard product={item} />;
+      case 'on_delivery'  : return <OnDeliveryCard product={item} />;
       default: return null;
     }
   }
+
+  renderSectionHeader = ({ section: { title } }) => (
+    <View style={[styles.container, { backgroundColor: '#000000', }]}>
+      <Text style={[styles.openSansBold, { fontSize: 19, color: '#FFFFFF' }]}>{title}</Text>
+    </View>
+  )
 
   handleOnRefresh = () => {
   };
@@ -38,11 +48,24 @@ class Products extends Component {
   render() {
 
     const { DashboardStore } = this.props;
-    const products = toJS(DashboardStore.products);
+    const products = toJS(DashboardStore.products).reduce((a, e) => {
+      switch (e.status) {
+        case 'requested'   : a[0].data.unshift(e); break;
+        case 'reserved'    : a[1].data.unshift(e); break;
+        case 'on_delivery' : a[2].data.unshift(e); break;
+      }
+      return a;
+    }, [
+      { title: 'Requested', data: []},
+      { title: 'Reserved', data: []},
+      { title: 'On Delivery', data: []},
+    ]);
+
     return (
-      <FlatList
-        data={products}
+      <SectionList
+        sections={products}
         renderItem={this.renderProduct}
+        renderSectionHeader={this.renderSectionHeader}
         keyExtractor={product => `${product.id}`}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
@@ -52,5 +75,38 @@ class Products extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentStyle: {
+    flex: 1,
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  openSansBold: {
+    fontFamily: 'OpenSans-Bold'
+  },
+  openSansSemiBold: {
+    fontFamily: 'OpenSans-SemiBold'
+  },
+  cardStyle: {
+    borderColor: 'transparent',
+    borderColor: '#f7f7f7',
+    shadowColor: '#f7f7f7',
+    shadowRadius: 0.1,
+    elevation: 1
+  },
+  flatButton: {
+    elevation: 0,
+    borderColor: 'transparent',
+    borderBottomWidth: 0
+  },
+});
 
 export default Products;
