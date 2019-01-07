@@ -15,7 +15,8 @@ import Product from './Product';
 class Products extends Component {
 
   state = {
-    refreshing: false
+    refreshing: false,
+    i: 0
   }
 
   renderProduct = ({ item }) => {
@@ -33,6 +34,10 @@ class Products extends Component {
     });
   };
 
+  getMoreProducts = async ({ distanceFromEnd }) => {
+    await this.props.ProductsStore.getMoreProducts();
+  }
+
   render() {
 
     const { ProductsStore } = this.props;
@@ -41,10 +46,13 @@ class Products extends Component {
     return (
       <FlatList
         data={toJS(_products)}
+        extraData={this.state}
         renderItem={this.renderProduct}
         keyExtractor={product => `${product.id}`}
         refreshing={this.state.refreshing}
-        onRefresh={() => this.handleOnRefresh()}
+        onRefresh={this.handleOnRefresh}
+        onEndReached={this.getMoreProducts}
+        onEndReachedThreshold={0.5}
       />
     );
   }

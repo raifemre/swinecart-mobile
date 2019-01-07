@@ -60,13 +60,11 @@ class ProductsStore {
 
   @action async getMoreProducts() {
     const { data: { data: { data } } } = await BreederProducts.getProducts(this.page + 1);
-    if(data.length > 0) {
-      runInAction(() => {
-        const newProducts = data.map(p => new Product(p));
-        this._products.unshift(...newProducts);
-        this.page = this.page + 1;
-      });
-    }
+    runInAction(() => {
+      const newProducts = data.map(p => new Product(p));
+      this._products.unshift(...newProducts);
+      this.page = data.length > 0 ? this.page + 1 : this.page;
+    });
   }
 
   @action async filterProducts() {
