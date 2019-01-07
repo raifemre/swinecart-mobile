@@ -219,7 +219,6 @@ class EditProduct extends Component {
                       minimumDate={new Date(1970, 0, 1)}
                       locale={"ph"}
                       androidMode={"default"}
-                      placeHolderText={selectedProduct.birthdate}
                       formatChosenDate={date => { return moment(date).format('LL'); }}
                       textStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       placeHolderTextStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
