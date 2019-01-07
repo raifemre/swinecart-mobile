@@ -78,8 +78,8 @@ class Chat extends Component {
                 <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
               </Button>
             </Left>
-            <Body style={{ flex: 1, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000', fontSize: 15 }]}>
+            <Body style={{ flex: 3, alignItems: 'center' }}>
+              <Title style={[openSansBold, { color: '#000000' }]}>
                 {MessageStore.selectedUser.name}
               </Title>
             </Body>

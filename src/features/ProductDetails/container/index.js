@@ -32,8 +32,8 @@ class ProductDetails extends Component {
                 <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
               </Button>
             </Left>
-            <Body style={{ flex: 1, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000', fontSize: 16 }]}>
+            <Body style={{ flex: 3, alignItems: 'center' }}>
+              <Title style={[openSansBold, { color: '#000000' }]}>
                 Product Details
             </Title>
             </Body>
