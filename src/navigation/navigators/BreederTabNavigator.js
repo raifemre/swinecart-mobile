@@ -13,6 +13,7 @@ import NotificationsIcon from '../../shared/NotificationsIcon';
 
 import MessagingStackNavigator from './MessagingStackNavigator';
 import ManageProductsStackNavigator from './ManageProductsStackNavigator';
+import ProductInventoryStackNavigator from './ProductInventoryStackNavigator';
 
 const iconMapping = {
   ManageProducts: 'credit-card',
@@ -39,7 +40,7 @@ const navigator = createBottomTabNavigator({
     screen: ManageProductsStackNavigator
   },
   'ProductInventory': {
-    screen: ManageProductsStackNavigator
+    screen: ProductInventoryStackNavigator
   },
   'Dashboard': {
     screen: Dashboard
@@ -55,7 +56,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'ManageProducts',
+  initialRouteName: 'ProductInventory',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

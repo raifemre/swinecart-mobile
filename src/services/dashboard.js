@@ -6,6 +6,18 @@ const service = {
     const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/dashboard`;
     return API.get(`${URL_PREFIX}/stats`);
   },
+  getProduct() {
+    const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/dashboard`;
+    return API.get(`${URL_PREFIX}/product-status`);
+  },
+  getProductRequests(id) {
+    const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/dashboard`;
+    return API.get(`${URL_PREFIX}/product-requests/${id}`);
+  },
+  getCustomerInfo(id) {
+    const URL_PREFIX = `/${UserStore.userRole.toLowerCase()}/dashboard`;
+    return API.get(`${URL_PREFIX}/customer-info/${id}`);
+  }
 }
 
 export default service;

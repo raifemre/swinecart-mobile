@@ -25,6 +25,10 @@ class DashboardStore {
   @observable productQuality = 0;
   @observable reviewsSize = 0;
 
+  @observable products = [];
+  @observable selectedProduct = null;
+  @observable productRequests = [];
+  @observable currentCustomerInfo;
 
   @action async getStats() {
     const { data: { data } } = await Dashboard.getStats();
@@ -44,6 +48,40 @@ class DashboardStore {
       this.productQuality = productQuality;
       this.reviewsSize = reviewsSize;
 
+    });
+  }
+
+  @action async getProducts() {
+    const { data: { data } } = await Dashboard.getProduct();
+    runInAction(() => {
+      this.products = data;
+    });
+  }
+
+  @action async getProductRequests() {
+    const { data: { data } } = await Dashboard.getProductRequests(this.selectedProduct.id);
+    console.log(data);
+    runInAction(() => {
+      this.productRequests = data;
+    });
+  }
+
+  @action async getCustomerInfo(id) {
+    const { data: { data } } = await Dashboard.getCustomerInfo(id);
+    runInAction(() => {
+      this.currentCustomerInfo = data;
+    });
+  }
+
+  @action setSelectedProduct(product) {
+    runInAction(() => {
+      this.selectedProduct = product;
+    });
+  }
+
+  @action clearProductRequests() {
+    runInAction(() => {
+      this.productRequests = [];
     });
   }
 
