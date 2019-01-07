@@ -48,7 +48,7 @@ class Product extends Component {
 
   render() {
 
-    const { openSansBold, cardStyle, container, center } = styles;
+    const { openSansBold, cardStyle, container } = styles;
 
     const { product } = this.props;
 
