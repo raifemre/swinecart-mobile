@@ -11,16 +11,28 @@ import { observer, inject } from 'mobx-react';
 
 import { Navigation } from '../../../services';
 
+import moment from 'moment';
+
 // moment(value).format("MMM D YYYY (ddd), h:mmA");
 
 @inject('DashboardStore', 'UserStore')
 @observer
-class RequestedCard extends Component {
+class ReservedCard extends Component {
 
-  seeRequests = () => {
-    const { product, DashboardStore } = this.props;
-    DashboardStore.setSelectedProduct(product);
-    Navigation.navigate('ProductRequests');
+  cancelTransaction = () => {
+
+  }
+
+  sendForDelivery = () => {
+    alert('Delivery!');
+  }
+
+  showDetails = () => {
+    alert('Details');
+  }
+
+  messageCustomer = () =>{
+    alert('Message');
   }
 
   render() {
@@ -28,8 +40,8 @@ class RequestedCard extends Component {
     const { openSansBold, cardStyle, container, flatButton } = styles;
 
     const { product } = this.props;
-    const { 
-      name, type, breed
+    const {
+      name, type, breed, status_time, customer_name
     } = product;
 
     return (
@@ -72,20 +84,64 @@ class RequestedCard extends Component {
               </Col>
               <Col>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 14 }]}>Requested</Text>
+                  <Text style={[openSansBold, { fontSize: 14 }]}>
+                    Reserved
+                  </Text>
+                  <Text style={[openSansBold, { fontSize: 12, color: '#757D75' }]}>
+                    &nbsp;({moment(status_time).format("MMM D YYYY (ddd), h:mmA")})
+                  </Text>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ marginBottom: 5 }}>
+              <Col style={{ paddingHorizontal: 5 }}>
+                <View style={{ flex: 1 }}>
+                  <Button onPress={this.showDetails} block bordered small style={{ borderColor: '#000000' }}>
+                    <Text style={[openSansBold, { color: '#000000', fontSize: 14 }]}>Details</Text>
+                  </Button>
+                </View>
+              </Col>
+              <Col style={{ paddingHorizontal: 5 }}>
+                <View style={{ flex: 1 }}>
+                  <Button onPress={this.messageCustomer} block bordered small style={{ borderColor: '#000000' }}>
+                    <Text style={[openSansBold, { color: '#000000', fontSize: 14 }]}>Message</Text>
+                  </Button>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 15 }]}>Reserved for</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 14 }]}>{customer_name}</Text>
                 </View>
               </Col>
             </Row>
             <Row>
-              <View style={{ flex: 1 }}>
-                <Button
-                  block
-                  onPress={this.seeRequests}
-                  style={[flatButton, { backgroundColor: '#00af66', marginTop: 10 }]}
-                >
-                  <Text uppercase={false} style={[openSansBold, { fontSize: 14 }]}>See Requests</Text>
-                </Button>
-              </View>
+              <Col style={{ paddingHorizontal: 5 }}>
+                <View style={{ flex: 1 }}>
+                  <Button
+                    block
+                    onPress={this.sendForDelivery}
+                    style={[flatButton, { backgroundColor: '#00af66', marginTop: 10 }]}
+                  >
+                    <Text uppercase={false} style={[openSansBold, { fontSize: 14 }]}>Send for Delivery</Text>
+                  </Button>
+                </View>
+              </Col>
+              <Col style={{ paddingHorizontal: 5 }}>
+                <View style={{ flex: 1 }}>
+                  <Button
+                    block
+                    onPress={this.cancelTransaction}
+                    style={[flatButton, { backgroundColor: '#EF5350', marginTop: 10 }]}
+                  >
+                    <Text uppercase={false} style={[openSansBold, { fontSize: 14 }]}>Cancel</Text>
+                  </Button>
+                </View>
+              </Col>
             </Row>
           </Grid>
         </CardItem>
@@ -128,4 +184,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RequestedCard;
+export default ReservedCard;

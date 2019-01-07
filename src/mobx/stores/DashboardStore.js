@@ -60,7 +60,6 @@ class DashboardStore {
 
   @action async getProductRequests() {
     const { data: { data } } = await Dashboard.getProductRequests(this.selectedProduct.id);
-    console.log(data);
     runInAction(() => {
       this.productRequests = data;
     });

@@ -54,7 +54,7 @@ class FarmField extends Component {
     else {
       return (
         <React.Fragment>
-          <Item floatingLabel>
+          <Item stackedLabel>
             <Label>{label}</Label>
             <Input
               disabled={!isEditable}

@@ -7,6 +7,7 @@ import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
 
 import RequestedCard from './RequestedCard';
+import ReservedCard from './ReservedCard';
 
 @inject('DashboardStore', 'UserStore')
 @observer
@@ -22,7 +23,8 @@ class Products extends Component {
   renderProduct = ({ item }) => {
     const { status } = item;
     switch(status) {
-      case 'requested': return <RequestedCard product={item} />;
+      case 'requested' : return <RequestedCard product={item} />;
+      case 'reserved'  : return <ReservedCard product={item} />;
       default: return null;
     }
   }

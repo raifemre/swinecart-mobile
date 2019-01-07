@@ -46,7 +46,7 @@ class Requests extends Component {
       <FlatList
         data={productRequests}
         renderItem={this.renderRequest}
-        keyExtractor={product => `${product.id}`}
+        keyExtractor={request => `${request.customerId}`}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
         onEndReached={this.getMoreProducts}
