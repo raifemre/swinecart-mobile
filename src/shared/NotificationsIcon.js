@@ -36,8 +36,8 @@ function NotificationsIcon({ focused }) {
         // </View>
       }
       <Icon
-        type='Feather'
-        name='bell'
+        type='MaterialIcons'
+        name='notifications'
         style={{ color: focused ? '#00af66' : '#000000' }} />
     </View>
   )

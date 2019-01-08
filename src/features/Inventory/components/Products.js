@@ -50,15 +50,17 @@ class Products extends Component {
     const { DashboardStore } = this.props;
     const products = toJS(DashboardStore.products).reduce((a, e) => {
       switch (e.status) {
-        case 'requested'   : a[0].data.unshift(e); break;
-        case 'reserved'    : a[1].data.unshift(e); break;
-        case 'on_delivery' : a[2].data.unshift(e); break;
+        case 'requested'   : a[0].data.push(e); break;
+        case 'reserved'    : a[1].data.push(e); break;
+        case 'on_delivery' : a[2].data.push(e); break;
+        case 'sold' : a[3].data.push(e); break;
       }
       return a;
     }, [
       { title: 'Requested', data: []},
       { title: 'Reserved', data: []},
       { title: 'On Delivery', data: []},
+      { title: 'Sold', data: []},
     ]);
 
     return (

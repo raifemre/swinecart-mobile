@@ -23,7 +23,7 @@ class OnDeliveryCard extends Component {
   }
 
   sendForDelivery = () => {
-    alert('Delivery!');
+    alert('Confirm Sold?');
   }
 
   showDetails = () => {
@@ -40,7 +40,7 @@ class OnDeliveryCard extends Component {
 
     const { product } = this.props;
     const {
-      name, type, breed, status_time, customer_name
+      name, type, breed, status_time, customer_name, delivery_date
     } = product;
 
     return (
@@ -115,6 +115,16 @@ class OnDeliveryCard extends Component {
               <Col>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                   <Text style={[openSansBold, { fontSize: 14 }]}>{customer_name}</Text>
+                </View>
+              </Col>
+            </Row>
+            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+              <Col>
+                <Text style={[openSansBold, { fontSize: 15 }]}>Expected to arrive on</Text>
+              </Col>
+              <Col>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <Text style={[openSansBold, { fontSize: 14 }]}>{delivery_date}</Text>
                 </View>
               </Col>
             </Row>

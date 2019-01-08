@@ -16,12 +16,11 @@ import ManageProductsStackNavigator from './ManageProductsStackNavigator';
 import ProductInventoryStackNavigator from './ProductInventoryStackNavigator';
 
 const iconMapping = {
-  ManageProducts: 'credit-card',
-  ProductInventory: 'menu',
-  Dashboard: 'bar-chart-2',
-  Messaging: 'message-square',
-  Notifications: 'bell',
-  Profile: 'user'
+  ManageProducts: 'store',
+  ProductInventory: 'list',
+  Dashboard: 'assessment',
+  Messaging: 'message',
+  Profile: 'mode-edit'
 };
 
 MessagingStackNavigator.navigationOptions = ({ navigation }) => {
@@ -68,7 +67,7 @@ const navigator = createBottomTabNavigator({
         }
         else {
           return <Icon
-            type='Feather'
+            type='MaterialIcons'
             name={iconMapping[routeName]}
             style={{ color: focused ? '#00af66' : '#000000' }} />
         }
