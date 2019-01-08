@@ -72,6 +72,7 @@ class Products extends Component {
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
         onEndReached={this.getMoreProducts}
+        stickySectionHeadersEnabled={true}
         onEndReachedThreshold={0.5}
       />
     );

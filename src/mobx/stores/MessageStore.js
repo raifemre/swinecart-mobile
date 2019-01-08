@@ -30,7 +30,7 @@ class MessageStore {
       return m.GCFormat;
     });
     runInAction(() => {
-      this.messages.unshift(...ms);
+      this.messages = ms;
     });
   }
 
