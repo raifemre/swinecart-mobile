@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction
+  observable, action, toJS, runInAction, computed
 } from 'mobx';
 
 import {
@@ -29,6 +29,22 @@ class DashboardStore {
   @observable selectedProduct = null;
   @observable productRequests = [];
   @observable currentCustomerInfo;
+
+
+  @computed get requestedProducts() {
+    return this.products.filter(p => p.status === 'requested');
+  }
+
+  @computed get reservedProducts() {
+    return this.products.filter(p => p.status === 'reserved');
+  }
+
+  @computed get onDeliveryProducts() {
+    return this.products.filter(p => p.status === 'on_delivery');
+  }
+  @computed get soldProducts() {
+    return this.products.filter(p => p.status === 'sold');
+  }
 
   @action async getStats() {
     const { data: { data } } = await Dashboard.getStats();

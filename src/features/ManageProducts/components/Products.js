@@ -35,6 +35,7 @@ class Products extends Component {
   };
 
   getMoreProducts = async ({ distanceFromEnd }) => {
+    console.log('true');
     await this.props.ProductsStore.getMoreProducts();
   }
 
@@ -52,7 +53,7 @@ class Products extends Component {
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
         onEndReached={this.getMoreProducts}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.1}
       />
     );
   }

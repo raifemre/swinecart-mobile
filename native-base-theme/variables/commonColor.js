@@ -120,7 +120,7 @@ export default {
 
   // Font
   DefaultFontSize: 16,
-  fontFamily: "System",
+  fontFamily: 'OpenSans-Bold',
   fontSizeBase: 15,
   get fontSizeH1() {
     return this.fontSizeBase * 1.8;
@@ -227,15 +227,15 @@ export default {
   inverseSpinnerColor: "#1A191B",
 
   // Tab
-  tabDefaultBg: platform === "ios" ? "#F8F8F8" : "#3F51B5",
-  topTabBarTextColor: platform === "ios" ? "#6b6b6b" : "#b3c7f9",
-  topTabBarActiveTextColor: platform === "ios" ? "#007aff" : "#fff",
-  topTabBarBorderColor: platform === "ios" ? "#a7a6ab" : "#fff",
-  topTabBarActiveBorderColor: platform === "ios" ? "#007aff" : "#fff",
+  tabDefaultBg: "#FFFFFF",
+  topTabBarTextColor:"#000000",
+  topTabBarActiveTextColor: "#00af66",
+  topTabBarBorderColor: 'transparent',
+  topTabBarActiveBorderColor: "#00af66",
 
   // Tabs
-  tabBgColor: "#F8F8F8",
-  tabFontSize: 15,
+  tabBgColor: "#FFFFFF",
+  tabFontSize: 16,
 
   // Text
   textColor: "#000",

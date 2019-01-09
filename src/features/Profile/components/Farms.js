@@ -24,7 +24,7 @@ import UserStore from '../../../mobx/stores/UserStore';
 const wp = percentage => Math.round((percentage * viewportWidth) / 100);
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 const slideWidth = wp(100);
-const itemHorizontalMargin = wp(1);
+const itemHorizontalMargin = wp(0);
 const sliderWidth = viewportWidth;
 const itemWidth = slideWidth + itemHorizontalMargin * 2;
 

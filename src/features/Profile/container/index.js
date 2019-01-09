@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text
+  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text,
+  Left, Right, Icon
 } from 'native-base';
 
 import {
@@ -45,18 +46,28 @@ class Profile extends Component {
   render() {
 
     const {
-      container, openSansBold, openSansSemiBold, flatButton
+      container, openSansBold, openSansSemiBold, flatButton, contentStyle
     } = styles;
 
     return (
       <StyleProvider style={getTheme(commonColor)}>
         <Container>
           <Header noShadow androidStatusBarColor='#ffffff' hasSegment>
-            <Body style={[container]}>
+            <Left style={{ flex: 1 }}></Left>
+            <Body style={container}>
               <Title style={[openSansBold, { color: '#000000' }]}>
                 Profile
               </Title>
             </Body>
+            <Right style={[contentStyle]}>
+              <Button
+                block
+                onPress={this.logout}
+                style={[flatButton, { backgroundColor: '#EF5350' }]}
+              >
+                <Text uppercase={true} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
+              </Button>
+            </Right>
           </Header>
           <Segment>
             <Button first onPress={() => this.changeSeg(1)} active={this.state.currSeg === 1}>
@@ -70,13 +81,6 @@ class Profile extends Component {
             </Button>
           </Segment>
           <Content padder>
-            <Button
-              block
-              onPress={this.logout}
-              style={[flatButton, { backgroundColor: '#EF5350' }]}
-            >
-              <Text uppercase={true} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
-            </Button> 
             {this.state.currSeg === 1 && <OfficeInfo />}
             {this.state.currSeg === 2 && <Farms />}
             {this.state.currSeg === 3 && <ChangePassword />}

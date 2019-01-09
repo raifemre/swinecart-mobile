@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import {
-  Container, Header, Body, Title, View
+  Container, Header, Body, Title, Tabs, Tab
 } from 'native-base';
 
 
@@ -25,22 +25,35 @@ class Inventory extends Component {
   render() {
 
     const {
-      openSansBold, contentStyle
+      openSansBold, openSansSemiBold
     } = styles;
+
+    const { DashboardStore } = this.props;
 
     return (
       <StyleProviderWrapper>
         <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
+          <Header hasTabs noShadow androidStatusBarColor='#ffffff'>
             <Body style={{ flex: 3, alignItems: 'center' }}>
               <Title style={[openSansBold, { color: '#000000' }]}>
                 Product Inventory
             </Title>
             </Body>
           </Header>
-          <View style={[contentStyle, { padding: 15 }]}>
-            <Products />
-          </View>
+          <Tabs locked={true}>
+            <Tab heading='Requested'>
+              <Products status='requested' products={DashboardStore.requestedProducts}/>
+            </Tab>
+            <Tab heading='Reserved'>
+              <Products status='reserved' products={DashboardStore.reservedProducts} />
+            </Tab>
+            <Tab heading='Delivery'>
+              <Products status='onDelivery' products={DashboardStore.onDeliveryProducts} />
+            </Tab>
+            <Tab heading='Sold'>
+              <Products status='sold' products={DashboardStore.soldProducts} />
+            </Tab>
+          </Tabs>
         </Container>
       </StyleProviderWrapper>
     );
