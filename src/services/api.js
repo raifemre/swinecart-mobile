@@ -40,7 +40,7 @@ instance.interceptors.response.use(
         await UserStore.forgetUser();
         Navigation.navigate('Public');
       }
-      if (error.response.status === 408 || error.code === 'ECONNABORTED') {
+      if (err.response.status === 408 || err.code === 'ECONNABORTED') {
         console.log('Timeout!');
       }
       else {

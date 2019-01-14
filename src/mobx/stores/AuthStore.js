@@ -41,7 +41,8 @@ class AuthStore {
       Navigation.navigate(UserStore.userRole);
     }
     catch(e) {
-      console.error(e);
+      const { data: { error } } = e;
+      console.log(error);
     }
   }
 

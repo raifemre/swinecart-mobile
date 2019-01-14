@@ -30,6 +30,12 @@ class Products extends Component {
   }
 
   handleOnRefresh = () => {
+    this.setState({
+      refreshing: true
+    }, async () => {
+      await this.props.DashboardStore.getProducts();
+      this.setState({ refreshing: false });
+    });
   };
 
   getMoreProducts = async ({ distanceFromEnd }) => {
