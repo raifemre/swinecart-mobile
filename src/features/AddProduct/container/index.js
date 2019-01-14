@@ -13,12 +13,12 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import moment from 'moment';
 
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import { Navigation } from '../../../services';
 
+import { formatBirthdate } from '../../../utils';
 
 @inject('UserStore', 'ProductsStore')
 @observer
@@ -197,7 +197,7 @@ class AddProduct extends Component {
                       androidMode={'default'}
                       locale={'ph'}
                       placeHolderText='Birth Date'
-                      formatChosenDate={date => { return moment(date).format('LL'); }}
+                      formatChosenDate={date => formatBirthdate(date)}
                       textStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       placeHolderTextStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       onDateChange={value => newProduct.setValue('birthdate', value)}

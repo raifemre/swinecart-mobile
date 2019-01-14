@@ -14,11 +14,12 @@ import {
 } from 'mobx-react';
 
 import { toJS } from 'mobx';
-import moment from 'moment';
+
 
 import { Navigation } from '../../../services';
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
+import { formatBirthdate } from '../../../utils';
 @inject('UserStore', 'ProductsStore')
 @observer
 class EditProduct extends Component {
@@ -219,7 +220,7 @@ class EditProduct extends Component {
                       minimumDate={new Date(1970, 0, 1)}
                       locale={"ph"}
                       androidMode={"default"}
-                      formatChosenDate={date => { return moment(date).format('LL'); }}
+                      formatChosenDate={date => formatBirthdate(date) }
                       textStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       placeHolderTextStyle={[openSansSemiBold, { color: "#000000", paddingLeft: 5 }]}
                       onDateChange={value => selectedProduct.setValue('birthdate', value)}

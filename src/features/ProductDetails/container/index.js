@@ -17,7 +17,7 @@ import {
 
 import { Navigation } from '../../../services';
 
-
+import { formatBirthdate } from '../../../utils';
 @inject('UserStore', 'ProductsStore')
 @observer
 class ProductDetails extends Component {
@@ -101,7 +101,7 @@ class ProductDetails extends Component {
                     </Col>
                     <Col>
                       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 14 }]}>{moment(birthdate).format('LL')}</Text>
+                        <Text style={[openSansBold, { fontSize: 14 }]}>{formatBirthdate(birthdate)}</Text>
                         <Text style={[openSansBold, { fontSize: 14 }]}>&nbsp;({age} days old)</Text>
                       </View>
                     </Col>

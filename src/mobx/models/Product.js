@@ -1,6 +1,8 @@
 import { observable, action, runInAction } from 'mobx';
 
 import UserStore from '../stores/UserStore';
+
+import { formatBirthdate } from '../../utils';
 class Product {
 
   constructor(props) {
@@ -34,7 +36,7 @@ class Product {
   @observable fatherBreed = '';
 
   @action setValue(field, value) {
-    this[field] = value;
+      this[field] = value;
   }
 
   @action setStatus(status) {
