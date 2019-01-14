@@ -67,6 +67,26 @@ class DashboardStore {
     });
   }
 
+  @action async reserveProduct(request) {
+    const {
+      customerId, swineCartId, requestQuantity, dateNeeded, specialRequest
+    } = request;
+
+    const data = {
+      product_id: this.selectedProduct.id,
+      customer_id: customerId,
+      swinecart_id: swineCartId,
+      request_quantity: requestQuantity,
+      date_needed: dateNeeded,
+      special_request: specialRequest,
+      status: 'reserved'
+    };
+
+    const { data: response } = await Dashboard.updateProductStatus(data.product_id, data);
+    console.log(response);
+    await this.getProducts();
+  }
+
   @action async getProducts() {
     const { data: { data } } = await Dashboard.getProduct();
     runInAction(() => {

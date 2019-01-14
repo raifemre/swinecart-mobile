@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 
 import {
   View, Text, Card, CardItem, Button, Grid, Col, Row,
@@ -10,18 +10,29 @@ import { observer, inject } from 'mobx-react';
 
 import { Navigation } from '../../../services';
 
+import { alertDialog } from '../../../utils';
 
 @inject('DashboardStore', 'UserStore')
 @observer
 class Request extends Component {
 
-  reserveProduct = () => {
+  reserveProduct = async () => {
+    const { request, DashboardStore } = this.props;
+    await DashboardStore.reserveProduct(request);
+    Navigation.back();
+  }
+
+  handleReserve = () => {
     const { request, DashboardStore } = this.props;
     const { selectedProduct } = DashboardStore;
     const { customerName } = request;
     const { name } = selectedProduct;
+    const dialogText = `Are you sure you want to reserve ${name} to ${customerName}?`;
 
-    alert(`Are you sure you want to reserve ${name} to ${customerName}?`);
+    alertDialog(dialogText,
+      { text: 'Yes', onPress: this.reserveProduct },
+      { text: 'Close', onPress: () => { console.log('Cancelled!') } }
+    );
   }
 
   messageBreeder = () => {
@@ -86,7 +97,7 @@ class Request extends Component {
                 <View style={{ flex: 1 }}>
                   <Button
                     block
-                    onPress={this.reserveProduct}
+                    onPress={this.handleReserve}
                     style={[flatButton, { backgroundColor: '#00af66', marginTop: 10 }]}
                   >
                     <Text uppercase={false} style={[openSansBold, { fontSize: 15 }]}>Reserve</Text>
