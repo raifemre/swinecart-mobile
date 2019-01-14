@@ -25,10 +25,13 @@ class ConnectedIndicator extends Component {
   render() {
     if(this.state.visible) {
       return (
-        <View style={{ backgroundColor: '#00af66', height: 30, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ 
+          backgroundColor: '#00af66', height: 30, justifyContent: 'center',
+          alignItems: 'center', position: 'absolute', width: '100%'
+        }}>
           <Text style={{ color: '#FFFFFF', fontSize: 15, fontFamily: 'OpenSans-SemiBold' }}>
             Connected!
-              </Text>
+          </Text>
         </View>
       )
     }

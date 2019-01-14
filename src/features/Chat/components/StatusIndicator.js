@@ -19,7 +19,7 @@ class StatusIndicator extends Component {
   render() {
     if(!this.props.MessageStore.socket) {
       return (
-        <View style={{ backgroundColor: '#F1E05A', height: 30, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ backgroundColor: '#F1E05A', height: 30, justifyContent: 'center', alignItems: 'center', position: 'absolute', width: '100%' }}>
           <Text style={{ color: '#FFFFFF', fontSize: 15, fontFamily: 'OpenSans-SemiBold' }}>
             Connecting...
           </Text>
