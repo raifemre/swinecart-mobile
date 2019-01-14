@@ -9,6 +9,7 @@ import {
 } from 'native-base';
 
 import FastImage from 'react-native-fast-image';
+import moment from 'moment';
 
 import {
   observer, inject
@@ -100,8 +101,8 @@ class ProductDetails extends Component {
                     </Col>
                     <Col>
                       <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 14 }]}>{birthdate}</Text>
-                        <Text style={[openSansBold, { fontSize: 14 }]}>&nbsp;({age} years old)</Text>
+                        <Text style={[openSansBold, { fontSize: 14 }]}>{moment(birthdate).format('LL')}</Text>
+                        <Text style={[openSansBold, { fontSize: 14 }]}>&nbsp;({age} days old)</Text>
                       </View>
                     </Col>
                   </Row>
