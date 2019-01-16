@@ -87,6 +87,15 @@ class DashboardStore {
     await this.getProducts();
   }
 
+  @action async sendProduct(product, date) {
+    console.log(toJS(product));
+    // const { reservation_id, id } = product;
+    // console.log({ reservation_id, id, status: 'on_delivery', delivery_date: date });
+    // const { data: response } = await Dashboard.updateProductStatus(data.product_id, data);
+    // console.log(response);
+    // await this.getProducts();
+  }
+
   @action async getProducts() {
     const { data: { data } } = await Dashboard.getProduct();
     runInAction(() => {

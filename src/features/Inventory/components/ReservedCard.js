@@ -12,6 +12,7 @@ import { observer, inject } from 'mobx-react';
 import { Navigation } from '../../../services';
 
 import moment from 'moment';
+import { toJS } from 'mobx';
 
 // moment(value).format("MMM D YYYY (ddd), h:mmA");
 
@@ -20,11 +21,12 @@ import moment from 'moment';
 class ReservedCard extends Component {
 
   cancelTransaction = () => {
-
+    
   }
 
-  sendForDelivery = () => {
-    alert('Delivery!');
+  sendForDelivery = async () => {
+    const { product, DashboardStore } = this.props;
+    await DashboardStore.sendProduct(product, '201232132');
   }
 
   showDetails = () => {
@@ -40,6 +42,7 @@ class ReservedCard extends Component {
     const { openSansBold, cardStyle, container, flatButton } = styles;
 
     const { product } = this.props;
+
     const {
       name, type, breed, status_time, customer_name
     } = product;
