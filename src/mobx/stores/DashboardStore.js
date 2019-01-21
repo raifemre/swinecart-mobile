@@ -30,6 +30,7 @@ class DashboardStore {
   @observable productRequests = [];
   @observable currentCustomerInfo;
 
+  @observable activeTab = 0;
 
   @computed get requestedProducts() {
     return this.products.filter(p => p.status === 'requested');
@@ -67,6 +68,20 @@ class DashboardStore {
     });
   }
 
+  @action async cancelTransaction(product) {
+
+    const { id, reservation_id } = product;
+
+    const { data: response } = await Dashboard.updateProductStatus(id, {
+      status: 'cancel_transaction',
+      reservation_id,
+      product_id: id
+    });
+
+    console.log(response);
+    await this.getProducts();
+  }
+
   @action async reserveProduct(request) {
     const {
       customerId, swineCartId, requestQuantity, dateNeeded, specialRequest
@@ -88,12 +103,12 @@ class DashboardStore {
   }
 
   @action async sendProduct(product, date) {
-    console.log(toJS(product));
-    // const { reservation_id, id } = product;
-    // console.log({ reservation_id, id, status: 'on_delivery', delivery_date: date });
-    // const { data: response } = await Dashboard.updateProductStatus(data.product_id, data);
-    // console.log(response);
-    // await this.getProducts();
+    const { reservation_id, id } = product;
+    const data = { reservation_id, product_id: id, status: 'on_delivery', delivery_date: date };
+    console.log(data);
+    const { data: response } = await Dashboard.updateProductStatus(data.product_id, data);
+    console.log(response);
+    await this.getProducts();
   }
 
   @action async getProducts() {
@@ -127,6 +142,10 @@ class DashboardStore {
     runInAction(() => {
       this.productRequests = [];
     });
+  }
+
+  @action setActiveTab(activeTab) {
+    this.activeTab = activeTab;
   }
 
 }

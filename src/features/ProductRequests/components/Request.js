@@ -20,6 +20,7 @@ class Request extends Component {
     const { request, DashboardStore } = this.props;
     await DashboardStore.reserveProduct(request);
     Navigation.back();
+    setTimeout(() => DashboardStore.setActiveTab(1), 300);
   }
 
   handleReserve = () => {

@@ -18,8 +18,9 @@ import moment from 'moment';
 @observer
 class OnDeliveryCard extends Component {
 
-  cancelTransaction = () => {
-
+  cancelTransaction = async () => {
+    const { product, DashboardStore } = this.props;
+    await DashboardStore.cancelTransaction(product);
   }
 
   sendForDelivery = () => {
@@ -36,7 +37,7 @@ class OnDeliveryCard extends Component {
 
   render() {
 
-    const { openSansBold, cardStyle, container, flatButton } = styles;
+    const { openSansBold, cardStyle, flatButton } = styles;
 
     const { product } = this.props;
     const {

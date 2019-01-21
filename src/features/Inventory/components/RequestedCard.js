@@ -25,7 +25,7 @@ class RequestedCard extends Component {
 
   render() {
 
-    const { openSansBold, cardStyle, container, flatButton } = styles;
+    const { openSansBold, cardStyle, flatButton } = styles;
 
     const { product } = this.props;
     const { 
@@ -42,7 +42,7 @@ class RequestedCard extends Component {
               </Col>
               <Col>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 14 }]}>{name}</Text>
+                  <Text style={[openSansBold, { fontSize: 18 }]}>{name}</Text>
                 </View>
               </Col>
             </Row>

@@ -17,16 +17,23 @@ import Products from '../components/Products';
 @observer
 class Inventory extends Component {
 
+
+  state = {
+    activeTab: 0
+  }
+
   componentDidMount() {
     const { DashboardStore } = this.props;
     DashboardStore.getProducts();
   }
 
+  onChangeTab = ({ i: activeTab }) => {
+    this.props.DashboardStore.setActiveTab(activeTab);
+  }
+
   render() {
 
-    const {
-      openSansBold, openSansSemiBold
-    } = styles;
+    const { openSansBold } = styles;
 
     const { DashboardStore } = this.props;
 
@@ -40,9 +47,9 @@ class Inventory extends Component {
             </Title>
             </Body>
           </Header>
-          <Tabs locked={true}>
+          <Tabs locked={true} initialPage={0} page={DashboardStore.activeTab} onChangeTab={this.onChangeTab}>
             <Tab heading='Requested'>
-              <Products status='requested' products={DashboardStore.requestedProducts}/>
+              <Products status='requested' products={DashboardStore.requestedProducts} />
             </Tab>
             <Tab heading='Reserved'>
               <Products status='reserved' products={DashboardStore.reservedProducts} />
