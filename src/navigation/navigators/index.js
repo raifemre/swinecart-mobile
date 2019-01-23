@@ -7,8 +7,8 @@ import Navigation from '../../services/navigation';
 
 import AuthChecker from '../../features/AuthChecker';
 
-import BreederTabNavigator from '../navigators/BreederTabNavigator';
-import PublicStackNavigator from '../navigators/PublicStackNavigator';
+import BreederTabNavigator from './BreederTabs';
+import PublicStackNavigator from './PublicStack';
 
 const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
@@ -19,9 +19,8 @@ const RootNavigator = createSwitchNavigator({
 });
 
 class Root extends Component {
-  state = {};
   render() {
-    return <RootNavigator ref={r => Navigation.setTopLevelNavigator(r)} />;
+    return <RootNavigator ref={ref => Navigation.setTopLevelNavigator(ref)} />;
   }
 }
 

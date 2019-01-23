@@ -11,9 +11,9 @@ import Dashboard from '../../features/Dashboard';
 
 import NotificationsIcon from '../../shared/NotificationsIcon';
 
-import MessagingStackNavigator from './MessagingStackNavigator';
-import ManageProductsStackNavigator from './ManageProductsStackNavigator';
-import ProductInventoryStackNavigator from './ProductInventoryStackNavigator';
+import MessagingStackNavigator from './MessagingStack';
+import ManageProductsStackNavigator from './ManageProductsStack';
+import ProductInventoryStackNavigator from './ProductInventoryStack';
 
 const iconMapping = {
   ManageProducts: 'store',
@@ -28,7 +28,6 @@ MessagingStackNavigator.navigationOptions = ({ navigation }) => {
   if (navigation.state.index > 0) {
     tabBarVisible = false;
   }
-
   return {
     tabBarVisible,
   };
@@ -55,7 +54,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'ProductInventory',
+  initialRouteName: 'Dashboard',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text
+  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text,
+  Grid, Col, View
 } from 'native-base';
 
 import {
@@ -20,7 +21,6 @@ import getTheme from '../../../../native-base-theme/components';
 
 import ProductStats from '../components/ProductStats';
 import Reviews from '../components/Reviews';
-import Sales from '../components/Sales';
 
 @inject('DashboardStore')
 @observer
@@ -66,19 +66,15 @@ class Dashboard extends Component {
           </Header>
           <Segment>
             <Button first onPress={() => this.changeSeg(1)} active={this.state.currSeg === 1}>
-              <Text style={[openSansSemiBold]}>Sales</Text>
-            </Button>
-            <Button onPress={() => this.changeSeg(2)} active={this.state.currSeg === 2}>
               <Text style={[openSansSemiBold]}>Product Status</Text>
             </Button>
-            <Button last onPress={() => this.changeSeg(3)} active={this.state.currSeg === 3}>
+            <Button first onPress={() => this.changeSeg(2)} active={this.state.currSeg === 2}>
               <Text style={[openSansSemiBold]}> Reviews</Text>
             </Button>
           </Segment>
           <Content padder>
-            { this.state.currSeg === 1 && <Sales /> }
-            { this.state.currSeg === 2 && <ProductStats stats={DashboardStore.stats}/> }
-            { this.state.currSeg === 3 && <Reviews /> }
+            { this.state.currSeg === 1 && <ProductStats stats={DashboardStore.stats}/> }
+            { this.state.currSeg === 2 && <Reviews /> }
           </Content>
         </Container>
       </StyleProvider>
