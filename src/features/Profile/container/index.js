@@ -12,8 +12,7 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import OfficeInfo from '../components/OfficeInfo';
 import Farms from '../components/Farms';
@@ -24,7 +23,7 @@ import Segments from '../components/Segments';
 class Profile extends Component {
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 2
   }
 
   setIndex = index => {
@@ -34,8 +33,7 @@ class Profile extends Component {
   }
 
   logout = async () => {
-    const { AuthStore } = this.props;
-    await AuthStore.logout();
+    await this.props.AuthStore.logout();
   }
 
   render() {
@@ -45,7 +43,7 @@ class Profile extends Component {
     } = styles;
 
     return (
-      <StyleProvider style={getTheme(commonColor)}>
+      <StyleProviderWrapper>
         <Container>
           <Header noShadow androidStatusBarColor='#00695C' hasSegment>
             <Left style={{ flex: 1 }}></Left>
@@ -64,20 +62,18 @@ class Profile extends Component {
               </Button>
             </Right>
           </Header>
-          <View>
-            <Segments 
-              values={['Office Information', 'Farms', 'Change Password']}
-              selectedIndex={this.state.selectedIndex}
-              onTabPress={this.setIndex}
-            />
-          </View>
+          <Segments 
+            values={['Office Info', 'Farms', 'Change Password']}
+            selectedIndex={this.state.selectedIndex}
+            onTabPress={this.setIndex}
+          />
           <Content padder>
             {this.state.selectedIndex === 0 && <OfficeInfo />}
             {this.state.selectedIndex === 1 && <Farms />}
             {this.state.selectedIndex === 2 && <ChangePassword />}
           </Content>
         </Container>
-      </StyleProvider>
+      </StyleProviderWrapper>
     );
   }
 

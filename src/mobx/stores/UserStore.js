@@ -29,7 +29,8 @@ class UserStore {
   }
 
   @action async changePassword({ currentPassword, newPassword, newPasswordConfirmation }) {
-    const data = await Profile.changePassword({ currentPassword, newPassword, newPasswordConfirmation });
+    const { data } = await Profile.changePassword({ currentPassword, newPassword, newPasswordConfirmation });
+    return data;
   }
 
   @action async getProfile() {
