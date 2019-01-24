@@ -36,25 +36,27 @@ class ManageProducts extends Component {
     return (
       <StyleProviderWrapper>
         <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
+          <Header noShadow androidStatusBarColor='#00695C'>
             <Left style={[contentStyle]}>
               <Button transparent onPress={this.navigateToAdd}>
-                <Icon type='Feather' name='plus' style={{ color: '#000000' }} />
+                <Icon type='Feather' name='plus' style={{ color: '#FFFFFF' }} />
               </Button>
             </Left>
-            <Body style={{ flex: 1, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
-                Products
+            <Body style={{ flex: 3, alignItems: 'center' }}>
+              <Title style={[openSansBold, { color: '#FFFFFF' }]}>
+                Manage Products
             </Title>
             </Body>
             <Right style={[contentStyle]}>
               <Button transparent onPress={this.navigateToFilter}>
-                <Icon type='Feather' name='filter' style={{ color: '#000000' }} />
+                <Icon type='Feather' name='filter' style={{ color: '#FFFFFF' }} />
               </Button>
             </Right>
           </Header>
-          <View style={[contentStyle, { padding: 15 }]}>
-            <Products />
+          <View style={[contentStyle, { backgroundColor: '#f7f7f7' }]}>
+            {
+              <Products />
+            }
           </View>
         </Container>
       </StyleProviderWrapper>
@@ -72,11 +74,6 @@ const styles = StyleSheet.create({
   },
   openSansSemiBold: {
     fontFamily: 'OpenSans-SemiBold'
-  },
-  modalContent: {
-    backgroundColor: "white",
-    padding: 18,
-    borderColor: "rgba(0, 0, 0, 0.1)"
   },
   flatButton: {
     elevation: 0,

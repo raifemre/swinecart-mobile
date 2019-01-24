@@ -11,9 +11,9 @@ import Dashboard from '../../features/Dashboard';
 
 import NotificationsIcon from '../../shared/NotificationsIcon';
 
-import MessagingStackNavigator from './MessagingStack';
-import ManageProductsStackNavigator from './ManageProductsStack';
-import ProductInventoryStackNavigator from './ProductInventoryStack';
+import MessagingStack from './MessagingStack';
+import ManageProductsStack from './ManageProductsStack';
+import ProductInventory from './ProductInventoryStack';
 
 const iconMapping = {
   ManageProducts: 'store',
@@ -23,7 +23,7 @@ const iconMapping = {
   Profile: 'mode-edit'
 };
 
-MessagingStackNavigator.navigationOptions = ({ navigation }) => {
+MessagingStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
@@ -35,10 +35,10 @@ MessagingStackNavigator.navigationOptions = ({ navigation }) => {
 
 const navigator = createBottomTabNavigator({
   'ManageProducts': {
-    screen: ManageProductsStackNavigator
+    screen: ManageProductsStack
   },
   // 'ProductInventory': {
-  //   screen: ProductInventoryStackNavigator
+  //   screen: ProductInventory
   // },
   // 'Dashboard': {
   //   screen: Dashboard
@@ -49,12 +49,12 @@ const navigator = createBottomTabNavigator({
   // 'Notifications': {
   //   screen: Notifications
   // },
-  // 'Profile': {
-  //   screen: Profile,
-  // },
+  'Profile': {
+    screen: Profile,
+  },
 },
 {
-  initialRouteName: 'ManageProducts',
+  initialRouteName: 'Profile',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

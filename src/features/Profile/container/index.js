@@ -52,10 +52,10 @@ class Profile extends Component {
     return (
       <StyleProvider style={getTheme(commonColor)}>
         <Container>
-          <Header noShadow androidStatusBarColor='#ffffff' hasSegment>
+          <Header noShadow androidStatusBarColor='#00695C' hasSegment>
             <Left style={{ flex: 1 }}></Left>
             <Body style={container}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
+              <Title style={[openSansBold, { color: '#ffffff' }]}>
                 Profile
               </Title>
             </Body>

@@ -14,8 +14,8 @@ class AuthStore {
   @observable loading = false;
 
   @observable values = {
-    email: '',
-    password: ''
+    email: 'kimberly09@tillman.net',
+    password: 'secret12'
   };
 
   @action setEmail(email) {
@@ -34,15 +34,20 @@ class AuthStore {
   @action async login() {
     this.loading = true;
     try {
-      const { data: { data: { access_token : token } } } = await Auth.login(this.values);
+      const { data: { data: { access_token : token } } } = await Auth.login(this.values)
       await CommonStore.setToken(token);
       await UserStore.getUser();
       await UserStore.getProfile();
       Navigation.navigate(UserStore.userRole);
     }
     catch(e) {
-      const { data: { error } } = e;
-      console.log(error);
+      const { data } = e;
+      if(data) {
+        console.log(data.error);
+      }
+      else {
+        console.log(e);
+      }
     }
   }
 

@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-
-import {
-  FlatList
-} from 'react-native';
-
+import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
-
 import { toJS } from 'mobx';
 
 import Product from './Product';
@@ -35,7 +30,6 @@ class Products extends Component {
   };
 
   getMoreProducts = async ({ distanceFromEnd }) => {
-    console.log('true');
     await this.props.ProductsStore.getMoreProducts();
   }
 
