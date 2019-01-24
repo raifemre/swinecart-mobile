@@ -5,7 +5,7 @@ import {
 
 import {
   Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text,
-  Left, Right, Icon
+  Left, Right, Icon, View
 } from 'native-base';
 
 import {
@@ -18,23 +18,18 @@ import getTheme from '../../../../native-base-theme/components';
 import OfficeInfo from '../components/OfficeInfo';
 import Farms from '../components/Farms';
 import ChangePassword from '../components/ChangePassword';
+import Segments from '../components/Segments';
 @inject('UserStore', 'AuthStore')
 @observer
 class Profile extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      currSeg: 1
-    }
+  state = {
+    selectedIndex: 0
   }
 
-  componentDidMount() {
-  }
-
-  changeSeg = (segNum) => {
+  setIndex = index => {
     this.setState({
-      currSeg: segNum
+      selectedIndex: index
     });
   }
 
@@ -46,7 +41,7 @@ class Profile extends Component {
   render() {
 
     const {
-      container, openSansBold, openSansSemiBold, flatButton, contentStyle
+      container, openSansBold, flatButton, contentStyle
     } = styles;
 
     return (
@@ -63,27 +58,23 @@ class Profile extends Component {
               <Button
                 block
                 onPress={this.logout}
-                style={[flatButton, { backgroundColor: '#EF5350' }]}
+                style={[flatButton, { backgroundColor: 'transparent' }]}
               >
-                <Text uppercase={true} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
+                <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
               </Button>
             </Right>
           </Header>
-          <Segment>
-            <Button first onPress={() => this.changeSeg(1)} active={this.state.currSeg === 1}>
-              <Text style={[openSansSemiBold]}>Office Info</Text>
-            </Button>
-            <Button onPress={() => this.changeSeg(2)} active={this.state.currSeg === 2}>
-              <Text style={[openSansSemiBold]}>Farms</Text>
-            </Button>
-            <Button last onPress={() => this.changeSeg(3)} active={this.state.currSeg === 3}>
-              <Text style={[openSansSemiBold]}>Change Password</Text>
-            </Button>
-          </Segment>
+          <View>
+            <Segments 
+              values={['Office Information', 'Farms', 'Change Password']}
+              selectedIndex={this.state.selectedIndex}
+              onTabPress={this.setIndex}
+            />
+          </View>
           <Content padder>
-            {this.state.currSeg === 1 && <OfficeInfo />}
-            {this.state.currSeg === 2 && <Farms />}
-            {this.state.currSeg === 3 && <ChangePassword />}
+            {this.state.selectedIndex === 0 && <OfficeInfo />}
+            {this.state.selectedIndex === 1 && <Farms />}
+            {this.state.selectedIndex === 2 && <ChangePassword />}
           </Content>
         </Container>
       </StyleProvider>

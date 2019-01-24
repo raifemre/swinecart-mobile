@@ -53,7 +53,7 @@ class ManageProducts extends Component {
               </Button>
             </Right>
           </Header>
-          <View style={[contentStyle, { backgroundColor: '#f7f7f7' }]}>
+          <View style={[contentStyle, { backgroundColor: '#F2F2F2' }]}>
             {
               <Products />
             }
