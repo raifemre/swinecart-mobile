@@ -9,9 +9,10 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import FlatButton from '../../../shared/FlatButton';
+import OutlinedButton from '../../../shared/OutlinedButton';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 import OfficeInfo from '../components/OfficeInfo';
 import Farms from '../components/Farms';
@@ -42,37 +43,39 @@ class Profile extends Component {
     } = styles;
 
     return (
-      <StyleProviderWrapper>
-        <Container>
-          <HeaderWrapper hasSegment>
-            <Left style={{ flex: 1 }}></Left>
-            <Body style={container}>
-              <Title style={[openSansBold, { color: '#ffffff' }]}>
-                Profile
+      <React.Fragment>
+        <SpinnerWithOverlay visible={this.props.AuthStore.loadingLogout} textContent='Logging out...' />
+        <StyleProviderWrapper>
+          <Container>
+            <HeaderWrapper hasSegment>
+              <Left style={{ flex: 1 }}></Left>
+              <Body style={container}>
+                <Title style={[openSansBold, { color: '#ffffff' }]}>
+                  Profile
               </Title>
-            </Body>
-            <Right style={[contentStyle]}>
-              <FlatButton
-                block
-                onPress={this.logout}
-                style={{ backgroundColor: 'transparent' }}
-              >
-                <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
-              </FlatButton>
-            </Right>
-          </HeaderWrapper>
-          <Segments 
-            values={['Office Info', 'Farms', 'Change Password']}
-            selectedIndex={this.state.selectedIndex}
-            onTabPress={this.setIndex}
-          />
-          <Content padder>
-            {this.state.selectedIndex === 0 && <OfficeInfo />}
-            {this.state.selectedIndex === 1 && <Farms />}
-            {this.state.selectedIndex === 2 && <ChangePassword />}
-          </Content>
-        </Container>
-      </StyleProviderWrapper>
+              </Body>
+              <Right style={[contentStyle]}>
+                <OutlinedButton onPress={this.logout} style={{ height: 36 }}
+                >
+                  <Text uppercase={false} style={[openSansBold, { fontSize: 14, lineHeight: 36 }]}>
+                    Logout
+                </Text>
+                </OutlinedButton>
+              </Right>
+            </HeaderWrapper>
+            <Segments
+              values={['Office Info', 'Farms', 'Change Password']}
+              selectedIndex={this.state.selectedIndex}
+              onTabPress={this.setIndex}
+            />
+            <Content padder>
+              {this.state.selectedIndex === 0 && <OfficeInfo />}
+              {this.state.selectedIndex === 1 && null}
+              {this.state.selectedIndex === 2 && <ChangePassword />}
+            </Content>
+          </Container>
+        </StyleProviderWrapper>
+      </React.Fragment>
     );
   }
 

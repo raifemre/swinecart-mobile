@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS
+  observable, action, toJS, runInAction
 } from 'mobx';
 
 import {
@@ -12,6 +12,7 @@ import UserStore from './UserStore';
 class AuthStore {
 
   @observable loading = false;
+  @observable loadingLogout = false;
 
   @observable values = {
     email: 'kimberly09@tillman.net',
@@ -52,10 +53,14 @@ class AuthStore {
   }
 
   @action async logout() {
+    this.loadingLogout = true;
     await Auth.logout();
     CommonStore.setToken(null);
     UserStore.forgetUser();
-    Navigation.navigate('AuthChecker');
+    runInAction(() => {
+      this.loadingLogout = false;
+      Navigation.navigate('Public');
+    });
   }
 
 }
