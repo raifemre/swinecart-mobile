@@ -5,6 +5,7 @@ import { Button, Text, Form, View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
 import PasswordField from './PasswordField';
+import FlatButton from '../../../shared/FlatButton';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 @inject('UserStore', 'ChangePasswordForm')
 @observer
@@ -15,7 +16,7 @@ class ChangePassword extends Component {
   }
 
   render() {
-    const { openSansBold, flatButton } = styles;
+    const { openSansBold } = styles;
     const { ChangePasswordForm } = this.props;
     
     return (
@@ -39,13 +40,9 @@ class ChangePassword extends Component {
           />
         </Form>
         <View style={{ marginTop: 20 }}>
-          <Button
-            block
-            onPress={this.submit}
-            style={[flatButton, { backgroundColor: '#00af66' }]}
-          >
-            <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Submit</Text>
-          </Button>
+          <FlatButton block onPress={this.submit} style={{ backgroundColor: '#00af66' }}>
+            <Text uppercase={false} style={[openSansBold, { fontSize: 18}]}>Submit</Text>
+          </FlatButton>
         </View>
       </React.Fragment>
     );
@@ -71,12 +68,7 @@ const styles = StyleSheet.create({
   },
   openSansSemiBold: {
     fontFamily: 'OpenSans-SemiBold'
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
+  }
 });
 
 export default ChangePassword;

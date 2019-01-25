@@ -13,6 +13,10 @@ class ChangePasswordForm {
     newPasswordConfirmation: ''
   }
 
+  formRules = {
+
+  }
+
   @observable loading = false;
 
   @observable form = {
@@ -72,13 +76,13 @@ class ChangePasswordForm {
 
   @action async submitForm() {
     this.loading = true;
-    console.log(toJS(this.form));
+    await sleep(2000);
     try {
       const form = cleanFields(toJS(this.form));
       if (this.validateFields(form)) {
         const { message } = await UserStore.changePassword(form);
         showToast(message, 'success', 'bottom');
-        this.resetForm();
+        // this.resetForm();
       }
     }
     catch(e) {

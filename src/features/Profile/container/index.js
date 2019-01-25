@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet, FlatList
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text,
-  Left, Right, Icon, View
+  Container, Content, Header, Body, Title, Button, Text, Left, Right
 } from 'native-base';
 
 import {
   observer, inject
 } from 'mobx-react';
 
+import FlatButton from '../../../shared/FlatButton';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import OfficeInfo from '../components/OfficeInfo';
@@ -39,13 +38,13 @@ class Profile extends Component {
   render() {
 
     const {
-      container, openSansBold, flatButton, contentStyle
+      container, openSansBold, contentStyle
     } = styles;
 
     return (
       <StyleProviderWrapper>
         <Container>
-          <Header noShadow androidStatusBarColor='#00695C' hasSegment>
+          <HeaderWrapper hasSegment>
             <Left style={{ flex: 1 }}></Left>
             <Body style={container}>
               <Title style={[openSansBold, { color: '#ffffff' }]}>
@@ -53,15 +52,15 @@ class Profile extends Component {
               </Title>
             </Body>
             <Right style={[contentStyle]}>
-              <Button
+              <FlatButton
                 block
                 onPress={this.logout}
-                style={[flatButton, { backgroundColor: 'transparent' }]}
+                style={{ backgroundColor: 'transparent' }}
               >
                 <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Logout</Text>
-              </Button>
+              </FlatButton>
             </Right>
-          </Header>
+          </HeaderWrapper>
           <Segments 
             values={['Office Info', 'Farms', 'Change Password']}
             selectedIndex={this.state.selectedIndex}
@@ -97,12 +96,7 @@ const styles = StyleSheet.create({
   },
   openSansSemiBold: {
     fontFamily: 'OpenSans-SemiBold'
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
+  }
 });
 
 export default Profile;

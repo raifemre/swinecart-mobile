@@ -24,12 +24,8 @@ const iconMapping = {
 };
 
 MessagingStack.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = true;
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-  }
   return {
-    tabBarVisible,
+    tabBarVisible: navigation.state.index > 0 ? false : true,
   };
 };
 
@@ -37,18 +33,18 @@ const navigator = createBottomTabNavigator({
   'ManageProducts': {
     screen: ManageProductsStack
   },
-  // 'ProductInventory': {
-  //   screen: ProductInventory
-  // },
-  // 'Dashboard': {
-  //   screen: Dashboard
-  // },
-  // 'Messaging': {
-  //   screen: MessagingStackNavigator
-  // },
-  // 'Notifications': {
-  //   screen: Notifications
-  // },
+  'ProductInventory': {
+    screen: ProductInventory
+  },
+  'Dashboard': {
+    screen: Dashboard
+  },
+  'Messaging': {
+    screen: MessagingStack
+  },
+  'Notifications': {
+    screen: Notifications
+  },
   'Profile': {
     screen: Profile,
   },
