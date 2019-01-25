@@ -74,7 +74,7 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.js",
-    extraPackagerArgs: ["--max-workers=1"]
+    extraPackagerArgs: ["--max-workers=6"]
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"

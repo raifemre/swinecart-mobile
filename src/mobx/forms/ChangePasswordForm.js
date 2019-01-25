@@ -2,16 +2,23 @@ import {
   observable, action, runInAction, toJS
 } from 'mobx';
 
-import { showToast, cleanFields } from '../../utils';
+import { showToast, cleanFields, sleep } from '../../utils';
 import UserStore from '../stores/UserStore';
+
 class ChangePasswordForm {
+
+  defaultFormState = {
+    currentPassword: '',
+    newPassword: '',
+    newPasswordConfirmation: ''
+  }
 
   @observable loading = false;
 
   @observable form = {
-    currentPassword: '',
-    newPassword: '',
-    newPasswordConfirmation: ''
+    currentPassword: 'secret12',
+    newPassword: 'secret12',
+    newPasswordConfirmation: 'secret12'
   }
 
   @action setValue(field, value) {
@@ -20,6 +27,16 @@ class ChangePasswordForm {
 
   @action validateField(field, validator, failMessage) {
 
+  }
+
+  @action resetForm() {
+    runInAction(() => {
+      for (const field in this.form) {
+        if (this.form.hasOwnProperty(field)) {
+          this.form[field] = this.defaultFormState[field];
+        }
+      }
+    });
   }
 
   @action validateFields(form) {
@@ -54,16 +71,15 @@ class ChangePasswordForm {
   }
 
   @action async submitForm() {
+    this.loading = true;
+    console.log(toJS(this.form));
     try {
-      this.loading = true;
       const form = cleanFields(toJS(this.form));
       if (this.validateFields(form)) {
         const { message } = await UserStore.changePassword(form);
-        console.log(message);
+        showToast(message, 'success', 'bottom');
+        this.resetForm();
       }
-      runInAction(() => {
-        this.loading = false;
-      });
     }
     catch(e) {
       const { data } = e;
@@ -77,6 +93,9 @@ class ChangePasswordForm {
         console.log(e);
       }
     }
+    runInAction(() => {
+      this.loading = false;
+    });
   }
 
 }

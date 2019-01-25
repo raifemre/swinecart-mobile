@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { Item, Input } from 'native-base';
-
+import { Item, Input, Text } from 'native-base';
+import { observer } from 'mobx-react';
+@observer
 class PasswordField extends Component {
-
 
   state =  {
     showPassword: false
@@ -17,15 +17,17 @@ class PasswordField extends Component {
   render() {
     const { form, placeholder, field } = this.props;
     return (
-      <Item>
-        <Input
-          placeholder={placeholder}
-          value={form[field]}
-          onChangeText={this.onChangeText}
-          secureTextEntry={this.state.showPassword}
-          style={{ fontFamily: 'OpenSans-SemiBold' }}
-        />
-      </Item>
+      <React.Fragment>
+        <Item>
+          <Input
+            placeholder={placeholder}
+            value={form.form[field]}
+            onChangeText={this.onChangeText}
+            secureTextEntry={this.state.showPassword}
+            style={{ fontFamily: 'OpenSans-SemiBold' }}
+          />
+        </Item>
+      </React.Fragment>
     );
   }
 }

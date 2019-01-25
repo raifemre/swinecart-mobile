@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Text, Form, Item, Input, View, Spinner } from 'native-base';
+import { Button, Text, Form, View } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
 import PasswordField from './PasswordField';
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 @inject('UserStore', 'ChangePasswordForm')
 @observer
 class ChangePassword extends Component {
@@ -19,6 +20,7 @@ class ChangePassword extends Component {
     
     return (
       <React.Fragment>
+        <SpinnerWithOverlay visible={ChangePasswordForm.loading} textContent='Changing Password...'/>
         <Form>
           <PasswordField
             form={ChangePasswordForm}

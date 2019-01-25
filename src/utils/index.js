@@ -12,7 +12,7 @@ export function alertDialog(title = '', okHandler, cancelhandler) {
 
 export function showToast(text, type, position) {
   // console.log('Toast: ', text, type, position);
-  Toast.show({ text, type, position, buttonText: 'Close', duration: 1000 });
+  Toast.show({ text, type, position, buttonText: 'Close', duration: 1500 });
 }
 
 export function cleanFields(form) {
@@ -27,4 +27,8 @@ export function cleanFields(form) {
   }
   // console.log('Cleaned Form', cleanedForm);
   return cleanedForm;
+}
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
