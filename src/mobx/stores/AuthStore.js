@@ -11,7 +11,7 @@ import UserStore from './UserStore';
 
 class AuthStore {
 
-  @observable loading = false;
+  @observable loadingLogin = false;
   @observable loadingLogout = false;
 
   @observable values = {
@@ -33,13 +33,16 @@ class AuthStore {
   }
 
   @action async login() {
-    this.loading = true;
+    this.loadingLogin = true;
     try {
       const { data: { data: { access_token : token } } } = await Auth.login(this.values)
       await CommonStore.setToken(token);
       await UserStore.getUser();
       await UserStore.getProfile();
-      Navigation.navigate(UserStore.userRole);
+      runInAction(() => {
+        this.loadingLogin = false;
+        Navigation.navigate(UserStore.userRole);
+      });
     }
     catch(e) {
       const { data } = e;
@@ -50,6 +53,9 @@ class AuthStore {
         console.log(e);
       }
     }
+    runInAction(() => {
+      this.loadingLogin = false;
+    });
   }
 
   @action async logout() {

@@ -76,13 +76,12 @@ class ChangePasswordForm {
 
   @action async submitForm() {
     this.loading = true;
-    await sleep(2000);
     try {
       const form = cleanFields(toJS(this.form));
       if (this.validateFields(form)) {
         const { message } = await UserStore.changePassword(form);
         showToast(message, 'success', 'bottom');
-        // this.resetForm();
+        this.resetForm();
       }
     }
     catch(e) {

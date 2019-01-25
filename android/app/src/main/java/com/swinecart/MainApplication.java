@@ -3,6 +3,8 @@ package com.swinecart;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+import com.kishanjvaghela.cardview.RNCardViewPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SvgPackage(),
+            new RNCardViewPackage(),
             new RNSpinkitPackage(),
             new FastImageViewPackage(),
             new RNSpinkitPackage()

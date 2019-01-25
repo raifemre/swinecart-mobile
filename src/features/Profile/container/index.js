@@ -70,7 +70,7 @@ class Profile extends Component {
             />
             <Content padder>
               {this.state.selectedIndex === 0 && <OfficeInfo />}
-              {this.state.selectedIndex === 1 && null}
+              {this.state.selectedIndex === 1 && <Farms />}
               {this.state.selectedIndex === 2 && <ChangePassword />}
             </Content>
           </Container>

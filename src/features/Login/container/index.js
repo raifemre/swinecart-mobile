@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import {
   Container, Content, Header, Body, Title, StyleProvider, Form, Item, Text,
-  Input, Button, View, Icon, ScrollView
+  Input, Button, View, Icon
 } from 'native-base';
 
 import {
@@ -12,10 +12,8 @@ import {
 } from 'mobx-react';
 
 import Divider from 'react-native-divider';
-
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
-
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 @inject(['AuthStore'])
 @observer
 class Login extends Component {
@@ -63,89 +61,85 @@ class Login extends Component {
     } = styles;
 
     return (
-      <StyleProvider style={getTheme(commonColor)}>
-        <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
-            <Body  style={[container]}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
-                
-              </Title>
-            </Body>
-          </Header>
-          <Content contentContainerStyle={[contentStyle]} padder>
+      <React.Fragment>
+        <SpinnerWithOverlay visible={this.props.AuthStore.loadingLogin} textContent='Logging in...' />
+        <StyleProviderWrapper>
+          <Container>
+            <Content contentContainerStyle={[contentStyle]} padder>
 
-            <View style={{ alignItems: 'center' }}>
-              <Text style={[openSansBold, { fontSize: 22 }]}>Welcome!</Text>
-              <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
-                Login to your account!
+              <View style={{ alignItems: 'center' }}>
+                <Text style={[openSansBold, { fontSize: 22 }]}>Welcome!</Text>
+                <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
+                  Login to your account!
               </Text>
-            </View>
+              </View>
 
-            <View style={{ marginVertical: 10 }}>
-              <Form>
-                <Item style={[fullInput]}>
-                  <Input placeholder='Email' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} testID='email' />
-                </Item>
-                <Item style={[fullInput]}>
-                  <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} onChangeText={this.handlePasswordChange} testID='password'/>
-                  <Button 
-                    style={[flatButton, { backgroundColor: 'transparent' }]}
-                    onPress={() => this.navigateTo('ForgotPassword')}
-                  >
-                    <Text uppercase={false} style={[openSansSemiBold, { fontSize: 9, color: '#000000' }]}>
-                      Forgot Password?
+              <View style={{ marginVertical: 10 }}>
+                <Form>
+                  <Item style={[fullInput]}>
+                    <Input placeholder='Email' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} testID='email' />
+                  </Item>
+                  <Item style={[fullInput]}>
+                    <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} onChangeText={this.handlePasswordChange} testID='password' />
+                    <Button
+                      style={[flatButton, { backgroundColor: 'transparent' }]}
+                      onPress={() => this.navigateTo('ForgotPassword')}
+                    >
+                      <Text uppercase={false} style={[openSansSemiBold, { fontSize: 9, color: '#000000' }]}>
+                        Forgot Password?
                     </Text>
+                    </Button>
+                  </Item>
+                  <Button
+                    block
+                    style={[backgroundPrimary, flatButton, { marginTop: 20 }]}
+                    onPress={this.login}
+                  >
+                    <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Login</Text>
                   </Button>
-                </Item>
-                <Button 
-                  block 
-                  style={[backgroundPrimary, flatButton, { marginTop: 20 }]}
-                  onPress={this.login}
-                >
-                  <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Login</Text>
-                </Button>
-              </Form>
-            </View>
+                </Form>
+              </View>
 
-            <View style={{ alignItems: 'center', marginVertical: 10 }}>
-              <Button 
-                block 
-                style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]} 
-                onPress={() => this.navigateTo('Register')}
-              >
-                <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
-                  Tap here to create a Customer account!
-                </Text>
-              </Button>
-            </View>
-
-            <View>
               <View style={{ alignItems: 'center', marginVertical: 10 }}>
-                <Divider orientation='center'>
-                  <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
-                    OR
-                </Text>
-                </Divider>
-              </View>
-              <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
                 <Button
-                  style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
-                  onPress={this.facebookLogin}
+                  block
+                  style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]}
+                  onPress={() => this.navigateTo('Register')}
                 >
-                  <Icon type='FontAwesome' name='facebook-square' />
-                </Button>
-                <Button 
-                  style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
-                  onPress={this.googleLogin}
-                >
-                  <Icon type='FontAwesome' name='google' />
+                  <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
+                    Tap here to create a Customer account!
+                </Text>
                 </Button>
               </View>
-            </View>
 
-          </Content>
-        </Container>
-      </StyleProvider>
+              <View>
+                <View style={{ alignItems: 'center', marginVertical: 10 }}>
+                  <Divider orientation='center'>
+                    <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
+                      OR
+                </Text>
+                  </Divider>
+                </View>
+                <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
+                  <Button
+                    style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
+                    onPress={this.facebookLogin}
+                  >
+                    <Icon type='FontAwesome' name='facebook-square' />
+                  </Button>
+                  <Button
+                    style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
+                    onPress={this.googleLogin}
+                  >
+                    <Icon type='FontAwesome' name='google' />
+                  </Button>
+                </View>
+              </View>
+
+            </Content>
+          </Container>
+        </StyleProviderWrapper>
+      </React.Fragment>
     );
   }
 }
