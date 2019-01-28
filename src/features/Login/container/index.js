@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet
-} from 'react-native';
-import {
-  Container, Content, Header, Body, Title, StyleProvider, Form, Item, Text,
-  Input, Button, View, Icon
-} from 'native-base';
-
-import {
-  observer, inject
-} from 'mobx-react';
-
+import { Container, Content, Form, View, Grid, Col, Row } from 'native-base';
+import { observer, inject } from 'mobx-react';
 import Divider from 'react-native-divider';
 
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 import IconWrapper from '../../../shared/IconWrapper';
+import PrimaryButton from '../../../shared/PrimaryButton';
+import FlatButton from '../../../shared/FlatButton';
+import TextWrapper from '../../../shared/TextWrapper';
 
 import PasswordField from '../components/PasswordField';
 import TextField from '../components/TextField';
@@ -24,14 +17,16 @@ import TextField from '../components/TextField';
 @observer
 class Login extends Component {
 
-  delay = fn => {
-    setTimeout(() => fn(), 10);
+  navigateToRegister = () =>  {
+    this.props.navigation.navigate('Register');
   }
 
-  navigateTo = route =>  {
-    this.delay(() => {
-      this.props.navigation.navigate(route);
-    });
+  navigateToForgotPassword = () => {
+    this.props.navigation.navigate('ForgotPassword');
+  }
+
+  navigateToShop = () => {
+    this.props.navigation.navigate('Shop');
   }
 
   login = async () =>  {
@@ -47,17 +42,6 @@ class Login extends Component {
   }
 
   render() {
-    const { 
-      contentStyle,
-      container,
-      backgroundPrimary,
-      openSansBold,
-      openSansSemiBold,
-      flatButton,
-      fullInput,
-      sideBySide
-    } = styles;
-
     const { LoginForm } = this.props;
     console.log('Login Screen Render!');
     return (
@@ -65,15 +49,21 @@ class Login extends Component {
         <SpinnerWithOverlay visible={LoginForm.loading} textContent='Logging in...' />
         <StyleProviderWrapper>
           <Container>
-            <Content contentContainerStyle={[contentStyle]} padder>
-
+            <Content padder>
               <View style={{ alignItems: 'center' }}>
-                <Text style={[openSansBold, { fontSize: 24 }]}>Welcome to SwineCart!</Text>
-                <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
-                  Login to your account!
-                </Text>
+                <TextWrapper
+                  text='Welcome To SwineCart!'
+                  font='OpenSans-Bold'
+                  size={24}
+                  color='#000000'
+                />
+                <TextWrapper
+                  text='Login to your account!'
+                  font='OpenSans-Bold'
+                  size={14}
+                  color='#7f8c8d'
+                />
               </View>
-
               <View style={{ marginVertical: 10 }}>
                 <Form>
                   <TextField
@@ -88,58 +78,91 @@ class Login extends Component {
                     field={'password'}
                     isPassword={true}
                   />
-                  {
-                    <Button
-                      block
-                      style={[backgroundPrimary, flatButton, { marginTop: 20 }]}
-                      onPress={this.login}
+                  <View style={{ marginTop: 15 }}>
+                    <PrimaryButton block onPress={this.login}>
+                      <TextWrapper
+                        uppercase={false}
+                        color='#ffffff'
+                        text='Login'
+                        font='OpenSans-Bold'
+                        size={16}
+                      />
+                    </PrimaryButton>
+                  </View>
+                  <View style={{ marginVertical: 5 }}>
+                    <FlatButton block
+                      onPress={this.navigateToForgotPassword}
+                      style={{ backgroundColor: 'transparent', borderColor: '#000000', borderWidth: 2 }}
                     >
-                      <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Login</Text>
-                    </Button>
-                  }
+                      <TextWrapper
+                        uppercase={false}
+                        color='#000000'
+                        text='Forgot Password?'
+                        font='OpenSans-Bold'
+                        size={12}
+                      />
+                    </FlatButton>
+                  </View>
                 </Form>
               </View>
-
-              {
-                <View style={{ alignItems: 'center', marginVertical: 10 }}>
-                  <Button
-                    block
-                    style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]}
-                    onPress={() => this.navigateTo('Register')}
-                  >
-                    <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
-                      Tap here to create a Customer account!
-                </Text>
-                  </Button>
-                </View>
-              }
-
-              {
-                <View>
-                  <View style={{ alignItems: 'center', marginVertical: 10 }}>
-                    <Divider orientation='center'>
-                      <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
-                        OR
-                </Text>
-                    </Divider>
-                  </View>
-                  <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
-                    <Button
-                      style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
-                      onPress={this.facebookLogin}
-                    >
-                      <IconWrapper type='MaterialCommunityIcons' name='facebook-box' />
-                    </Button>
-                    <Button
-                      style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
-                      onPress={this.googleLogin}
-                    >
+              <Divider orientation='center'>
+                <TextWrapper
+                  color='#7f8c8d'
+                  text='OR'
+                  font='OpenSans-Bold'
+                  size={14}
+                />
+              </Divider>
+              <Grid style={{ marginTop: 20 }}>
+                <Row style={{ height: 60 }}>
+                  <Col style={{ paddingRight: 5 }}>
+                    <FlatButton block
+                      style={{ backgroundColor: '#3B5998' }}
+                      onPress={this.facebookLogin}>
+                      <IconWrapper type='MaterialCommunityIcons' name='facebook-box' fontSize={30} />
+                    </FlatButton>
+                  </Col>
+                  <Col style={{ paddingLeft: 5 }}>
+                    <FlatButton block
+                      style={{ backgroundColor: '#DB3236' }}
+                      onPress={this.googleLogin}>
                       <IconWrapper type='MaterialCommunityIcons' name='google' />
-                    </Button>
-                  </View>
-                </View>
-              }
-
+                    </FlatButton>
+                  </Col>
+                </Row>
+                <Row style={{ height: 60 }}>
+                  <Col>
+                    <FlatButton block
+                      onPress={this.navigateToRegister}
+                      style={{ backgroundColor: 'transparent', borderColor: '#000000', borderWidth: 2 }}
+                    >
+                      <TextWrapper
+                        uppercase={false}
+                        color='#000000'
+                        text='Tap here to Register!'
+                        font='OpenSans-Bold'
+                        size={16}
+                      />
+                    </FlatButton>
+                  </Col>
+                </Row>
+                <Row style={{ height: 60 }}>
+                  <Col>
+                    <FlatButton block
+                      onPress={this.navigateToShop}
+                      style={{ backgroundColor: 'transparent', borderColor: '#00695C', borderWidth: 2 }}
+                    >
+                      <TextWrapper
+                        uppercase={false}
+                        color='#00695C'
+                        text='Shop'
+                        font='OpenSans-Bold'
+                        size={14}
+                      />
+                    </FlatButton>
+                  </Col>
+                </Row>
+              </Grid>
             </Content>
           </Container>
         </StyleProviderWrapper>
@@ -147,44 +170,5 @@ class Login extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  backgroundWhite: {
-    backgroundColor: '#ffffff'
-  },
-  backgroundPrimary: {
-    backgroundColor: '#00695C'
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
-  fullInput: { 
-    marginLeft: 0,
-    marginVertical: 10
-  },
-  sideBySide: {
-    margin: 0, width: '49%', justifyContent: 'center',
-  }
-});
 
 export default Login;

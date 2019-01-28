@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Text, Form, View } from 'native-base';
+import { Text, Form, View } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
 import PasswordField from './PasswordField';
-import FlatButton from '../../../shared/FlatButton';
+import PrimaryButton from '../../../shared/PrimaryButton';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 @inject('UserStore', 'ChangePasswordForm')
 @observer
@@ -40,9 +40,11 @@ class ChangePassword extends Component {
           />
         </Form>
         <View style={{ marginTop: 20 }}>
-          <FlatButton block onPress={this.submit} style={{ backgroundColor: '#00695C' }}>
-            <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Submit</Text>
-          </FlatButton>
+          <PrimaryButton block onPress={this.submit}>
+            <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>
+              Submit
+            </Text>
+          </PrimaryButton>
         </View>
       </React.Fragment>
     );
