@@ -30,27 +30,27 @@ MessagingStack.navigationOptions = ({ navigation }) => {
 };
 
 const navigator = createBottomTabNavigator({
-  'ManageProducts': {
-    screen: ManageProductsStack
-  },
-  // 'ProductInventory': {
-  //   screen: ProductInventory
+  // 'ManageProducts': {
+  //   screen: ManageProductsStack
   // },
+  'ProductInventory': {
+    screen: ProductInventory
+  },
   // 'Dashboard': {
   //   screen: Dashboard
   // },
   // 'Messaging': {
   //   screen: MessagingStack
   // },
-  // 'Notifications': {
-  //   screen: Notifications
-  // },
+  'Notifications': {
+    screen: Notifications
+  },
   'Profile': {
     screen: Profile,
   },
 },
 {
-  initialRouteName: 'Profile',
+  initialRouteName: 'Notifications',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

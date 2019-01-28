@@ -24,10 +24,8 @@ class LoginForm {
   @observable loading = false;
 
   @observable form = {
-    // email: 'kimberly09@tillman.net',
-    // password: 'secret12'
-    email: '',
-    password: ''
+    email: 'kimberly09@tillman.net',
+    password: 'secret12'
   }
 
   @action setValue(field, value) {

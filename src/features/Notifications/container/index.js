@@ -1,95 +1,45 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet, FlatList
-} from 'react-native';
 
-import { NavigationEvents } from 'react-navigation';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider
+  Container, View, Body, Title,
 } from 'native-base';
 
 import {
   observer, inject
 } from 'mobx-react';
 
-import {
-  toJS
-} from 'mobx';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
+import Notifs from '../components/Notifications';
 
-import Notification from '../components/Notification';
-
-@inject(['NotificationStore'])
+@inject('NotificationStore')
 @observer
 class Notifications extends Component {
 
-  renderItem = ({ item }) => {
-    const { data: { description, time: { date } } } = item;
-    const message = description.replace(/(<b>|<\/b>)/g, '');
-    return <Notification message={message} date={date}/>
-  }
-
   render() {
-
-    const {
-      NotificationStore
-    } = this.props;
-
-    const {
-      container, openSansBold
-    } = styles;
-
     return (
       <React.Fragment>
-        <NavigationEvents
-          onDidFocus={() => NotificationStore.seeNotifs()}
-        />
-        <StyleProvider style={getTheme(commonColor)}>
+        <StyleProviderWrapper>
           <Container>
-            <Header noShadow androidStatusBarColor='#ffffff'>
-              <Body style={[container]}>
-                <Title style={[openSansBold, { color: '#000000' }]}>
+            <HeaderWrapper>
+              <Body style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Title style={{ color: '#ffffff', fontFamily: 'OpenSans-Bold' }}>
                   Notifications
-              </Title>
+                </Title>
               </Body>
-            </Header>
-            <Content padder>
-              <FlatList
-                data={toJS(NotificationStore.notifs)}
-                renderItem={this.renderItem}
-                keyExtractor={item => item.id}
-              />
-            </Content>
+            </HeaderWrapper>
+            <View style={[{ backgroundColor: '#F2F2F2' }]}>
+              <Notifs />
+            </View>
           </Container>
-        </StyleProvider>
+        </StyleProviderWrapper>
       </React.Fragment>
     );
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  }
-});
 
 export default Notifications;

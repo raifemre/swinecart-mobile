@@ -1,38 +1,36 @@
 import {
-  observable, action, toJS, runInAction, computed
+  observable, action, toJS, runInAction, autorun
 } from 'mobx';
 
 import {
   Notifications
 } from '../../services';
 
+import Notification from '../models/Notification';
+
 class NotificationStore {
-
-  @observable notifs = [];
-
+  @observable notifications = [];
+  @observable unreadCount = 0;
   @action async getNotifs() {
-    const { data: { data: notifs } } = await Notifications.getNotifs();
+    const { data: { data } } = await Notifications.getNotifs();
+    const notifications = data.map(d => new Notification(d));
     runInAction(() => {
-      this.notifs = notifs;
+      this.notifications = notifications;
     });
   }
 
-  @action async seeNotifs() {
-    const id = this.unreadNotifs.map(n => Notifications.seeNotif(n.id));
-    await Promise.all(id);
+  @action async readNotification(id) {
+    await Notifications.seeNotif(id);
     await this.getNotifs();
   }
 
-  @computed get unreadNotifs() {
-    const unread = this.notifs.filter(n => !n.read_at);
-    return unread;
-  }
-
-  @computed get unreadCount() {
-    return this.unreadNotifs.length;
-  }
-
-
+  reactToNotifChange = autorun(() => {
+    const unread = this.notifications.filter(n => !n.read_at);
+    console.log(unread);
+    runInAction(() => {
+      this.unreadCount = unread.length;
+    })
+  });
 }
 
 export default new NotificationStore();

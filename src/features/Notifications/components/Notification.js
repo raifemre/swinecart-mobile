@@ -1,34 +1,57 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
+import { StyleSheet } from 'react-native';
+import InViewPort from '../../../shared/InViewPort';
+import TextWrapper from '../../../shared/TextWrapper';
+import { Card, CardItem, Body, View } from 'native-base';
+@inject('NotificationStore')
+@observer
+class Notification extends Component {
 
-import {
-  StyleSheet
-} from 'react-native';
+  componentDidMount() {
+    
+  }
 
-import {
-  Text, Card, CardItem, Body, Left
-} from 'native-base'
-
-import moment from 'moment';
-
-class Notification extends PureComponent {
+  onVisible = isVisible => {
+    if (isVisible) {
+      const { notification, NotificationStore } = this.props;
+      if (!notification.read_at) {
+        NotificationStore.readNotification(notification.id);
+      }
+    }
+  }
 
   render() {
-    const { message, date } = this.props;
-    const {
-      openSansBold, openSansSemiBold, cardStyle, container
-    } = styles;
-
-    const ago = moment(date).fromNow();
-
+    const { cardStyle } = styles;
+    const { notification } = this.props;
     return (
-      <Card style={[cardStyle]}>
-        <CardItem>
-          <Body>
-            <Text style={[openSansSemiBold]}>{message}</Text>
-            <Text style={[openSansSemiBold, { fontSize: 12 }]}>{ago}</Text>
-          </Body>
-        </CardItem>
-      </Card>
+      <InViewPort onChange={this.onVisible}>
+        <View style={{ paddingHorizontal: 10 }}>
+          <Card style={[cardStyle]}>
+            <CardItem>
+              <Body>
+                <TextWrapper
+                  font={'OpenSans-Bold'}
+                  text={notification.message}
+                  size={14}
+                />
+                <TextWrapper
+                  font={'OpenSans-Bold'}
+                  color={'#7f8c8d'}
+                  text={notification.ago}
+                  size={13}
+                />
+                <TextWrapper
+                  font={'OpenSans-Bold'}
+                  color={'#7f8c8d'}
+                  text={notification.read_at}
+                  size={13}
+                />
+              </Body>
+            </CardItem>
+          </Card>
+        </View>
+      </InViewPort>
     );
   }
 
@@ -57,8 +80,8 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderColor: '#f7f7f7',
     shadowColor: '#f7f7f7',
-    shadowRadius: 0.1,
-    elevation: 1
+    shadowRadius: 0,
+    elevation: 1,
   }
 });
 
