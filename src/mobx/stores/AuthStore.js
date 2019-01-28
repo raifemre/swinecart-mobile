@@ -9,57 +9,25 @@ import {
 import CommonStore from './CommonStore';
 import UserStore from './UserStore';
 
+import { sleep } from '../../utils';
+
 class AuthStore {
 
   @observable loadingLogin = false;
   @observable loadingLogout = false;
 
-  @observable values = {
-    email: 'kimberly09@tillman.net',
-    password: 'secret12'
-  };
+  @action async login(data) {
+    await sleep(300);
+    const { 
+      data: { data: { access_token: token } } 
+    } = await Auth.login(data);
 
-  @action setEmail(email) {
-    this.values.email = email;
-  }
-
-  @action setPassword(password) {
-    this.values.password = password;
-  }
-
-  @action resetValues() {
-    this.values.email = '';
-    this.values.password = '';
-  }
-
-  @action async login() {
-    this.loadingLogin = true;
-    try {
-      const { data: { data: { access_token : token } } } = await Auth.login(this.values)
-      await CommonStore.setToken(token);
-      await UserStore.getUser();
-      await UserStore.getProfile();
-      runInAction(() => {
-        this.loadingLogin = false;
-        Navigation.navigate(UserStore.userRole);
-      });
-    }
-    catch(e) {
-      const { data } = e;
-      if(data) {
-        console.log(data.error);
-      }
-      else {
-        console.log(e);
-      }
-    }
-    runInAction(() => {
-      this.loadingLogin = false;
-    });
+    return token;
   }
 
   @action async logout() {
     this.loadingLogout = true;
+    await sleep(300);
     await Auth.logout();
     CommonStore.setToken(null);
     UserStore.forgetUser();

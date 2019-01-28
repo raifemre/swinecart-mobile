@@ -12,9 +12,14 @@ import {
 } from 'mobx-react';
 
 import Divider from 'react-native-divider';
+
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
-@inject(['AuthStore'])
+
+import PasswordField from '../components/PasswordField';
+import TextField from '../components/TextField';
+
+@inject('LoginForm', 'AuthStore')
 @observer
 class Login extends Component {
 
@@ -29,15 +34,7 @@ class Login extends Component {
   }
 
   login = async () =>  {
-    this.props.AuthStore.login();
-  }
-
-  handleEmailChange = value => {
-    this.props.AuthStore.setEmail(value);
-  }
-
-  handlePasswordChange = value => {
-    this.props.AuthStore.setPassword(value);
+    await this.props.LoginForm.submitForm();
   }
 
   facebookLogin = () => {
@@ -60,81 +57,87 @@ class Login extends Component {
       sideBySide
     } = styles;
 
+    const { LoginForm } = this.props;
+    console.log('Login Screen Render!');
     return (
       <React.Fragment>
-        <SpinnerWithOverlay visible={this.props.AuthStore.loadingLogin} textContent='Logging in...' />
+        <SpinnerWithOverlay visible={LoginForm.loading} textContent='Logging in...' />
         <StyleProviderWrapper>
           <Container>
             <Content contentContainerStyle={[contentStyle]} padder>
 
               <View style={{ alignItems: 'center' }}>
-                <Text style={[openSansBold, { fontSize: 22 }]}>Welcome!</Text>
+                <Text style={[openSansBold, { fontSize: 24 }]}>Welcome to SwineCart!</Text>
                 <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
                   Login to your account!
-              </Text>
+                </Text>
               </View>
 
               <View style={{ marginVertical: 10 }}>
                 <Form>
-                  <Item style={[fullInput]}>
-                    <Input placeholder='Email' style={[openSansSemiBold]} onChangeText={this.handleEmailChange} testID='email' />
-                  </Item>
-                  <Item style={[fullInput]}>
-                    <Input placeholder='Password' style={[openSansSemiBold]} secureTextEntry={true} onChangeText={this.handlePasswordChange} testID='password' />
+                  <TextField
+                    form={LoginForm}
+                    placeholder='Email'
+                    field={'email'}
+                    isPassword={false}
+                  />
+                  <PasswordField
+                    form={LoginForm}
+                    placeholder='Password'
+                    field={'password'}
+                    isPassword={true}
+                  />
+                  {
                     <Button
-                      style={[flatButton, { backgroundColor: 'transparent' }]}
-                      onPress={() => this.navigateTo('ForgotPassword')}
+                      block
+                      style={[backgroundPrimary, flatButton, { marginTop: 20 }]}
+                      onPress={this.login}
                     >
-                      <Text uppercase={false} style={[openSansSemiBold, { fontSize: 9, color: '#000000' }]}>
-                        Forgot Password?
-                    </Text>
+                      <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Login</Text>
                     </Button>
-                  </Item>
-                  <Button
-                    block
-                    style={[backgroundPrimary, flatButton, { marginTop: 20 }]}
-                    onPress={this.login}
-                  >
-                    <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Login</Text>
-                  </Button>
+                  }
                 </Form>
               </View>
 
-              <View style={{ alignItems: 'center', marginVertical: 10 }}>
-                <Button
-                  block
-                  style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]}
-                  onPress={() => this.navigateTo('Register')}
-                >
-                  <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
-                    Tap here to create a Customer account!
-                </Text>
-                </Button>
-              </View>
+              {
+                // <View style={{ alignItems: 'center', marginVertical: 10 }}>
+                //   <Button
+                //     block
+                //     style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]}
+                //     onPress={() => this.navigateTo('Register')}
+                //   >
+                //     <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
+                //       Tap here to create a Customer account!
+                // </Text>
+                //   </Button>
+                // </View>
+              }
 
-              <View>
-                <View style={{ alignItems: 'center', marginVertical: 10 }}>
-                  <Divider orientation='center'>
-                    <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
-                      OR
-                </Text>
-                  </Divider>
-                </View>
-                <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
-                  <Button
-                    style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
-                    onPress={this.facebookLogin}
-                  >
-                    <Icon type='FontAwesome' name='facebook-square' />
-                  </Button>
-                  <Button
-                    style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
-                    onPress={this.googleLogin}
-                  >
-                    <Icon type='FontAwesome' name='google' />
-                  </Button>
-                </View>
-              </View>
+              {
+                // <View>
+                //   <View style={{ alignItems: 'center', marginVertical: 10 }}>
+                //     <Divider orientation='center'>
+                //       <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
+                //         OR
+                // </Text>
+                //     </Divider>
+                //   </View>
+                //   <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
+                //     <Button
+                //       style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
+                //       onPress={this.facebookLogin}
+                //     >
+                //       <Icon type='FontAwesome' name='facebook-square' />
+                //     </Button>
+                //     <Button
+                //       style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
+                //       onPress={this.googleLogin}
+                //     >
+                //       <Icon type='FontAwesome' name='google' />
+                //     </Button>
+                //   </View>
+                // </View>
+              }
 
             </Content>
           </Container>
