@@ -40,8 +40,8 @@ class ChangePassword extends Component {
           />
         </Form>
         <View style={{ marginTop: 20 }}>
-          <FlatButton block onPress={this.submit} style={{ backgroundColor: '#00af66' }}>
-            <Text uppercase={false} style={[openSansBold, { fontSize: 18}]}>Submit</Text>
+          <FlatButton block onPress={this.submit} style={{ backgroundColor: '#00695C' }}>
+            <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Submit</Text>
           </FlatButton>
         </View>
       </React.Fragment>

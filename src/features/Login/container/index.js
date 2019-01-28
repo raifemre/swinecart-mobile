@@ -15,6 +15,7 @@ import Divider from 'react-native-divider';
 
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
+import IconWrapper from '../../../shared/IconWrapper';
 
 import PasswordField from '../components/PasswordField';
 import TextField from '../components/TextField';
@@ -100,43 +101,43 @@ class Login extends Component {
               </View>
 
               {
-                // <View style={{ alignItems: 'center', marginVertical: 10 }}>
-                //   <Button
-                //     block
-                //     style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]}
-                //     onPress={() => this.navigateTo('Register')}
-                //   >
-                //     <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
-                //       Tap here to create a Customer account!
-                // </Text>
-                //   </Button>
-                // </View>
+                <View style={{ alignItems: 'center', marginVertical: 10 }}>
+                  <Button
+                    block
+                    style={[flatButton, { backgroundColor: 'transparent', alignItems: 'center' }]}
+                    onPress={() => this.navigateTo('Register')}
+                  >
+                    <Text uppercase={false} style={[openSansBold, { fontSize: 14, color: '#000000' }]}>
+                      Tap here to create a Customer account!
+                </Text>
+                  </Button>
+                </View>
               }
 
               {
-                // <View>
-                //   <View style={{ alignItems: 'center', marginVertical: 10 }}>
-                //     <Divider orientation='center'>
-                //       <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
-                //         OR
-                // </Text>
-                //     </Divider>
-                //   </View>
-                //   <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
-                //     <Button
-                //       style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
-                //       onPress={this.facebookLogin}
-                //     >
-                //       <Icon type='FontAwesome' name='facebook-square' />
-                //     </Button>
-                //     <Button
-                //       style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
-                //       onPress={this.googleLogin}
-                //     >
-                //       <Icon type='FontAwesome' name='google' />
-                //     </Button>
-                //   </View>
-                // </View>
+                <View>
+                  <View style={{ alignItems: 'center', marginVertical: 10 }}>
+                    <Divider orientation='center'>
+                      <Text style={[openSansBold, { fontSize: 14, color: '#7f8c8d' }]}>
+                        OR
+                </Text>
+                    </Divider>
+                  </View>
+                  <View style={[{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10 }]}>
+                    <Button
+                      style={[flatButton, sideBySide, { backgroundColor: '#3B5998' }]}
+                      onPress={this.facebookLogin}
+                    >
+                      <IconWrapper type='MaterialCommunityIcons' name='facebook-box' />
+                    </Button>
+                    <Button
+                      style={[flatButton, sideBySide, { backgroundColor: '#DB3236' }]}
+                      onPress={this.googleLogin}
+                    >
+                      <IconWrapper type='MaterialCommunityIcons' name='google' />
+                    </Button>
+                  </View>
+                </View>
               }
 
             </Content>
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   backgroundPrimary: {
-    backgroundColor: '#00af66'
+    backgroundColor: '#00695C'
   },
   center: {
     justifyContent: 'center',
