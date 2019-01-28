@@ -24,8 +24,10 @@ class LoginForm {
   @observable loading = false;
 
   @observable form = {
-    email: 'kimberly09@tillman.net',
-    password: 'secret12'
+    // email: 'kimberly09@tillman.net',
+    // password: 'secret12'
+    email: '',
+    password: ''
   }
 
   @action setValue(field, value) {
@@ -47,6 +49,18 @@ class LoginForm {
   }
 
   @action validateFields(form) {
+    const { email, password } = form;
+
+    if (email === '') {
+      showToast('Please enter your Email!', 'warning', 'bottom');
+      return false;
+    }
+
+    if (password === '') {
+      showToast('Please enter your Password!', 'warning', 'bottom');
+      return false;
+    }
+
     return true;
   }
 
