@@ -3,7 +3,7 @@ import {
 } from 'react-navigation';
 
 import Chat from '../../features/Chat';
-import Conversations from '../../features/Conversations';
+import Conversations from '../../features/Messaging';
 
 const navigator = createStackNavigator({
   Conversations: Conversations,

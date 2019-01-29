@@ -20,9 +20,8 @@ import {
   toJS
 } from 'mobx';
 
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
-
+import HeaderWrapper from '../../../shared/HeaderWrapper';
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import {
   Navigation
 } from '../../../services';
@@ -40,7 +39,7 @@ class Chat extends Component {
             backgroundColor: '#f1f0f0',
           },
           right: {
-            backgroundColor: '#00af66'
+            backgroundColor: '#00695C'
           }
         }}
       />
@@ -70,21 +69,21 @@ class Chat extends Component {
     } = styles;
     
     return (
-      <StyleProvider style={getTheme(commonColor)}>
+      <StyleProviderWrapper>
         <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
+          <HeaderWrapper>
             <Left style={[contentStyle]}>
               <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
+                <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
               </Button>
             </Left>
             <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
+              <Title style={[openSansBold, { color: '#ffffff' }]}>
                 {MessageStore.selectedUser.name}
               </Title>
             </Body>
             <Right></Right>
-          </Header>
+          </HeaderWrapper>
           <View style={[contentStyle]}>
             <StatusIndicator />
             <GiftedChat
@@ -103,7 +102,7 @@ class Chat extends Component {
             />
           </View>
         </Container>
-      </StyleProvider>
+      </StyleProviderWrapper>
     );
   }
 

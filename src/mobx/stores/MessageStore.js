@@ -13,6 +13,7 @@ class MessageStore {
 
   @observable threads = [];
   @observable messages = [];
+  @observable allMessages = {};
   @observable selectedUser = {};
 
   @action async getThreads() {
@@ -31,10 +32,12 @@ class MessageStore {
     });
     runInAction(() => {
       this.messages = ms;
+      this.allMessages[id] = ms;
     });
   }
 
   @action addMessage(messages) {
+    const { id } = this.selectedUser;
     messages.map(message => {
       delete message.createdAt;
       this.messages.unshift(message);
@@ -47,11 +50,10 @@ class MessageStore {
     this.selectedUser = selectedUser;
   }
 
-  @action handleReceivedMessage(message) {
+  @action async handleReceivedMessage(message) {
     const m = new Message(message);
-    console.log(m.GCFormat);
+    // console.log(m.GCFormat);
     this.messages.unshift(m.GCFormat);
-    console.log('Message Store:', 'New Message!', message);
   }
 
   setSocket(socket) {
