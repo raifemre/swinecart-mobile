@@ -24,34 +24,27 @@ class Notification extends Component {
   render() {
     const { cardStyle } = styles;
     const { notification } = this.props;
+    
     return (
-      <InViewPort onChange={this.onVisible}>
-        <View style={{ paddingHorizontal: 10 }}>
-          <Card style={[cardStyle]}>
-            <CardItem>
-              <Body>
-                <TextWrapper
-                  font={'OpenSans-Bold'}
-                  text={notification.message}
-                  size={14}
-                />
-                <TextWrapper
-                  font={'OpenSans-Bold'}
-                  color={'#7f8c8d'}
-                  text={notification.ago}
-                  size={13}
-                />
-                <TextWrapper
-                  font={'OpenSans-Bold'}
-                  color={'#7f8c8d'}
-                  text={notification.read_at}
-                  size={13}
-                />
-              </Body>
-            </CardItem>
-          </Card>
-        </View>
-      </InViewPort>
+      <View style={{ paddingHorizontal: 10 }}>
+        <Card style={[cardStyle]}>
+          <CardItem>
+            <Body>
+              <TextWrapper
+                font={'OpenSans-Bold'}
+                text={notification.message}
+                size={14}
+              />
+              <TextWrapper
+                font={'OpenSans-Bold'}
+                color={'#7f8c8d'}
+                text={notification.ago}
+                size={13}
+              />
+            </Body>
+          </CardItem>
+        </Card>
+      </View>
     );
   }
 

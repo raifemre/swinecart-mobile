@@ -28,10 +28,11 @@ class Notifications extends Component {
     const { NotificationStore } = this.props;
     return (
       <FlatList
-        data={NotificationStore.notifications.slice()}
+        data={NotificationStore.notifications}
         extraData={NotificationStore.notifications}
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
+        initialNumToRender={8}
       />
     );
   }

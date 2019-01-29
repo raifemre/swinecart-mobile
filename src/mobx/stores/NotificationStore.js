@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction, autorun
+  observable, action, toJS, runInAction, autorun, computed
 } from 'mobx';
 
 import {
@@ -10,7 +10,7 @@ import Notification from '../models/Notification';
 
 class NotificationStore {
   @observable notifications = [];
-  @observable unreadCount = 0;
+
   @action async getNotifs() {
     const { data: { data } } = await Notifications.getNotifs();
     const notifications = data.map(d => new Notification(d));
@@ -21,16 +21,12 @@ class NotificationStore {
 
   @action async readNotification(id) {
     await Notifications.seeNotif(id);
-    await this.getNotifs();
   }
 
-  reactToNotifChange = autorun(() => {
+  @computed get unreadCount() {
     const unread = this.notifications.filter(n => !n.read_at);
-    console.log(unread);
-    runInAction(() => {
-      this.unreadCount = unread.length;
-    })
-  });
+    return unread.length;
+  }
 }
 
 export default new NotificationStore();

@@ -13,6 +13,7 @@ class Notification {
     this.message = message;
     this.read_at = read_at ? read_at.date : null;
     this.ago = moment(date).fromNow();
+    this.date = moment(date).format('MMMM Do YYYY, h:mm:ss a'); 
   }
 
   @observable message;
