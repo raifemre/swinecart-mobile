@@ -17,7 +17,7 @@ import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 import OfficeInfo from '../components/OfficeInfo';
 import Farms from '../components/Farms';
 import ChangePassword from '../components/ChangePassword';
-import Segments from '../components/Segments';
+import Segments from '../../../shared/Segments';
 @inject('UserStore', 'AuthStore')
 @observer
 class Profile extends Component {
@@ -70,7 +70,9 @@ class Profile extends Component {
             />
             <Content padder>
               {this.state.selectedIndex === 0 && <OfficeInfo />}
-              {this.state.selectedIndex === 1 && <Farms />}
+              {
+                // this.state.selectedIndex === 1 && <Farms />
+              }
               {this.state.selectedIndex === 2 && <ChangePassword />}
             </Content>
           </Container>

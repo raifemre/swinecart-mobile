@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
+import { Container, Body, Title, Tabs, Tab } from 'native-base';
+import { observer, inject } from 'mobx-react';
+
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
+import Segments from '../../../shared/Segments';
 
-import {
-  Container, Header, Body, Title, Tabs, Tab
-} from 'native-base';
-
-
-import {
-  observer, inject
-} from 'mobx-react';
 
 import Products from '../components/Products';
 
@@ -19,7 +16,7 @@ class Inventory extends Component {
 
 
   state = {
-    activeTab: 0
+    selectedIndex: 0
   }
 
   componentDidMount() {
@@ -27,77 +24,38 @@ class Inventory extends Component {
     DashboardStore.getProducts();
   }
 
-  onChangeTab = ({ i: activeTab }) => {
-    this.props.DashboardStore.setActiveTab(activeTab);
+  setIndex = index => {
+    this.setState({
+      selectedIndex: index
+    });
   }
 
   render() {
-
-    const { openSansBold } = styles;
-
     const { DashboardStore } = this.props;
 
     return (
       <StyleProviderWrapper>
         <Container>
-          <Header hasTabs noShadow androidStatusBarColor='#ffffff'>
+          <HeaderWrapper hasTabs>
             <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
+              <Title style={{ color: '#ffffff', fontFamily: 'OpenSans-Bold' }}>
                 Product Inventory
-            </Title>
+              </Title>
             </Body>
-          </Header>
-          <Tabs locked={true} initialPage={0} page={DashboardStore.activeTab} onChangeTab={this.onChangeTab}>
-            <Tab heading='Requested'>
-              <Products status='requested' products={DashboardStore.requestedProducts} />
-            </Tab>
-            <Tab heading='Reserved'>
-              <Products status='reserved' products={DashboardStore.reservedProducts} />
-            </Tab>
-            <Tab heading='Delivery'>
-              <Products status='onDelivery' products={DashboardStore.onDeliveryProducts} />
-            </Tab>
-            <Tab heading='Sold'>
-              <Products status='sold' products={DashboardStore.soldProducts} />
-            </Tab>
-          </Tabs>
+          </HeaderWrapper>
+          <Segments
+            values={['Requested', 'Reserved', 'On Delivery', 'Sold']}
+            selectedIndex={this.state.selectedIndex}
+            onTabPress={this.setIndex}
+          />
+          {this.state.selectedIndex === 0 && <Products status='requested' products={DashboardStore.requestedProducts} />}
+          {this.state.selectedIndex === 1 && <Products status='reserved'  products={DashboardStore.reservedProducts} />}
+          {this.state.selectedIndex === 2 && <Products status='onDelivery' products={DashboardStore.onDeliveryProducts} />}
+          {this.state.selectedIndex === 3 && <Products status='sold' products={DashboardStore.soldProducts} />}
         </Container>
       </StyleProviderWrapper>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  cardStyle: {
-    borderColor: 'transparent',
-    borderColor: '#f7f7f7',
-    shadowColor: '#f7f7f7',
-    shadowRadius: 0.1,
-    elevation: 1
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
-});
 
 export default Inventory;
