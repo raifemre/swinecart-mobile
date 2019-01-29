@@ -104,7 +104,7 @@ class ReservedCard extends Component {
             modalContainer: { backgroundColor: 'rgba(49,49,49, 0.7)' },
             titleText: {
               fontSize: 16,
-              fontColor: '#000000',
+              color: '#000000',
               fontWeight: '900',
               padding: 10,
               alignSelf: 'center'

@@ -30,21 +30,21 @@ MessagingStack.navigationOptions = ({ navigation }) => {
 };
 
 const navigator = createBottomTabNavigator({
-  // 'ManageProducts': {
-  //   screen: ManageProductsStack
-  // },
+  'ManageProducts': {
+    screen: ManageProductsStack
+  },
   'ProductInventory': {
     screen: ProductInventory
   },
-  // 'Dashboard': {
-  //   screen: Dashboard
-  // },
-  // 'Messaging': {
-  //   screen: MessagingStack
-  // },
-  // 'Notifications': {
-  //   screen: Notifications
-  // },
+  'Dashboard': {
+    screen: Dashboard
+  },
+  'Messaging': {
+    screen: MessagingStack
+  },
+  'Notifications': {
+    screen: Notifications
+  },
   'Profile': {
     screen: Profile,
   },
@@ -64,7 +64,7 @@ const navigator = createBottomTabNavigator({
           return <Icon
             type='MaterialIcons'
             name={iconMapping[routeName]}
-            style={{ color: focused ? '#00af66' : '#000000' }} />
+            style={{ color: focused ? '#00695C' : '#000000' }} />
         }
       }
     }

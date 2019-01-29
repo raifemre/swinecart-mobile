@@ -41,7 +41,7 @@ function NotificationsIcon({ focused }) {
       <Icon
         type='MaterialIcons'
         name='notifications'
-        style={{ color: focused ? '#00af66' : '#000000' }} />
+        style={{ color: focused ? '#00695C' : '#000000' }} />
     </View>
   )
 }

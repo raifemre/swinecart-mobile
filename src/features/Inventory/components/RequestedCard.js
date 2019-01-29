@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import {
-  View, Text, Card, CardItem, Button, Grid, Col, Row
+  View, Text, Card, CardItem, Grid, Col, Row
 } from 'native-base';
 
 import { startCase } from 'lodash';
@@ -11,7 +11,8 @@ import { observer, inject } from 'mobx-react';
 
 import { Navigation } from '../../../services';
 
-// moment(value).format("MMM D YYYY (ddd), h:mmA");
+import PrimaryButton from '../../../shared/PrimaryButton';
+import TextWrapper from '../../../shared/TextWrapper';
 
 @inject('DashboardStore', 'UserStore')
 @observer
@@ -25,71 +26,72 @@ class RequestedCard extends Component {
 
   render() {
 
-    const { openSansBold, cardStyle, flatButton } = styles;
+    const { openSansBold, cardStyle } = styles;
 
     const { product } = this.props;
-    const { 
-      name, type, breed
-    } = product;
+    const { name, type, breed } = product;
 
     return (
-      <Card style={[cardStyle]}>
-        <CardItem>
-          <Grid>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <Col>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Name</Text>
-              </Col>
-              <Col>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 18 }]}>{name}</Text>
+      <View style={{ paddingHorizontal: 5 }}>
+        <Card style={[cardStyle]}>
+          <CardItem>
+            <Grid>
+              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
+                <Col>
+                  <Text style={[openSansBold, { fontSize: 15 }]}>Name</Text>
+                </Col>
+                <Col>
+                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                    <Text style={[openSansBold, { fontSize: 18 }]}>{name}</Text>
+                  </View>
+                </Col>
+              </Row>
+              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
+                <Col>
+                  <Text style={[openSansBold, { fontSize: 15 }]}>Type</Text>
+                </Col>
+                <Col>
+                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                    <Text style={[openSansBold, { fontSize: 14 }]}>{startCase(type)}</Text>
+                  </View>
+                </Col>
+              </Row>
+              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
+                <Col>
+                  <Text style={[openSansBold, { fontSize: 15 }]}>Breed</Text>
+                </Col>
+                <Col>
+                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                    <Text style={[openSansBold, { fontSize: 14 }]}>{breed}</Text>
+                  </View>
+                </Col>
+              </Row>
+              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
+                <Col>
+                  <Text style={[openSansBold, { fontSize: 15 }]}>Status</Text>
+                </Col>
+                <Col>
+                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                    <Text style={[openSansBold, { fontSize: 14 }]}>Requested</Text>
+                  </View>
+                </Col>
+              </Row>
+              <Row style={{ marginTop: 10 }}>
+                <View style={{ flex: 1 }}>
+                  <PrimaryButton block onPress={this.seeRequests}>
+                    <TextWrapper
+                      color='#ffffff'
+                      text='See Requests'
+                      font='OpenSans-Bold'
+                      size={15}
+                    />
+                  </PrimaryButton>
                 </View>
-              </Col>
-            </Row>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <Col>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Type</Text>
-              </Col>
-              <Col>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 14 }]}>{startCase(type)}</Text>
-                </View>
-              </Col>
-            </Row>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <Col>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Breed</Text>
-              </Col>
-              <Col>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 14 }]}>{breed}</Text>
-                </View>
-              </Col>
-            </Row>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <Col>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Status</Text>
-              </Col>
-              <Col>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 14 }]}>Requested</Text>
-                </View>
-              </Col>
-            </Row>
-            <Row>
-              <View style={{ flex: 1 }}>
-                <Button
-                  block
-                  onPress={this.seeRequests}
-                  style={[flatButton, { backgroundColor: '#00af66', marginTop: 10 }]}
-                >
-                  <Text uppercase={false} style={[openSansBold, { fontSize: 14 }]}>See Requests</Text>
-                </Button>
-              </View>
-            </Row>
-          </Grid>
-        </CardItem>
-      </Card>
+              </Row>
+            </Grid>
+          </CardItem>
+        </Card>
+      </View>
     );
   }
 
