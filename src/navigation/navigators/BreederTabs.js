@@ -42,15 +42,15 @@ const navigator = createBottomTabNavigator({
   // 'Messaging': {
   //   screen: MessagingStack
   // },
-  'Notifications': {
-    screen: Notifications
-  },
+  // 'Notifications': {
+  //   screen: Notifications
+  // },
   'Profile': {
     screen: Profile,
   },
 },
 {
-  initialRouteName: 'Notifications',
+  initialRouteName: 'ProductInventory',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {
