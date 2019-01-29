@@ -12,6 +12,13 @@ class Notification extends Component {
     
   }
 
+
+  onPress = () => {
+    const { notification } = this.props;
+    const { id } = notification;
+    console.log(id);
+  }
+
   onVisible = isVisible => {
     if (isVisible) {
       const { notification, NotificationStore } = this.props;
@@ -28,7 +35,7 @@ class Notification extends Component {
     return (
       <View style={{ paddingHorizontal: 10 }}>
         <Card style={[cardStyle]}>
-          <CardItem>
+          <CardItem button onPress={this.onPress}>
             <Body>
               <TextWrapper
                 font={'OpenSans-Bold'}
