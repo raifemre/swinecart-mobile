@@ -47,20 +47,22 @@ class Inventory extends Component {
             </Title>
             </Body>
           </Header>
-          <Tabs locked={true} initialPage={0} page={DashboardStore.activeTab} onChangeTab={this.onChangeTab}>
-            <Tab heading='Requested'>
-              <Products status='requested' products={DashboardStore.requestedProducts} />
-            </Tab>
-            <Tab heading='Reserved'>
-              <Products status='reserved' products={DashboardStore.reservedProducts} />
-            </Tab>
-            <Tab heading='Delivery'>
-              <Products status='onDelivery' products={DashboardStore.onDeliveryProducts} />
-            </Tab>
-            <Tab heading='Sold'>
-              <Products status='sold' products={DashboardStore.soldProducts} />
-            </Tab>
-          </Tabs>
+          {
+            // <Tabs locked={true} initialPage={0} page={DashboardStore.activeTab} onChangeTab={this.onChangeTab}>
+            //   <Tab heading='Requested'>
+            //     <Products status='requested' products={DashboardStore.requestedProducts} />
+            //   </Tab>
+            //   <Tab heading='Reserved'>
+            //     <Products status='reserved' products={DashboardStore.reservedProducts} />
+            //   </Tab>
+            //   <Tab heading='Delivery'>
+            //     <Products status='onDelivery' products={DashboardStore.onDeliveryProducts} />
+            //   </Tab>
+            //   <Tab heading='Sold'>
+            //     <Products status='sold' products={DashboardStore.soldProducts} />
+            //   </Tab>
+            // </Tabs>
+          }
         </Container>
       </StyleProviderWrapper>
     );
