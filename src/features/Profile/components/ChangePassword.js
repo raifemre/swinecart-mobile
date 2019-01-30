@@ -1,27 +1,42 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, Form, View } from 'native-base';
-
+import { Form, View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
 import PasswordField from '../../../shared/PasswordField';
 import PrimaryButton from '../../../shared/PrimaryButton';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
+import TextWrapper from '../../../shared/TextWrapper';
+
+import ChangePasswordDialog from './ChangePasswordDialog';
 @inject('UserStore', 'ChangePasswordForm')
 @observer
 class ChangePassword extends Component {
 
+  state = {
+    visible: false
+  }
+
   submit = () => {
+    this.closeDialog();
     this.props.ChangePasswordForm.submitForm();
   }
 
+  showDialog = () => {
+    this.setState({ visible: true });
+  }
+
+  closeDialog = () => {
+    this.setState({ visible: false });
+  }
+
   render() {
-    const { openSansBold } = styles;
     const { ChangePasswordForm } = this.props;
-    
+
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={ChangePasswordForm.loading} textContent='Changing Password...'/>
+        <ChangePasswordDialog visible={this.state.visible} submit={this.submit} closeDialog={this.closeDialog} />
         <Form>
           <PasswordField
             form={ChangePasswordForm}
@@ -40,10 +55,13 @@ class ChangePassword extends Component {
           />
         </Form>
         <View style={{ marginTop: 20 }}>
-          <PrimaryButton block onPress={this.submit}>
-            <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>
-              Submit
-            </Text>
+          <PrimaryButton block onPress={this.showDialog}>
+            <TextWrapper
+              text='Submit'
+              font='OpenSans-Bold'
+              size={16}
+              color='#ffffff'
+            />
           </PrimaryButton>
         </View>
       </React.Fragment>
@@ -51,26 +69,5 @@ class ChangePassword extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  }
-});
 
 export default ChangePassword;

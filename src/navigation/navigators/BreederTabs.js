@@ -50,7 +50,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'Notifications',
+  initialRouteName: 'Profile',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {
