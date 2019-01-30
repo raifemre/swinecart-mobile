@@ -27,6 +27,10 @@ class NotificationStore {
     const unread = this.notifications.filter(n => !n.read_at);
     return unread.length;
   }
+
+  @action clearNotifs() {
+    this.notifications = [];
+  }
 }
 
 export default new NotificationStore();

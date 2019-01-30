@@ -34,7 +34,7 @@ class PasswordField extends Component {
           style={{ fontFamily: 'OpenSans-SemiBold' }}
         />
         <Button transparent onPress={this.togglePassword}>
-          <IconWrapper style={{ color: showPassword ? 'black' : 'gray' }} name='remove-red-eye' />
+          <IconWrapper style={{ color: '#000000' }} name={ !showPassword? 'eye' : 'eye-off' } type='MaterialCommunityIcons' />
         </Button>
       </Item>
     );

@@ -8,6 +8,8 @@ import {
 
 import CommonStore from './CommonStore';
 import UserStore from './UserStore';
+import NotificationStore from './NotificationStore';
+import MessageStore from './MessageStore';
 
 import { sleep } from '../../utils';
 
@@ -33,6 +35,8 @@ class AuthStore {
     UserStore.forgetUser();
     runInAction(() => {
       this.loadingLogout = false;
+      NotificationStore.clearNotifs();
+      MessageStore.setSocket(null);
       Navigation.navigate('Public');
     });
   }

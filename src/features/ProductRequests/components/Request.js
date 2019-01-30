@@ -99,7 +99,7 @@ class Request extends Component {
                   <Button
                     block
                     onPress={this.handleReserve}
-                    style={[flatButton, { backgroundColor: '#00af66', marginTop: 10 }]}
+                    style={[flatButton, { backgroundColor: '#00695C', marginTop: 10 }]}
                   >
                     <Text uppercase={false} style={[openSansBold, { fontSize: 15 }]}>Reserve</Text>
                   </Button>
@@ -110,7 +110,7 @@ class Request extends Component {
                   <Button
                     block
                     onPress={this.messageBreeder}
-                    style={[flatButton, { backgroundColor: '#00af66', marginTop: 10 }]}
+                    style={[flatButton, { backgroundColor: '#00695C', marginTop: 10 }]}
                   >
                     <Text uppercase={false} style={[openSansBold, { fontSize: 15 }]}>Message</Text>
                   </Button>

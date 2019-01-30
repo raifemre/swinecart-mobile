@@ -69,9 +69,7 @@ class LoginForm {
       if (this.validateFields(form)) {
         const token = await AuthStore.login(form);
         await CommonStore.setToken(token);
-        await UserStore.getUser();
-        await UserStore.getProfile();
-        Navigation.navigate(UserStore.userRole);
+        Navigation.navigate('AuthChecker');
       }
     }
     catch (e) {

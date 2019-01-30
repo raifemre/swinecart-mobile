@@ -29,7 +29,6 @@ class Notifications extends Component {
     return (
       <FlatList
         data={NotificationStore.notifications}
-        extraData={NotificationStore.notifications}
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
         initialNumToRender={8}

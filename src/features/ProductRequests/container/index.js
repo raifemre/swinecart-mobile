@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import {
   Container, Header, Body, Title, View, Right, Left, Button, Icon
@@ -11,7 +10,9 @@ import {
 } from 'mobx-react';
 
 import { Navigation } from '../../../services';
-
+import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 import Requests from '../components/Requests';
 
 @inject('UserStore', 'DashboardStore')
@@ -38,26 +39,29 @@ class ProductRequests extends Component {
     const { DashboardStore } = this.props;
 
     return (
-      <StyleProviderWrapper>
-        <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
-            <Left style={[contentStyle]}>
-              <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
-              </Button>
-            </Left>
-            <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
-                {DashboardStore.selectedProduct.name} Product Requests
+      <React.Fragment>
+        <SpinnerWithOverlay visible={DashboardStore.loading} />
+        <StyleProviderWrapper>
+          <Container>
+            <HeaderWrapper>
+              <Left style={[contentStyle]}>
+                <Button transparent onPress={Navigation.back}>
+                  <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
+                </Button>
+              </Left>
+              <Body style={{ flex: 3, alignItems: 'center' }}>
+                <Title style={[openSansBold, { color: '#ffffff' }]}>
+                  {DashboardStore.selectedProduct.name} Product Requests
               </Title>
-            </Body>
-            <Right />
-          </Header>
-          <View style={[contentStyle, { padding: 15 }]}>
-            <Requests />
-          </View>
-        </Container>
-      </StyleProviderWrapper>
+              </Body>
+              <Right />
+            </HeaderWrapper>
+            <View style={[contentStyle, { padding: 15 }]}>
+              <Requests />
+            </View>
+          </Container>
+        </StyleProviderWrapper>
+      </React.Fragment>
     );
   }
 }
