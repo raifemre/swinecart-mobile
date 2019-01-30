@@ -9,9 +9,11 @@ import {
   observer, inject
 } from 'mobx-react';
 
+import { NavigationEvents } from 'react-navigation';
+
+
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
-import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 import Notifs from '../components/Notifications';
 
@@ -20,8 +22,15 @@ import Notifs from '../components/Notifications';
 class Notifications extends Component {
 
   render() {
+
+    const { NotificationStore } = this.props;
+
     return (
       <React.Fragment>
+        <NavigationEvents
+          onDidFocus={() => { NotificationStore.readNotifications() }}
+          onDidBlur={() => { NotificationStore.readNotifications() }}
+        />
         <StyleProviderWrapper>
           <Container>
             <HeaderWrapper>

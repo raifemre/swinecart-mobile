@@ -19,13 +19,20 @@ class NotificationStore {
     });
   }
 
-  @action async readNotification(id) {
-    await Notifications.seeNotif(id);
+  @action async readNotifications() {
+    this.unread.map(async ({ id }) => {
+      await Notifications.seeNotif(id);
+    });
+    await this.getNotifs();
+  }
+
+  @computed get unread() {
+    const unread = this.notifications.filter(n => !n.read_at);
+    return unread;
   }
 
   @computed get unreadCount() {
-    const unread = this.notifications.filter(n => !n.read_at);
-    return unread.length;
+    return this.unread.length;
   }
 
   @action clearNotifs() {

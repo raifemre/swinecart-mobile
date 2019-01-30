@@ -1,31 +1,16 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { StyleSheet } from 'react-native';
-import InViewPort from '../../../shared/InViewPort';
 import TextWrapper from '../../../shared/TextWrapper';
 import { Card, CardItem, Body, View } from 'native-base';
 @inject('NotificationStore')
 @observer
 class Notification extends Component {
 
-  componentDidMount() {
-    
-  }
-
-
   onPress = () => {
     const { notification } = this.props;
     const { id } = notification;
     console.log(id);
-  }
-
-  onVisible = isVisible => {
-    if (isVisible) {
-      const { notification, NotificationStore } = this.props;
-      if (!notification.read_at) {
-        NotificationStore.readNotification(notification.id);
-      }
-    }
   }
 
   render() {
@@ -34,23 +19,29 @@ class Notification extends Component {
     
     return (
       <View style={{ paddingHorizontal: 10 }}>
-        <Card style={[cardStyle]}>
-          <CardItem button onPress={this.onPress}>
-            <Body>
-              <TextWrapper
-                font={'OpenSans-Bold'}
-                text={notification.message}
-                size={14}
-              />
-              <TextWrapper
-                font={'OpenSans-Bold'}
-                color={'#7f8c8d'}
-                text={notification.ago}
-                size={13}
-              />
-            </Body>
-          </CardItem>
-        </Card>
+          <Card style={[cardStyle]}>
+            <CardItem button onPress={this.onPress}>
+              <Body>
+                <TextWrapper
+                  font={'OpenSans-Bold'}
+                  text={notification.message}
+                  size={14}
+                />
+                <TextWrapper
+                  font={'OpenSans-Bold'}
+                  color={'#7f8c8d'}
+                  text={notification.ago}
+                  size={13}
+                />
+                <TextWrapper
+                  font={'OpenSans-Bold'}
+                  color={'#7f8c8d'}
+                  text={notification.read_at}
+                  size={12}
+                />
+              </Body>
+            </CardItem>
+          </Card>
       </View>
     );
   }
