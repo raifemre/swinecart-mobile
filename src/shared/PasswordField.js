@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Item, Input, Button } from 'native-base';
 import { observer } from 'mobx-react';
 
-import IconWrapper from '../../../shared/IconWrapper';
+import IconWrapper from './IconWrapper';
 
 @observer
 class PasswordField extends Component {
@@ -34,7 +34,7 @@ class PasswordField extends Component {
           style={{ fontFamily: 'OpenSans-SemiBold' }}
         />
         <Button transparent onPress={this.togglePassword}>
-          <IconWrapper style={{ color: '#000000' }} name={ !showPassword? 'eye' : 'eye-off' } type='MaterialCommunityIcons' />
+          <IconWrapper style={{ color: '#000000' }} name={!showPassword ? 'eye' : 'eye-off'} type='MaterialCommunityIcons' />
         </Button>
       </Item>
     );

@@ -4,7 +4,7 @@ import { Text, Form, View } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
-import PasswordField from './PasswordField';
+import PasswordField from '../../../shared/PasswordField';
 import PrimaryButton from '../../../shared/PrimaryButton';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 @inject('UserStore', 'ChangePasswordForm')

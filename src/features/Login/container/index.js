@@ -9,8 +9,8 @@ import IconWrapper from '../../../shared/IconWrapper';
 import PrimaryButton from '../../../shared/PrimaryButton';
 import FlatButton from '../../../shared/FlatButton';
 import TextWrapper from '../../../shared/TextWrapper';
+import PasswordField from '../../../shared/PasswordField';
 
-import PasswordField from '../components/PasswordField';
 import TextField from '../components/TextField';
 
 @inject('LoginForm', 'AuthStore')
