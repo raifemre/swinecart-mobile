@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
 import { Form, View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
@@ -22,7 +21,15 @@ class ChangePassword extends Component {
     this.props.ChangePasswordForm.submitForm();
   }
 
-  showDialog = () => {
+  handleClick = () => {
+    const { ChangePasswordForm } = this.props;
+    const form = ChangePasswordForm.cleanForm();
+    if (ChangePasswordForm.validateFields(form)) {
+      this.openDialog();
+    }
+  }
+
+  openDialog = () => {
     this.setState({ visible: true });
   }
 
@@ -55,7 +62,7 @@ class ChangePassword extends Component {
           />
         </Form>
         <View style={{ marginTop: 20 }}>
-          <PrimaryButton block onPress={this.showDialog}>
+          <PrimaryButton block onPress={this.handleClick}>
             <TextWrapper
               text='Submit'
               font='OpenSans-Bold'

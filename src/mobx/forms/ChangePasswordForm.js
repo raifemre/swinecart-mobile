@@ -33,6 +33,10 @@ class ChangePasswordForm {
 
   }
 
+  @action cleanForm() {
+    return cleanFields(toJS(this.form));
+  }
+
   @action resetForm() {
     runInAction(() => {
       for (const field in this.form) {
@@ -77,7 +81,7 @@ class ChangePasswordForm {
   @action async submitForm() {
     this.loading = true;
     try {
-      const form = cleanFields(toJS(this.form));
+      const form = this.cleanForm();
       if (this.validateFields(form)) {
         const { message } = await UserStore.changePassword(form);
         showToast(message, 'success', 'bottom');
