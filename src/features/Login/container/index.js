@@ -43,7 +43,6 @@ class Login extends Component {
 
   render() {
     const { LoginForm } = this.props;
-    console.log('Login Screen Render!');
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={LoginForm.loading} textContent='Logging in...' />

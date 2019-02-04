@@ -8,7 +8,9 @@ import {
 import { observer, inject } from 'mobx-react';
 
 import Products from '../components/Products';
+
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
 
 import { Navigation } from '../../../services';
 
@@ -36,7 +38,7 @@ class ManageProducts extends Component {
     return (
       <StyleProviderWrapper>
         <Container>
-          <Header noShadow androidStatusBarColor='#00695C'>
+          <HeaderWrapper>
             <Left style={[contentStyle]}>
               <Button transparent onPress={this.navigateToAdd}>
                 <Icon type='Feather' name='plus' style={{ color: '#FFFFFF' }} />
@@ -52,7 +54,7 @@ class ManageProducts extends Component {
                 <Icon type='Feather' name='filter' style={{ color: '#FFFFFF' }} />
               </Button>
             </Right>
-          </Header>
+          </HeaderWrapper>
           <View style={[contentStyle, { backgroundColor: '#F2F2F2' }]}>
             {
               <Products />
@@ -71,15 +73,7 @@ const styles = StyleSheet.create({
   },
   openSansBold: {
     fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
+  }
 });
 
 export default ManageProducts;
