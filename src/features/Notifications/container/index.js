@@ -40,7 +40,7 @@ class Notifications extends Component {
                 </Title>
               </Body>
             </HeaderWrapper>
-            <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50 }]}>
+            <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50, flex: 1 }]}>
               <Notifs />
             </View>
           </Container>
