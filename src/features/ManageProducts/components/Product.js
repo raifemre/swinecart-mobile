@@ -58,11 +58,11 @@ class Product extends Component {
     } = product;
 
     return (
-      <View style={{ paddingHorizontal: 15 }}>
+      <View style={{ paddingHorizontal: 5 }}>
         <Card style={[cardStyle]}>
           <CardItem>
             <Left>
-              <Text style={[openSansBold, { fontSize: 21 }]}>{name}</Text>
+              <Text style={[openSansBold, { fontSize: 20 }]}>{name}</Text>
             </Left>
             <Right>
               <Button onPress={this.navigateToDetails} bordered small style={{ borderColor: '#000000' }}>

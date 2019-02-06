@@ -6,6 +6,7 @@ import { observer, inject } from 'mobx-react';
 import { Navigation } from '../../../services';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import IconWrapper from '../../../shared/IconWrapper';
 
 // @inject('MessageStore')
 @observer
@@ -24,7 +25,7 @@ class ProductMedia extends Component {
         <HeaderWrapper>
           <Left style={[contentStyle]}>
             <Button transparent onPress={Navigation.back}>
-              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
+              <IconWrapper name='arrow-back' style={{ color: '#ffffff' }} />
             </Button>
           </Left>
           <Body style={{ flex: 3, alignItems: 'center' }}>

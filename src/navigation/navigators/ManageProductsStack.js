@@ -17,7 +17,7 @@ const navigator = createStackNavigator({
   ProductDetails: ProductDetails,
   ProductMedia: ProductMedia,
 }, {
-    initialRouteName: 'ProductMedia',
+    initialRouteName: 'Products',
     navigationOptions: ({ navigation }) => {
       return {
         header: null,
