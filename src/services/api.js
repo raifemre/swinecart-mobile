@@ -9,10 +9,6 @@ import UserStore from '../mobx/stores/UserStore';
 
 import Navigation from './navigation';
 
-// const API_URL = 'http://swinecart.test/api';
-
-console.log('API_URL:', API_URL);
-
 const instance = axios.create({
   baseURL: API_URL,
   timeout: 5000
