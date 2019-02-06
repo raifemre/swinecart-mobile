@@ -13,7 +13,6 @@ import Products from '../components/Products';
 @observer
 class Inventory extends Component {
 
-
   state = {
     selectedIndex: 0
   }

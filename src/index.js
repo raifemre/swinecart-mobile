@@ -5,6 +5,8 @@ import { Root } from 'native-base';
 
 import RootNavigator from './navigation/navigators';
 
+import StyleProviderWrapper from './shared/StyleProviderWrapper';
+
 import stores from './mobx/stores';
 import forms from './mobx/forms';
 
@@ -13,7 +15,9 @@ configure({ enforceActions: 'always' });
 export default () => (
   <Root>
     <Provider {...stores} {...forms}>
-      <RootNavigator />
+      <StyleProviderWrapper>
+        <RootNavigator />
+      </StyleProviderWrapper>  
     </Provider>
   </Root>
 );

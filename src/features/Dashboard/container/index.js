@@ -4,34 +4,26 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text,
-  Grid, Col, View
+  Container, Content, Body, Title, Segment, Button, Text
 } from 'native-base';
 
 import {
   observer, inject
 } from 'mobx-react';
 
-import {
-  toJS
-} from 'mobx';
-
-import commonColor from '../../../../native-base-theme/variables/commonColor';
-import getTheme from '../../../../native-base-theme/components';
 
 import ProductStats from '../components/ProductStats';
 import Reviews from '../components/Reviews';
+
+import HeaderWrapper from '../../../shared/HeaderWrapper';
+import Segments from '../../../shared/Segments';
 
 @inject('DashboardStore')
 @observer
 class Dashboard extends Component {
 
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      currSeg: 3
-    }
+  state = {
+    selectedIndex: 0
   }
 
   componentDidMount() {
@@ -39,45 +31,38 @@ class Dashboard extends Component {
     DashboardStore.getStats();
   }
 
-  changeSeg = (segNum) => {
+  setIndex = index => {
     this.setState({
-      currSeg: segNum
+      selectedIndex: index
     });
   }
-
   render() {
-    const {
-      DashboardStore
-    } = this.props;
+
+    const { selectedIndex } = this.state;
 
     const {
-      container, openSansBold, openSansSemiBold
+      container, openSansBold
     } = styles;
 
     return (
-      <StyleProvider style={getTheme(commonColor)}>
-        <Container>
-          <Header noShadow androidStatusBarColor='#ffffff' hasSegment>
-            <Body style={[container]}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
-                Dashboard
-              </Title>
-            </Body>
-          </Header>
-          <Segment>
-            <Button first onPress={() => this.changeSeg(1)} active={this.state.currSeg === 1}>
-              <Text style={[openSansSemiBold]}>Product Status</Text>
-            </Button>
-            <Button first onPress={() => this.changeSeg(2)} active={this.state.currSeg === 2}>
-              <Text style={[openSansSemiBold]}> Reviews</Text>
-            </Button>
-          </Segment>
-          <Content padder>
-            { this.state.currSeg === 1 && <ProductStats stats={DashboardStore.stats}/> }
-            { this.state.currSeg === 2 && <Reviews /> }
-          </Content>
-        </Container>
-      </StyleProvider>
+      <Container>
+        <HeaderWrapper hasSegment>
+          <Body style={[container]}>
+            <Title style={[openSansBold, { color: '#ffffff' }]}>
+              Dashboard
+            </Title>
+          </Body>
+        </HeaderWrapper>
+        <Segments
+          values={['Product Status', 'Reviews']}
+          selectedIndex={selectedIndex}
+          onTabPress={this.setIndex}
+        />
+        <Content padder>
+          { selectedIndex === 0 && <ProductStats stats={this.props.DashboardStore.stats}/> }
+          { selectedIndex === 1 && <Reviews /> }
+        </Content>
+      </Container>
     );
   }
 
@@ -86,13 +71,6 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
     justifyContent: 'center',
     alignItems: 'center',
   },
