@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
-  Container, Header, Body, Title, StyleProvider, Button, View, Icon, Left,
-  Right, Text
+  Container, View, Left, Right
 } from 'native-base';
 
 import { 
@@ -21,9 +18,8 @@ import {
 } from 'mobx';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
-import {
-  Navigation
-} from '../../../services';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 
 import StatusIndicator from '../components/StatusIndicator';
 @inject('MessageStore', 'UserStore')
@@ -60,22 +56,16 @@ class Chat extends Component {
   }
 
   render() {
+    const { contentStyle } = styles;
     const { MessageStore, UserStore } = this.props;
-    const { contentStyle, openSansBold } = styles;
 
     return (
       <Container>
         <HeaderWrapper>
           <Left style={[contentStyle]}>
-            <Button transparent onPress={Navigation.back}>
-              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-            </Button>
+            <BackButton />
           </Left>
-          <Body style={{ flex: 3, alignItems: 'center' }}>
-            <Title style={[openSansBold, { color: '#ffffff' }]}>
-              {MessageStore.selectedUser.name}
-            </Title>
-          </Body>
+          <BodyWrapper title={MessageStore.selectedUser.name} />
           <Right></Right>
         </HeaderWrapper>
         <View style={[contentStyle]}>
@@ -104,10 +94,7 @@ class Chat extends Component {
 const styles = StyleSheet.create({
   contentStyle: {
     flex: 1,
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
+  }
 });
 
 export default Chat;

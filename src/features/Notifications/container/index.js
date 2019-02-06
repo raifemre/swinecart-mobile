@@ -13,6 +13,7 @@ import { NavigationEvents } from 'react-navigation';
 
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
 
 import Notifs from '../components/Notifications';
 
@@ -32,11 +33,7 @@ class Notifications extends Component {
         />
         <Container>
           <HeaderWrapper>
-            <Body style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <Title style={{ color: '#ffffff', fontFamily: 'OpenSans-Bold' }}>
-                Notifications
-              </Title>
-            </Body>
+            <BodyWrapper title='Notifications' />
           </HeaderWrapper>
           <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50, flex: 1 }]}>
             <Notifs />

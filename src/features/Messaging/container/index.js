@@ -4,6 +4,7 @@ import  { View, Container, Body, Title } from 'native-base'
 import {  observer, inject } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
 
 import Messages from '../components/Messages';
 @inject('MessageStore')
@@ -20,11 +21,7 @@ class Conversations extends Component {
     return (
       <Container>
         <HeaderWrapper>
-          <Body style={{ flex: 1, alignItems: 'center' }}>
-            <Title style={[{ color: '#ffffff', fontFamily: 'OpenSans-Bold' }]}>
-              Messages
-            </Title>
-          </Body>
+          <BodyWrapper title='Messages' />
         </HeaderWrapper>
         <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50, flex: 1 }]}>
           <Messages />

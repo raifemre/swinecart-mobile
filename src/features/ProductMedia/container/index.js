@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 import { View, Container, Body, Title, Left, Right, Button, Icon } from 'native-base'
 import { observer, inject } from 'mobx-react';
 
-import { Navigation } from '../../../services';
-
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 import IconWrapper from '../../../shared/IconWrapper';
 
 // @inject('MessageStore')
@@ -24,15 +24,9 @@ class ProductMedia extends Component {
       <Container>
         <HeaderWrapper>
           <Left style={[contentStyle]}>
-            <Button transparent onPress={Navigation.back}>
-              <IconWrapper name='arrow-back' style={{ color: '#ffffff' }} />
-            </Button>
+            <BackButton />
           </Left>
-          <Body style={{ flex: 3, alignItems: 'center' }}>
-            <Title style={[openSansBold, { color: '#ffffff' }]}>
-              Product Media
-            </Title>
-          </Body>
+          <BodyWrapper title='Product Media'  />
           <Right />
         </HeaderWrapper>
         <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50, flex: 1 }]}>

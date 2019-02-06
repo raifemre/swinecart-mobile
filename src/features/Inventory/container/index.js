@@ -3,6 +3,7 @@ import { Container, Body, Title, View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
 import Segments from '../../../shared/Segments';
 
 import Products from '../components/Products';
@@ -32,11 +33,7 @@ class Inventory extends Component {
     return (
       <Container>
         <HeaderWrapper hasTabs>
-          <Body style={{ flex: 3, alignItems: 'center' }}>
-            <Title style={{ color: '#ffffff', fontFamily: 'OpenSans-Bold' }}>
-              Product Inventory
-            </Title>
-          </Body>
+          <BodyWrapper title='Product Inventory' />
         </HeaderWrapper>
         <Segments
           values={['Requested', 'Reserved', 'On Delivery', 'Sold']}

@@ -11,6 +11,8 @@ import { observer, inject } from 'mobx-react';
 import { Navigation } from '../../../services';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 
 import Dropdown from '../components/Dropdown';
 
@@ -42,15 +44,9 @@ class FilterProducts extends Component {
       <Container>
         <HeaderWrapper>
           <Left style={[contentStyle]}>
-            <Button transparent onPress={Navigation.back}>
-              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-            </Button>
+            <BackButton />
           </Left>
-          <Body style={{ flex: 3, alignItems: 'center' }}>
-            <Title style={[openSansBold, { color: '#ffffff' }]}>
-              Filter Products
-            </Title>
-          </Body>
+          <BodyWrapper title='Filter Products' />
           <Right />
         </HeaderWrapper>
         <Content padder>

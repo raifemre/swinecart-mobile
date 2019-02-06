@@ -16,6 +16,7 @@ import ProductStats from '../components/ProductStats';
 import Reviews from '../components/Reviews';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
 import Segments from '../../../shared/Segments';
 
 @inject('DashboardStore')
@@ -27,8 +28,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const { DashboardStore } = this.props;
-    DashboardStore.getStats();
+    this.props.DashboardStore.getStats();
   }
 
   setIndex = index => {
@@ -36,29 +36,23 @@ class Dashboard extends Component {
       selectedIndex: index
     });
   }
+
   render() {
 
     const { selectedIndex } = this.state;
 
-    const { container, openSansBold } = styles;
-
     return (
       <Container>
         <HeaderWrapper hasSegment>
-          <Body style={[container]}>
-            <Title style={[openSansBold, { color: '#ffffff' }]}>
-              Dashboard
-            </Title>
-          </Body>
+          <BodyWrapper title='Dashboard' />
         </HeaderWrapper>
         <Segments
           values={['Product Status', 'Reviews']}
           selectedIndex={selectedIndex}
           onTabPress={this.setIndex}
         />
-
         <Content padder>
-          { selectedIndex === 0 && <ProductStats stats={this.props.DashboardStore.stats}/> }
+          { selectedIndex === 0 && <ProductStats /> }
           { selectedIndex === 1 && <Reviews /> }
         </Content>
       </Container>
@@ -66,16 +60,5 @@ class Dashboard extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  }
-});
 
 export default Dashboard;

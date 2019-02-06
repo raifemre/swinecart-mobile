@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
 
 import StatCard from './StatCard';
-import {
-  observer, inject
-} from 'mobx-react';
-
 @inject('DashboardStore')
 @observer
 class ProductStats extends Component {
 
   render() {
-
     const { DashboardStore } = this.props;
-
     return (
       <React.Fragment>
         <StatCard title='Requested' data={DashboardStore.requested } />

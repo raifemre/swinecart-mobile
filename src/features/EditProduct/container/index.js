@@ -16,8 +16,9 @@ import {
 import { toJS } from 'mobx';
 
 
-import { Navigation } from '../../../services';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 
 import { formatBirthdate } from '../../../utils';
 @inject('UserStore', 'ProductsStore')
@@ -114,15 +115,9 @@ class EditProduct extends Component {
       <Container>
         <HeaderWrapper>
           <Left style={[contentStyle]}>
-            <Button transparent onPress={Navigation.back}>
-              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-            </Button>
+            <BackButton />
           </Left>
-          <Body style={{ flex: 1, alignItems: 'center' }}>
-            <Title style={[openSansBold, { color: '#ffffff' }]}>
-              Edit Product
-            </Title>
-          </Body>
+          <BodyWrapper title='Edit Product' />
           <Right />
         </HeaderWrapper>
         <Content padder>

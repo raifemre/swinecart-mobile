@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { 
-  Container, View, Header, Body, Title, Icon, Left, Button, Right
+  Container, View, Icon, Left, Button, Right
 } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
@@ -10,6 +10,9 @@ import { observer, inject } from 'mobx-react';
 import Products from '../components/Products';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import FlatButton from '../../../shared/FlatButton';
+import IconWrapper from '../../../shared/IconWrapper';
 
 import { Navigation } from '../../../services';
 
@@ -30,27 +33,21 @@ class ManageProducts extends Component {
   }
 
   render() {
-    const {
-      openSansBold, contentStyle
-    } = styles;
+    const { contentStyle } = styles;
 
     return (
       <Container>
         <HeaderWrapper>
           <Left style={[contentStyle]}>
-            <Button transparent onPress={this.navigateToAdd}>
-              <Icon type='Feather' name='plus' style={{ color: '#FFFFFF' }} />
-            </Button>
+            <FlatButton transparent onPress={this.navigateToAdd}>
+              <IconWrapper name='add' />
+            </FlatButton>
           </Left>
-          <Body style={{ flex: 3, alignItems: 'center' }}>
-            <Title style={[openSansBold, { color: '#FFFFFF' }]}>
-              Manage Products
-          </Title>
-          </Body>
+          <BodyWrapper title='Manage Products' />
           <Right style={[contentStyle]}>
-            <Button transparent onPress={this.navigateToFilter}>
-              <Icon type='Feather' name='filter' style={{ color: '#FFFFFF' }} />
-            </Button>
+            <FlatButton transparent onPress={this.navigateToFilter}>
+              <IconWrapper name='filter-list' />
+            </FlatButton>
           </Right>
         </HeaderWrapper>
         <View style={[contentStyle, { backgroundColor: '#F2F2F2' }]}>

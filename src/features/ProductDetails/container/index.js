@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, Text, Icon, Left,
-  Button, Right, Form, Input, View, Item, Picker, DatePicker, Grid, Col, Radio,
-  Row, Card, CardItem, Footer, FooterTab
+  Container, Content, Text, Left,
+  Button, Right, View, Grid, Col,
+  Row, Card, CardItem, Footer
 } from 'native-base';
 
 import FastImage from 'react-native-fast-image';
@@ -15,8 +15,9 @@ import {
 } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 
-import { Navigation } from '../../../services';
 import { formatBirthdate } from '../../../utils';
 @inject('UserStore', 'ProductsStore')
 @observer
@@ -37,15 +38,9 @@ class ProductDetails extends Component {
       <Container>
         <HeaderWrapper>
           <Left style={[contentStyle]}>
-            <Button transparent onPress={Navigation.back}>
-              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-            </Button>
+            <BackButton />
           </Left>
-          <Body style={{ flex: 3, alignItems: 'center' }}>
-            <Title style={[openSansBold, { color: '#ffffff' }]}>
-              Product Details
-          </Title>
-          </Body>
+          <BodyWrapper title='Product Details' />
           <Right />
         </HeaderWrapper>
         <Content>

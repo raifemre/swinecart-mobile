@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import {
-  Container, Body, Title, Content, Left, Right, Button, Icon
+  Container, Content, Left, Right
 } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
-import { Navigation } from '../../../services';
-
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 
 // @inject('NotificationStore')
 @observer
@@ -17,22 +17,16 @@ class Register extends Component {
 
   render() {
 
-    const { openSansBold, contentStyle } = styles;
+    const { contentStyle } = styles;
 
     return (
       <React.Fragment>
         <Container>
           <HeaderWrapper>
             <Left style={[contentStyle]}>
-              <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-              </Button>
+              <BackButton />
             </Left>
-            <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#ffffff' }]}>
-                Register
-            </Title>
-            </Body>
+            <BodyWrapper title='Register'/>
             <Right />
           </HeaderWrapper>
           <Content padder>

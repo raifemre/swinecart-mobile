@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import {
-  Container, Header, Body, Title, View, Right, Left, Button, Icon
+  Container, View, Right, Left
 } from 'native-base';
 
 import {
   observer, inject
 } from 'mobx-react';
 
-import { Navigation } from '../../../services';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
+
 import Requests from '../components/Requests';
 
 @inject('UserStore', 'DashboardStore')
@@ -19,8 +21,7 @@ import Requests from '../components/Requests';
 class ProductRequests extends Component {
 
   componentDidMount() {
-    const { DashboardStore } = this.props;
-    DashboardStore.getProductRequests();
+    this.props.DashboardStore.getProductRequests();
   }
 
   componentWillUnmount() {
@@ -31,10 +32,7 @@ class ProductRequests extends Component {
 
   render() {
 
-    const {
-      openSansBold, contentStyle
-    } = styles;
-
+    const { contentStyle } = styles;
     const { DashboardStore } = this.props;
 
     return (
@@ -43,15 +41,11 @@ class ProductRequests extends Component {
         <Container>
           <HeaderWrapper>
             <Left style={[contentStyle]}>
-              <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-              </Button>
+              <BackButton />
             </Left>
-            <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#ffffff' }]}>
-                {DashboardStore.selectedProduct.name} Product Requests
-            </Title>
-            </Body>
+            <BodyWrapper 
+              title={`${DashboardStore.selectedProduct.name} Product Requests`}
+            />
             <Right />
           </HeaderWrapper>
           <View style={[contentStyle, { padding: 15 }]}>
@@ -64,36 +58,9 @@ class ProductRequests extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   contentStyle: {
     flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  cardStyle: {
-    borderColor: 'transparent',
-    borderColor: '#f7f7f7',
-    shadowColor: '#f7f7f7',
-    shadowRadius: 0.1,
-    elevation: 1
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
+  }
 });
 
 export default ProductRequests;
