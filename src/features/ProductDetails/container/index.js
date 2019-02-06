@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import {
   Container, Content, Header, Body, Title, Text, Icon, Left,
@@ -15,8 +14,9 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import { Navigation } from '../../../services';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
 
+import { Navigation } from '../../../services';
 import { formatBirthdate } from '../../../utils';
 @inject('UserStore', 'ProductsStore')
 @observer
@@ -34,127 +34,125 @@ class ProductDetails extends Component {
     } = ProductsStore.selectedProduct;
 
     return (
-      <StyleProviderWrapper>
-        <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
-            <Left style={[contentStyle]}>
-              <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
+      <Container>
+        <HeaderWrapper>
+          <Left style={[contentStyle]}>
+            <Button transparent onPress={Navigation.back}>
+              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
+            </Button>
+          </Left>
+          <Body style={{ flex: 3, alignItems: 'center' }}>
+            <Title style={[openSansBold, { color: '#ffffff' }]}>
+              Product Details
+          </Title>
+          </Body>
+          <Right />
+        </HeaderWrapper>
+        <Content>
+          <Card style={[cardStyle]}>
+            <CardItem cardBody style={[container]}>
+              <FastImage
+                style={{ width: 200, height: 200 }}
+                source={{
+                  uri: 'https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/H-P/pig-full-body.adapt.945.1.jpg',
+                  priority: FastImage.priority.normal,
+                }}
+                resizeMode={FastImage.resizeMode.contain}
+              />
+            </CardItem>
+          </Card>
+          <Card style={[cardStyle]}>
+            <CardItem cardBody style={[container]}>
+              <Grid>
+                <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+                  <Col>
+                    <Text style={[openSansBold, { fontSize: 15 }]}>Name</Text>
+                  </Col>
+                  <Col>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Text style={[openSansBold, { fontSize: 16 }]}>{name}</Text>
+                    </View>
+                  </Col>
+                </Row>
+                <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+                  <Col>
+                    <Text style={[openSansBold, { fontSize: 15 }]}>Breed</Text>
+                  </Col>
+                  <Col>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Text style={[openSansBold, { fontSize: 16 }]}>{breed}</Text>
+                    </View>
+                  </Col>
+                </Row>
+                <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+                  <Col>
+                    <Text style={[openSansBold, { fontSize: 15 }]}>Type</Text>
+                  </Col>
+                  <Col>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Text style={[openSansBold, { fontSize: 16 }]}>{type}</Text>
+                    </View>
+                  </Col>
+                </Row>
+                <Row style={{ paddingHorizontal: 10, marginBottom: 20 }}>
+                  <Col>
+                    <Text style={[openSansBold, { fontSize: 15 }]}>Born on</Text>
+                  </Col>
+                  <Col>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Text style={[openSansBold, { fontSize: 14 }]}>{formatBirthdate(birthdate)}</Text>
+                      <Text style={[openSansBold, { fontSize: 14 }]}>&nbsp;({age} days old)</Text>
+                    </View>
+                  </Col>
+                </Row>
+                <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+                  <Col>
+                    <Text style={[openSansBold, { fontSize: 14 }]}>Average Daily Gain</Text>
+                  </Col>
+                  <Col>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}>{adg} g</Text>
+                    </View>
+                  </Col>
+                </Row>
+                <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+                  <Col>
+                    <Text style={[openSansBold, { fontSize: 14 }]}>Feed Conversion Ratio</Text>
+                  </Col>
+                  <Col>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}> {fcr}</Text>
+                    </View>
+                  </Col>
+                </Row>
+                <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
+                  <Col>
+                    <Text style={[openSansBold, { fontSize: 14 }]}>Backfat Thickness</Text>
+                  </Col>
+                  <Col>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}> {backfat_thickness} mm</Text>
+                    </View>
+                  </Col>
+                </Row>
+              </Grid>
+            </CardItem>
+          </Card>
+        </Content>
+        {
+          UserStore.userRole === 'Customer' && <Footer>
+            <View style={[container]}>
+              <Button
+                block
+                onPress={this.addNewProduct}
+                style={[flatButton, { backgroundColor: '#00af66' }]}
+              >
+                <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Add to Cart</Text>
               </Button>
-            </Left>
-            <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
-                Product Details
-            </Title>
-            </Body>
-            <Right />
-          </Header>
-          <Content>
-            <Card style={[cardStyle]}>
-              <CardItem cardBody style={[container]}>
-                <FastImage
-                  style={{ width: 200, height: 200 }}
-                  source={{
-                    uri: 'https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/H-P/pig-full-body.adapt.945.1.jpg',
-                    priority: FastImage.priority.normal,
-                  }}
-                  resizeMode={FastImage.resizeMode.contain}
-                />
-              </CardItem>
-            </Card>
-            <Card style={[cardStyle]}>
-              <CardItem cardBody style={[container]}>
-                <Grid>
-                  <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-                    <Col>
-                      <Text style={[openSansBold, { fontSize: 15 }]}>Name</Text>
-                    </Col>
-                    <Col>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 16 }]}>{name}</Text>
-                      </View>
-                    </Col>
-                  </Row>
-                  <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-                    <Col>
-                      <Text style={[openSansBold, { fontSize: 15 }]}>Breed</Text>
-                    </Col>
-                    <Col>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 16 }]}>{breed}</Text>
-                      </View>
-                    </Col>
-                  </Row>
-                  <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-                    <Col>
-                      <Text style={[openSansBold, { fontSize: 15 }]}>Type</Text>
-                    </Col>
-                    <Col>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 16 }]}>{type}</Text>
-                      </View>
-                    </Col>
-                  </Row>
-                  <Row style={{ paddingHorizontal: 10, marginBottom: 20 }}>
-                    <Col>
-                      <Text style={[openSansBold, { fontSize: 15 }]}>Born on</Text>
-                    </Col>
-                    <Col>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 14 }]}>{formatBirthdate(birthdate)}</Text>
-                        <Text style={[openSansBold, { fontSize: 14 }]}>&nbsp;({age} days old)</Text>
-                      </View>
-                    </Col>
-                  </Row>
-                  <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-                    <Col>
-                      <Text style={[openSansBold, { fontSize: 14 }]}>Average Daily Gain</Text>
-                    </Col>
-                    <Col>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}>{adg} g</Text>
-                      </View>
-                    </Col>
-                  </Row>
-                  <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-                    <Col>
-                      <Text style={[openSansBold, { fontSize: 14 }]}>Feed Conversion Ratio</Text>
-                    </Col>
-                    <Col>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}> {fcr}</Text>
-                      </View>
-                    </Col>
-                  </Row>
-                  <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-                    <Col>
-                      <Text style={[openSansBold, { fontSize: 14 }]}>Backfat Thickness</Text>
-                    </Col>
-                    <Col>
-                      <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                        <Text style={[openSansBold, { fontSize: 15, color: '#00af66' }]}> {backfat_thickness} mm</Text>
-                      </View>
-                    </Col>
-                  </Row>
-                </Grid>
-              </CardItem>
-            </Card>
-          </Content>
-          {
-            UserStore.userRole === 'Customer' && <Footer>
-              <View style={[container]}>
-                <Button
-                  block
-                  onPress={this.addNewProduct}
-                  style={[flatButton, { backgroundColor: '#00af66' }]}
-                >
-                  <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Add to Cart</Text>
-                </Button>
-              </View>
-            </Footer>
-          }
+            </View>
+          </Footer>
+        }
         </Container>
-      </StyleProviderWrapper>
     );
   }
 }

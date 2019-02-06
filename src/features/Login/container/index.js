@@ -3,7 +3,6 @@ import { Container, Content, Form, View, Grid, Col, Row } from 'native-base';
 import { observer, inject } from 'mobx-react';
 import Divider from 'react-native-divider';
 
-import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 import IconWrapper from '../../../shared/IconWrapper';
 import PrimaryButton from '../../../shared/PrimaryButton';
@@ -46,8 +45,7 @@ class Login extends Component {
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={LoginForm.loading} textContent='Logging in...' />
-        <StyleProviderWrapper>
-          <Container>
+        <Container>
             <Content padder>
               <View style={{ alignItems: 'center' }}>
                 <TextWrapper
@@ -164,7 +162,6 @@ class Login extends Component {
               </Grid>
             </Content>
           </Container>
-        </StyleProviderWrapper>
       </React.Fragment>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import {
-  Container, View, Header, Body, Title, Icon, Left, Button, Right, Text,
+  Container, View, Body, Title, Icon, Left, Button, Right, Text,
   Content
 } from 'native-base';
 
@@ -10,7 +10,6 @@ import { observer, inject } from 'mobx-react';
 
 import { Navigation } from '../../../services';
 
-import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 
 import Dropdown from '../components/Dropdown';
@@ -40,77 +39,75 @@ class FilterProducts extends Component {
     const { ProductsStore } = this.props;
 
     return (
-      <StyleProviderWrapper>
-        <Container>
-          <HeaderWrapper>
-            <Left style={[contentStyle]}>
-              <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-              </Button>
-            </Left>
-            <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#ffffff' }]}>
-                Filter Products
-              </Title>
-            </Body>
-            <Right />
-          </HeaderWrapper>
-          <Content padder>
-            <View style={[modalContent]}>
-              <Dropdown
-                label='Type'
-                selectedValue={ProductsStore.filters.type}
-                onValueChange={value => ProductsStore.setFilterValue('type', value)}
-                data={[
-                  { label: 'All', value: 'all' },
-                  { label: 'Boar', value: 'boar' },
-                  { label: 'Sow', value: 'sow' },
-                  { label: 'Gilt', value: 'gilt' },
-                  { label: 'Semen', value: 'semen' }
-                ]}
-              />
-              <Dropdown
-                label='Status'
-                selectedValue={ProductsStore.filters.status}
-                onValueChange={value => ProductsStore.setFilterValue('status', value)}
-                data={[
-                  { label: 'All', value: 'all' },
-                  { label: 'Displayed', value: 'displayed' },
-                  { label: 'Hidden', value: 'hidden' },
-                  { label: 'Requested', value: 'requested' },
-                ]}
-              />
-              <Dropdown
-                label='Sort By'
-                selectedValue={ProductsStore.filters.sort}
-                onValueChange={value => ProductsStore.setFilterValue('sort', value)}
-                data={[
-                  { label: 'Relevance', value: 'none' },
-                  { label: 'Age: High to Low', value: 'birthdate-asc' },
-                  { label: 'Age: Low to High', value: 'birthdate-desc' },
-                  { label: 'Average Daily Gain', value: 'adg-desc' },
-                  { label: 'Feed Conversion Ratio', value: 'fcr-desc' },
-                  { label: 'Backfat Thickness', value: 'backfat_thickness-asc' },
-                ]}
-              />
-              <Button
-                block
-                onPress={this.clearFilters}
-                style={[flatButton, { backgroundColor: '#eee', marginTop: 15 }]}
-              >
-                <Text uppercase={false} style={[openSansBold, { fontSize: 16, color: '#000000' }]}>Clear Filters</Text>
-              </Button>
-              <Button
-                block
-                onPress={this.filterProducts}
-                style={[flatButton, { backgroundColor: '#00af66', marginTop: 15 }]}
-              >
-                <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Filter Products</Text>
-              </Button>
-            </View>
-          </Content>
-        </Container>
-      </StyleProviderWrapper>
+      <Container>
+        <HeaderWrapper>
+          <Left style={[contentStyle]}>
+            <Button transparent onPress={Navigation.back}>
+              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
+            </Button>
+          </Left>
+          <Body style={{ flex: 3, alignItems: 'center' }}>
+            <Title style={[openSansBold, { color: '#ffffff' }]}>
+              Filter Products
+            </Title>
+          </Body>
+          <Right />
+        </HeaderWrapper>
+        <Content padder>
+          <View style={[modalContent]}>
+            <Dropdown
+              label='Type'
+              selectedValue={ProductsStore.filters.type}
+              onValueChange={value => ProductsStore.setFilterValue('type', value)}
+              data={[
+                { label: 'All', value: 'all' },
+                { label: 'Boar', value: 'boar' },
+                { label: 'Sow', value: 'sow' },
+                { label: 'Gilt', value: 'gilt' },
+                { label: 'Semen', value: 'semen' }
+              ]}
+            />
+            <Dropdown
+              label='Status'
+              selectedValue={ProductsStore.filters.status}
+              onValueChange={value => ProductsStore.setFilterValue('status', value)}
+              data={[
+                { label: 'All', value: 'all' },
+                { label: 'Displayed', value: 'displayed' },
+                { label: 'Hidden', value: 'hidden' },
+                { label: 'Requested', value: 'requested' },
+              ]}
+            />
+            <Dropdown
+              label='Sort By'
+              selectedValue={ProductsStore.filters.sort}
+              onValueChange={value => ProductsStore.setFilterValue('sort', value)}
+              data={[
+                { label: 'Relevance', value: 'none' },
+                { label: 'Age: High to Low', value: 'birthdate-asc' },
+                { label: 'Age: Low to High', value: 'birthdate-desc' },
+                { label: 'Average Daily Gain', value: 'adg-desc' },
+                { label: 'Feed Conversion Ratio', value: 'fcr-desc' },
+                { label: 'Backfat Thickness', value: 'backfat_thickness-asc' },
+              ]}
+            />
+            <Button
+              block
+              onPress={this.clearFilters}
+              style={[flatButton, { backgroundColor: '#eee', marginTop: 15 }]}
+            >
+              <Text uppercase={false} style={[openSansBold, { fontSize: 16, color: '#000000' }]}>Clear Filters</Text>
+            </Button>
+            <Button
+              block
+              onPress={this.filterProducts}
+              style={[flatButton, { backgroundColor: '#00af66', marginTop: 15 }]}
+            >
+              <Text uppercase={false} style={[openSansBold, { fontSize: 16 }]}>Filter Products</Text>
+            </Button>
+          </View>
+        </Content>
+      </Container>
     )
   }
 

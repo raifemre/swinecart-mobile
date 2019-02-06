@@ -13,7 +13,6 @@ import { NavigationEvents } from 'react-navigation';
 
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
-import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 
 import Notifs from '../components/Notifications';
 
@@ -31,20 +30,18 @@ class Notifications extends Component {
           onDidFocus={() => { NotificationStore.readNotifications() }}
           onDidBlur={() => { NotificationStore.readNotifications() }}
         />
-        <StyleProviderWrapper>
-          <Container>
-            <HeaderWrapper>
-              <Body style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Title style={{ color: '#ffffff', fontFamily: 'OpenSans-Bold' }}>
-                  Notifications
-                </Title>
-              </Body>
-            </HeaderWrapper>
-            <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50, flex: 1 }]}>
-              <Notifs />
-            </View>
-          </Container>
-        </StyleProviderWrapper>
+        <Container>
+          <HeaderWrapper>
+            <Body style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <Title style={{ color: '#ffffff', fontFamily: 'OpenSans-Bold' }}>
+                Notifications
+              </Title>
+            </Body>
+          </HeaderWrapper>
+          <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50, flex: 1 }]}>
+            <Notifs />
+          </View>
+        </Container>
       </React.Fragment>
     );
   }

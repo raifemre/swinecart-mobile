@@ -9,7 +9,6 @@ import { observer, inject } from 'mobx-react';
 
 import Products from '../components/Products';
 
-import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 
 import { Navigation } from '../../../services';
@@ -36,32 +35,30 @@ class ManageProducts extends Component {
     } = styles;
 
     return (
-      <StyleProviderWrapper>
-        <Container>
-          <HeaderWrapper>
-            <Left style={[contentStyle]}>
-              <Button transparent onPress={this.navigateToAdd}>
-                <Icon type='Feather' name='plus' style={{ color: '#FFFFFF' }} />
-              </Button>
-            </Left>
-            <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#FFFFFF' }]}>
-                Manage Products
-            </Title>
-            </Body>
-            <Right style={[contentStyle]}>
-              <Button transparent onPress={this.navigateToFilter}>
-                <Icon type='Feather' name='filter' style={{ color: '#FFFFFF' }} />
-              </Button>
-            </Right>
-          </HeaderWrapper>
-          <View style={[contentStyle, { backgroundColor: '#F2F2F2' }]}>
-            {
-              <Products />
-            }
-          </View>
-        </Container>
-      </StyleProviderWrapper>
+      <Container>
+        <HeaderWrapper>
+          <Left style={[contentStyle]}>
+            <Button transparent onPress={this.navigateToAdd}>
+              <Icon type='Feather' name='plus' style={{ color: '#FFFFFF' }} />
+            </Button>
+          </Left>
+          <Body style={{ flex: 3, alignItems: 'center' }}>
+            <Title style={[openSansBold, { color: '#FFFFFF' }]}>
+              Manage Products
+          </Title>
+          </Body>
+          <Right style={[contentStyle]}>
+            <Button transparent onPress={this.navigateToFilter}>
+              <Icon type='Feather' name='filter' style={{ color: '#FFFFFF' }} />
+            </Button>
+          </Right>
+        </HeaderWrapper>
+        <View style={[contentStyle, { backgroundColor: '#F2F2F2' }]}>
+          {
+            <Products />
+          }
+        </View>
+      </Container>
     );
   }
 

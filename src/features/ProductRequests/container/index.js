@@ -10,7 +10,6 @@ import {
 } from 'mobx-react';
 
 import { Navigation } from '../../../services';
-import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 import Requests from '../components/Requests';
@@ -41,26 +40,24 @@ class ProductRequests extends Component {
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={DashboardStore.loading} />
-        <StyleProviderWrapper>
-          <Container>
-            <HeaderWrapper>
-              <Left style={[contentStyle]}>
-                <Button transparent onPress={Navigation.back}>
-                  <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-                </Button>
-              </Left>
-              <Body style={{ flex: 3, alignItems: 'center' }}>
-                <Title style={[openSansBold, { color: '#ffffff' }]}>
-                  {DashboardStore.selectedProduct.name} Product Requests
-              </Title>
-              </Body>
-              <Right />
-            </HeaderWrapper>
-            <View style={[contentStyle, { padding: 15 }]}>
-              <Requests />
-            </View>
-          </Container>
-        </StyleProviderWrapper>
+        <Container>
+          <HeaderWrapper>
+            <Left style={[contentStyle]}>
+              <Button transparent onPress={Navigation.back}>
+                <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
+              </Button>
+            </Left>
+            <Body style={{ flex: 3, alignItems: 'center' }}>
+              <Title style={[openSansBold, { color: '#ffffff' }]}>
+                {DashboardStore.selectedProduct.name} Product Requests
+            </Title>
+            </Body>
+            <Right />
+          </HeaderWrapper>
+          <View style={[contentStyle, { padding: 15 }]}>
+            <Requests />
+          </View>
+        </Container>
       </React.Fragment>
     );
   }

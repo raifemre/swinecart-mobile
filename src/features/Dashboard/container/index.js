@@ -40,9 +40,7 @@ class Dashboard extends Component {
 
     const { selectedIndex } = this.state;
 
-    const {
-      container, openSansBold
-    } = styles;
+    const { container, openSansBold } = styles;
 
     return (
       <Container>
@@ -76,9 +74,6 @@ const styles = StyleSheet.create({
   },
   openSansBold: {
     fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
   }
 });
 
