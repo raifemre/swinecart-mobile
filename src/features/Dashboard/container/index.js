@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Body, Title, Segment, Button, Text
+  Container, Content, Body, Title, View
 } from 'native-base';
 
 import {
@@ -56,6 +56,7 @@ class Dashboard extends Component {
           selectedIndex={selectedIndex}
           onTabPress={this.setIndex}
         />
+
         <Content padder>
           { selectedIndex === 0 && <ProductStats stats={this.props.DashboardStore.stats}/> }
           { selectedIndex === 1 && <Reviews /> }

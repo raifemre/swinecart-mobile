@@ -1,57 +1,64 @@
 import React, { Component } from 'react';
 
-import {
-  StyleSheet, FlatList, ScrollView
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import {
-  Container, Content, Header, Body, Title, StyleProvider, Card, CardItem, Text,
-  List, ListItem, Grid, Col
-} from 'native-base';
+import { Card, CardItem, Grid, Col, Row } from 'native-base';
 
+import { observer } from 'mobx-react';
+import TextWrapper from '../../../shared/TextWrapper';
+
+import StatRow from './StatRow';
+
+@observer
 class StatCard extends Component {
 
   render() {
     
-    const {
-      container, openSansBold, openSansSemiBold
-    } = styles;
+    const { container, cardStyle } = styles;
     
-    const { 
-      title, data
-    } = this.props;
+    const { title, data } = this.props;
 
-    const {
-      boar, sow, gilt, semen
-    } = data;
+    const { boar, sow, gilt, semen } = data;
 
     const total = boar + sow + gilt + semen;
 
     return (
-      <Card>
-        <CardItem header style={[container]}>
-          <Text style={[openSansBold, { color: '#000000', fontSize: 20 }]}>{title}</Text>
-        </CardItem>
-        <CardItem header style={[container]}>
-          <Text style={[openSansBold, { color: '#000000', fontSize: 20 }]}>{total}</Text>
-        </CardItem>
-        <CardItem>
-          <Body style={[container]}>
-            <Grid>
+      <Card style={[cardStyle]}>
+        <CardItem style={{ backgroundColor: '#00695C' }}>
+          <Grid>
+            <Row style={[container]}>
+              <TextWrapper
+                color='#ffffff'
+                text={title}
+                font='OpenSans-Bold'
+                size={14}
+              />
+            </Row>
+            <Row style={[container, { marginBottom: 20 }]}>
+              <TextWrapper
+                color='#ecf0f1'
+                text={total}
+                font='OpenSans-Bold'
+                size={28}
+              />
+            </Row>
+            <Row>
               <Col>
-                <Text style={[openSansSemiBold]}>Boar: {boar}</Text>
+                <StatRow text='Boar' data={boar} />
               </Col>
               <Col>
-                <Text style={[openSansSemiBold]}>Sow: {sow}</Text>
+                <StatRow text='Sow' data={sow} />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <StatRow text='Gilt' data={gilt} />
               </Col>
               <Col>
-                <Text style={[openSansSemiBold]}>Gilt: {gilt}</Text>
+                <StatRow text='Semen' data={semen} />
               </Col>
-              <Col>
-                <Text style={[openSansSemiBold]}>Semen: {semen}</Text>
-              </Col>
-            </Grid>
-          </Body>
+            </Row>
+          </Grid>
         </CardItem>
       </Card>
     );
@@ -65,18 +72,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
+  cardStyle: {
+    borderColor: 'transparent',
+    borderColor: '#f7f7f7',
+    shadowColor: '#f7f7f7',
+    shadowRadius: 0.1,
+    elevation: 1,
   }
 });
 
