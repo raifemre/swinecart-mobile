@@ -9,9 +9,10 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import OutlinedButton from '../../../shared/OutlinedButton';
+import FlatButton from '../../../shared/FlatButton';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
+import IconWrapper from '../../../shared/IconWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 import OfficeInfo from '../components/OfficeInfo';
@@ -39,7 +40,7 @@ class Profile extends Component {
   render() {
 
     const {
-      container, openSansBold, contentStyle
+      contentStyle
     } = styles;
 
     return (
@@ -48,18 +49,15 @@ class Profile extends Component {
         <Container>
           <HeaderWrapper hasSegment>
             <Left style={{ flex: 1 }}></Left>
-            <Body style={container}>
-              <Title style={[openSansBold, { color: '#ffffff' }]}>
-                Profile
-            </Title>
-            </Body>
+            <BodyWrapper title='Profile' />
             <Right style={[contentStyle]}>
-              <OutlinedButton onPress={this.logout} style={{ height: 36 }}
-              >
-                <Text uppercase={false} style={[openSansBold, { fontSize: 14, lineHeight: 36 }]}>
-                  Logout
-              </Text>
-              </OutlinedButton>
+              <FlatButton transparent onPress={this.logout}>
+                <IconWrapper
+                  type='MaterialCommunityIcons'
+                  name='logout'
+                  style={{ fontSize: 30, color: '#ffffff' }}
+                />
+              </FlatButton>
             </Right>
           </HeaderWrapper>
           <Segments
