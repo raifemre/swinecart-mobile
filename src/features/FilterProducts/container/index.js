@@ -9,7 +9,9 @@ import {
 import { observer, inject } from 'mobx-react';
 
 import { Navigation } from '../../../services';
+
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
 
 import Dropdown from '../components/Dropdown';
 
@@ -40,19 +42,19 @@ class FilterProducts extends Component {
     return (
       <StyleProviderWrapper>
         <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
+          <HeaderWrapper>
             <Left style={[contentStyle]}>
               <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
+                <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
               </Button>
             </Left>
             <Body style={{ flex: 3, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
+              <Title style={[openSansBold, { color: '#ffffff' }]}>
                 Filter Products
               </Title>
             </Body>
             <Right />
-          </Header>
+          </HeaderWrapper>
           <Content padder>
             <View style={[modalContent]}>
               <Dropdown

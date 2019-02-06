@@ -15,6 +15,7 @@ import {
 
 
 import StyleProviderWrapper from '../../../shared/StyleProviderWrapper';
+import HeaderWrapper from '../../../shared/HeaderWrapper';
 
 import { Navigation } from '../../../services';
 
@@ -88,19 +89,19 @@ class AddProduct extends Component {
     return (
       <StyleProviderWrapper>
         <Container>
-          <Header noShadow androidStatusBarColor='#ffffff'>
+          <HeaderWrapper>
             <Left style={[contentStyle]}>
               <Button transparent onPress={Navigation.back}>
-                <Icon type='Feather' name='arrow-left' style={{ color: '#000000' }} />
+                <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
               </Button>
             </Left>
             <Body style={{ flex: 1, alignItems: 'center' }}>
-              <Title style={[openSansBold, { color: '#000000' }]}>
+              <Title style={[openSansBold, { color: '#ffffff' }]}>
                 Add Product
             </Title>
             </Body>
             <Right />
-          </Header>
+          </HeaderWrapper>
           <Content padder>
             <View>
               <View style={[container]}>

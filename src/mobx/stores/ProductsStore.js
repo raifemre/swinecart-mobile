@@ -53,7 +53,6 @@ class ProductsStore {
 
   @action async getProducts() {
     const { data: { data: { data } } } = await BreederProducts.getProducts(1);
-    console.log(data);
     runInAction(() => {
       this._products = data.map(p => new Product(p));
     });
