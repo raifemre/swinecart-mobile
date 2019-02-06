@@ -34,14 +34,12 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => response,
   async (err) => {
+    console.log(err);
     if(err && err.response) {
       if (err.response.status === 401) {
         await CommonStore.removeToken(null);
         await UserStore.forgetUser();
         Navigation.navigate('Public');
-      }
-      if (err.response.status === 408 || err.code === 'ECONNABORTED') {
-        console.log('Timeout!');
       }
       else {
         return Promise.reject(err.response);
