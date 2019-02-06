@@ -15,6 +15,7 @@ import {
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
+import BackButton from '../../../shared/BackButton';
 
 import { Navigation } from '../../../services';
 
@@ -89,9 +90,7 @@ class AddProduct extends Component {
       <Container>
         <HeaderWrapper>
           <Left style={[contentStyle]}>
-            <Button transparent onPress={Navigation.back}>
-              <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
-            </Button>
+            <BackButton />
           </Left>
           <BodyWrapper title='Add Product' />
           <Right />
