@@ -25,6 +25,7 @@ class Notification extends Component {
                 <TextWrapper
                   font={'OpenSans-Bold'}
                   text={notification.message}
+                  color={'#000000'}
                   size={14}
                 />
                 <TextWrapper
@@ -32,12 +33,6 @@ class Notification extends Component {
                   color={'#7f8c8d'}
                   text={notification.ago}
                   size={13}
-                />
-                <TextWrapper
-                  font={'OpenSans-Bold'}
-                  color={'#7f8c8d'}
-                  text={notification.read_at}
-                  size={12}
                 />
               </Body>
             </CardItem>

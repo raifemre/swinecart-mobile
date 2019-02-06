@@ -37,7 +37,7 @@ class AuthChecker extends Component {
       await UserStore.getUser();
       await UserStore.getProfile();
       // initChat();
-      // await initNotifications();
+      await initNotifications();
       Navigation.navigate(UserStore.userRole);
     }
     else {
