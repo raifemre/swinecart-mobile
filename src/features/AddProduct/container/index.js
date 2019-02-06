@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, Text, Icon, Left,
+  Container, Content, Body, Title, Text, Icon, Left,
   Button, Right, Form, Input, View, Item, Picker, DatePicker, Grid, Col, Radio, 
   Row
 } from 'native-base';
@@ -14,6 +14,7 @@ import {
 } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
 
 import { Navigation } from '../../../services';
 
@@ -92,11 +93,7 @@ class AddProduct extends Component {
               <Icon type='Feather' name='arrow-left' style={{ color: '#ffffff' }} />
             </Button>
           </Left>
-          <Body style={{ flex: 1, alignItems: 'center' }}>
-            <Title style={[openSansBold, { color: '#ffffff' }]}>
-              Add Product
-          </Title>
-          </Body>
+          <BodyWrapper title='Add Product' />
           <Right />
         </HeaderWrapper>
         <Content padder>

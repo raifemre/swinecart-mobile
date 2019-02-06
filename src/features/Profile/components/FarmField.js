@@ -60,6 +60,8 @@ class FarmField extends Component {
               disabled={!isEditable}
               value={farm.editableData[field]}
               style={[openSansSemiBold]}
+              multiline={true}
+              numberOfLines={2}
               keyboardType={keyboardType}
               onChangeText={value => farm.setValue(field, value)}
             />
