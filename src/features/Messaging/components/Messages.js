@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
-import { toJS } from 'mobx';
+
 import Thread from './Thread';
 
 @inject('MessageStore')
@@ -29,11 +29,9 @@ class Messages extends Component {
   }
 
   render() {
-
-    const { MessageStore } = this.props;
     return (
       <FlatList
-        data={MessageStore.threads}
+        data={this.props.MessageStore.threads}
         renderItem={this.renderItem}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
 import { StyleSheet } from 'react-native';
+import { observer, inject } from 'mobx-react';
+import { Card, CardItem, View } from 'native-base';
 
 import TextWrapper from '../../../shared/TextWrapper';
-import { Card, CardItem, View } from 'native-base';
 import { toJS } from 'mobx';
 
 import {

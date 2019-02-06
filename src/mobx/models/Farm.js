@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction
+  observable, action, toJS
 } from 'mobx';
 
 import {
@@ -11,74 +11,36 @@ class Farm {
   constructor(props) {
     for (const key in props) {
       if (props.hasOwnProperty(key)) {
-        this.defaultData[key] = props[key];
-        this.editableData[key] = props[key];
+        this[key] = props[key];
       }
     }
   }
 
-  @observable defaultData = {
-    id: '',
-    name: '',
-    addressLine1: '',
-    addressLine2: '',
-    province: '',
-    zipCode: '',
-    farmType: '',
-    landline: '',
-    mobile: '',
-    addressable_id: '',
-    addressable_type: '',
-    accreditation_date: '',
-    accreditation_expiry: '',
-    accreditation_no: '',
-    accreditation_status: '',
-    deleted_at: ''
-  }
-
-  @observable editableData = {
-    id: '',
-    name: '',
-    addressLine1: '',
-    addressLine2: '',
-    province: '',
-    zipCode: '',
-    farmType: '',
-    landline: '',
-    mobile: '',
-    addressable_id: '',
-    addressable_type: '',
-    accreditation_date: '',
-    accreditation_expiry: '',
-    accreditation_no: '',
-    accreditation_status: '',
-    deleted_at: ''
-  }
+    @observable id;
+    @observable name; 
+    @observable addressLine1; 
+    @observable addressLine2; 
+    @observable province; 
+    @observable zipCode; 
+    @observable farmType; 
+    @observable landline; 
+    @observable mobile; 
+    @observable addressable_id; 
+    @observable addressable_type; 
+    @observable accreditation_date; 
+    @observable accreditation_expiry; 
+    @observable accreditation_no; 
+    @observable accreditation_status; 
+    @observable deleted_at;
   
 
   @action setValue(field, value) {
-    this.editableData[field] = value;
+    this[field] = value;
   }
 
   @action async updateInfo() {
-    const { id, ...data } = this.editableData;
+    const { id, ...data } = this;
     await Profile.updateFarmInfo(data, id);
-  
-    runInAction(() => {
-      for (const key in this.defaultData) {
-        if (this.editableData.hasOwnProperty(key)) {
-          this.defaultData[key] = this.editableData[key];
-        }
-      }
-    });
-  }
-
-  @action cancelEdit() {
-    for (const key in this.defaultData) {
-      if (this.editableData.hasOwnProperty(key)) {
-        this.editableData[key] = this.defaultData[key];
-      }
-    }
   }
 
 }

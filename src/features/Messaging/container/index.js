@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  { View, Container, Body, Title } from 'native-base'
+import  { View, Container } from 'native-base'
 
 import {  observer, inject } from 'mobx-react';
 

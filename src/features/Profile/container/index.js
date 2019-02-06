@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import {
-  Container, Content, Header, Body, Title, Button, Text, Left, Right
+  Container, Content, Left, Right
 } from 'native-base';
 
 import {
@@ -24,7 +24,7 @@ import Segments from '../../../shared/Segments';
 class Profile extends Component {
 
   state = {
-    selectedIndex: 2
+    selectedIndex: 1
   }
 
   setIndex = index => {
