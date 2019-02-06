@@ -10,7 +10,6 @@ class Notification extends Component {
   onPress = () => {
     const { notification } = this.props;
     const { id } = notification;
-    console.log(id);
   }
 
   render() {
@@ -25,7 +24,7 @@ class Notification extends Component {
                 <TextWrapper
                   font={'OpenSans-Bold'}
                   text={notification.message}
-                  color={'#000000'}
+                  color={notification.read_at ? '#7f8c8d' : '#000000'}
                   size={14}
                 />
                 <TextWrapper
