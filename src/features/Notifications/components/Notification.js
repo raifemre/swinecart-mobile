@@ -17,25 +17,25 @@ class Notification extends Component {
     const { notification } = this.props;
     
     return (
-      <View style={{ paddingHorizontal: 10 }}>
-          <Card style={[cardStyle]}>
-            <CardItem button onPress={this.onPress}>
-              <Body>
-                <TextWrapper
-                  font={'OpenSans-Bold'}
-                  text={notification.message}
-                  color={notification.read_at ? '#7f8c8d' : '#000000'}
-                  size={14}
-                />
-                <TextWrapper
-                  font={'OpenSans-Bold'}
-                  color={'#7f8c8d'}
-                  text={notification.ago}
-                  size={13}
-                />
-              </Body>
-            </CardItem>
-          </Card>
+      <View style={{ paddingHorizontal: 5 }}>
+        <Card style={[cardStyle]}>
+          <CardItem>
+            <Body>
+              <TextWrapper
+                font={'OpenSans-Bold'}
+                text={notification.message}
+                color={notification.read_at ? '#7f8c8d' : '#000000'}
+                size={14}
+              />
+              <TextWrapper
+                font={'OpenSans-Bold'}
+                color={'#7f8c8d'}
+                text={notification.ago}
+                size={13}
+              />
+            </Body>
+          </CardItem>
+        </Card>
       </View>
     );
   }

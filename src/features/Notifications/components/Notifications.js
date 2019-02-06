@@ -17,7 +17,13 @@ class Notifications extends Component {
     return <Notification notification={item}/>;
   }
 
-  handleOnRefresh = () => { 
+  handleOnRefresh = () => {
+    this.setState({
+      refreshing: true
+    }, async () => {
+        await this.props.NotificationStore.getNotifs();
+      this.setState({ refreshing: false });
+    });
   };
 
   getMoreProducts = async ({ distanceFromEnd }) => {
@@ -28,9 +34,10 @@ class Notifications extends Component {
     return (
       <FlatList
         data={this.props.NotificationStore.notifications}
-        extraData={this.props}
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
+        refreshing={this.state.refreshing}
+        onRefresh={this.handleOnRefresh}
         initialNumToRender={8}
       />
     );
