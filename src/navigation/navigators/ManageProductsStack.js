@@ -7,15 +7,17 @@ import AddProduct from '../../features/AddProduct';
 import EditProduct from '../../features/EditProduct';
 import FilterProducts from '../../features/FilterProducts';
 import ProductDetails from '../../features/ProductDetails';
+import ProductMedia from '../../features/ProductMedia';
 
 const navigator = createStackNavigator({
   Products: ManageProducts,
   AddProduct: AddProduct,
   EditProduct: EditProduct,
   FilterProducts: FilterProducts,
-  ProductDetails: ProductDetails
+  ProductDetails: ProductDetails,
+  ProductMedia: ProductMedia,
 }, {
-    initialRouteName: 'Products',
+    initialRouteName: 'ProductMedia',
     navigationOptions: ({ navigation }) => {
       return {
         header: null,
