@@ -93,6 +93,6 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     elevation: 2,
   }
-});
+}); 
 
 export default Farm;
