@@ -23,7 +23,7 @@ class Farm extends Component {
     return (
       <View style={{ paddingHorizontal: 5 }}>
         <Card style={[cardStyle]}>
-          <CardItem>
+          <CardItem style={{ paddingVertical: 5 }}>
             <Body style={{ flex: 3 }}>
               <Grid>
                 <Row>

@@ -20,7 +20,7 @@ const iconMapping = {
   ProductInventory: 'list',
   Dashboard: 'assessment',
   Messaging: 'message',
-  Profile: 'mode-edit'
+  Profile: 'account-circle'
 };
 
 MessagingStack.navigationOptions = ({ navigation }) => {
