@@ -15,15 +15,20 @@ import { startCase } from 'lodash';
 @observer
 class Farm extends Component {
 
+
+  goToFarm = () => {
+
+  }
+
   render() {
 
-    const { cardStyle, container } = styles;
+    const { cardStyle } = styles;
     const { farm } = this.props;
 
     return (
       <View style={{ paddingHorizontal: 5 }}>
         <Card style={[cardStyle]}>
-          <CardItem style={{ paddingVertical: 5 }}>
+          <CardItem>
             <Body style={{ flex: 3 }}>
               <Grid>
                 <Row>
@@ -37,40 +42,20 @@ class Farm extends Component {
                 <Row>
                   <TextWrapper
                     font={'OpenSans-Bold'}
-                    color={'#000000'}
+                    color={'#7f8c8d'}
                     text={`Farm Province: ${startCase(farm.province)}`}
                     size={13}
-                  />
-                </Row>
-                <Row>
-                  <TextWrapper
-                    font={'OpenSans-Bold'}
-                    color={'#7f8c8d'}
-                    text={`Farm Type: ${startCase(farm.farmType)}`}
-                    size={12}
                   />
                 </Row>
               </Grid>
             </Body>
             <Right>
-              <Grid style={[container]}>
-                <Col style={{ marginRight: 4}}>
-                  <FlatButton transparent onPress={this.logout}>
-                    <IconWrapper
-                      name='edit'
-                      style={{ fontSize: 26, color: '#2980b9' }}
-                    />
-                  </FlatButton>
-                </Col>
-                <Col style={{ marginLeft: 4 }}>
-                  <FlatButton transparent onPress={this.logout}>
-                    <IconWrapper
-                      name='delete-forever'
-                      style={{ fontSize: 26, color: '#e74c3c' }}
-                    />
-                  </FlatButton>
-                </Col>
-              </Grid>
+              <FlatButton transparent onPress={this.goToFarm}>
+                <IconWrapper
+                  name='edit'
+                  style={{ fontSize: 26, color: '#2980b9' }}
+                />
+              </FlatButton>
             </Right>
           </CardItem>
         </Card>
