@@ -24,7 +24,7 @@ class LoginForm {
   @observable loading = false;
 
   @observable form = {
-    email: 'funk.nickolas@hotmail.com',
+    email: 'bwisoky@yahoo.com',
     password: 'secret12'
   }
 
@@ -67,19 +67,11 @@ class LoginForm {
     try {
       const form = cleanFields(toJS(this.form));
       if (this.validateFields(form)) {
-        const token = await AuthStore.login(form);
-        await CommonStore.setToken(token);
-        Navigation.navigate('AuthChecker');
+        await AuthStore.login(form);
       }
     }
-    catch (e) {
-      const { data } = e;
-      if(data) {
-        showToast(data.error, 'danger', 'bottom');
-      }
-      else {
-        console.log(e);
-      }
+    catch (error) {
+      showToast(error.message, 'danger', 'bottom');
     }
     runInAction(() => {
       this.loading = false;

@@ -1,50 +1,64 @@
-import axios from 'axios';
-
-import {
-  API_URL
-} from 'react-native-dotenv';
+import apisauce from 'apisauce';
+import { API_URL } from 'react-native-dotenv';
 
 import CommonStore from '../mobx/stores/CommonStore';
 import UserStore from '../mobx/stores/UserStore';
 
 import Navigation from './navigation';
 
-const instance = axios.create({
+import { showToast } from '../utils';
+
+const instance = apisauce.create({
   baseURL: API_URL,
-  timeout: 5000
+  timeout: 3000,
+  headers: {
+    'Accept-Encoding': 'gzip',
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
 });
 
-instance.interceptors.request.use(
-  config => {
-    const token = CommonStore.token;
-    if(token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  err => {
-    return Promise.reject(err);
-  }
-);
+instance.addRequestTransform(request => {
+  const token = CommonStore.token;
+  const data = `Bearer ${token}`;
+  request.headers['Authorization'] = token ? data : '';
+})
 
-instance.interceptors.response.use(
-  response => response,
-  async (err) => {
-    console.log(err);
-    if(err && err.response) {
-      if (err.response.status === 401) {
-        await CommonStore.removeToken(null);
-        await UserStore.forgetUser();
-        Navigation.navigate('Public');
-      }
-      else {
-        return Promise.reject(err.response);
+instance.addResponseTransform(response => {
+
+  const { ok, problem, status } = response;
+  const { config, ...res } = response;
+  // console.dir(res);
+
+  if(!ok) {
+    if(problem === 'NETWORK_ERROR') {
+      showToast('Something went wrong!', 'danger', 'bottom');
+    }
+    if(problem === 'CLIENT_ERROR') {
+      console.log('STATUS CODE:', status);
+      if(status === 401) {
+        Navigation.navigate('Login');
       }
     }
-    return Promise.reject(err);
   }
-);
+  else {
 
+  }
+  
+})
+
+instance.addMonitor(({ config: request, ...response }) => {
+  const { headers: reqHeaders, data: reqData, url: endpoint } = request;
+  const { headers: resHeaders, data: resData, duration: resDuration } = response;
+
+  // console.dir('Request Headers: ', reqHeaders);
+  // console.dir('Request Token:', reqHeaders.Authorization);
+  // console.dir('Request Data: ', reqData);
+  console.dir(resDuration, 'Request Endpoint:', endpoint);
+
+  // console.dir('Response Headers: ', resHeaders);
+  // console.dir('Response Data: ', resData);
+});
 
 
 const api = {

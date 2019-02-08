@@ -18,10 +18,15 @@ class UserStore {
   @observable farms = [];
 
   @action async getUser() {
-    const { data: { user }  } = await Auth.me();
-    runInAction(() => {
-      this.user = user;
-    });
+    const { data: { error, data }  } = await Auth.me();
+    if(error) {
+    }
+    else {
+      const { user } = data;
+      runInAction(() => {
+        this.user = user;
+      })
+    }
   }
   
   @action forgetUser() {

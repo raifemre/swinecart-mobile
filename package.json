@@ -8,6 +8,7 @@
     "test-android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug -l verbose"
   },
   "dependencies": {
+    "apisauce": "1.0.2",
     "axios": "0.18.0",
     "buffer": "5.2.1",
     "lodash": "4.17.11",

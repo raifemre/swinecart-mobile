@@ -15,9 +15,7 @@ import {
 
 import { Navigation } from '../../../services/';
 
-import initChat from '../../../boot/initChat';
-import initNotifications from '../../../boot/initNotifications';
-@inject('UserStore', 'CommonStore')
+@inject('AuthStore')
 @observer
 class AuthChecker extends Component {
 
@@ -26,22 +24,17 @@ class AuthChecker extends Component {
   }
 
   checkToken = async () => {
-    const { 
-      CommonStore, UserStore
-    } = this.props;
     
     const token = await AsyncStorage.getItem('token');
-
-    if(token) {
-      await CommonStore.setToken(token);
-      await UserStore.getUser();
-      await UserStore.getProfile();
-      initChat();
-      await initNotifications();
-      Navigation.navigate(UserStore.userRole);
+    try {
+      if (token) {
+        await this.props.AuthStore.loginFlow(token);
+      }
+      else {
+        Navigation.navigate('Public');
+      }
     }
-    else {
-      Navigation.navigate('Public');
+    catch(e) {
     }
   }
 

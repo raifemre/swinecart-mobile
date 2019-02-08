@@ -1,10 +1,5 @@
-import {
-  observable, runInAction, action, autorun
-} from 'mobx';
-
-import {
-  AsyncStorage
-} from 'react-native';
+import { observable, runInAction, action } from 'mobx';
+import { AsyncStorage } from 'react-native';
 
 class CommonStore {
 
@@ -23,8 +18,6 @@ class CommonStore {
       this.token = null;
     });
   }
-
-  // reactToTokenChange = autorun(() => { console.log('Token: ', this.token) });
 
 }
 

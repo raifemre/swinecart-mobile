@@ -18,27 +18,36 @@ class AuthStore {
   @observable loadingLogin = false;
   @observable loadingLogout = false;
 
-  @action async login(data) {
-    await sleep(300);
-    const { 
-      data: { data: { access_token: token } } 
-    } = await Auth.login(data);
-
-    return token;
+  @action async login(form) {
+    const { data: { error, data } } = await Auth.login(form);
+    if(error) {
+      throw new Error(error);
+    }
+    else {
+      await this.loginFlow(data.access_token);
+    }
   }
 
   @action async logout() {
     this.loadingLogout = true;
-    await sleep(300);
     await Auth.logout();
-    CommonStore.setToken(null);
-    UserStore.forgetUser();
+    await CommonStore.removeToken();
     runInAction(() => {
-      this.loadingLogout = false;
+      UserStore.forgetUser();
       NotificationStore.clearNotifs();
       MessageStore.setSocket(null);
+      this.loadingLogout = false;
       Navigation.navigate('Public');
     });
+  }
+
+  @action async loginFlow(token) {
+    await CommonStore.setToken(token);
+    await UserStore.getUser();
+    await UserStore.getProfile();
+    // // initChat();
+    // // await initNotifications();
+    Navigation.navigate(UserStore.userRole);
   }
 
 }
