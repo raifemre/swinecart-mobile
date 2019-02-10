@@ -1,12 +1,20 @@
 import React from 'react';
 import { Icon } from 'native-base';
 
+function IconWrapper(props) {
+  const { 
+    type = 'MaterialIcons',
+    size = 30,
+    color = '#000000',
+    style,
+    ...otherProps 
+  } = props;
 
-function IconWrapper({ type = 'MaterialIcons',  ...props}) {
   return (
     <Icon
       type={type}
-      {...props}
+      style={{ fontSize: size, color, ...style}}
+      {...otherProps}
     />
   )
 }

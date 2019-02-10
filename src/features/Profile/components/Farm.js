@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { observer, inject } from 'mobx-react';
-import { Card, CardItem, View, Right, Body, Button, Text, Grid, Row, Col } from 'native-base';
+import { Card, CardItem, View, Right, Body, Grid, Row } from 'native-base';
+import { toJS } from 'mobx';
+import { startCase } from 'lodash';
 
 import TextWrapper from '../../../shared/TextWrapper';
 import FlatButton from '../../../shared/FlatButton';
 import IconWrapper from '../../../shared/IconWrapper';
 
-import { toJS } from 'mobx';
+import Navigation from '../../../services/navigation';
 
-import { startCase } from 'lodash';
 
 @inject('UserStore')
 @observer
 class Farm extends Component {
 
-
   goToFarm = () => {
-
+    Navigation.navigate('FarmDetails', { farm });
   }
 
   render() {
@@ -51,10 +51,7 @@ class Farm extends Component {
             </Body>
             <Right>
               <FlatButton transparent onPress={this.goToFarm}>
-                <IconWrapper
-                  name='edit'
-                  style={{ fontSize: 26, color: '#2980b9' }}
-                />
+                <IconWrapper name='arrow-forward' size={26} color='#000000' />
               </FlatButton>
             </Right>
           </CardItem>

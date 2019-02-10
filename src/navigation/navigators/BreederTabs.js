@@ -5,7 +5,6 @@ import {
 
 import { Icon } from 'native-base';
 
-import Profile from '../../features/Profile';
 import Notifications from '../../features/Notifications';
 import Dashboard from '../../features/Dashboard';
 
@@ -13,7 +12,8 @@ import NotificationsIcon from '../../shared/NotificationsIcon';
 
 import MessagingStack from './MessagingStack';
 import ManageProductsStack from './ManageProductsStack';
-import ProductInventory from './ProductInventoryStack';
+import ProductInventoryStack from './ProductInventoryStack';
+import ProfileStack from './ProfileStack';
 
 const iconMapping = {
   ManageProducts: 'store',
@@ -34,7 +34,7 @@ const navigator = createBottomTabNavigator({
     screen: ManageProductsStack
   },
   'ProductInventory': {
-    screen: ProductInventory
+    screen: ProductInventoryStack
   },
   'Dashboard': {
     screen: Dashboard
@@ -46,7 +46,7 @@ const navigator = createBottomTabNavigator({
     screen: Notifications
   },
   'Profile': {
-    screen: Profile,
+    screen: ProfileStack,
   },
 },
 {
