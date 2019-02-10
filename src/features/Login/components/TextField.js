@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import { Item, Input } from 'native-base';
+import { Item, Input, Label } from 'native-base';
 
 @observer
 class InputField extends Component {
@@ -14,10 +14,11 @@ class InputField extends Component {
     const { form, placeholder, field  } = this.props;
 
     return (
-      <Item>
+      <Item stackedLabel>
+        <Label>{placeholder}</Label>
         <Input
-          value={form.form[field]}
           placeholder={placeholder}
+          value={form.form[field]}
           onChangeText={this.onChangeText}
         />
       </Item>

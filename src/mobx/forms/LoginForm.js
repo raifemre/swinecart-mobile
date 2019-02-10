@@ -25,6 +25,7 @@ class LoginForm {
 
   @observable form = {
     email: 'bwisoky@yahoo.com',
+    // email: '',
     password: 'secret12'
   }
 
