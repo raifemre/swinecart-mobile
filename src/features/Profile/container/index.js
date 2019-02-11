@@ -24,7 +24,7 @@ import Segments from '../../../shared/Segments';
 class Profile extends Component {
 
   state = {
-    selectedIndex: 2
+    selectedIndex: 0
   }
 
   setIndex = index => {
@@ -48,15 +48,12 @@ class Profile extends Component {
         <SpinnerWithOverlay visible={this.props.AuthStore.loadingLogout} textContent='Logging out...' />
         <Container>
           <HeaderWrapper hasSegment>
-            <Left style={{ flex: 1 }}></Left>
+            <Left style={[contentStyle]}>
+            </Left>
             <BodyWrapper title='Profile' />
             <Right style={[contentStyle]}>
               <FlatButton transparent onPress={this.logout}>
-                <IconWrapper
-                  type='MaterialCommunityIcons'
-                  name='logout'
-                  style={{ fontSize: 30, color: '#ffffff' }}
-                />
+                <IconWrapper name='filter-list' color='#ffffff' />
               </FlatButton>
             </Right>
           </HeaderWrapper>

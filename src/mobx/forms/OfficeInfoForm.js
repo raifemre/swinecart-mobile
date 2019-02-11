@@ -1,31 +1,61 @@
-import { observable, action } from 'mobx';
+import { observable, action, runInAction, toJS } from 'mobx';
 
 class OfficeInfoForm {
 
-  constructor(props) {
-    for (const key in props) {
-      if (props.hasOwnProperty(key)) {
-        this[key] = props[key];
-      }
-    }
+  defaultFormState = {
+    officeAddress_addressLine1: '',
+    officeAddress_addressLine2: '',
+    officeAddress_province: '',
+    officeAddress_zipCode: '',
+    office_landline: '',
+    office_mobile: '',
+    website: '',
+    produce: '',
+    contactPerson_name: '',
+    contactPerson_mobile: '',
   }
 
-  @observable officeAddress_addressLine1;
-  @observable officeAddress_addressLine2;
-  @observable officeAddress_province;
-  @observable officeAddress_zipCode;
-  @observable office_landline;
-  @observable office_mobile;
-  @observable website;
-  @observable produce;
-  @observable contactPerson_name;
-  @observable contactPerson_mobile;
+  @observable form = {
+    officeAddress_addressLine1: '',
+    officeAddress_addressLine2: '',
+    officeAddress_province: '',
+    officeAddress_zipCode: '',
+    office_landline: '',
+    office_mobile: '',
+    website: '',
+    produce: '',
+    contactPerson_name: '',
+    contactPerson_mobile: '',
+  }
 
   @observable farm_addresses;
 
   @action setValue(field, value) {
-    this[field] = value;
+    this.form[field] = value;
+  }
+
+  @action resetForm() {
+    runInAction(() => {
+      for (const field in this.form) {
+        if (this.form.hasOwnProperty(field)) {
+          this.form[field] = this.defaultFormState[field];
+        }
+      }
+    });
+  }
+
+  @action setDefaultState(breederProfile) {
+    for (const field in breederProfile) {
+      if (breederProfile.hasOwnProperty(field)) {
+        this.form[field] = this.defaultFormState[field] = breederProfile[field];
+      }
+    }
+  }
+
+  @action save() {
+    this.setDefaultState(this.form);
+    console.log(toJS(this.defaultFormState));
   }
 }
 
-export default OfficeInfoForm;
+export default new OfficeInfoForm();

@@ -1,190 +1,157 @@
 import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+
 import {
-  StyleSheet, FlatList
-} from 'react-native';
-import {
-  Container, Content, Header, Body, Title, StyleProvider, Segment, Button, Text,
-  Form, Item, Input, Label, View
+  View, Form, Grid, Col, Button
 } from 'native-base';
+
 import {
   observer, inject
 } from 'mobx-react';
 
-import  {
-  toJS
-} from 'mobx'
 
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
+import TextWrapper from '../../../shared/TextWrapper';
+import TextField from '../../../shared/TextField';
+import FlatButton from '../../../shared/FlatButton';
+import IconWrapper from '../../../shared/IconWrapper';
+import OutlinedButton from '../../../shared/OutlinedButton';
 
-import UserField from './UserField';
-import EditButton from './EditButton';
-@inject(['UserStore'])
+@inject('UserStore', 'OfficeInfoForm')
 @observer
 class OfficeInfo extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      address1: 'odio',
-      address2: 'Los Banos',
-      province: 'Bulacan',
-      postalZipCode: '9539',
-      landline: '032714-4639',
-      mobile: '09776749666',
-      isEditable: false
-    }
+  state = {
+    isEditable: false
   }
 
-  toggleisEditable = () => {
-    this.setState(prevState => ({
-      isEditable: !prevState.isEditable
-    }));
+  componentWillMount() {
+    const { UserStore, OfficeInfoForm } = this.props;
+    OfficeInfoForm.setDefaultState(UserStore.breederProfile);
   }
 
-  saveInfo = async () => {
-    const { UserStore } = this.props;
-    await UserStore.breederProfile.updateInfo();
-    this.setState({
-      isEditable: false
-    });
+  toggleEditable = () => {
+    this.setState({ isEditable: !this.state.isEditable });
   }
 
-  cancelEdit = () => {
-    this.toggleisEditable();
+  editInfo = () => {
+    this.toggleEditable();
   }
 
+  save = () => {
+    this.toggleEditable();
+    const { OfficeInfoForm } = this.props;
+    OfficeInfoForm.save();
+  }
+
+  cancel = () => {
+    this.toggleEditable();
+    const { OfficeInfoForm } = this.props;
+    OfficeInfoForm.resetForm();
+  }
 
   render() {
-
-    const {
-      openSansBold, flatButton, container
-    } = styles;
-
+    const { UserStore, OfficeInfoForm } = this.props;
     const { isEditable } = this.state;
+    // console.log(UserStore.breederProfile);
 
     return (
       <React.Fragment>
-        <View style={[container, { marginTop: 20 }]}>
-          <Text style={[openSansBold, { fontSize: 24 }]}>Personal Info</Text>
-        </View>
-        <Form>
-          <UserField 
-            label='Address Line 1* : Street, Road, Subdivision'
-            field={'officeAddress_addressLine1'}
-            isEditable={isEditable}
-            keyboardType='default'
-            isPicker={false}
-          />
-          <UserField
-            label='Address Line 2* : Barangay, Town, City'
-            field={'officeAddress_addressLine2'}
-            isEditable={isEditable}
-            keyboardType='default'
-            isPicker={false}
-          />
-          <UserField
-            label='Province'
-            field={'officeAddress_province'}
-            isEditable={isEditable}
-            keyboardType='default'
-            isPicker={true}
-          />
-          <UserField
-            label='Postal / Zip Code'
-            field={'officeAddress_zipCode'}
-            isEditable={isEditable}
-            keyboardType='numeric'
-            isPicker={false}
-          />
-          <UserField
-            label='Landline Number'
-            field={'office_landline'}
-            isEditable={isEditable}
-            keyboardType='numeric'
-            isPicker={false}
-          />
-          <UserField
-            label='Mobile Number'
-            field={'office_mobile'}
-            isEditable={isEditable}
-            keyboardType='numeric'
-            isPicker={false}
-          />
-        </Form>
-        <View style={[container, { marginTop: 20 }]}>
-          <Text style={[openSansBold, { fontSize: 24 }]}>Contact Person Details</Text>
-        </View>
-        <Form>
-          <UserField
-            label='Name'
-            field={'contactPerson_name'}
-            isEditable={isEditable}
-            keyboardType='default'
-            isPicker={false}
-          />
-          <UserField
-            label='Mobile Number'
-            field={'contactPerson_mobile'}
-            isEditable={isEditable}
-            keyboardType='numeric'
-            isPicker={false}
-          />
-        </Form>
-        <View style={[container, { marginTop: 20 }]}>
-          <Text style={[openSansBold, { fontSize: 24 }]}>Other Information</Text>
-        </View>
-        <Form>
-          <UserField
-            label='Website'
-            field={'website'}
-            isEditable={isEditable}
-            keyboardType='default'
-            isPicker={false}
-          />
-          <UserField
-            label='Product'
-            field={'produce'}
-            isEditable={isEditable}
-            keyboardType='default'
-            isPicker={false}
-          />
-        </Form>
-        <View style={{ marginTop: 20 }}>
-          <EditButton 
-            isEditable={isEditable}
-            toggleisEditable={this.toggleisEditable}
-            saveInfo={this.saveInfo}
-            cancelEdit={this.cancelEdit}
-          />
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <TextWrapper text='Personal Information' size={20} color='#00695C' />
+          </View>
+          <Form style={{ paddingTop: 10 }}>
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Address Line 1* : Street, Road, Subdivision'
+              field='officeAddress_addressLine1'
+              editable={isEditable}
+            />
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Address Line 2* : Barangay, Town, City'
+              field='officeAddress_addressLine2'
+              editable={isEditable}
+            />
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Province'
+              field='officeAddress_province'
+              editable={isEditable}
+            />
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Postal / Zip Code'
+              field='officeAddress_zipCode'
+              editable={isEditable}
+            />
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Landline Number'
+              field='office_landline'
+              editable={isEditable}
+            />
+          </Form>
+          <TextWrapper text='Contact Person Details' size={20} color='#00695C' />
+          <Form style={{ paddingTop: 10 }}>
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Name'
+              field='contactPerson_name'
+              editable={isEditable}
+            />
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Mobile Number'
+              field='contactPerson_mobile'
+              editable={isEditable}
+            />
+          </Form>
+          <TextWrapper text='Other Information' size={20} color='#00695C' />
+          <Form style={{ paddingTop: 10 }}>
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Website'
+              field='website'
+              editable={isEditable}
+            />
+            <TextField
+              form={OfficeInfoForm}
+              placeholder='Produce'
+              field='produce'
+              editable={isEditable}
+            />
+          </Form>
+          {
+            isEditable
+              ? 
+                <View>
+                  <Grid>
+                    <Col style={{ padding: 5 }}>
+                    <OutlinedButton block onPress={this.save} style={{ borderColor: '#00a7e1' }}>
+                        <TextWrapper text='Save' size={16} color='#00a7e1' />
+                      </OutlinedButton>
+                    </Col>
+                    <Col style={{ padding: 5 }}>
+                      <OutlinedButton block onPress={this.cancel} style={{ borderColor: '#e71d36' }}>
+                        <TextWrapper text='Cancel' size={16} color='#e71d36' />
+                      </OutlinedButton>
+                    </Col>
+                  </Grid>
+                </View>
+              : 
+                <View style={{ padding: 5 }}>
+                <FlatButton block onPress={this.editInfo} style={{ backgroundColor: '#053c5e' }}>
+                    <TextWrapper text='Edit Information' size={16} color='#ffffff' />
+                  </FlatButton>
+                </View>
+          }
         </View>
       </React.Fragment>
     );
   }
 
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
-});
 
 export default OfficeInfo;
