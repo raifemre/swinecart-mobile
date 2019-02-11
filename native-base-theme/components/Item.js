@@ -23,6 +23,10 @@ export default (variables = variable) => {
         top: 6,
         paddingTop: 8
       },
+      "NativeBase.Button": {
+        top: 6,
+        paddingTop: 8
+      },
       "NativeBase.IconNB": {
         top: 6,
         paddingTop: 8

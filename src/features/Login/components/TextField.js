@@ -1,29 +1,78 @@
 import React, { Component } from 'react';
+import { StyleSheet, TextInput, Animated } from 'react-native';
 import { observer } from 'mobx-react';
-import { Item, Input, Label } from 'native-base';
+import { View, Icon } from 'native-base';
 
 @observer
 class InputField extends Component {
 
-  onChangeText = value => {
-    const { form, field } = this.props;
-    form.setValue(field, value);
+  state = {
+    isFocused: false,
   }
 
-  render() {
-    const { form, placeholder, field  } = this.props;
+  componentWillMount() {
+    this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
+  }
 
+  componentDidUpdate() {
+    Animated.timing(this._animatedIsFocused, {
+      toValue: (this.state.isFocused || this.props.value !== '') ? 1 : 0,
+      duration: 200,
+    }).start();
+  }
+
+  handleFocus = () => this.setState({ isFocused: true });
+  handleBlur = () => this.setState({ isFocused: false });
+
+  render() {
+
+    const { label, ...props } = this.props;
+    const { inputStyle, containerStyle } = styles;
+
+    const labelStyle = {
+      position: 'absolute',
+      left: 10,
+      fontFamily: 'OpenSans-Bold',
+      top: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: [6, -22],
+      }),
+      fontSize: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: [18, 14],
+      }),
+      color: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['#7f8c8d', '#000'],
+      }),
+    };
     return (
-      <Item stackedLabel>
-        <Label>{placeholder}</Label>
-        <Input
-          placeholder={placeholder}
-          value={form.form[field]}
-          onChangeText={this.onChangeText}
+      <View style={containerStyle}>
+        <Animated.Text style={labelStyle}>
+          {label}
+        </Animated.Text>
+        <TextInput
+          {...props}
+          selectionColor='#000000'
+          style={inputStyle}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
-      </Item>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  containerStyle: { 
+    paddingTop: 0, borderColor: '#00695C', borderWidth: 2, height: 42,
+    flexDirection: 'row', marginVertical: 10, borderRadius: 20,
+    paddingHorizontal: 10
+  },
+  inputStyle: {
+    height: 40, fontSize: 18, fontFamily: 'OpenSans-Bold',
+    paddingVertical: 0, flex: 1
+  }
+});
 
 export default InputField;

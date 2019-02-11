@@ -8,13 +8,17 @@ import IconWrapper from '../../../shared/IconWrapper';
 import PrimaryButton from '../../../shared/PrimaryButton';
 import FlatButton from '../../../shared/FlatButton';
 import TextWrapper from '../../../shared/TextWrapper';
-import PasswordField from '../../../shared/PasswordField';
 
+import PasswordField from '../components/PasswordField';
 import TextField from '../components/TextField';
 
 @inject('LoginForm', 'AuthStore')
 @observer
 class Login extends Component {
+
+  state = {
+    text: '13123213123'
+  }
 
   navigateToRegister = () =>  {
     this.props.navigation.navigate('Register');
@@ -63,19 +67,17 @@ class Login extends Component {
               </View>
               <View style={{ marginVertical: 10 }}>
                 <Form>
-                  <TextField
-                    form={LoginForm}
-                    placeholder='Email'
-                    field={'email'}
-                    isPassword={false}
-                  />
-                  <PasswordField
-                    form={LoginForm}
-                    placeholder='Password'
-                    field={'password'}
-                    isPassword={true}
-                  />
-                  <View style={{ marginTop: 15 }}>
+                <TextField
+                  label='Email'
+                  value={this.state.text}
+                  onChangeText={text => this.setState({ text })}
+                />
+                <TextField
+                  label='Email'
+                  value={this.state.text}
+                  onChangeText={text => this.setState({ text })}
+                />
+                  <View style={{ marginTop: 10 }}>
                     <PrimaryButton block onPress={this.login}>
                       <TextWrapper
                         uppercase={false}
