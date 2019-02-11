@@ -29,12 +29,17 @@ class PasswordField extends Component {
   handleFocus = () => this.setState({ isFocused: true });
   handleBlur = () => this.setState({ isFocused: false });
 
+  onChangeText = value => {
+    const { form, field } = this.props;
+    form.setValue(field, value);
+  }
+
+
   render() {
 
-    const { label, ...props } = this.props;
+    const { form, placeholder, field } = this.props;
     const { inputStyle, containerStyle } = styles;
     const { hidePassword } = this.state;
-
 
     const labelStyle = {
       position: 'absolute',
@@ -57,13 +62,14 @@ class PasswordField extends Component {
     return (
       <View style={containerStyle}>
         <Animated.Text style={labelStyle}>
-          {label}
+          {placeholder}
         </Animated.Text>
         <TextInput
-          {...props}
+          onChangeText={this.onChangeText}
           selectionColor='#000000'
           underlineColorAndroid='transparent'
           style={inputStyle}
+          value={form.form[field]}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           secureTextEntry={hidePassword}

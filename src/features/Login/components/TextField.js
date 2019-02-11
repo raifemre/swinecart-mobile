@@ -24,9 +24,14 @@ class TextField extends Component {
   handleFocus = () => this.setState({ isFocused: true });
   handleBlur = () => this.setState({ isFocused: false });
 
+  onChangeText = value => {
+    const { form, field } = this.props;
+    form.setValue(field, value);
+  }
+
   render() {
 
-    const { label, ...props } = this.props;
+    const { form, placeholder, field  } = this.props;
     const { inputStyle, containerStyle } = styles;
 
     const labelStyle = {
@@ -50,11 +55,12 @@ class TextField extends Component {
     return (
       <View style={containerStyle}>
         <Animated.Text style={labelStyle}>
-          {label}
+          {placeholder}
         </Animated.Text>
         <TextInput
-          {...props}
+          onChangeText={this.onChangeText}
           selectionColor='#000000'
+          value={form.form[field]}
           underlineColorAndroid='transparent'
           style={inputStyle}
           onFocus={this.handleFocus}
@@ -62,7 +68,7 @@ class TextField extends Component {
         />
       </View>
     );
-  }add
+  }
 }
 
 const styles = StyleSheet.create({

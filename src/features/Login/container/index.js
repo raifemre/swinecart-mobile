@@ -68,14 +68,14 @@ class Login extends Component {
               <View style={{ marginVertical: 10 }}>
                 <Form>
                 <TextField
-                  label='Email'
-                  value={this.state.text}
-                  onChangeText={text => this.setState({ text })}
+                  form={LoginForm}
+                  placeholder='Email'
+                  field='email'
                 />
                 <PasswordField
-                  label='Password'
-                  value={this.state.text}
-                  onChangeText={text => this.setState({ text })}
+                  form={LoginForm}
+                  placeholder='Password'
+                  field='password'
                 />
                   <View style={{ marginTop: 10 }}>
                     <PrimaryButton block onPress={this.login}>
