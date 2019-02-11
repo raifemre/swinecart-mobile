@@ -44,7 +44,7 @@ class ChangePassword extends Component {
       <React.Fragment>
         <SpinnerWithOverlay visible={ChangePasswordForm.loading} textContent='Changing Password...'/>
         <ChangePasswordDialog visible={this.state.visible} submit={this.submit} closeDialog={this.closeDialog} />
-        <Form>
+        <Form style={{ paddingTop: 10 }}>
           <PasswordField
             form={ChangePasswordForm}
             field={'currentPassword'}
@@ -61,7 +61,7 @@ class ChangePassword extends Component {
             placeholder='Confirm New Password'
           />
         </Form>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 10 }}>
           <PrimaryButton block onPress={this.handleClick}>
             <TextWrapper
               text='Submit'
