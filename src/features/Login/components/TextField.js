@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, TextInput, Animated } from 'react-native';
 import { observer } from 'mobx-react';
-import { View, Icon } from 'native-base';
+import { View } from 'native-base';
 
 @observer
-class InputField extends Component {
+class TextField extends Component {
 
   state = {
     isFocused: false,
@@ -35,11 +35,11 @@ class InputField extends Component {
       fontFamily: 'OpenSans-Bold',
       top: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [5, -22],
+        outputRange: [7, -22],
       }),
       fontSize: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [18, 13],
+        outputRange: [16, 13],
       }),
       color: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
@@ -72,9 +72,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   inputStyle: {
-    height: 38, fontSize: 18, fontFamily: 'OpenSans-Bold',
+    height: 38, fontSize: 16, fontFamily: 'OpenSans-Bold',
     paddingVertical: 0, flex: 1,
   }
 });
 
-export default InputField;
+export default TextField;

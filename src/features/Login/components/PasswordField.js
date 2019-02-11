@@ -4,17 +4,16 @@ import { observer } from 'mobx-react';
 import { View, Button } from 'native-base';
 
 import IconWrapper from '../../../shared/IconWrapper';
+
 @observer
-class InputField extends Component {
+class PasswordField extends Component {
 
   state = {
     isFocused: false,
     hidePassword: true
   }
 
-  togglePassword = () => {
-    this.setState({ hidePassword: !this.state.hidePassword });
-  }
+  togglePassword = () => this.setState({ hidePassword: !this.state.hidePassword });
 
   componentWillMount() {
     this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
@@ -34,6 +33,8 @@ class InputField extends Component {
 
     const { label, ...props } = this.props;
     const { inputStyle, containerStyle } = styles;
+    const { hidePassword } = this.state;
+
 
     const labelStyle = {
       position: 'absolute',
@@ -41,17 +42,18 @@ class InputField extends Component {
       fontFamily: 'OpenSans-Bold',
       top: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [5, -22],
+        outputRange: [7, -22],
       }),
       fontSize: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [18, 14],
+        outputRange: [16, 12],
       }),
       color: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
         outputRange: ['#7f8c8d', '#000'],
       }),
     };
+
     return (
       <View style={containerStyle}>
         <Animated.Text style={labelStyle}>
@@ -60,17 +62,22 @@ class InputField extends Component {
         <TextInput
           {...props}
           selectionColor='#000000'
+          underlineColorAndroid='transparent'
           style={inputStyle}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          secureTextEntry={true}
+          secureTextEntry={hidePassword}
         />
-        <Button transparent onPress={this.togglePassword} style={{ height: 42 }}>
-          <IconWrapper style={{ color: '#000000', lineHeight: 20 }} name={!this.state.hidePassword ? 'eye' : 'eye-off'} type='MaterialCommunityIcons' />
+        <Button transparent style={{ height: 38, paddingHorizontal: 0 }} onPress={this.togglePassword}>
+          <IconWrapper
+            type='MaterialCommunityIcons'
+            size={25}
+            name={hidePassword? 'eye' : 'eye-off'}
+          />
         </Button>
       </View>
     );
-  }
+  } add
 }
 
 const styles = StyleSheet.create({
@@ -80,9 +87,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   inputStyle: {
-    height: 40, fontSize: 18, fontFamily: 'OpenSans-Bold',
-    paddingVertical: 0, flex: 1, borderColor: 'red', borderWidth: 2
+    height: 38, fontSize: 16, fontFamily: 'OpenSans-Bold',
+    paddingVertical: 0, flex: 1,
   }
 });
 
-export default InputField;
+export default PasswordField;

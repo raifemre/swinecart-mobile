@@ -17,7 +17,7 @@ import TextField from '../components/TextField';
 class Login extends Component {
 
   state = {
-    text: ''
+    text: '12321323'
   }
 
   navigateToRegister = () =>  {
@@ -43,11 +43,7 @@ class Login extends Component {
   googleLogin = () => {
     alert('Google Login');
   }
-  // <PasswordField
-  //                 label='Password'
-  //                 value={this.state.text}
-  //                 onChangeText={text => this.setState({ text })}
-  //               />
+  
   render() {
     const { LoginForm } = this.props;
     return (
@@ -76,7 +72,11 @@ class Login extends Component {
                   value={this.state.text}
                   onChangeText={text => this.setState({ text })}
                 />
-                
+                <PasswordField
+                  label='Password'
+                  value={this.state.text}
+                  onChangeText={text => this.setState({ text })}
+                />
                   <View style={{ marginTop: 10 }}>
                     <PrimaryButton block onPress={this.login}>
                       <TextWrapper
