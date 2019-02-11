@@ -1,71 +1,88 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextInput, Animated } from 'react-native';
 import { observer } from 'mobx-react';
-import { Item, Input, Label, View, Button, Icon } from 'native-base';
-
-
-// import IconWrapper from './IconWrapper';
+import { View, Button } from 'native-base';
 
 import IconWrapper from '../../../shared/IconWrapper';
-
 @observer
-class PasswordField extends Component {
+class InputField extends Component {
 
   state = {
-    showPassword: false
-  }
-
-  onChangeText = value => {
-    const { form, field } = this.props;
-    form.setValue(field, value);
+    isFocused: false,
+    hidePassword: true
   }
 
   togglePassword = () => {
-    this.setState(({ showPassword }) => ({ showPassword: !showPassword }));
+    this.setState({ hidePassword: !this.state.hidePassword });
   }
+
+  componentWillMount() {
+    this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
+  }
+
+  componentDidUpdate() {
+    Animated.timing(this._animatedIsFocused, {
+      toValue: (this.state.isFocused || this.props.value !== '') ? 1 : 0,
+      duration: 200,
+    }).start();
+  }
+
+  handleFocus = () => this.setState({ isFocused: true });
+  handleBlur = () => this.setState({ isFocused: false });
 
   render() {
 
-    const { item, label, input, container } = styles;
-    const { form, placeholder, field } = this.props;
-    const { showPassword } = this.state;
+    const { label, ...props } = this.props;
+    const { inputStyle, containerStyle } = styles;
 
+    const labelStyle = {
+      position: 'absolute',
+      left: 10,
+      fontFamily: 'OpenSans-Bold',
+      top: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: [5, -22],
+      }),
+      fontSize: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: [18, 14],
+      }),
+      color: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['#7f8c8d', '#000'],
+      }),
+    };
     return (
-      <View style={container}>
-        <Item floatingLabel rounded style={item}>
-          <Label style={label}>
-            {placeholder}
-          </Label>
-          <Input
-            value={form.form[field]}
-            style={input}
-            onChangeText={this.onChangeText}
-            secureTextEntry={!showPassword}
-          />
-          <Icon
-            name={!showPassword ? 'eye' : 'eye-off'}
-            type='MaterialCommunityIcons'
-            style={{ marginBottom: 18 }}
-          />
-        </Item>
+      <View style={containerStyle}>
+        <Animated.Text style={labelStyle}>
+          {label}
+        </Animated.Text>
+        <TextInput
+          {...props}
+          selectionColor='#000000'
+          style={inputStyle}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          secureTextEntry={true}
+        />
+        <Button transparent onPress={this.togglePassword} style={{ height: 42 }}>
+          <IconWrapper style={{ color: '#000000', lineHeight: 20 }} name={!this.state.hidePassword ? 'eye' : 'eye-off'} type='MaterialCommunityIcons' />
+        </Button>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  item: {
-    height: 44, paddingHorizontal: 10, lineHeight: 44
+  containerStyle: {
+    paddingTop: 0, borderColor: '#00695C', borderWidth: 2, height: 40,
+    flexDirection: 'row', marginVertical: 10, borderRadius: 20,
+    paddingHorizontal: 10
   },
-  label: {
-    top: -8, left: 15, fontFamily: 'OpenSans-SemiBold'
-  },
-  input: {
-    height: 46, marginBottom: 12, fontSize: 16, fontFamily: 'OpenSans-Bold'
-  },
-  container: {
-    marginVertical: 10
+  inputStyle: {
+    height: 40, fontSize: 18, fontFamily: 'OpenSans-Bold',
+    paddingVertical: 0, flex: 1, borderColor: 'red', borderWidth: 2
   }
 });
 
-export default PasswordField;
+export default InputField;

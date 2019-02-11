@@ -35,17 +35,18 @@ class InputField extends Component {
       fontFamily: 'OpenSans-Bold',
       top: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [6, -22],
+        outputRange: [5, -22],
       }),
       fontSize: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [18, 14],
+        outputRange: [18, 13],
       }),
       color: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
         outputRange: ['#7f8c8d', '#000'],
       }),
     };
+    
     return (
       <View style={containerStyle}>
         <Animated.Text style={labelStyle}>
@@ -54,24 +55,25 @@ class InputField extends Component {
         <TextInput
           {...props}
           selectionColor='#000000'
+          underlineColorAndroid='transparent'
           style={inputStyle}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
       </View>
     );
-  }
+  }add
 }
 
 const styles = StyleSheet.create({
   containerStyle: { 
-    paddingTop: 0, borderColor: '#00695C', borderWidth: 2, height: 42,
+    paddingTop: 0, borderColor: '#00695C', borderWidth: 2, height: 40,
     flexDirection: 'row', marginVertical: 10, borderRadius: 20,
     paddingHorizontal: 10
   },
   inputStyle: {
-    height: 40, fontSize: 18, fontFamily: 'OpenSans-Bold',
-    paddingVertical: 0, flex: 1
+    height: 38, fontSize: 18, fontFamily: 'OpenSans-Bold',
+    paddingVertical: 0, flex: 1,
   }
 });
 
