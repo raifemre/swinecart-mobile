@@ -36,8 +36,9 @@ class TextField extends Component {
   render() {
 
     const {
-      form, placeholder, field, editable, errorMessage
+      form, placeholder, field, editable
     } = this.props;
+
     const { inputStyle, containerStyle } = styles;
 
     const labelStyle = {
@@ -59,7 +60,7 @@ class TextField extends Component {
     };
 
     return (
-      <View style={{ marginVertical: 15 }}>
+      <View style={{ marginVertical: 10 }}>
         <View style={[{ borderColor: editable ? '#2d3436' : '#95a5a6' }, containerStyle]}>
           <Animated.Text style={labelStyle}>
             {placeholder}
@@ -76,10 +77,10 @@ class TextField extends Component {
           />
         </View>
         {
-          errorMessage 
+          form.errors[field] !== ''
             &&
           <View style={{ paddingLeft: 10 }}>
-            <TextWrapper text='Error' size={13} color='#db222a' />
+            <TextWrapper text={form.errors[field]} size={13} color='#db222a' />
           </View> 
         }
       </View>

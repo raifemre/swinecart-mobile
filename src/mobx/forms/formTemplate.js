@@ -15,27 +15,21 @@ import { Navigation } from '../../services';
 class LoginForm {
 
   defaultFormState = {
-    email: '',
-    password: ''
+    
   }
 
   formRules = {
-    email: {
-      email: true,
-    }
+
   }
 
   @observable loading = false;
 
   @observable form = {
-    // email: 'bwisoky@yahoo.com',
-    email: '',
-    password: 'secret12'
+
   }
 
   @observable errors = {
-    email: '',
-    password: ''
+
   }
 
   @action setValue(field, value) {
@@ -60,8 +54,8 @@ class LoginForm {
 
   @action validateFields(form) {
     const errors = validate(form, this.formRules);
-    
-    if(errors) {
+
+    if (errors) {
       for (const field in errors) {
         if (errors.hasOwnProperty(field)) {
           this.errors[field] = errors[field][0];
@@ -84,11 +78,11 @@ class LoginForm {
     try {
       const form = cleanFields(toJS(this.form));
       if (this.validateFields(form)) {
-        // await AuthStore.login(form);
+
       }
     }
     catch (error) {
-      showToast(error.message, 'danger', 'bottom');
+
     }
     runInAction(() => {
       this.loading = false;
