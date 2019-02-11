@@ -3,6 +3,8 @@ import { StyleSheet, TextInput, Animated } from 'react-native';
 import { observer } from 'mobx-react';
 import { View } from 'native-base';
 
+import TextWrapper from './TextWrapper';
+
 @observer
 class TextField extends Component {
 
@@ -33,7 +35,9 @@ class TextField extends Component {
 
   render() {
 
-    const { form, placeholder, field, editable } = this.props;
+    const {
+      form, placeholder, field, editable, errorMessage
+    } = this.props;
     const { inputStyle, containerStyle } = styles;
 
     const labelStyle = {
@@ -55,20 +59,29 @@ class TextField extends Component {
     };
 
     return (
-      <View style={[{ borderColor: editable ? '#2d3436' : '#95a5a6'}, containerStyle]}>
-        <Animated.Text style={labelStyle}>
-          {placeholder}
-        </Animated.Text>
-        <TextInput
-          onChangeText={this.onChangeText}
-          selectionColor='#2d3436'
-          value={form.form[field]}
-          underlineColorAndroid='transparent'
-          style={inputStyle}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          editable={editable}
-        />
+      <View style={{ marginVertical: 15 }}>
+        <View style={[{ borderColor: editable ? '#2d3436' : '#95a5a6' }, containerStyle]}>
+          <Animated.Text style={labelStyle}>
+            {placeholder}
+          </Animated.Text>
+          <TextInput
+            onChangeText={this.onChangeText}
+            selectionColor='#2d3436'
+            value={form.form[field]}
+            underlineColorAndroid='transparent'
+            style={inputStyle}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            editable={editable}
+          />
+        </View>
+        {
+          errorMessage 
+            &&
+          <View style={{ paddingLeft: 10 }}>
+            <TextWrapper text='Error' size={13} color='#db222a' />
+          </View> 
+        }
       </View>
     );
   }
@@ -77,7 +90,7 @@ class TextField extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     paddingTop: 0, borderWidth: 2, height: 40,
-    flexDirection: 'row', marginVertical: 10, borderRadius: 20,
+    flexDirection: 'row', borderRadius: 20,
     paddingHorizontal: 10
   },
   inputStyle: {
