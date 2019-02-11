@@ -24,7 +24,7 @@ import Segments from '../../../shared/Segments';
 class Profile extends Component {
 
   state = {
-    selectedIndex: 1
+    selectedIndex: 2
   }
 
   setIndex = index => {

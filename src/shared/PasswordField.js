@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Item, Input, Button } from 'native-base';
+import { StyleSheet, TextInput, Animated } from 'react-native';
 import { observer } from 'mobx-react';
+import { View, Button } from 'native-base';
 
 import IconWrapper from './IconWrapper';
 
@@ -8,37 +9,95 @@ import IconWrapper from './IconWrapper';
 class PasswordField extends Component {
 
   state = {
-    showPassword: false
+    isFocused: false,
+    hidePassword: true
   }
+
+  togglePassword = () => this.setState({ hidePassword: !this.state.hidePassword });
+
+  componentWillMount() {
+    const { form, field } = this.props;
+    this._animatedIsFocused = new Animated.Value(form.form[field] === '' ? 0 : 1);
+  }
+
+  componentDidUpdate() {
+    const { form, field } = this.props;
+    Animated.timing(this._animatedIsFocused, {
+      toValue: (this.state.isFocused || form.form[field] !== '') ? 1 : 0,
+      duration: 200,
+    }).start();
+  }
+
+  handleFocus = () => this.setState({ isFocused: true });
+  handleBlur = () => this.setState({ isFocused: false });
 
   onChangeText = value => {
     const { form, field } = this.props;
     form.setValue(field, value);
   }
 
-  togglePassword = () => {
-    this.setState(({ showPassword }) => ({ showPassword: !showPassword }));
-  }
 
   render() {
+
     const { form, placeholder, field } = this.props;
-    const { showPassword } = this.state;
+    const { inputStyle, containerStyle } = styles;
+    const { hidePassword } = this.state;
+
+    const labelStyle = {
+      position: 'absolute',
+      left: 10,
+      fontFamily: 'OpenSans-Bold',
+      top: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: [7, -22],
+      }),
+      fontSize: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: [16, 12],
+      }),
+      color: this._animatedIsFocused.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['#7f8c8d', '#000'],
+      }),
+    };
 
     return (
-      <Item>
-        <Input
-          placeholder={placeholder}
-          value={form.form[field]}
+      <View style={containerStyle}>
+        <Animated.Text style={labelStyle}>
+          {placeholder}
+        </Animated.Text>
+        <TextInput
           onChangeText={this.onChangeText}
-          secureTextEntry={!showPassword}
-          style={{ fontFamily: 'OpenSans-SemiBold' }}
+          selectionColor='#000000'
+          underlineColorAndroid='transparent'
+          style={inputStyle}
+          value={form.form[field]}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          secureTextEntry={hidePassword}
         />
-        <Button transparent onPress={this.togglePassword}>
-          <IconWrapper style={{ color: '#000000' }} name={!showPassword ? 'eye' : 'eye-off'} type='MaterialCommunityIcons' />
+        <Button transparent style={{ height: 38, paddingHorizontal: 0 }} onPress={this.togglePassword}>
+          <IconWrapper
+            type='MaterialCommunityIcons'
+            size={25}
+            name={hidePassword ? 'eye' : 'eye-off'}
+          />
         </Button>
-      </Item>
+      </View>
     );
-  }
+  } add
 }
+
+const styles = StyleSheet.create({
+  containerStyle: {
+    paddingTop: 0, borderColor: '#00695C', borderWidth: 2, height: 40,
+    flexDirection: 'row', marginVertical: 10, borderRadius: 20,
+    paddingHorizontal: 10
+  },
+  inputStyle: {
+    height: 38, fontSize: 16, fontFamily: 'OpenSans-Bold',
+    paddingVertical: 0, flex: 1,
+  }
+});
 
 export default PasswordField;
