@@ -8,17 +8,12 @@ import IconWrapper from '../../../shared/IconWrapper';
 import PrimaryButton from '../../../shared/PrimaryButton';
 import FlatButton from '../../../shared/FlatButton';
 import TextWrapper from '../../../shared/TextWrapper';
-
-import PasswordField from '../components/PasswordField';
-import TextField from '../components/TextField';
+import PasswordField from '../../../shared/PasswordField';
+import TextField from '../../../shared/TextField';
 
 @inject('LoginForm', 'AuthStore')
 @observer
 class Login extends Component {
-
-  state = {
-    text: '12321323'
-  }
 
   navigateToRegister = () =>  {
     this.props.navigation.navigate('Register');
