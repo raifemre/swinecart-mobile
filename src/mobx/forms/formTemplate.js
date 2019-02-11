@@ -15,7 +15,6 @@ import { Navigation } from '../../services';
 class LoginForm {
 
   defaultFormState = {
-    
   }
 
   formRules = {
