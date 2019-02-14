@@ -2,8 +2,6 @@ import {
   observable, action, runInAction, toJS
 } from 'mobx';
 
-import validate from 'validate.js';
-
 import { showToast, cleanFields, sleep } from '../../utils';
 
 import AuthStore from '../stores/AuthStore';
@@ -29,7 +27,8 @@ class LoginForm {
 
   @observable form = {
     // email: 'bwisoky@yahoo.com',
-    email: '',
+    email: 'coralie94@heaney.com',
+    // email: '',
     password: 'secret12'
   }
 
@@ -39,7 +38,7 @@ class LoginForm {
   }
 
   @action setValue(field, value) {
-    this.validateField(field, value);
+    // this.validateField(field, value);
     this.form[field] = value;
   }
 
@@ -59,22 +58,22 @@ class LoginForm {
   }
 
   @action validateFields(form) {
-    const errors = validate(form, this.formRules);
+    // const errors = validate(form, this.formRules);
     
-    if(errors) {
-      for (const field in errors) {
-        if (errors.hasOwnProperty(field)) {
-          this.errors[field] = errors[field][0];
-        }
-      }
-      return false;
-    }
+    // if(errors) {
+    //   for (const field in errors) {
+    //     if (errors.hasOwnProperty(field)) {
+    //       this.errors[field] = errors[field][0];
+    //     }
+    //   }
+    //   return false;
+    // }
 
-    for (const field in this.errors) {
-      if (this.errors.hasOwnProperty(field)) {
-        this.errors[field] = '';
-      }
-    }
+    // for (const field in this.errors) {
+    //   if (this.errors.hasOwnProperty(field)) {
+    //     this.errors[field] = '';
+    //   }
+    // }
 
     return true;
   }
@@ -84,7 +83,7 @@ class LoginForm {
     try {
       const form = cleanFields(toJS(this.form));
       if (this.validateFields(form)) {
-        // await AuthStore.login(form);
+        await AuthStore.login(form);
       }
     }
     catch (error) {

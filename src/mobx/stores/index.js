@@ -5,6 +5,7 @@ import ProductsStore from './ProductsStore';
 import MessageStore from './MessageStore';
 import NotificationStore from './NotificationStore';
 import DashboardStore from './DashboardStore';
+import ShopStore from './ShopStore';
 
 const stores = {
   AuthStore,
@@ -13,7 +14,8 @@ const stores = {
   ProductsStore,
   MessageStore,
   NotificationStore,
-  DashboardStore
+  DashboardStore,
+  ShopStore
 }
 
 export default stores;

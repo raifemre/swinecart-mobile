@@ -28,6 +28,19 @@ class OfficeInfoForm {
     contactPerson_mobile: '',
   }
 
+  @observable errors = {
+    officeAddress_addressLine1: '',
+    officeAddress_addressLine2: '',
+    officeAddress_province: '',
+    officeAddress_zipCode: '',
+    office_landline: '',
+    office_mobile: '',
+    website: '',
+    produce: '',
+    contactPerson_name: '',
+    contactPerson_mobile: '',
+  }
+
   @observable farm_addresses;
 
   @action setValue(field, value) {

@@ -6,6 +6,7 @@ import Messages from './messages';
 import Notifications from './notifications';
 import Profile from './profile';
 import Dashboard from './dashboard';
+import Shop from './shop';
 
 export {
   Auth,
@@ -14,5 +15,6 @@ export {
   Messages,
   Notifications,
   Profile,
+  Shop,
   Dashboard
 };

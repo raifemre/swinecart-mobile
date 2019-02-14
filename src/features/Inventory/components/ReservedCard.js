@@ -8,7 +8,6 @@ import {
 
 import { startCase } from 'lodash';
 import { observer, inject } from 'mobx-react';
-import AwesomeAlert from 'react-native-awesome-alert';
 
 import moment from 'moment';
 import { toJS } from 'mobx';
@@ -98,24 +97,6 @@ class ReservedCard extends Component {
 
     return (
       <React.Fragment>
-        <AwesomeAlert
-          ref={ref => (this.dateModal = ref)}
-          styles={{
-            modalContainer: { backgroundColor: 'rgba(49,49,49, 0.7)' },
-            titleText: {
-              fontSize: 16,
-              color: '#000000',
-              fontWeight: '900',
-              padding: 10,
-              alignSelf: 'center'
-            },
-            modalView: { 
-              marginBottom: 10,
-              borderRadius: 0,
-              backgroundColor: '#FFFFFF'
-            }
-          }}
-        />
         <Card style={[cardStyle]}>
           <CardItem>
             <Grid>

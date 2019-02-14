@@ -8,11 +8,13 @@ import Navigation from '../../services/navigation';
 import AuthChecker from '../../features/AuthChecker';
 
 import BreederTabNavigator from './BreederTabs';
+import CustomerStackNavigator from './CustomerTabs';
 import PublicStackNavigator from './PublicStack';
 
 const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
   Public: PublicStackNavigator,
+  Customer: CustomerStackNavigator,
   Breeder: BreederTabNavigator
 }, {
   initialRouteName: 'AuthChecker'
