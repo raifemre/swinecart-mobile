@@ -34,7 +34,7 @@ class Product extends Component {
           <ImageWrapper width={200} height={100} uri={img_path} />
         </View>
         <View style={{ flex: 1, paddingHorizontal: 8 }}>
-          <TextWrapper text={name} size={20} color='#000000' /> 
+          <TextWrapper text={name} size={18} color='#000000' /> 
           <TextWrapper text={`${type} - ${breed}`} size={12} color='#8E8E8E' /> 
           <TextWrapper text={`${age} days old`} size={12} color='#8E8E8E' /> 
         </View>

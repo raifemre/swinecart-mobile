@@ -23,19 +23,27 @@ class Products extends Component {
     this.setState({
       refreshing: true
     }, async () => {
+      await this.props.ShopStore.getProducts();
       this.setState({ refreshing: false });
     });
   };
-
+  
+  handleOnEndReached = () => {
+    this.props.ShopStore.getMoreProducts();
+  }
 
   render() {
-    const { ShopStore } = this.props;
     return (
       <FlatGrid
         itemDimension={130}
         spacing={16}
         items={this.props.ShopStore.products}
         renderItem={this.renderItem}
+        refreshing={this.state.refreshing}
+        onRefresh={this.handleOnRefresh}
+        initialNumToRender={6}
+        onEndReached={this.handleOnEndReached}
+        onEndReachedThreshold={0.01}
       />
     );
   }

@@ -34,7 +34,7 @@ class Shop extends Component {
             />
             <Right />
           </HeaderWrapper>
-          <View style={[contentStyle]}>
+          <View style={[contentStyle, { paddingTop: 16 }]}>
             <Products />
           </View>
         </Container>
