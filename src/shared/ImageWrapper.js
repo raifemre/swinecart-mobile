@@ -29,7 +29,7 @@ class ImageWrapper extends PureComponent {
 
     return (
       <FastImage
-        style={[{ width: props.width, height: props.height }, this.props.style]}
+        style={[{ width: props.width, height: props.height || height }, this.props.style]}
         onLoad={this.onLoad}
         source={{
           uri: uri,

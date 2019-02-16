@@ -14,7 +14,7 @@ const navigator = createStackNavigator({
   AddProduct: AddProduct,
   EditProduct: EditProduct,
   FilterProducts: FilterProducts,
-  ProductDetails: ProductDetails,
+  ProductDetailsBreeder: ProductDetails,
   ProductMedia: ProductMedia,
 }, {
     initialRouteName: 'Products',

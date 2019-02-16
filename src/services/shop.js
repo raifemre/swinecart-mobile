@@ -6,6 +6,9 @@ const service = {
   getProducts(page, perpage) {
     return API.get(`${URL_PREFIX}`, { page, perpage });
   },
+  getProductDetails(id) {
+    return API.get(`/breeder/products/${id}/details`);
+  }
 }
 
 export default service;

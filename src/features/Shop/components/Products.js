@@ -43,7 +43,7 @@ class Products extends Component {
         onRefresh={this.handleOnRefresh}
         initialNumToRender={6}
         onEndReached={this.handleOnEndReached}
-        onEndReachedThreshold={0.01}
+        onEndReachedThreshold={0.3}
       />
     );
   }

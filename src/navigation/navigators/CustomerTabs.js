@@ -24,6 +24,12 @@ MessagingStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+ShopStack.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarVisible: navigation.state.index > 0 ? false : true,
+  };
+};
+
 const navigator = createBottomTabNavigator({
   'Shop': {
     screen: ShopStack

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { View } from 'native-base';
 import CardView from 'react-native-cardview';
 
@@ -10,17 +10,21 @@ import OutlinedButton from '../../../shared/OutlinedButton';
 import IconWrapper from '../../../shared/IconWrapper';
 import FlatButton from '../../../shared/FlatButton';
 
+import Navigation from '../../../services/navigation';
+import { Shop } from '../../../services';
+
+@inject('ShopStore')
 @observer
 class Product extends Component {
 
-  navigateToProductDetails = () => {
-    const { product } = this.props;
-    console.log(product.id);
+  navigateToProductDetails = async () => {
+    const { product: { id },  ShopStore } = this.props;
+    const { product, rating } = await ShopStore.getProductDetails(id);
+    Navigation.navigate('ProductDetailsCustomer', { product, rating });
   }
 
   addToCart = () => {
     const { product } = this.props;
-    console.log(product.name);
   }
 
   render() {

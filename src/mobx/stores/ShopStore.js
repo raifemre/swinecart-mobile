@@ -13,6 +13,7 @@ class ShopStore {
   perpage = 8;
   @observable products = [];
 
+  @observable selectedProduct = null;
 
   @action async getProducts() {
     const { data: { error, data } } = await Shop.getProducts(1, this.perpage);
@@ -40,6 +41,28 @@ class ShopStore {
         if (products.length > 0) this.page = this.page + 1;
       });
     }
+  }
+
+  @action async getProductDetails(id) {
+    const { data: { error, data } } = await Shop.getProductDetails(id);
+    if (error) {
+      throw new Error(error);
+    }
+    else {
+      const { ratings, product } = data;
+      return { ratings, product };
+    }
+  }
+
+  @action setSelectedProduct(product) {
+    runInAction(() => {
+      this.selectedProduct = product;
+    });
+  }
+
+  @action async viewProductDetails(id) {
+    const { ratings, product } = await this.getProductDetails(id);
+    this.setSelectedProduct(product);
   }
 
 }
