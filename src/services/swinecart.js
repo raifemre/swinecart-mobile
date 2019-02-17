@@ -12,8 +12,8 @@ const service = {
   getItems() {
     return API.get(`${URL_PREFIX}items`);
   },
-  requestItem(id) {
-    return API.put(`${URL_PREFIX}items/${id}`);
+  requestItem(id, data) {
+    return API.put(`${URL_PREFIX}items/${id}`, { ...data });
   }
 }
 

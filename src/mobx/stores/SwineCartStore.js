@@ -2,9 +2,13 @@ import {
   observable, action, toJS, runInAction
 } from 'mobx';
 
+import { sortBy } from 'lodash';
+
+
 import {
   SwineCart
 } from '../../services';
+
 
 
 class SwineCartStore {
@@ -45,8 +49,10 @@ class SwineCartStore {
       console.log(error);
     }
     else {
+
+      const items = sortBy(data.items, 'request_status');
       runInAction(() => {
-        this.items = data;
+        this.items = items;
       });
     }
   }
@@ -65,8 +71,16 @@ class SwineCartStore {
     }
   }
 
-  @action async requestItem(id) {
-
+  @action async requestItem(id, request) {
+    console.log(id, request);
+    const { data: { error, data } } = await SwineCart.requestItem(id, request);
+    if (error) {
+      throw new Error(error);
+    }
+    else {
+      console.log(data);
+      this.getItems();
+    }
   }
 
 }

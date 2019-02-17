@@ -10,9 +10,11 @@ import NotificationsIcon from '../../shared/NotificationsIcon';
 import MessagingStack from './MessagingStack';
 import ProfileStack from './ProfileStack';
 import ShopStack from './ShopStack';
+import CartStack from './CartStack';
 
 const iconMapping = {
   Shop: 'shop',
+  Cart: 'shopping-cart',
   Dashboard: 'assessment',
   Messaging: 'message',
   Profile: 'account-circle'
@@ -33,6 +35,9 @@ ShopStack.navigationOptions = ({ navigation }) => {
 const navigator = createBottomTabNavigator({
   'Shop': {
     screen: ShopStack
+  },  
+  'Cart': {
+    screen: CartStack
   },
   // 'Messaging': {
   //   screen: MessagingStack
@@ -45,7 +50,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'Shop',
+  initialRouteName: 'Cart',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {
