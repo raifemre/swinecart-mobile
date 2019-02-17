@@ -13,7 +13,7 @@ import FlatButton from '../../../shared/FlatButton';
 import Navigation from '../../../services/navigation';
 import { Shop } from '../../../services';
 
-@inject('ShopStore')
+@inject('ShopStore', 'SwineCartStore')
 @observer
 class Product extends Component {
 
@@ -23,8 +23,9 @@ class Product extends Component {
     Navigation.navigate('ProductDetailsCustomer', { product, rating });
   }
 
-  addToCart = () => {
-    const { product } = this.props;
+  addToCart = async () => {
+    const { product, SwineCartStore } = this.props;
+    await SwineCartStore.addItem(product.id);
   }
 
   render() {

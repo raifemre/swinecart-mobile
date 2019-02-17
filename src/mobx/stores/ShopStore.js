@@ -53,18 +53,6 @@ class ShopStore {
       return { ratings, product };
     }
   }
-
-  @action setSelectedProduct(product) {
-    runInAction(() => {
-      this.selectedProduct = product;
-    });
-  }
-
-  @action async viewProductDetails(id) {
-    const { ratings, product } = await this.getProductDetails(id);
-    this.setSelectedProduct(product);
-  }
-
 }
 
 export default new ShopStore();

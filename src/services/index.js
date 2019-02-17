@@ -7,6 +7,7 @@ import Notifications from './notifications';
 import Profile from './profile';
 import Dashboard from './dashboard';
 import Shop from './shop';
+import SwineCart from './swinecart';
 
 export {
   Auth,
@@ -16,5 +17,6 @@ export {
   Notifications,
   Profile,
   Shop,
-  Dashboard
+  Dashboard,
+  SwineCart
 };
