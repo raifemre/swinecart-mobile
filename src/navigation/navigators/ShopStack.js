@@ -5,11 +5,13 @@ import {
 import Shop from '../../features/Shop';
 import SearchProduct from '../../features/SearchProduct';
 import ProductDetails from '../../features/ProductDetails';
+import FilterProductsCustomer from '../../features/FilterProductsCustomer';
 
 const navigator = createStackNavigator({
   SearchProduct: SearchProduct,
   Shop: Shop,
-  ProductDetailsCustomer: ProductDetails
+  ProductDetailsCustomer: ProductDetails,
+  FilterProductsCustomer: FilterProductsCustomer
 }, {
     initialRouteName: 'Shop',
     navigationOptions: ({ navigation }) => {

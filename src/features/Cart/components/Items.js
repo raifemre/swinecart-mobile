@@ -32,11 +32,13 @@ class Items extends Component {
     this.setState({
       refreshing: true
     }, async () => {
+      await this.props.SwineCartStore.getItems();
       this.setState({ refreshing: false });
     });
   };
 
   handleOnEndReached = () => {
+    this.props.SwineCartStore.getMoreItems();
   }
 
   render() {

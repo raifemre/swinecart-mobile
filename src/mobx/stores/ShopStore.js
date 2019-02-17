@@ -53,6 +53,16 @@ class ShopStore {
       return { ratings, product };
     }
   }
+
+  @action async filterProducts(types, breeds) {
+    const products = this.products.filter(({ type, breed }) => {
+      return types.find(t => t === type) || breeds.find(b => b === breed);
+    });
+    runInAction(() => {
+      this.products = products;
+    })
+  }
+
 }
 
 export default new ShopStore();

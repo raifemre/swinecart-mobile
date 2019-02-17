@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Container, View, Input, Item, Icon } from 'native-base';
+import { Container, View, Input, Item, Icon, Right } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
-import BackButton from '../../../shared/BackButton';
+import FlatButton from '../../../shared/FlatButton';
+import IconWrapper from '../../../shared/IconWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 import Products from '../components/Products';
@@ -25,6 +26,10 @@ class Shop extends Component {
     Navigation.navigate('SearchProduct');
   }
 
+  navigateToFilter = () => {
+    Navigation.navigate('FilterProductsCustomer');
+  }
+
   render() {
 
     const { contentStyle } = styles;
@@ -34,12 +39,17 @@ class Shop extends Component {
         <SpinnerWithOverlay visible={false} />
         <Container>
           <HeaderWrapper searchBar rounded>
-            <Item>
+            <Item style={{ flex: 3 }}>
               <Icon name='ios-search' />
               <Input placeholder='Search' onFocus={this.handleOnFocus}/>
             </Item>
+            <Right>
+              <FlatButton transparent onPress={this.navigateToFilter}>
+                <IconWrapper name='filter-list' color='#ffffff'/>
+              </FlatButton>
+            </Right>
           </HeaderWrapper>
-          <View style={[contentStyle, { paddingTop: 16 }]}>
+          <View style={[contentStyle, { paddingTop: 16, paddingBottom: 50 }]}>
             <Products />
           </View>
         </Container>
@@ -50,8 +60,6 @@ class Shop extends Component {
 
 const styles = StyleSheet.create({
   contentStyle: {
-    flex: 1,
-    backgroundColor: '#ecf0f1'
   },
 });
 

@@ -18,8 +18,7 @@ import { toJS } from 'mobx';
 @observer
 class Product extends Component {
 
-
-  requestItem = () => {
+  rateBreeder = () => {
 
   }
 
@@ -31,10 +30,23 @@ class Product extends Component {
   render() {
     const { container } = styles;
     const { item } = this.props;
-    const { breeder, product_breed, product_name, product_type, img_path, request_status, request_quantity } = item;
+    console.log(toJS(item));
+    const { breeder, product_breed, product_name, product_type, img_path, request_status, request_quantity, status } = item;
     
     return (
-      null
+      <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={5} style={{ height: 250, backgroundColor: '#00695C' }}>
+        <View style={[container]}>
+          <ImageWrapper width={200} height={100} uri={img_path} />
+        </View>
+        <View style={{ flex: 1, paddingHorizontal: 8 }}>
+          <TextWrapper text={product_name} size={18} color='#ffffff' />
+          <TextWrapper text={`${product_type} - ${product_breed}`} size={12} color='#ffffff' />
+          <TextWrapper text={breeder} size={12} color='#ffffff' />
+          <TextWrapper text={`Quantity - ${request_quantity}`} size={12} color='#ffffff' />
+        </View>
+        <View style={{ flex: 1, justifyContent: 'flex-end', padding: 8, marginTop: 8 }}>
+        </View>
+      </CardView>
     );
   }
 }
