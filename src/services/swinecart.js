@@ -9,8 +9,8 @@ const service = {
   deleteItem(id) {
     return API.delete(`${URL_PREFIX}items/${id}`);
   },
-  getItems() {
-    return API.get(`${URL_PREFIX}items`);
+  getItems(page, perpage) {
+    return API.get(`${URL_PREFIX}items`, { page, perpage });
   },
   requestItem(id, data) {
     return API.put(`${URL_PREFIX}items/${id}`, { ...data });

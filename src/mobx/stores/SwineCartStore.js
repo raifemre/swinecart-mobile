@@ -9,7 +9,7 @@ import {
   SwineCart
 } from '../../services';
 
-
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 class SwineCartStore {
 
@@ -21,7 +21,11 @@ class SwineCartStore {
   @action async addItem(id) {
     const { data: { error, data } } = await SwineCart.addItem(id);
     if(error) {
-      console.log(error);
+      showMessage({
+        message: 'Error',
+        description: error,
+        type: 'danger',
+      });
     }
     else {
       const { item } = data;
@@ -52,6 +56,7 @@ class SwineCartStore {
 
       const items = sortBy(data.items, 'request_status');
       runInAction(() => {
+        this.page = 1;
         this.items = items;
       });
     }
@@ -63,8 +68,9 @@ class SwineCartStore {
       throw new Error(error);
     }
     else {
-      const { count, items } = data;
       runInAction(() => {
+        const items = sortBy([...this.items, ...data.items], 'request_status');
+        this.items = [];
         this.items.push(...items);
         if (items.length > 0) this.page = this.page + 1;
       });

@@ -13,6 +13,7 @@ import FlatButton from '../../../shared/FlatButton';
 import Navigation from '../../../services/navigation';
 import { Shop } from '../../../services';
 import { toJS } from 'mobx';
+import moment from 'moment';
 
 @inject('ShopStore', 'SwineCartStore')
 @observer
@@ -30,8 +31,7 @@ class Product extends Component {
   render() {
     const { container } = styles;
     const { item } = this.props;
-    console.log(toJS(item));
-    const { breeder, product_breed, product_name, product_type, img_path, request_status, request_quantity, status } = item;
+    const { breeder, product_breed, product_name, product_type, img_path, request_status, request_quantity, status, status_transactions } = item;
     
     return (
       <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={5} style={{ height: 250, backgroundColor: '#00695C' }}>
@@ -43,8 +43,20 @@ class Product extends Component {
           <TextWrapper text={`${product_type} - ${product_breed}`} size={12} color='#ffffff' />
           <TextWrapper text={breeder} size={12} color='#ffffff' />
           <TextWrapper text={`Quantity - ${request_quantity}`} size={12} color='#ffffff' />
+          <TextWrapper text={moment(status_transactions[status]).format('MMM Do YYYY, h:mm a')} size={12} color='#ffffff' />
         </View>
         <View style={{ flex: 1, justifyContent: 'flex-end', padding: 8, marginTop: 8 }}>
+          {
+            status === 'sold'
+              ? 
+              <IconWrapper name='local-offer' color='#ffffff' />
+              : 
+                <View style={{ flexDirection: 'row' }}>
+                  <IconWrapper name='queue' color={status === 'requested' ? '#ffffff' : '#bdbdbd'} />
+                  <IconWrapper name='save' color={status === 'reserved' ? '#ffffff' : '#bdbdbd'} />
+                  <IconWrapper name='local-shipping' color={status === 'on_delivery' ? '#ffffff' : '#bdbdbd'} />
+                </View>
+          }
         </View>
       </CardView>
     );

@@ -6,7 +6,7 @@ import { Root } from 'native-base';
 import RootNavigator from './navigation/navigators';
 
 import StyleProviderWrapper from './shared/StyleProviderWrapper';
-
+import FlashMessage from "react-native-flash-message";
 import stores from './mobx/stores';
 import forms from './mobx/forms';
 
@@ -19,5 +19,6 @@ export default () => (
         <RootNavigator />
       </StyleProviderWrapper>  
     </Provider>
+    <FlashMessage position='bottom' />
   </Root>
 );

@@ -38,7 +38,7 @@ class Items extends Component {
   };
 
   handleOnEndReached = () => {
-    this.props.SwineCartStore.getMoreItems();
+    // this.props.SwineCartStore.getMoreItems();
   }
 
   render() {
