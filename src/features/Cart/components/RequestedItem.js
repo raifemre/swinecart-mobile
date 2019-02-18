@@ -31,7 +31,7 @@ class Product extends Component {
   render() {
     const { container } = styles;
     const { item } = this.props;
-    const { breeder, product_breed, product_name, product_type, img_path, request_status, request_quantity, status, status_transactions } = item;
+    const { breeder, product_breed, product_name, product_type, img_path, delivery_date, request_quantity, status, status_transactions } = item;
     
     return (
       <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={5} style={{ height: 250, backgroundColor: '#00695C' }}>
@@ -43,7 +43,8 @@ class Product extends Component {
           <TextWrapper text={`${product_type} - ${product_breed}`} size={12} color='#ffffff' />
           <TextWrapper text={breeder} size={12} color='#ffffff' />
           <TextWrapper text={`Quantity - ${request_quantity}`} size={12} color='#ffffff' />
-          <TextWrapper text={moment(status_transactions[status]).format('MMM Do YYYY, h:mm a')} size={12} color='#ffffff' />
+          {status !== 'on_delivery' && <TextWrapper text={moment(status_transactions[status]).format('MMM Do YYYY, h:mm a')} size={12} color='#ffffff' /> }
+          {status === 'on_delivery' && <TextWrapper text={`Expected to arrive on ${delivery_date}`} size={12} color='#ffffff' />}
         </View>
         <View style={{ flex: 1, justifyContent: 'flex-end', padding: 8, marginTop: 8 }}>
           {

@@ -37,7 +37,7 @@ class ProductDetails extends Component {
     const product = navigation.getParam('product');
     const { 
       name, breed, type, imageCollection, adg, fcr, backfat_thickness,
-      breeder, birthdate, farm_province, other_details
+      breeder, birthdate, farm_province, other_details, img_path
     } = product;
     const details = other_details.split(',');
     return (
