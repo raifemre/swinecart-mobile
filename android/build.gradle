@@ -9,8 +9,8 @@ buildscript {
         supportLibVersion = "27.1.1"
     }
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
@@ -22,8 +22,7 @@ buildscript {
 
 allprojects {
     repositories {
-				// Add jitpack repository (added by react-native-spinkit)
-				maven { url "https://jitpack.io" }
+        maven { url "https://jitpack.io" }
         mavenLocal()
         jcenter()
         maven {
