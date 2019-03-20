@@ -3,8 +3,9 @@ import API from './api';
 const URL_PREFIX = '/auth'
 
 const service = {
-  login({ email, password }) {
-    return API.post(`${URL_PREFIX}/login`, { email, password });
+  async login({ email, password }) {
+    const { data } = await API.post(`${URL_PREFIX}/login`, { email, password });
+    return data;
   },
   me() {
     return API.get(`${URL_PREFIX}/me`);

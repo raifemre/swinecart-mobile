@@ -12,23 +12,21 @@ const instance = apisauce.create({
   baseURL: API_URL,
   timeout: 3000,
   headers: {
-    'Accept-Encoding': 'gzip',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
+    // 'Accept-Encoding' : 'gzip'
   }
 });
 
 instance.addRequestTransform(request => {
   const token = CommonStore.token;
   const data = `Bearer ${token}`;
-  request.headers['Authorization'] = token ? data : '';
-})
+  request.headers['Authorization'] = token ? data : null;
+});
 
 instance.addResponseTransform(response => {
 
   const { ok, problem, status } = response;
   const { config, ...res } = response;
-  // console.dir(res);
+  // console.dir(response);
 
   if(!ok) {
     if(problem === 'NETWORK_ERROR') {
@@ -39,13 +37,11 @@ instance.addResponseTransform(response => {
       if(status === 401) {
         Navigation.navigate('Login');
       }
+      console.log(res);
     }
   }
-  else {
-
-  }
   
-})
+});
 
 instance.addMonitor(({ config: request, ...response }) => {
   const { headers: reqHeaders, data: reqData, url: endpoint } = request;
@@ -54,7 +50,7 @@ instance.addMonitor(({ config: request, ...response }) => {
   // console.dir('Request Headers: ', reqHeaders);
   // console.dir('Request Token:', reqHeaders.Authorization);
   // console.dir('Request Data: ', reqData);
-  console.dir(resDuration, 'Request Endpoint:', endpoint);
+  // console.dir(resDuration, 'Request Endpoint:', endpoint);
 
   // console.dir('Response Headers: ', resHeaders);
   // console.dir('Response Data: ', resData);

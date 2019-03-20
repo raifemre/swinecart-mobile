@@ -6,7 +6,7 @@ import {
 import {
   Container,
   Content
-} from 'native-base'
+} from 'native-base';
 import Spinner from 'react-native-spinkit';
 
 import {
@@ -24,7 +24,6 @@ class AuthChecker extends Component {
   }
 
   checkToken = async () => {
-    
     const token = await AsyncStorage.getItem('token');
     try {
       if (token) {
@@ -34,14 +33,15 @@ class AuthChecker extends Component {
         Navigation.navigate('Public');
       }
     }
-    catch(e) {
+    catch(error) {
+      console.log(error);
     }
   }
 
   render() {
     return (
       <Container style={{ flex: 1 }}>
-        <Content contentContainerStyle={[styles.container]}>
+        <Content contentContainerStyle={styles.container}>
           <Spinner
             type='ThreeBounce'
             color='#ffffff'

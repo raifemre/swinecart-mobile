@@ -1,25 +1,19 @@
 import {
-  observable, action, toJS, autorun, runInAction, computed
+  observable, action, runInAction, computed
 } from 'mobx';
 
 import {
-  Auth, Profile
+  Auth, BreederProfile
 } from '../../services';
 
-import BreederProfile from '../models/BreederProfile';
-import Farm from '../models/Farm';
 class UserStore {
 
-  @observable user;
-  @observable loadinguser;
-  @observable updatingUser;
-  @observable breederProfile = new BreederProfile();
-  @observable provinces = [];
-  @observable farms = [];
+  @observable user = null;
 
   @action async getUser() {
     const { data: { error, data }  } = await Auth.me();
     if(error) {
+      console.log(error);
     }
     else {
       const { user } = data;
@@ -39,13 +33,14 @@ class UserStore {
   }
 
   @action async getProfile() {
-    if(this.userRole === 'Breeder') {
-      const { data: { data: { breeder, farmAddresses, provinces } } } = await Profile.getProfile();
-      runInAction(() => {
-        this.breederProfile = new BreederProfile(breeder);
-        this.provinces = provinces;
-        this.farms = farmAddresses.map(f => new Farm(f));
-      });
+    if (this.userRole === 'Breeder') {
+      try {
+        const { data: { data } } = await BreederProfile.getProfile();
+      // console.log(data);
+      }
+      catch (e) {
+        console.log(e);
+      }
     }
   }
 
@@ -60,9 +55,6 @@ class UserStore {
     }
     return undefined;
   }
-
-  // reactToUserChange = autorun(() => { console.log('User:', toJS(this.user)) });
-
 }
 
 export default new UserStore();

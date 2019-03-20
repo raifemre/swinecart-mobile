@@ -11,15 +11,14 @@ import UserStore from './UserStore';
 import NotificationStore from './NotificationStore';
 import MessageStore from './MessageStore';
 
-import { sleep } from '../../utils';
-
 class AuthStore {
 
   @observable loadingLogin = false;
   @observable loadingLogout = false;
 
   @action async login(form) {
-    const { data: { error, data } } = await Auth.login(form);
+    const { error, data }  = await Auth.login(form);
+
     if(error) {
       throw new Error(error);
     }
