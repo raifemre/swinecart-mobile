@@ -21,7 +21,7 @@ import { Navigation } from '../../../services';
 class ManageProducts extends Component {
 
   componentDidMount() {
-    this.props.ProductsStore.getProducts();
+    // this.props.ProductsStore.getProducts();
   }
 
   navigateToAdd = () => {  
@@ -52,7 +52,7 @@ class ManageProducts extends Component {
         </HeaderWrapper>
         <View style={[contentStyle, { backgroundColor: '#F2F2F2' }]}>
           {
-            <Products />
+            // <Products />
           }
         </View>
       </Container>

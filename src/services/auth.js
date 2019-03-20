@@ -7,8 +7,9 @@ const service = {
     const { data } = await API.post(`${URL_PREFIX}/login`, { email, password });
     return data;
   },
-  me() {
-    return API.get(`${URL_PREFIX}/me`);
+  async me() {
+    const { data } = await API.get(`${URL_PREFIX}/me`);
+    return data;
   },
   logout() {
     return API.post(`${URL_PREFIX}/logout`);

@@ -12,8 +12,8 @@ class UserStore {
   @observable user = null;
 
   @action async getUser() {
-    const { data: { error, data } } = await Auth.me();
-    if(error) {
+    const { error, data } = await Auth.me();
+    if (error) {
       console.log(error);
     }
     else {
@@ -25,7 +25,9 @@ class UserStore {
   }
   
   @action forgetUser() {
-    this.user = undefined;
+    runInAction(() => {
+      this.user = undefined;
+    });
   }
 
   @action async changePassword(form) {
@@ -41,18 +43,6 @@ class UserStore {
     }
     else {
       return { message, data };
-    }
-  }
-
-  @action async getProfile() {
-    if (this.userRole === 'Breeder') {
-      try {
-        const { data: { data } } = await BreederProfile.getProfile();
-      // console.log(data);
-      }
-      catch (e) {
-        console.log(e);
-      }
     }
   }
 

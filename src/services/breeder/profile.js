@@ -7,7 +7,8 @@ const service = {
     return data;
   },
   async getProfile() {
-    return API.get(`${URL_PREFIX}/`);
+    const { data } = await API.get(`${URL_PREFIX}/`);
+    return data;
   },
   updateProfile(data) {
     return API.post(`${URL_PREFIX}/update-personal`, data);

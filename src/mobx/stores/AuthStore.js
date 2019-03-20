@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction
+  observable, action, runInAction
 } from 'mobx';
 
 import {
@@ -10,6 +10,7 @@ import CommonStore from './CommonStore';
 import UserStore from './UserStore';
 import NotificationStore from './NotificationStore';
 import MessageStore from './MessageStore';
+import ProfileStore from './ProfileStore';
 
 class AuthStore {
 
@@ -43,9 +44,9 @@ class AuthStore {
   @action async loginFlow(token) {
     await CommonStore.setToken(token);
     await UserStore.getUser();
-    await UserStore.getProfile();
-    // // initChat();
-    // // await initNotifications();
+    await ProfileStore.getProfile();
+    // initChat();
+    // await initNotifications();
     Navigation.navigate(UserStore.userRole);
   }
 

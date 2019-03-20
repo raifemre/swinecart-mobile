@@ -7,6 +7,7 @@ import NotificationStore from './NotificationStore';
 import DashboardStore from './DashboardStore';
 import ShopStore from './ShopStore';
 import SwineCartStore from './SwineCartStore';
+import ProfileStore from './ProfileStore';
 
 const stores = {
   AuthStore,
@@ -17,7 +18,8 @@ const stores = {
   NotificationStore,
   DashboardStore,
   ShopStore,
-  SwineCartStore
+  SwineCartStore,
+  ProfileStore,
 }
 
 export default stores;
