@@ -14,14 +14,14 @@ import BodyWrapper from '../../../shared/BodyWrapper';
 import FlatButton from '../../../shared/FlatButton';
 import IconWrapper from '../../../shared/IconWrapper';
 
-import { Navigation } from '../../../services';
+import Navigation from '../../../services';
 
 @inject('ProductsStore')
 @observer
 class ManageProducts extends Component {
 
   componentDidMount() {
-    // this.props.ProductsStore.getProducts();
+    this.props.ProductsStore.getProducts();
   }
 
   navigateToAdd = () => {  
@@ -51,9 +51,7 @@ class ManageProducts extends Component {
           </Right>
         </HeaderWrapper>
         <View style={viewStyle}>
-          {
-            // <Products />
-          }
+          <Products />
         </View>
       </Container>
     );

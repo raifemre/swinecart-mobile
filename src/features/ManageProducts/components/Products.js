@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 
 import Product from './Product';
 
-@inject('ProductsStore', 'UserStore')
+@inject('ProductsStore')
 @observer
 class Products extends Component {
 
@@ -27,7 +27,7 @@ class Products extends Component {
     });
   };
 
-  getMoreProducts = async ({ distanceFromEnd }) => {
+  getMoreProducts = async () => {
     await this.props.ProductsStore.getMoreProducts();
   }
 
@@ -37,13 +37,13 @@ class Products extends Component {
 
     return (
       <FlatList
-        data={ProductsStore._products}
+        data={ProductsStore.products}
         renderItem={this.renderProduct}
         keyExtractor={product => `${product.id}`}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
         onEndReached={this.getMoreProducts}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.5}
       />
     );
   }
