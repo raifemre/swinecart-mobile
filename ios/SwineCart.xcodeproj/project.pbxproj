@@ -66,6 +66,10 @@
 		EE80D74DA9004B0DA6B3F619 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE8FDE4747CF49E6B5DB0126 /* libFastImage.a */; };
 		C0C3C510BB074A2AA87DCB4B /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDB9FD57C7F4F729032C033 /* libRNSVG.a */; };
 		6683A21DB2EF473AADAC15F7 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB84E162A2C44C3F9A40FBF3 /* libRNSVG-tvOS.a */; };
+		C6C53F7B03D040A5A7A672A4 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 511462E49A63423DBF660CA0 /* AntDesign.ttf */; };
+		ED85ADD6DC7C4A0686A6583A /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBEBE2793B21401890905068 /* FontAwesome5_Brands.ttf */; };
+		6A9BECBD6E624A818DFC63AC /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4471EEBC7BB436A95A5DD1B /* FontAwesome5_Regular.ttf */; };
+		440B28A711904207B1B9D0D2 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C88C091EB40E46178F2CE940 /* FontAwesome5_Solid.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +408,10 @@
 		AE257A0C183F44BE834410C7 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		DCDB9FD57C7F4F729032C033 /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		AB84E162A2C44C3F9A40FBF3 /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		511462E49A63423DBF660CA0 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BBEBE2793B21401890905068 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D4471EEBC7BB436A95A5DD1B /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C88C091EB40E46178F2CE940 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -701,6 +709,10 @@
 				08777E8C173942A282AF6F91 /* OpenSans-Regular.ttf */,
 				A9416A1B471340D0915A0831 /* OpenSans-SemiBold.ttf */,
 				EF5E8A32D8EA42B9A567B37F /* OpenSans-SemiBoldItalic.ttf */,
+				511462E49A63423DBF660CA0 /* AntDesign.ttf */,
+				BBEBE2793B21401890905068 /* FontAwesome5_Brands.ttf */,
+				D4471EEBC7BB436A95A5DD1B /* FontAwesome5_Regular.ttf */,
+				C88C091EB40E46178F2CE940 /* FontAwesome5_Solid.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1176,6 +1188,10 @@
 				C5EBE3E78DEC406FBDCCEF58 /* OpenSans-Regular.ttf in Resources */,
 				F2A63393E429475FB5352A73 /* OpenSans-SemiBold.ttf in Resources */,
 				B165D314191647EAA12CE417 /* OpenSans-SemiBoldItalic.ttf in Resources */,
+				C6C53F7B03D040A5A7A672A4 /* AntDesign.ttf in Resources */,
+				ED85ADD6DC7C4A0686A6583A /* FontAwesome5_Brands.ttf in Resources */,
+				6A9BECBD6E624A818DFC63AC /* FontAwesome5_Regular.ttf in Resources */,
+				440B28A711904207B1B9D0D2 /* FontAwesome5_Solid.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

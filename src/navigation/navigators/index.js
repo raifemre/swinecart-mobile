@@ -14,7 +14,7 @@ import PublicStackNavigator from './PublicStack';
 const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
   Public: PublicStackNavigator,
-  Customer: CustomerStackNavigator,
+  // Customer: CustomerStackNavigator,
   Breeder: BreederTabNavigator
 }, {
   initialRouteName: 'AuthChecker'
