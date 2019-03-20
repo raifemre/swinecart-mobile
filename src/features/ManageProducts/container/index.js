@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { 
-  Container, View, Icon, Left, Button, Right
+  Container, View, Left, Right
 } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
@@ -33,24 +33,24 @@ class ManageProducts extends Component {
   }
 
   render() {
-    const { contentStyle } = styles;
+    const { contentStyle, viewStyle } = styles;
 
     return (
       <Container>
         <HeaderWrapper>
-          <Left style={[contentStyle]}>
+          <Left style={contentStyle}>
             <FlatButton transparent onPress={this.navigateToAdd}>
-              <IconWrapper name='add' />
+              <IconWrapper name='add' color='#FFFFFF' />
             </FlatButton>
           </Left>
           <BodyWrapper title='Manage Products' />
-          <Right style={[contentStyle]}>
+          <Right style={contentStyle}>
             <FlatButton transparent onPress={this.navigateToFilter}>
-              <IconWrapper name='filter-list' />
+              <IconWrapper name='filter-list' color='#FFFFFF' />
             </FlatButton>
           </Right>
         </HeaderWrapper>
-        <View style={[contentStyle, { backgroundColor: '#F2F2F2' }]}>
+        <View style={viewStyle}>
           {
             // <Products />
           }
@@ -65,8 +65,9 @@ const styles = StyleSheet.create({
   contentStyle: {
     flex: 1,
   },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
+  viewStyle: {
+    flex: 1,
+    backgroundColor: '#F2F2F2'
   }
 });
 
