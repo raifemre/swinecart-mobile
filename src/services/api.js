@@ -2,7 +2,6 @@ import apisauce from 'apisauce';
 import { API_URL } from 'react-native-dotenv';
 
 import CommonStore from '../mobx/stores/CommonStore';
-import UserStore from '../mobx/stores/UserStore';
 
 import Navigation from './navigation';
 
@@ -50,7 +49,7 @@ instance.addMonitor(({ config: request, ...response }) => {
   // console.dir('Request Headers: ', reqHeaders);
   // console.dir('Request Token:', reqHeaders.Authorization);
   // console.dir('Request Data: ', reqData);
-  // console.dir(resDuration, 'Request Endpoint:', endpoint);
+  console.dir(resDuration, 'Request Endpoint:', endpoint);
 
   // console.dir('Response Headers: ', resHeaders);
   // console.dir('Response Data: ', resData);

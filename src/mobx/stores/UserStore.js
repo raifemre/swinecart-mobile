@@ -5,7 +5,6 @@ import {
 import {
   Auth, BreederProfile
 } from '../../services';
-
 class UserStore {
 
   @observable user = null;
