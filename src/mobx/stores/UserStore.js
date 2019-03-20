@@ -5,12 +5,14 @@ import {
 import {
   Auth, BreederProfile
 } from '../../services';
+
+import { transformChangePass } from '../../utils';
 class UserStore {
 
   @observable user = null;
 
   @action async getUser() {
-    const { data: { error, data }  } = await Auth.me();
+    const { data: { error, data } } = await Auth.me();
     if(error) {
       console.log(error);
     }
@@ -26,9 +28,20 @@ class UserStore {
     this.user = undefined;
   }
 
-  @action async changePassword({ currentPassword, newPassword, newPasswordConfirmation }) {
-    const { data } = await Profile.changePassword({ currentPassword, newPassword, newPasswordConfirmation });
-    return data;
+  @action async changePassword(form) {
+    const { error, message, data } = await BreederProfile.changePassword(transformChangePass(form));
+    if (error) {
+      const { current_password } = error;
+      if(current_password) {
+        throw new Error(current_password[0]);
+      }
+      else {
+        throw new Error('Something happened!');
+      }
+    }
+    else {
+      return { message, data };
+    }
   }
 
   @action async getProfile() {

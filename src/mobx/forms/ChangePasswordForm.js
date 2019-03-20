@@ -20,7 +20,7 @@ class ChangePasswordForm {
   @observable loading = false;
 
   @observable form = {
-    currentPassword: 'secret12',
+    currentPassword: 'secret121',
     newPassword: 'secret12',
     newPasswordConfirmation: 'secret12'
   }
@@ -82,23 +82,15 @@ class ChangePasswordForm {
     this.loading = true;
     try {
       const form = this.cleanForm();
-      if (this.validateFields(form)) {
+      // if (this.validateFields(form)) {
         const { message } = await UserStore.changePassword(form);
+        // await UserStore.changePassword(form);
         showToast(message, 'success', 'bottom');
-        this.resetForm();
-      }
+        // this.resetForm();
+      // }
     }
-    catch(e) {
-      const { data } = e;
-      if(data) {
-        const { current_password } = data;
-        if(current_password) {
-          showToast(current_password[0], 'danger', 'bottom');
-        }
-      }
-      else {
-        console.log(e);
-      }
+    catch(err) {
+      showToast(err.message, 'danger', 'bottom');
     }
     runInAction(() => {
       this.loading = false;

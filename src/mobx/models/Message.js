@@ -1,6 +1,5 @@
 import uuid from 'react-native-uuid';
 import UserStore from '../stores/UserStore';
-import MessageStore from '../stores/MessageStore';
 
 class Message {
 

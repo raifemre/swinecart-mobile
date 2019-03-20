@@ -2,15 +2,11 @@ import API from '../api';
 const URL_PREFIX = `/breeder/profile`;
 
 const service = {
-  changePassword({ currentPassword, newPassword, newPasswordConfirmation }) {
-    const data = {
-      current_password: currentPassword,
-      new_password: newPassword,
-      new_password_confirmation: newPasswordConfirmation
-    }
-    return API.post(`${URL_PREFIX}/change-password`, data);
+  async changePassword(requestData) {
+    const { data } = await API.patch(`${URL_PREFIX}/password`, requestData);
+    return data;
   },
-  getProfile() {
+  async getProfile() {
     return API.get(`${URL_PREFIX}/`);
   },
   updateProfile(data) {

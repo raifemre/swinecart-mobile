@@ -36,7 +36,6 @@ instance.addResponseTransform(response => {
       if(status === 401) {
         Navigation.navigate('Login');
       }
-      console.log(res);
     }
   }
   
@@ -68,6 +67,9 @@ const api = {
   },
   put(url, data = {}, options = {}) {
     return instance.put(url, data, options);
+  },
+  patch(url, data = {}, options = {}) {
+    return instance.patch(url, data, options);
   }
 };
 

@@ -32,3 +32,13 @@ export function cleanFields(form) {
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export function transformChangePass({ currentPassword, newPassword, newPasswordConfirmation }) {
+  const request = {
+    current_password: currentPassword,
+    new_password: newPassword,
+    new_password_confirmation: newPasswordConfirmation
+  }
+
+  return request;
+}
