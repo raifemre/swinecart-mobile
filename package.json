@@ -15,7 +15,7 @@
     "mobx-react": "5.2.8",
     "moment": "2.22.2",
     "native-base": "2.12.1",
-    "prop-types": "^15.7.2",
+    "prop-types": "15.7.2",
     "react": "16.6.3",
     "react-native": "0.57.8",
     "react-native-cardview": "2.0.2",
@@ -67,23 +67,5 @@
     "assets": [
       "./src/assets/fonts/"
     ]
-  },
-  "detox": {
-    "test-runner": "jest",
-    "runner-config": "e2e/config.json",
-    "configurations": {
-      "android.emu.debug": {
-        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
-        "type": "android.emulator",
-        "name": "Nexus_5X_API_23"
-      },
-      "android.emu.release": {
-        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
-        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
-        "type": "android.emulator",
-        "name": "Nexus_5X_API_23"
-      }
-    }
   }
 }
