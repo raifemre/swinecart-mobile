@@ -14,7 +14,7 @@ import BodyWrapper from '../../../shared/BodyWrapper';
 import FlatButton from '../../../shared/FlatButton';
 import IconWrapper from '../../../shared/IconWrapper';
 
-import Navigation from '../../../services';
+import { Navigation } from '../../../services';
 
 @inject('ProductsStore')
 @observer
