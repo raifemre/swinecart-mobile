@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatGrid } from 'react-native-super-grid';
 import { observer, inject } from 'mobx-react';
-import Product from './Product';
+import ProductContainer from './ProductContainer';
 
 @inject('ProductsStore')
 @observer
@@ -13,7 +13,7 @@ class Products extends Component {
 
   renderProduct = ({ item }) => {
     return (
-      <Product product={item} />
+      <ProductContainer product={item} />
     );
   }
 
@@ -35,10 +35,10 @@ class Products extends Component {
     const { ProductsStore } = this.props;
 
     return (
-      <FlatList
-        data={ProductsStore.products}
+      <FlatGrid
+        itemDimension={150}
+        items={ProductsStore.products}
         renderItem={this.renderProduct}
-        keyExtractor={product => `${product.id}`}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
         onEndReached={this.getMoreProducts}

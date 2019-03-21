@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 
-import { Card, CardItem, Badge, View, Thumbnail, Left } from 'native-base';
+import { Card, CardItem, Button, View, Thumbnail, Left, Body } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
@@ -15,42 +15,44 @@ import StatusBadge from './StatusBadge';
 @observer
 class Product extends Component {
 
+  state = {
+    selected : false
+  }
+
+  onPress = () => {
+    this.setState({
+      selected: !this.state.selected
+    });
+  }
+
   render() {
 
     const { cardStyle, padding4 } = styles;
-    const { product } = this.props;
+    const { product, onPressMore } = this.props;
 
     const { 
       id, name, breed, type, img_path, age, status
     } = product;
 
     return (
-      <View style={{ paddingHorizontal: 4 }}>
-        <Card style={cardStyle} >
-          <CardItem style={padding4}>
-            <Left>
-              <Thumbnail square large source={{ uri: img_path }} />
-            </Left>
-            <View style={{ flex: 4, marginLeft: 16 }}>
-              <View style={{ flexDirection: 'row', }}>
-                <TextWrapper
-                  text={name} font='OpenSans-Bold' color={'#000000'} size={16}
-                />
-                <StatusBadge status={status} />
-              </View>
-              <TextWrapper
-                text={`${type} - ${breed}`} font='OpenSans-SemiBold' color={'#7f8c8d'} size={12}
-              />
-              <TextWrapper
-                text={`${age} days old`} font='OpenSans-SemiBold' color={'#7f8c8d'} size={12}
-              />
-            </View>
-            <View>
-              <IconWrapper name='more-vert' color='#000000' />
-            </View>
-          </CardItem>
-        </Card>
-      </View>
+      <Card style={cardStyle}>
+        <CardItem style={[padding4]}>
+          <Image source={{ uri: img_path }} resizeMode='stretch' style={{ height: 100, width: 150, flex: 1, alignSelf: 'center', borderRadius: 5}} />
+        </CardItem>
+        <CardItem style={[padding4]}>
+          <Body>
+            <TextWrapper
+              text={name} font='OpenSans-Bold' color={'#000000'} size={16}
+            />
+            <TextWrapper
+              text={`${type} - ${breed}`} font='OpenSans-SemiBold' color={'#7f8c8d'} size={12}
+            />
+            <TextWrapper
+              text={`${age} days old`} font='OpenSans-SemiBold' color={'#7f8c8d'} size={12}
+            />
+          </Body>
+        </CardItem>
+      </Card>
     );
   }
 }
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     borderColor: '#f7f7f7',
     shadowColor: '#f7f7f7',
     shadowRadius: 0.1,
-    elevation: 1
+    elevation: 1,
   },
   padding4: {
     paddingTop: 4,
