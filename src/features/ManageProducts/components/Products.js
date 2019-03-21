@@ -37,12 +37,14 @@ class Products extends Component {
     return (
       <FlatGrid
         itemDimension={150}
+        spacing={4}
         items={ProductsStore.products}
         renderItem={this.renderProduct}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
         onEndReached={this.getMoreProducts}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.3}
+        initialItemsToRender={6}
       />
     );
   }

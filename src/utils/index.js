@@ -54,3 +54,7 @@ export function filterNewItems(mobxMap, items) {
     return array;
   }, []);
 }
+
+export function ternary(prop, truthValue, t, f) {
+  return prop === truthValue ? t : f;
+}

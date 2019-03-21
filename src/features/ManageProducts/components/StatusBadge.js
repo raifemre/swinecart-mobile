@@ -5,8 +5,8 @@ function StatusBadge({ status }) {
   if(status === 'hidden' || status === 'displayed') {
     return (
       <View style={{ 
-        backgroundColor: status === 'displayed' ? '#757D75' : '#95A5A6',
-        borderColor: status === 'displayed' ? '#757D75' : '#95A5A6',
+        backgroundColor: status === 'displayed' ? '#00695C' : '#95A5A6',
+        borderColor: status === 'displayed' ? '#00695C' : '#95A5A6',
         borderRadius: 5,
         borderWidth: 1,
         alignSelf: 'flex-start',

@@ -17,7 +17,7 @@ class ProductsStore {
     page: 1
   }
 
-  limit = 9
+  limit = 8
 
   @observable products = [];
   @observable productsMap = new Map();
