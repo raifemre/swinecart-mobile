@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 
 import { StyleSheet } from 'react-native';
 
-import { Card, CardItem, Body, View, Thumbnail, Left } from 'native-base';
+import { Card, CardItem, Badge, View, Thumbnail, Left } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
 import TextWrapper from '../../../shared/TextWrapper';
+import IconWrapper from '../../../shared/IconWrapper';
+
+import StatusBadge from './StatusBadge';
 
 @inject('ProductsStore')
 @observer
@@ -17,7 +20,9 @@ class Product extends Component {
     const { cardStyle, padding4 } = styles;
     const { product } = this.props;
 
-    const { id, name, breed, type, img_path, age } = product;
+    const { 
+      id, name, breed, type, img_path, age, status
+    } = product;
 
     return (
       <View style={{ paddingHorizontal: 4 }}>
@@ -26,16 +31,22 @@ class Product extends Component {
             <Left>
               <Thumbnail square large source={{ uri: img_path }} />
             </Left>
-            <View style={{ flex: 4, marginLeft: 8, }}>
+            <View style={{ flex: 4, marginLeft: 16 }}>
+              <View style={{ flexDirection: 'row', }}>
+                <TextWrapper
+                  text={name} font='OpenSans-Bold' color={'#000000'} size={16}
+                />
+                <StatusBadge status={status} />
+              </View>
               <TextWrapper
-                text={name} font='OpenSans-Bold' color={'#000000'} size={18}
+                text={`${type} - ${breed}`} font='OpenSans-SemiBold' color={'#7f8c8d'} size={12}
               />
               <TextWrapper
-                text={`${type} - ${breed}`} font='OpenSans-Bold' color={'#7f8c8d'} size={12}
+                text={`${age} days old`} font='OpenSans-SemiBold' color={'#7f8c8d'} size={12}
               />
-              <TextWrapper
-                text={`${age} days old`} font='OpenSans-Bold' color={'#7f8c8d'} size={12}
-              />
+            </View>
+            <View>
+              <IconWrapper name='more-vert' color='#000000' />
             </View>
           </CardItem>
         </Card>
