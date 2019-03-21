@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 
 import { StyleSheet } from 'react-native';
 
-import { Card, CardItem, Body, View, Thumbnail, Left, Text } from 'native-base';
+import { Card, CardItem, Body, View, Thumbnail, Left } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
-
-import Navigation from '../../../services/navigation';
 
 import TextWrapper from '../../../shared/TextWrapper';
 
@@ -16,22 +14,29 @@ class Product extends Component {
 
   render() {
 
-    const { cardStyle } = styles;
+    const { cardStyle, padding4 } = styles;
     const { product } = this.props;
 
+    const { id, name, breed, type, img_path, age } = product;
+
     return (
-      <View style={{ paddingHorizontal: 8 }}>
-        <Card>
-          <CardItem first>
+      <View style={{ paddingHorizontal: 4 }}>
+        <Card style={cardStyle} >
+          <CardItem style={padding4}>
             <Left>
-              <Thumbnail square large source={{ uri: product.img_path }} />
-              <Body>
-                <Text>{product.name}</Text>
-                <Text>GeekyAnts</Text>
-                <Text>GeekyAnts</Text>
-                <Text>GeekyAnts</Text>
-              </Body>
+              <Thumbnail square large source={{ uri: img_path }} />
             </Left>
+            <View style={{ flex: 4, marginLeft: 8, }}>
+              <TextWrapper
+                text={name} font='OpenSans-Bold' color={'#000000'} size={18}
+              />
+              <TextWrapper
+                text={`${type} - ${breed}`} font='OpenSans-Bold' color={'#7f8c8d'} size={12}
+              />
+              <TextWrapper
+                text={`${age} days old`} font='OpenSans-Bold' color={'#7f8c8d'} size={12}
+              />
+            </View>
           </CardItem>
         </Card>
       </View>
@@ -51,6 +56,12 @@ const styles = StyleSheet.create({
     shadowColor: '#f7f7f7',
     shadowRadius: 0.1,
     elevation: 1
+  },
+  padding4: {
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingLeft: 4,
+    paddingRight: 4,
   }
 });
 

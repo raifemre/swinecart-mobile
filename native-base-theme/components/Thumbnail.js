@@ -12,7 +12,7 @@ export default (variables = variable) => {
 			'.large': {
 				width: 80,
 				height: 80,
-				borderRadius: 0,
+				borderRadius: 5,
 			},
 		},
 		'.small': {
