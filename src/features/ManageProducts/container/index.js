@@ -21,7 +21,7 @@ import Navigation from '../../../services';
 class ManageProducts extends Component {
 
   componentDidMount() {
-    // this.props.ProductsStore.getProducts();
+    this.props.ProductsStore.getProducts();
   }
 
   navigateToAdd = () => {  

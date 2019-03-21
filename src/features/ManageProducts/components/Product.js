@@ -2,18 +2,11 @@ import React, { Component } from 'react';
 
 import { StyleSheet } from 'react-native';
 
-import {
-  View, Text, Card, CardItem, Left, Right, Button, CheckBox,
-  Icon, Grid, Col, Row
-} from 'native-base';
+import { Card, CardItem, Body, View, Thumbnail, Left, Text } from 'native-base';
 
-import FastImage from 'react-native-fast-image';
+import { observer, inject } from 'mobx-react';
 
-import {
-  observer, inject
-} from 'mobx-react';
-
-import { Navigation } from '../../../services/';
+import Navigation from '../../../services/navigation';
 
 import TextWrapper from '../../../shared/TextWrapper';
 
@@ -21,52 +14,25 @@ import TextWrapper from '../../../shared/TextWrapper';
 @observer
 class Product extends Component {
 
-  handleDelete = () => {
-    const { ProductsStore, product } = this.props;
-    ProductsStore.deleteProduct(product);
-  };
-
-  handleStatusToggle = () => {
-    const { ProductsStore, product } = this.props;
-    ProductsStore.toggleStatus(product);
-  }
-
-  handleChecked = () => {
-    const { ProductsStore, product } = this.props;
-    ProductsStore.toggleCheck(product);
-  }
-
-  handleEdit = () => {
-    const { ProductsStore, product } = this.props;
-    ProductsStore.setSelectedProduct(product);
-    Navigation.navigate('EditProduct');
-  }
-
-  navigateToDetails = () => {
-    const { ProductsStore, product } = this.props;
-    ProductsStore.setSelectedProduct(product);
-    Navigation.navigate('ProductDetails');
-  }
-
   render() {
 
-    const { openSansBold, cardStyle, container } = styles;
-
+    const { cardStyle } = styles;
     const { product } = this.props;
 
-    const {
-      name, id
-    } = product;
-
     return (
-      <View style={{ paddingHorizontal: 5 }}>
-        <Card style={[cardStyle]}>
-          <TextWrapper
-            text={id}
-            font='OpenSans-Bold'
-            size={24}
-            color='#000000'
-          />
+      <View style={{ paddingHorizontal: 8 }}>
+        <Card>
+          <CardItem first>
+            <Left>
+              <Thumbnail square large source={{ uri: product.img_path }} />
+              <Body>
+                <Text>{product.name}</Text>
+                <Text>GeekyAnts</Text>
+                <Text>GeekyAnts</Text>
+                <Text>GeekyAnts</Text>
+              </Body>
+            </Left>
+          </CardItem>
         </Card>
       </View>
     );
@@ -78,19 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
   },
   cardStyle: {
     borderColor: 'transparent',
