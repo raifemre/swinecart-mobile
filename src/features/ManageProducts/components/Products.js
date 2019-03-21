@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
-
 import Product from './Product';
 
 @inject('ProductsStore')
