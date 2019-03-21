@@ -1,14 +1,14 @@
 import {
-  observable, action, runInAction, toJS
+  observable, action, runInAction, get, set, has, autorun
 } from 'mobx';
-
-import { intersectionBy } from 'lodash';
 
 import { 
   BreederProducts, Navigation
 } from '../../services';
 
 import Product from '../models/Product';
+
+import { filterNewItems } from '../../utils';
 
 class ProductsStore {
 
@@ -20,6 +20,7 @@ class ProductsStore {
   limit = 9
 
   @observable products = [];
+  @observable productsMap = new Map();
   @observable page = 1;
 
   @action resetData(prop) {
@@ -36,7 +37,8 @@ class ProductsStore {
     const { products } = data;
     runInAction(() => {
       this.page = 1;
-      this.products = products;
+      this.productsMap = new Map();
+      this.products = filterNewItems(this.productsMap, products);
     });
   }
 
@@ -44,16 +46,9 @@ class ProductsStore {
     const { data } = await BreederProducts.getProducts(this.page + 1, this.limit);
     const { count, products } = data;
     runInAction(() => {
-      if (count > 0) {
-        this.incrementPage();
-      }
-      this.products = [...this.products, ...products];
-    });
-  }
-
-  @action incrementPage() {
-    runInAction(() => {
-      this.page = this.page + 1;
+      if(count >= this.limit) { this.page = this.page + 1; }
+      const newItems = filterNewItems(this.productsMap, products);
+      this.products.push(...newItems);
     });
   }
 

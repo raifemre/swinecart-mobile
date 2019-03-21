@@ -1,6 +1,7 @@
 import { Alert } from 'react-native';
 import moment from 'moment';
 import { Toast } from 'native-base';
+import { has, get, set } from 'mobx';
 
 export function formatBirthdate(birthdate) {
   return moment(new Date(birthdate)).format('LL');
@@ -41,4 +42,15 @@ export function transformChangePass({ currentPassword, newPassword, newPasswordC
   }
 
   return request;
+}
+
+export function filterNewItems(mobxMap, items) {
+  return items.reduce((array, element) => {
+    const id = `${element.id}`;
+    if(!has(mobxMap, id, element)) { 
+      set(mobxMap, id, element);
+      array.push(element);
+    }
+    return array;
+  }, []);
 }
