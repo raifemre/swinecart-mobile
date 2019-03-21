@@ -1,6 +1,9 @@
 import React from 'react';
 import { View } from 'native-base';
+import { observer } from 'mobx-react';
+
 import TextWrapper from '../../../shared/TextWrapper';
+
 function StatusBadge({ status }) {
   if(status === 'hidden' || status === 'displayed') {
     return (
@@ -24,4 +27,4 @@ function StatusBadge({ status }) {
   }
 }
 
-export default StatusBadge;
+export default observer(StatusBadge);

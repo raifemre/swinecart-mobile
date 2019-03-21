@@ -12,7 +12,7 @@ import { ternary } from '../../../utils';
 function ProductInfo({ product, selected }) {
 
   const { id, name, breed, type, img_path, age, status } = product;
-  const { cardItemFirst, cardItemBody } = styles;
+  const { cardItemFirst, cardItemBody, image } = styles;
 
   const cardItemBgColor = ternary(selected, true, '#00695C', 'transparent');
   const subTextColor = ternary(selected, true, '#ffffff', '#95A5A6');
@@ -20,7 +20,7 @@ function ProductInfo({ product, selected }) {
   return (
     <React.Fragment>
       <CardItem style={[cardItemFirst, { backgroundColor: cardItemBgColor }]}>
-        <Image source={{ uri: img_path }} resizeMode='stretch' style={{ height: 100, width: 150, flex: 1, alignSelf: 'center', borderRadius: 5 }} />
+        <Image source={{ uri: img_path }} resizeMode='stretch' style={image}/>
       </CardItem> 
       <CardItem style={[cardItemBody, { backgroundColor: cardItemBgColor }]}>
         <Body>
@@ -31,7 +31,7 @@ function ProductInfo({ product, selected }) {
               color={ternary(selected, true, '#ffffff', '#2e3131')}
               size={15}
             />
-            <StatusBadge status={status} />
+            <StatusBadge status={product.status} />
           </View>
           <TextWrapper
             text={`${type} - ${breed}`}

@@ -27,8 +27,8 @@ class Product extends Component {
   render() {
 
     const { cardStyle, cardItemLast } = styles;
-    const { product } = this.props;
-    const { status } = product;
+    const { product, onPressStatus, ProductsStore } = this.props;
+    const { id, status } = product;
 
     return (
       <Card style={cardStyle}>
@@ -47,10 +47,18 @@ class Product extends Component {
                 <IconButton marginLeft={8} marginRight={8} 
                   size={24} 
                   name={status === 'displayed' ? 'eye-off' : 'eye' } 
-                  type='MaterialCommunityIcons' 
+                  type='MaterialCommunityIcons'
+                  onPress={() => ProductsStore.toggleStatus(id)} 
                 /> 
               }
-              <IconButton marginLeft={8} marginRight={0} size={24} name='delete' type='MaterialCommunityIcons' />
+              <IconButton
+                marginLeft={8}
+                marginRight={0}
+                size={24}
+                name='delete'
+                type='MaterialCommunityIcons'
+                onPress={(() => ProductsStore.deleteProduct(id))}
+              />
             </View>
           </Right>
         </CardItem>

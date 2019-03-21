@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 
 import Product from './Product';
 
-function ProductContainer({ product }) {
+function ProductContainer(props) {
 
   const onPressMore = () => {
     alert('hello');
@@ -13,11 +13,16 @@ function ProductContainer({ product }) {
     alert('hi')
   }
 
+  const onPressToggle = () => {
+    alert('Status')
+  }
+
   return (
     <Product
-      product={product}
+      {...props}
       onPressMore={onPressMore}
       onPressCard={onPressCard}
+      onPressToggle={onPressToggle}
     />
   )
 }

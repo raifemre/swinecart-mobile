@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Text, Button } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
 import { observer, inject } from 'mobx-react';
 import ProductContainer from './ProductContainer';
@@ -37,7 +38,7 @@ class Products extends Component {
     return (
       <FlatGrid
         itemDimension={150}
-        spacing={4}
+        spacing={8}
         items={ProductsStore.products}
         renderItem={this.renderProduct}
         refreshing={this.state.refreshing}

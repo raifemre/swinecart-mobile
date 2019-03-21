@@ -43,6 +43,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     backgroundColor: '#f7f7f7',
+  },
+  image: {
+    height: 100,
+    width: 150,
+    flex: 1,
+    alignSelf: 'center',
+    borderRadius: 5
   }
 });
 

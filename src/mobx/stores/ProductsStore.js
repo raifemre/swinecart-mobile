@@ -1,5 +1,5 @@
 import {
-  observable, action, runInAction, get, set, has, autorun
+  observable, action, runInAction, get, set, has, autorun, remove
 } from 'mobx';
 
 import { 
@@ -9,6 +9,7 @@ import {
 import Product from '../models/Product';
 
 import { filterNewItems } from '../../utils';
+import Picker from '../../../native-base-theme/components/Picker';
 
 class ProductsStore {
 
@@ -52,6 +53,22 @@ class ProductsStore {
     });
   }
 
+  @action findProduct(id) {
+    return this.products.findIndex(p => p.id === id);
+  }
+
+  @action toggleStatus(id) {
+    const index = this.findProduct(id);
+    const status = this.products[index].status;
+    this.products[index].status = status === 'displayed' ? 'hidden' : 'displayed';
+    set(this.productsMap, `${id}`, this.products[index]);
+  }
+
+  @action deleteProduct(id) {
+    const index = this.findProduct(id);
+    const product = this.products[index];
+    this.products.remove(product);
+  }
 }
 
 export default new ProductsStore();
