@@ -52,14 +52,13 @@ class AddProductForm {
 
   @action validateStep(index) {
     const errors = validate(getValues(this.steps[index], this.form), this.formRules);
-
+    this.steps[index].map(field => this.errors[field] = '');
     if (errors) {
       this.steps[index].map(field => {
         this.errors[field] = errors[field] ? errors[field][0] : '';
       });
       return false;
     }
-
     return true;
   }
 

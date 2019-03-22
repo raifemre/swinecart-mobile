@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     paddingTop: 0, borderWidth: 2, height: 40,
     flexDirection: 'row', borderRadius: 5,
-    paddingHorizontal: 10
+    paddingHorizontal: 5
   },
   inputStyle: {
     height: 38, fontSize: 16, fontFamily: 'OpenSans-Bold',
