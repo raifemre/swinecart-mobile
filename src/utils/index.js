@@ -44,12 +44,13 @@ export function transformChangePass({ currentPassword, newPassword, newPasswordC
   return request;
 }
 
-export function filterNewItems(mobxMap, items) {
+export function filterNewItems(mobxMap, items, Model) {
   return items.reduce((array, element) => {
     const id = `${element.id}`;
-    if(!has(mobxMap, id, element)) { 
-      set(mobxMap, id, element);
-      array.push(element);
+    if(!has(mobxMap, id, element)) {
+      const newModel = new Model(element);
+      set(mobxMap, id, newModel);
+      array.push(newModel);
     }
     return array;
   }, []);

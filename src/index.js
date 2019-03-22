@@ -10,7 +10,7 @@ import FlashMessage from "react-native-flash-message";
 import stores from './mobx/stores';
 import forms from './mobx/forms';
 
-configure({ enforceActions: 'always' });
+// configure({ enforceActions: 'always' });
 
 export default () => (
   <Root>

@@ -13,6 +13,7 @@
     "lodash": "4.17.11",
     "mobx": "5.5.0",
     "mobx-react": "5.2.8",
+    "mobx-utils": "^5.2.0",
     "moment": "2.22.2",
     "native-base": "2.12.1",
     "prop-types": "15.7.2",

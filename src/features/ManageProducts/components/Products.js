@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, Button } from 'native-base';
 import { FlatGrid } from 'react-native-super-grid';
-import { observer, inject } from 'mobx-react';
-import ProductContainer from './ProductContainer';
+import { observer, inject, Observer } from 'mobx-react';
+import Product from './Product';
+import { toJS } from 'mobx';
 
 @inject('ProductsStore')
 @observer
@@ -14,7 +14,7 @@ class Products extends Component {
 
   renderProduct = ({ item }) => {
     return (
-      <ProductContainer product={item} />
+      <Product product={item} />
     );
   }
 
@@ -32,20 +32,18 @@ class Products extends Component {
   }
 
   render() {
-
-    const { ProductsStore } = this.props;
-
     return (
       <FlatGrid
         itemDimension={150}
         spacing={8}
-        items={ProductsStore.products}
+        items={toJS(this.props.ProductsStore.products)}
         renderItem={this.renderProduct}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
         onEndReached={this.getMoreProducts}
-        onEndReachedThreshold={0.3}
-        initialItemsToRender={6}
+        onEndReachedThreshold={0.2}
+        maxToRenderPerBatch={2}
+        initialNumToRender={8}
       />
     );
   }

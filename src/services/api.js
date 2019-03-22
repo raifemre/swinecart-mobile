@@ -27,15 +27,18 @@ instance.addResponseTransform(response => {
   const { config, ...res } = response;
   // console.dir(response);
 
-  if(!ok) {
-    if(problem === 'NETWORK_ERROR') {
+  if (!ok) {
+    if (problem === 'NETWORK_ERROR') {
       showToast('Something went wrong!', 'danger', 'bottom');
     }
-    if(problem === 'CLIENT_ERROR') {
+    if (problem === 'CLIENT_ERROR') {
       console.log('STATUS CODE:', status);
       if(status === 401) {
         Navigation.navigate('Login');
       }
+    }
+    if (problem === 'TIMEOUT_ERROR')  {
+      console.log('timeout');
     }
   }
   
@@ -56,11 +59,11 @@ instance.addMonitor(({ config: request, ...response }) => {
 
 
 const api = {
-  get(url, options = {}) {
-    return instance.get(url, options);
+  get(url, params = {}, options = {}) {
+    return instance.get(url, params, options);
   },
-  delete(url, options = {}) {
-    return instance.delete(url, options);
+  delete(url, params = {}, options = {}) {
+    return instance.delete(url, params, options);
   },
   post(url, data = {}, options = {}) {
     return instance.post(url, data, options);

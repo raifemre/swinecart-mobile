@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     borderRadius: 5
+  },
+  flex1: {
+    flex: 1
+  },
+  flexDirRow: {
+    flexDirection: 'row',
   }
 });
 

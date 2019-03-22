@@ -1,8 +1,4 @@
 import { observable, action, runInAction } from 'mobx';
-
-import UserStore from '../stores/UserStore';
-
-import { formatBirthdate } from '../../utils';
 class Product {
 
   constructor(props) {
@@ -13,41 +9,48 @@ class Product {
     }
   }
 
-  @observable adg = 0;
-  @observable age = 0;
-  @observable backfat_thickness = 0;
-  @observable birthdate;
-  @observable breed = '';
-  @observable breed_id;
-  @observable breeder_id;
-  @observable farm_from_id = UserStore.breederProfile.farm_addresses[0].id;
-  @observable fcr = 0;
   @observable id;
-  @observable img_path;
   @observable name;
-  @observable other_details;
+  @observable type;
+  @observable breed;
+  @observable breed_id;
+  @observable age;
+  @observable status;
+
+  @observable adg;
+  @observable bft;
+  @observable fcr;
+  @observable birthdate;
+  @observable breeder_id;
+  @observable farm_from_id
+  
+  @observable img_path;
   @observable price;
   @observable primary_img_id;
   @observable quantity;
-  @observable status;
-  @observable type = 'Boar';
-  @observable isChecked = false;
-  @observable motherBreed = '';
-  @observable fatherBreed = '';
+  @observable isSelected = false;
 
+  @observable other_details;
+  
   @action setValue(field, value) {
       this[field] = value;
   }
 
-  @action setStatus(status) {
+  @action toggleStatus() {
     runInAction(() => {
-      this.status = status;
+      this.status = this.status === 'displayed' ? 'hidden' : 'displayed';
     });
   }
 
   @action toggleChecked() {
     runInAction(() => {
       this.isChecked = !this.isChecked;
+    });
+  }
+
+  @action deleteProduct() {
+    runInAction(() => {
+      this.dispose();
     });
   }
 

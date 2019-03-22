@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import { Button } from 'native-base';
 
 import IconWrapper from './IconWrapper';
@@ -21,4 +22,4 @@ function IconButton({ size, name, color, type, onPress, marginLeft, marginRight 
   )
 }
 
-export default IconButton;
+export default observer(IconButton);

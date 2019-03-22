@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Image } from 'react-native';
 import { CardItem, View, Body } from 'native-base';
+import FastImage from 'react-native-fast-image';
 
 import StatusBadge from './StatusBadge';
 import TextWrapper from '../../../shared/TextWrapper';
@@ -11,7 +11,7 @@ import { ternary } from '../../../utils';
 
 function ProductInfo({ product, selected }) {
 
-  const { id, name, breed, type, img_path, age, status } = product;
+  const { id, name, breed, type, img_path, age } = product;
   const { cardItemFirst, cardItemBody, image } = styles;
 
   const cardItemBgColor = ternary(selected, true, '#00695C', 'transparent');
@@ -20,7 +20,7 @@ function ProductInfo({ product, selected }) {
   return (
     <React.Fragment>
       <CardItem style={[cardItemFirst, { backgroundColor: cardItemBgColor }]}>
-        <Image source={{ uri: img_path }} resizeMode='stretch' style={image}/>
+        <FastImage source={{ uri: img_path }} resizeMode='stretch' style={image}/>
       </CardItem> 
       <CardItem style={[cardItemBody, { backgroundColor: cardItemBgColor }]}>
         <Body>

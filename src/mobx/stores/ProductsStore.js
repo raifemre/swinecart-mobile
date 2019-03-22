@@ -9,7 +9,6 @@ import {
 import Product from '../models/Product';
 
 import { filterNewItems } from '../../utils';
-import Picker from '../../../native-base-theme/components/Picker';
 
 class ProductsStore {
 
@@ -18,7 +17,7 @@ class ProductsStore {
     page: 1
   }
 
-  limit = 8
+  limit = 10
 
   @observable products = [];
   @observable productsMap = new Map();
@@ -39,34 +38,36 @@ class ProductsStore {
     runInAction(() => {
       this.page = 1;
       this.productsMap = new Map();
-      this.products = filterNewItems(this.productsMap, products);
+      this.products = [];
+      this.products = filterNewItems(this.productsMap, products, Product);
     });
   }
 
   @action async getMoreProducts() {
     const { data } = await BreederProducts.getProducts(this.page + 1, this.limit);
     const { count, products } = data;
-    runInAction(() => {
-      if(count >= this.limit) { this.page = this.page + 1; }
-      const newItems = filterNewItems(this.productsMap, products);
-      this.products.push(...newItems);
-    });
+    // runInAction(() => {
+    //   if(count >= this.limit) { this.page = this.page + 1; }
+    //   const newItems = filterNewItems(this.productsMap, products);
+    //   this.products.push(...newItems);
+    // });
   }
 
   @action findProduct(id) {
-    return this.products.findIndex(p => p.id === id);
+    return this.products.find(p => p.id === id);
   }
 
   @action toggleStatus(id) {
-    const index = this.findProduct(id);
-    const status = this.products[index].status;
-    this.products[index].status = status === 'displayed' ? 'hidden' : 'displayed';
-    set(this.productsMap, `${id}`, this.products[index]);
+    runInAction(() => {
+      const product = this.findProduct(id);
+      product.toggleStatus();
+    });
+    // this.products.push({});
+    // set(this.productsMap, `${id}`, product);
   }
 
   @action deleteProduct(id) {
-    const index = this.findProduct(id);
-    const product = this.products[index];
+    const product = this.findProduct(id);
     this.products.remove(product);
   }
 }
