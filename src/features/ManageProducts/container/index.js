@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-
-import { 
-  Container, View, Left, Right
-} from 'native-base';
-
+import { Container, View, Left, Right } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
 import Products from '../components/Products';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
-import FlatButton from '../../../shared/FlatButton';
+import IconButton from '../../../shared/IconButton';
 import IconWrapper from '../../../shared/IconWrapper';
 
 import { Navigation } from '../../../services';
 
+import styles from '../styles';
 @inject('ProductsStore')
 @observer
 class ManageProducts extends Component {
@@ -25,32 +21,40 @@ class ManageProducts extends Component {
   }
 
   navigateToAdd = () => {  
-    Navigation.navigate('AddProduct');
+    // Navigation.navigate('AddProduct');
   }
 
   navigateToFilter = () => {
-    Navigation.navigate('FilterProducts');
+    // Navigation.navigate('FilterProducts');
   }
 
   render() {
-    const { contentStyle, viewStyle } = styles;
+    const { flex1 } = styles;
 
     return (
       <Container>
         <HeaderWrapper>
-          <Left style={contentStyle}>
-            <FlatButton transparent onPress={this.navigateToAdd}>
-              <IconWrapper name='add' color='#FFFFFF' />
-            </FlatButton>
+          <Left style={flex1}>
+            <IconButton marginLeft={8} marginRight={0}
+              size={26}
+              color='#ffffff'
+              name='plus'
+              type='MaterialCommunityIcons'
+              onPress={this.navigateToAdd}
+            />
           </Left>
           <BodyWrapper title='Manage Products' />
-          <Right style={contentStyle}>
-            <FlatButton transparent onPress={this.navigateToFilter}>
-              <IconWrapper name='filter-list' color='#FFFFFF' />
-            </FlatButton>
+          <Right style={flex1}>
+            <IconButton marginLeft={0} marginRight={0}
+              size={26}
+              color='#ffffff'
+              name='filter-outline'
+              type='MaterialCommunityIcons'
+              onPress={this.navigateToFilter}
+            />
           </Right>
         </HeaderWrapper>
-        <View style={viewStyle}>
+        <View style={flex1}>
           <Products />
         </View>
       </Container>
@@ -58,15 +62,5 @@ class ManageProducts extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  contentStyle: {
-    flex: 1,
-  },
-  viewStyle: {
-    flex: 1,
-    backgroundColor: '#F2F2F2'
-  }
-});
 
 export default ManageProducts;
