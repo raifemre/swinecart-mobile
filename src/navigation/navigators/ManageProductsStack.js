@@ -17,11 +17,10 @@ const navigator = createStackNavigator({
   ProductDetailsBreeder: ProductDetails,
   ProductMedia: ProductMedia,
 }, {
-    initialRouteName: 'Products',
+    initialRouteName: 'AddProduct',
     navigationOptions: ({ navigation }) => {
       return {
-        header: null,
-        mode: 'modal'
+        header: null
       }
     }
   });

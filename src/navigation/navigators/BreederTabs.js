@@ -29,6 +29,13 @@ MessagingStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+ManageProductsStack.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarVisible: false
+    // tabBarVisible: navigation.state.index > 0 ? false : true,
+  };
+};
+
 const navigator = createBottomTabNavigator({
   'ManageProducts': {
     screen: ManageProductsStack

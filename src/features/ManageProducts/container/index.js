@@ -21,7 +21,7 @@ class ManageProducts extends Component {
   }
 
   navigateToAdd = () => {  
-    // Navigation.navigate('AddProduct');
+    Navigation.navigate('AddProduct');
   }
 
   navigateToFilter = () => {

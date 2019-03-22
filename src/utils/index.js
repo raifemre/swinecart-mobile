@@ -59,3 +59,10 @@ export function filterNewItems(mobxMap, items, Model) {
 export function ternary(prop, truthValue, t, f) {
   return prop === truthValue ? t : f;
 }
+
+export function getValues(fields, object) {
+  return fields.reduce((accu, field) => {
+    accu[field] = object[field];
+    return accu;
+  }, {});
+}

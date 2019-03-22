@@ -41,7 +41,7 @@ class LoginForm {
   }
 
   @action validateField(field, value) {
-    const error = validate({ [field]: value }, this.formRules);
+    // const error = validate({ [field]: value }, this.formRules);
     this.errors[field] = error ? error[field][0] : '';
   }
 
