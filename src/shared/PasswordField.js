@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { View, Button } from 'native-base';
 
 import IconWrapper from './IconWrapper';
+import IconButton from './IconButton';
 
 @observer
 class PasswordField extends Component {
@@ -76,13 +77,16 @@ class PasswordField extends Component {
           onBlur={this.handleBlur}
           secureTextEntry={hidePassword}
         />
-        <Button transparent style={{ height: 38, paddingHorizontal: 0 }} onPress={this.togglePassword}>
-          <IconWrapper
-            type='MaterialCommunityIcons'
-            size={25}
+        <View style={{ justifyContent: 'center', }}>
+          <IconButton
+            marginLeft={0}
+            marginRight={0}
+            size={24}
             name={hidePassword ? 'eye' : 'eye-off'}
+            type='MaterialCommunityIcons'
+            onPress={this.togglePassword}
           />
-        </Button>
+        </View>
       </View>
     );
   } add
@@ -91,7 +95,7 @@ class PasswordField extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     paddingTop: 0, borderColor: '#95a5a6', borderWidth: 2, height: 40,
-    flexDirection: 'row', marginVertical: 10, borderRadius: 20,
+    flexDirection: 'row', marginVertical: 10, borderRadius: 5,
     paddingHorizontal: 10
   },
   inputStyle: {

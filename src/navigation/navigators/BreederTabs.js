@@ -31,8 +31,8 @@ MessagingStack.navigationOptions = ({ navigation }) => {
 
 ManageProductsStack.navigationOptions = ({ navigation }) => {
   return {
-    tabBarVisible: false
-    // tabBarVisible: navigation.state.index > 0 ? false : true,
+    // tabBarVisible: false
+    tabBarVisible: navigation.state.index > 0 ? false : true,
   };
 };
 

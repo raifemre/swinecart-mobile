@@ -21,7 +21,7 @@ class TextField extends Component {
     const { form, field } = this.props;
     Animated.timing(this._animatedIsFocused, {
       toValue: (this.state.isFocused || form.form[field] !== '') ? 1 : 0,
-      duration: 200,
+      duration: 300
     }).start();
   }
 
