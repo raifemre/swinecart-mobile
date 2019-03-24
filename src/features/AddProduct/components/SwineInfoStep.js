@@ -29,7 +29,7 @@ function ProductInfoStep({ AddProductForm }) {
           size={16}
           color='#004d40'
         />
-        <Grid style={{ marginTop: 10, marginBottom: 20, }}>
+        <Grid style={{ marginTop: 10, marginBottom: 10, }}>
           <Col>
             <Button full onPress={() => AddProductForm.setValue('breedType', 'pure')}>
               <TextWrapper

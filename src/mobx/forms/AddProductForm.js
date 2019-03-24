@@ -71,8 +71,8 @@ class AddProductForm {
   }
 
   steps = [
-    [ 'breed', 'fatherBreed', 'motherBreed' ],
     [ 'name', 'type', 'minPrice', 'maxPrice' ],
+    [ 'breed', 'fatherBreed', 'motherBreed' ],
   ]
 
   @observable loading = false;
@@ -125,17 +125,20 @@ class AddProductForm {
   }
   
   @action validateStep(index) {
-    const errors = validate(getValues(this.steps[index], this.form), this.formRules);
+    const errors = validate(
+      getValues(this.steps[index], this.form),
+      getValues(this.steps[index], this.formRules),
+    );
     console.dir(toJS(this.form));
     this.steps[index].map(field => this.errors[field] = '');
     if (errors) {
+      console.log(errors);
       this.steps[index].map(field => {
         this.errors[field] = errors[field] ? errors[field][0] : '';
       });
       return false;
     }
     return true;
-    // return false;
   }
 
   @action resetForm() {
