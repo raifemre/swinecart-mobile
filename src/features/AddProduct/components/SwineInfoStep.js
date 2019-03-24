@@ -113,7 +113,7 @@ function ProductInfoStep({ AddProductForm }) {
           field='lsba'
           keyboardType='numeric'
         />
-        <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, marginBottom: 8 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, marginBottom: 4 }}>
           <TextWrapper
             text='Number of Teats'
             font='OpenSans-SemiBold'

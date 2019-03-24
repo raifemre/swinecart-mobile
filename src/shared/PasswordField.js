@@ -95,7 +95,7 @@ class PasswordField extends Component {
 const styles = StyleSheet.create({
   containerStyle: {
     paddingTop: 0, borderColor: '#95a5a6', borderWidth: 2, height: 40,
-    flexDirection: 'row', marginVertical: 10, borderRadius: 5,
+    flexDirection: 'row', marginVertical: 15, borderRadius: 5,
     paddingHorizontal: 10
   },
   inputStyle: {
