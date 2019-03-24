@@ -8,6 +8,7 @@ import DashboardStore from './DashboardStore';
 import ShopStore from './ShopStore';
 import SwineCartStore from './SwineCartStore';
 import ProfileStore from './ProfileStore';
+import FarmStore from './FarmStore';
 
 const stores = {
   AuthStore,
@@ -19,6 +20,7 @@ const stores = {
   DashboardStore,
   ShopStore,
   SwineCartStore,
+  FarmStore,
   ProfileStore,
 }
 

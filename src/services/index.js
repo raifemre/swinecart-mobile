@@ -7,6 +7,7 @@ import BreederMessages from './breeder/messages';
 import BreederNotifications from './breeder/notifications';
 import BreederProfile from './breeder/profile';
 import BreederDashboard from './breeder/dashboard';
+import BreederFarms from './breeder/farms';
 
 import Shop from './shop';
 import SwineCart from './swinecart';
@@ -19,6 +20,7 @@ export {
   BreederNotifications,
   BreederProfile,
   BreederDashboard,
+  BreederFarms,
   Shop,
   SwineCart
 };

@@ -12,12 +12,13 @@ import IconWrapper from '../../../shared/IconWrapper';
 import { Navigation } from '../../../services';
 
 import styles from '../styles';
-@inject('ProductsStore')
+@inject('ProductsStore', 'FarmStore')
 @observer
 class ManageProducts extends Component {
 
   componentDidMount() {
     this.props.ProductsStore.getProducts();
+    this.props.FarmStore.getFarms();
   }
 
   navigateToAdd = () => {  

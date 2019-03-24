@@ -8,7 +8,7 @@ import TextWrapper from '../../../shared/TextWrapper';
 import DatePickerWrapper from '../../../shared/DatePickerWrapper';
 import PickerWrapper from '../../../shared/PickerWrapper';
 
-function ProductInfoStep({ AddProductForm }) {
+function ProductInfoStep({ AddProductForm, FarmStore }) {
   
   const houseTypeOptions = [
     { label: 'Tunnel Ventilated', data: 'tunnel-ventilated' },
@@ -89,7 +89,8 @@ function ProductInfoStep({ AddProductForm }) {
           form={AddProductForm}
           placeholder='Farm'
           field='farmFrom'
-          options={[]}
+          options={FarmStore.farms}
+          getLabel={item => `${item.name}, ${item.province}`}
         />
         <PickerWrapper
           form={AddProductForm}
@@ -153,4 +154,4 @@ function ProductInfoStep({ AddProductForm }) {
   )
 }
 
-export default inject('AddProductForm')(observer(ProductInfoStep));
+export default inject('AddProductForm', 'FarmStore')(observer(ProductInfoStep));

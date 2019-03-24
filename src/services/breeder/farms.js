@@ -1,10 +1,11 @@
 import API from '../api';
 
-const URL_PREFIX = '/breeder/dashboard';
+const URL_PREFIX = '/breeder/profile';
 
 const service = {
-  getFarms() {
-    return API.get(`${URL_PREFIX}/stats`);
+  async getFarms(page, limit) {
+    const { data } = await API.get(`${URL_PREFIX}/farms`, { page, limit });
+    return data;
   },
 }
 
