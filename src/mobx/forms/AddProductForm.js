@@ -132,11 +132,10 @@ class AddProductForm {
     console.dir(toJS(this.form));
     this.steps[index].map(field => this.errors[field] = '');
     if (errors) {
-      console.log(errors);
       this.steps[index].map(field => {
         this.errors[field] = errors[field] ? errors[field][0] : '';
       });
-      return true;
+      return false;
     }
     return true;
   }
