@@ -9,7 +9,11 @@ import { validate } from 'validate.js';
 class AddProductForm {
 
   defaultFormState = {
-    name: ''
+    name: null,
+    type: null,
+    minPrice: null,
+    maxPrice: null,
+    breed: null,
   }
 
   formRules = {
@@ -62,6 +66,9 @@ class AddProductForm {
     minPrice: null,
     maxPrice: null,
     breed: null,
+    breedType: 'pure',
+    fatherBreed: null,
+    motherBreed: null
   }
 
   @observable errors = {
@@ -90,8 +97,8 @@ class AddProductForm {
       });
       return false;
     }
-    // return true;
-    return false;
+    return true;
+    // return false;
   }
 
   @action resetForm() {
