@@ -74,7 +74,11 @@ function ProductInfoStep({ AddProductForm }) {
             />
           </React.Fragment>
         }
-        <DatePickerWrapper />
+        <DatePickerWrapper
+          form={AddProductForm}
+          placeholder='Birth Date'
+          field='birthDate'
+        />
         <PickerWrapper
           form={AddProductForm}
           placeholder='Farm'

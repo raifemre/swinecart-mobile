@@ -1,28 +1,47 @@
 import React, { Component } from 'react';
 import { View } from 'native-base';
-import { observer, inject } from 'mobx-react';
+import { observer } from 'mobx-react';
 import DatePicker from 'react-native-datepicker'
+import moment from 'moment';
+
+import TextWrapper from './TextWrapper';
 
 @observer
 class DatePickerWrapper extends Component {
 
-  state = {
-    date: null
+  formatString = date => {
+    return moment(date).format('MMMM D YYYY');
+  }
+
+  onDateChange = value => {
+    const { form, field } = this.props;
+    form.setValue(field, value);
   }
 
   render() {
+    const { form, field, placeholder } = this.props;
+
     return (
       <View style={{ marginTop: 10, marginBottom: 10 }}>
+        {form.form[field] && <View style={{ position: 'absolute', top: -20, left: 10 }}>
+          <TextWrapper
+            text={'Birth Date'}
+            font='OpenSans-Bold'
+            size={13}
+            color='#000000'
+          />
+        </View>}
         <DatePicker
           style={{ width: '100%', height: 40 }}
           mode='date'
-          date={this.state.date}
+          date={form.form[field]}
           showIcon={false}
-          placeholder='Birth Date'
-          format='YYYY-MM-DD'
+          placeholder={`Choose ${placeholder}`}
+          format='MMMM Do YYYY'
           maxDate={new Date()}
           confirmBtnText='Ok'
           cancelBtnText='Cancel'
+          getDateStr={this.formatString}
           customStyles={{
             dateInput: {
               borderColor: '#2d3436', borderWidth: 2, borderRadius: 5,
@@ -37,7 +56,7 @@ class DatePickerWrapper extends Component {
               alignSelf: 'flex-start', color: '#7f8c8d'
             }
           }}
-          onDateChange={(date) => { this.setState({ date: date }) }}
+          onDateChange={this.onDateChange}
         />
       </View>
     );
