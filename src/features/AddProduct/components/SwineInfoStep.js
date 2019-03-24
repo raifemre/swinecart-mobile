@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { View, Button, Grid, Col } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
@@ -37,22 +37,48 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
         />
         <Grid style={{ marginTop: 10, marginBottom: 10, }}>
           <Col>
-            <Button full onPress={() => AddProductForm.setValue('breedType', 'pure')}>
+            <Button 
+              full
+              transparent
+              onPress={() => AddProductForm.setValue('breedType', 'pure')}
+              style={{ 
+                backgroundColor: AddProductForm.form.breedType === 'pure' ? '#00695C' : '#ffffff',
+                borderWidth: 2,
+                borderColor: '#00695C',
+                borderBottomLeftRadius: 5,
+                borderTopLeftRadius: 5,
+                borderBottomRightRadius: 0,
+                borderTopRightRadius: 0,
+              }}
+              >
               <TextWrapper
                 text='Pure Breed'
                 font='OpenSans-Bold'
                 size={14}
-                color='#ffffff'
-              />
+                color={AddProductForm.form.breedType === 'pure' ? '#ffffff' : '#00695C' }
+            />
             </Button>
           </Col>
           <Col>
-            <Button full onPress={() => AddProductForm.setValue('breedType', 'cross')}>
+            <Button
+              full
+              transparent
+              onPress={() => AddProductForm.setValue('breedType', 'cross')}
+              style={{ 
+                backgroundColor: AddProductForm.form.breedType === 'pure' ? '#ffffff' : '#00695C',
+                borderWidth: 2,
+                borderColor: '#00695C',
+                borderBottomLeftRadius: 0,
+                borderTopLeftRadius: 0,
+                borderBottomRightRadius: 5,
+                borderTopRightRadius: 5,
+              }}
+            >
               <TextWrapper
                 text='Cross Breed'
                 font='OpenSans-Bold'
                 size={14}
-                color='#ffffff'
+                color={AddProductForm.form.breedType === 'pure' ? '#00695C' : '#ffffff' }
               />
             </Button>
           </Col>
@@ -153,5 +179,14 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
     </React.Fragment>
   )
 }
+
+const styles = StyleSheet.create({
+  selectedButton: {
+
+  },
+  notSelected: {
+
+  }
+})
 
 export default inject('AddProductForm', 'FarmStore')(observer(ProductInfoStep));
