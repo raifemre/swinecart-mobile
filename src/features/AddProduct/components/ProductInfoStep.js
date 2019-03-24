@@ -62,6 +62,7 @@ function ProductInfoStep({ AddProductForm }) {
         form={AddProductForm}
         placeholder='Maximum Price'
         field='maxPrice'
+        keyboardType='numeric'
       />
     </ScrollView>
   )
