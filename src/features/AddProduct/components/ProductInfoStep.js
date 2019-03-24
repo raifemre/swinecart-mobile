@@ -9,13 +9,15 @@ import PickerWrapper from '../../../shared/PickerWrapper';
 
 function ProductInfoStep({ AddProductForm }) {
   return (
-    <ScrollView style={{ flex: 2, paddingTop: 16, backgroundColor: '#ffffff', paddingHorizontal: 8 }}
+    <ScrollView 
+      style={{ flex: 1, paddingTop: 16, backgroundColor: '#ffffff', paddingHorizontal: 8 }}
+      contentContainerStyle={{ paddingBottom: 20 }}
     >
       <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 8, }}>
         <TextWrapper
           text='Product Information'
           font='OpenSans-Bold'
-          size={18}
+          size={20}
           color='#004d40'
         />
       </View>

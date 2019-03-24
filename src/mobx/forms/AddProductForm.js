@@ -50,12 +50,29 @@ class AddProductForm {
           return Number(v1) >= Number(v2);
         }
       }
-    }
+    },
+    breed: {
+      presence: {
+        allowEmpty: false,
+      }
+    },
+    fatherBreed: {
+      presence: {
+        allowEmpty: false,
+        message: "^Father Breed can't be blank"
+      }
+    },
+    motherBreed: {
+      presence: {
+        allowEmpty: false,
+        message: "^Mother Breed can't be blank"
+      }
+    },
   }
 
   steps = [
+    [ 'breed', 'fatherBreed', 'motherBreed' ],
     [ 'name', 'type', 'minPrice', 'maxPrice' ],
-    [ 'breed', 'type', 'minPrice', 'maxPrice' ],
   ]
 
   @observable loading = false;
@@ -68,7 +85,16 @@ class AddProductForm {
     breed: null,
     breedType: 'pure',
     fatherBreed: null,
-    motherBreed: null
+    motherBreed: null,
+    birthDate: null,
+    farmFrom: null,
+    houseType: null,
+    adg: null,
+    fcr: null,
+    bft: null,
+    lsba: null,
+    leftTeats: null,
+    rightTeats: null,
   }
 
   @observable errors = {
@@ -76,6 +102,17 @@ class AddProductForm {
     type: '',
     minPrice: '',
     maxPrice: '',
+    breed: '',
+    fatherBreed: '',
+    motherBreed: '',
+    farmFrom: '',
+    houseType: '',
+    adg: '',
+    fcr: '',
+    bft: '',
+    lsba: '',
+    leftTeats: '',
+    rightTeats: '',
   }
 
   @action setValue(field, value) {
@@ -89,7 +126,7 @@ class AddProductForm {
   
   @action validateStep(index) {
     const errors = validate(getValues(this.steps[index], this.form), this.formRules);
-    console.log(toJS(this.form));
+    console.dir(toJS(this.form));
     this.steps[index].map(field => this.errors[field] = '');
     if (errors) {
       this.steps[index].map(field => {

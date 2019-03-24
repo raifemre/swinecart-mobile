@@ -22,10 +22,10 @@ class ProductForm extends Component {
     const { AddProductForm } = this.props;
 
     const steps = [
+      // { component: SwineInfoStep, routeName: 'Step1' },
+      // { component: ProductInfoStep, routeName: 'Step2' },
       { component: SwineInfoStep, routeName: 'Step1' },
-      // { component: ProductInfoStep, routeName: 'Step1' },
-      // { component: SwineInfoStep, routeName: 'Step2' },
-      { component: ProductInfoStep, routeName: 'Step3' },
+      // { component: ProductInfoStep, routeName: 'Step3' },
     ];
 
     return (
