@@ -113,7 +113,7 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
         />
         <PickerWrapper
           form={AddProductForm}
-          placeholder='Farm'
+          placeholder='Farm From'
           field='farmFrom'
           options={FarmStore.farms}
           getLabel={item => `${item.name}, ${item.province}`}

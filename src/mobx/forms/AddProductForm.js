@@ -8,6 +8,32 @@ import { validate } from 'validate.js';
 
 class AddProductForm {
 
+  constructor() {
+    validate.validators.mustExist = function (value, options, key, attributes) {
+
+      console.dir(value, options, key, attributes);
+
+      const { breedType, breed, motherBreed, fatherBreed } = attributes;
+
+      if (breedType === 'pure') {
+        if (!breed) {
+          if (key === 'breed') {
+            return `^Breed cant be blank`;
+          }
+        }
+      }
+      else {
+        if (key === 'motherBreed' && !motherBreed) {
+          return `^Mother Breed cant be blank`;
+        }
+        if (key === 'Father' && !fatherBreed) {
+          return `^Father Breed cant be blank`;
+        }
+      }
+    };
+
+  }
+
   defaultFormState = {
     name: null,
     type: null,
@@ -52,27 +78,30 @@ class AddProductForm {
       }
     },
     breed: {
+      mustExist: true
+    },
+    breedType: {
       presence: {
-        allowEmpty: false,
+        allowEmpty: false
       }
     },
     fatherBreed: {
-      presence: {
-        allowEmpty: false,
-        message: "^Father Breed can't be blank"
-      }
+      mustExist: true
     },
     motherBreed: {
-      presence: {
-        allowEmpty: false,
-        message: "^Mother Breed can't be blank"
-      }
+      mustExist: true
     },
+    // farmFrom: {
+    //   presence: {
+    //     allowEmpty: false,
+    //     message: "^Farm From can't be blank"
+    //   },
+    // }
   }
 
   steps = [
     [ 'name', 'type', 'minPrice', 'maxPrice' ],
-    [ 'breed', 'fatherBreed', 'motherBreed' ],
+    [ 'breed', 'breedType', 'farmFrom', 'fatherBreed', 'motherBreed' ],
     [ 'otherDetails' ],
   ]
 
@@ -132,13 +161,12 @@ class AddProductForm {
       getValues(this.steps[index], this.form),
       getValues(this.steps[index], this.formRules),
     );
-    console.dir(toJS(this.form));
     this.steps[index].map(field => this.errors[field] = '');
     if (errors) {
       this.steps[index].map(field => {
         this.errors[field] = errors[field] ? errors[field][0] : '';
       });
-      return true;
+      return false;
     }
     return true;
   }
@@ -154,6 +182,7 @@ class AddProductForm {
   }
 
   @action async submitForm() {
+    console.dir(toJS(this.form));
   }
 
 }

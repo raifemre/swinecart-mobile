@@ -11,8 +11,9 @@ import OtherDetailsStep from './OtherDetailsStep';
 @observer
 class ProductForm extends Component {
 
-  onSubmitForm = () => {
-
+  onSubmitForm = async () => {
+    const { AddProductForm } = this.props;
+    await AddProductForm.submitForm();
   }
 
   onPressNext = () => {
