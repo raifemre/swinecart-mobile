@@ -23,7 +23,6 @@ function ProductInfoStep({ AddProductForm }) {
         form={AddProductForm}
         placeholder='Name'
         field='name'
-        editable
       />
       <PickerWrapper
         form={AddProductForm}

@@ -27,11 +27,25 @@ class AddProductForm {
       numericality: {
         message: '^Minimum Price must be a number'
       },
+      equality: {
+        attribute: 'maxPrice',
+        message: '^Minimum Price must be less than the Maximum Price',
+        comparator: function (v1, v2) {
+          return Number(v1) <= Number(v2);
+        }
+      }
     },
     maxPrice: {
       numericality: {
         message: '^Maximum Price must be a number'
       },
+      equality: {
+        attribute: 'minPrice',
+        message: '^Maximum Price must be more than the Minimum Price',
+        comparator: function (v1, v2) {
+          return Number(v1) >= Number(v2);
+        }
+      }
     }
   }
 
