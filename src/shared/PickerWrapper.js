@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { CustomPicker } from 'react-native-custom-picker';
 
 import TextWrapper from './TextWrapper';
+import IconButton from './IconButton';
 
 @observer
 class PickerWrapper extends Component {
@@ -18,13 +19,37 @@ class PickerWrapper extends Component {
 
     return (
       <View style={styles.fieldStyle}>
-        <View>
-          <TextWrapper
-            text={selectedItem ? getLabel(selectedItem) : defaultText}
-            font='OpenSans-Bold'
-            size={16}
-            color={selectedItem ? '#000000' : '#7f8c8d'}
-          />
+        <View style={{ flexDirection: 'row' }}>
+          {
+            !selectedItem && 
+            <React.Fragment>
+              <TextWrapper
+                text={defaultText}
+                font='OpenSans-Bold'
+                size={16}
+                color={'#7f8c8d'}
+              />
+            </React.Fragment>
+          }
+          {
+            selectedItem &&
+            <React.Fragment>
+              <IconButton
+                marginLeft={0}
+                marginRight={0}
+                size={24}
+                name='clear'
+                type='MaterialIcons'
+                onPress={clear}
+              />
+              <TextWrapper
+                text={getLabel(selectedItem)}
+                font='OpenSans-Bold'
+                size={16}
+                color={'#000000'}
+              />
+            </React.Fragment>
+          }
         </View>
       </View>
     );
@@ -47,14 +72,14 @@ class PickerWrapper extends Component {
 
     return (
       <View style={styles.containerStyle}>
-        <View style={{ position: 'absolute', top: -20, left: 10 }}>
+        {form.form[field] && <View style={{ position: 'absolute', top: -20, left: 10 }}>
           <TextWrapper
             text={placeholder}
             font='OpenSans-Bold'
             size={13}
             color='#000000'
           />
-        </View>
+        </View>}
         <CustomPicker
           placeholder={`Choose ${placeholder}`}
           fieldTemplate={this.renderField}
