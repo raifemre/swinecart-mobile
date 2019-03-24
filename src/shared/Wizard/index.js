@@ -6,6 +6,8 @@ import { View } from 'react-native';
 
 import Router from './Router';
 
+import TextWrapper from '../TextWrapper';
+
 const styles = {
   container: {
     backgroundColor: '#ffffff',
@@ -88,14 +90,26 @@ export default class Wizard extends Component {
           handleNavRef={this.onHandleNavRef}
           steps={steps}
         />
-        <View style={{ flexDirection: 'row', alignSelf: 'flex-end', width: '100%' }}>
+        <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
           {
-            !this.onFirstStep() && <Button onPress={this.onPressBack} style={{ flex: 1 }}>
-              <Text>Back</Text>
+            !this.onFirstStep() && 
+            <Button 
+              full
+              onPress={this.onPressBack} 
+              style={{ flex: 1, backgroundColor: '#f7f7f7' }}>
+              <TextWrapper text='Back' size={16} color='#000000' />
             </Button>
           }
-          <Button onPress={this.onPressNext} style={{ flex: 1 }}>
-            <Text>{this.onLastStep() ? 'Add Product' : 'Next'}</Text>
+          <Button
+            full
+            onPress={this.onPressNext}
+            style={{ flex: 1, backgroundColor: '#00695C' }}>
+            <TextWrapper
+              text={this.onLastStep() ? 'Add Product' : 'Next'}
+              size={16}
+              color='#f7f7f7'
+              style={{ alignSelf: 'center', }}
+            />
           </Button>
         </View>
       </View>
