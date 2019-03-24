@@ -9,6 +9,12 @@ import DatePickerWrapper from '../../../shared/DatePickerWrapper';
 import PickerWrapper from '../../../shared/PickerWrapper';
 
 function ProductInfoStep({ AddProductForm }) {
+  
+  const houseTypeOptions = [
+    { label: 'Tunnel Ventilated', data: 'tunnel-ventilated' },
+    { label: 'Open Sided', data: 'open-sided' },
+  ]
+
   return (
     <React.Fragment>
       <ScrollView 
@@ -83,11 +89,14 @@ function ProductInfoStep({ AddProductForm }) {
           form={AddProductForm}
           placeholder='Farm'
           field='farmFrom'
+          options={[]}
         />
         <PickerWrapper
           form={AddProductForm}
           placeholder='House Type'
           field='houseType'
+          options={houseTypeOptions}
+          getLabel={item => item.label}
         />
         <TextField
           form={AddProductForm}

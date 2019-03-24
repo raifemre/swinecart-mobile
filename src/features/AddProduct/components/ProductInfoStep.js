@@ -8,6 +8,14 @@ import TextWrapper from '../../../shared/TextWrapper';
 import PickerWrapper from '../../../shared/PickerWrapper';
 
 function ProductInfoStep({ AddProductForm }) {
+
+  const typeOptions = [
+    { 'label': 'Boar', 'data' : 'boar' },
+    { 'label': 'Sow', 'data' : 'sow' },
+    { 'label': 'Gilt', 'data' : 'gilt' },
+    { 'label': 'Semen', 'data' : 'semen' },
+  ];
+
   return (
     <ScrollView 
       style={{ flex: 1, paddingTop: 16, backgroundColor: '#ffffff', paddingHorizontal: 8 }}
@@ -30,6 +38,8 @@ function ProductInfoStep({ AddProductForm }) {
         form={AddProductForm}
         placeholder='Type'
         field='type'
+        options={typeOptions}
+        getLabel={item => item.label}
       />
       <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, marginBottom: 5 }}>
         <TextWrapper

@@ -136,7 +136,7 @@ class AddProductForm {
       this.steps[index].map(field => {
         this.errors[field] = errors[field] ? errors[field][0] : '';
       });
-      return false;
+      return true;
     }
     return true;
   }

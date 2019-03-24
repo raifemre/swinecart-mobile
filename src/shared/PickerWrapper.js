@@ -63,12 +63,7 @@ class PickerWrapper extends Component {
 
   render() {
 
-    const options = [{
-      label: 'Boar',
-      id: 1
-    }];
-
-    const { placeholder, form, field } = this.props;
+    const { placeholder, form, field, options, getLabel } = this.props;
 
     return (
       <View style={styles.containerStyle}>
@@ -85,7 +80,7 @@ class PickerWrapper extends Component {
           fieldTemplate={this.renderField}
           options={options}
           onValueChange={this.onValueChange}
-          getLabel={item => item.label}
+          getLabel={getLabel}
         />
         {
           form.errors[field] !== ''
