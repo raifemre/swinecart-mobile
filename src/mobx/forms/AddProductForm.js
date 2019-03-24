@@ -11,7 +11,7 @@ class AddProductForm {
   constructor() {
     validate.validators.mustExist = function (value, options, key, attributes) {
 
-      console.dir(value, options, key, attributes);
+      // console.dir(value, options, key, attributes);
 
       const { breedType, breed, motherBreed, fatherBreed } = attributes;
 
@@ -26,7 +26,7 @@ class AddProductForm {
         if (key === 'motherBreed' && !motherBreed) {
           return `^Mother Breed cant be blank`;
         }
-        if (key === 'Father' && !fatherBreed) {
+        if (key === 'fatherBreed' && !fatherBreed) {
           return `^Father Breed cant be blank`;
         }
       }
@@ -117,6 +117,7 @@ class AddProductForm {
     fatherBreed: null,
     motherBreed: null,
     birthDate: null,
+    birthWeight: null,
     farmFrom: null,
     houseType: null,
     adg: null,
@@ -136,6 +137,8 @@ class AddProductForm {
     breed: '',
     fatherBreed: '',
     motherBreed: '',
+    birthDate: '',
+    birthWeight: '',
     farmFrom: '',
     houseType: '',
     adg: '',

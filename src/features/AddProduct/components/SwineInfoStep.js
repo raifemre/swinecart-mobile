@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 import { View, Button, Grid, Col } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
@@ -13,7 +13,7 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
   const houseTypeOptions = [
     { label: 'Tunnel Ventilated', data: 'tunnel-ventilated' },
     { label: 'Open Sided', data: 'open-sided' },
-  ]
+  ];
 
   return (
     <React.Fragment>
@@ -111,6 +111,12 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
           placeholder='Birth Date'
           field='birthDate'
         />
+        <TextField
+          form={AddProductForm}
+          placeholder='Birth Weight'
+          field='birthWeight'
+          keyboardType='numeric'
+        />
         <PickerWrapper
           form={AddProductForm}
           placeholder='Farm From'
@@ -180,13 +186,5 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
   )
 }
 
-const styles = StyleSheet.create({
-  selectedButton: {
-
-  },
-  notSelected: {
-
-  }
-})
 
 export default inject('AddProductForm', 'FarmStore')(observer(ProductInfoStep));
