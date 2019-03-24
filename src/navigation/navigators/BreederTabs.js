@@ -57,7 +57,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'ManageProducts',
+  initialRouteName: 'Profile',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

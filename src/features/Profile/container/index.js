@@ -19,12 +19,16 @@ import OfficeInfo from '../components/OfficeInfo';
 import Farms from '../components/Farms';
 import ChangePassword from '../components/ChangePassword';
 import Segments from '../../../shared/Segments';
-@inject('UserStore', 'AuthStore')
+@inject('FarmStore', 'AuthStore')
 @observer
 class Profile extends Component {
 
+  componentDidMount() {
+    this.props.FarmStore.getFarms();
+  }
+
   state = {
-    selectedIndex: 2
+    selectedIndex: 1
   }
 
   setIndex = index => {

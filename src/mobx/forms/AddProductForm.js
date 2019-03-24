@@ -91,12 +91,12 @@ class AddProductForm {
     motherBreed: {
       mustExist: true
     },
-    // farmFrom: {
-    //   presence: {
-    //     allowEmpty: false,
-    //     message: "^Farm From can't be blank"
-    //   },
-    // }
+    farmFrom: {
+      presence: {
+        allowEmpty: false,
+        message: "^Farm From can't be blank"
+      },
+    }
   }
 
   steps = [

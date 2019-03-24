@@ -113,14 +113,14 @@ class Login extends Component {
                     <FlatButton block
                       style={{ backgroundColor: '#3B5998' }}
                       onPress={this.facebookLogin}>
-                      <IconWrapper type='MaterialCommunityIcons' name='facebook-box' fontSize={30} />
+                    <IconWrapper type='MaterialCommunityIcons' name='facebook-box' fontSize={30} color='#ffffff'/>
                     </FlatButton>
                   </Col>
                   <Col style={{ paddingLeft: 5 }}>
                     <FlatButton block
                       style={{ backgroundColor: '#DB3236' }}
                       onPress={this.googleLogin}>
-                      <IconWrapper type='MaterialCommunityIcons' name='google' />
+                      <IconWrapper type='MaterialCommunityIcons' name='google' color='#ffffff'/>
                     </FlatButton>
                   </Col>
                 </Row>

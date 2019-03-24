@@ -17,10 +17,12 @@ function ProductInfo({ product, selected }) {
   const cardItemBgColor = ternary(selected, true, '#00695C', 'transparent');
   const subTextColor = ternary(selected, true, '#ffffff', '#95A5A6');
 
+  const uri = img_path.replace('/medium', '');
+
   return (
     <React.Fragment>
       <CardItem style={[cardItemFirst, { backgroundColor: cardItemBgColor }]}>
-        <FastImage source={{ uri: img_path }} resizeMode='stretch' style={image}/>
+        <FastImage source={{ uri }} resizeMode='stretch' style={image} />
       </CardItem> 
       <CardItem style={[cardItemBody, { backgroundColor: cardItemBgColor }]}>
         <Body>

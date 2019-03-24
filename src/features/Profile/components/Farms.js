@@ -3,7 +3,8 @@ import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
 
 import Farm from './Farm';
-@inject('UserStore')
+import { toJS } from 'mobx';
+@inject('FarmStore')
 @observer
 class Farms extends Component {
 
@@ -12,6 +13,7 @@ class Farms extends Component {
   }
 
   renderItem({ item }) {
+    console.log(toJS(item));
     return (
       <Farm farm={item}/>
     );
@@ -30,7 +32,7 @@ class Farms extends Component {
 
     return (
       <FlatList
-        data={this.props.UserStore.farms}
+        data={this.props.FarmStore.farms}
         renderItem={this.renderItem}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}
