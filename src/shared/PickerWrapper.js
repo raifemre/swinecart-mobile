@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   containerStyle: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 15,
+    marginBottom: 15,
   }
 });
 

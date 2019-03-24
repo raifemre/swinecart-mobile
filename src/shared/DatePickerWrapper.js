@@ -22,7 +22,7 @@ class DatePickerWrapper extends Component {
     const { form, field, placeholder } = this.props;
 
     return (
-      <View style={{ marginTop: 10, marginBottom: 10 }}>
+      <View style={{ marginTop: 15, marginBottom: 15 }}>
         {form.form[field] && <View style={{ position: 'absolute', top: -20, left: 10 }}>
           <TextWrapper
             text={'Birth Date'}

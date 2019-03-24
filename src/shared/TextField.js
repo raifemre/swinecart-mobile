@@ -63,7 +63,7 @@ class TextField extends Component {
     };
 
     return (
-      <View style={{ marginVertical: 16 }}>
+      <View style={{ marginVertical: 15 }}>
         <View style={[{ borderColor: editable ? '#2d3436' : '#95a5a6' }, containerStyle]}>
           <Animated.Text style={labelStyle}>
             {placeholder}
