@@ -5,13 +5,14 @@ import { observer, inject } from 'mobx-react';
 
 import TextField from '../../../shared/TextField';
 import TextWrapper from '../../../shared/TextWrapper';
+import PickerWrapper from '../../../shared/PickerWrapper';
 
 function ProductInfoStep({ AddProductForm }) {
   return (
     <ScrollView style={{ flex: 1, paddingTop: 16, backgroundColor: '#ffffff', paddingHorizontal: 8, }}>
       <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 8, }}>
         <TextWrapper
-          text='Swine Information'
+          text='Product Information'
           font='OpenSans-Bold'
           size={18}
           color='#004d40'
@@ -19,31 +20,29 @@ function ProductInfoStep({ AddProductForm }) {
       </View>
       <TextField
         form={AddProductForm}
-        placeholder='Breed'
-        field='breed'
+        placeholder='Name'
+        field='name'
+        editable
       />
-      <TextField
+      <PickerWrapper
         form={AddProductForm}
         placeholder='Type'
         field='type'
       />
-      <TextWrapper
-        text='Price'
-        font='OpenSans-Bold'
-        size={18}
-        color='#004d40'
-      />
-      <TextField
-        form={AddProductForm}
-        placeholder='Min Price'
-        field='minPrice'
-        keyboardType='numeric'
-      />
-      <TextField
-        form={AddProductForm}
-        placeholder='Max Price'
-        field='maxPrice'
-      />
+      {/* <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, lineHeight: 25 }}>
+        <TextWrapper
+          text='Price'
+          font='OpenSans-SemiBold'
+          size={18}
+          color='#004d40'
+        />
+        <TextWrapper
+          text=' (Optional)'
+          font='OpenSans-Bold'
+          size={14}
+          color='#95a5a6'
+        />
+      </View> */}
     </ScrollView>
   )
 }

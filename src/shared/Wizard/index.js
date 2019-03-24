@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Text } from 'native-base';
+import { Button, Text, Footer } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 import { findIndex } from 'lodash';
 import { View } from 'react-native';
@@ -88,16 +88,18 @@ export default class Wizard extends Component {
           handleNavRef={this.onHandleNavRef}
           steps={steps}
         />
-        <View style={{ flexDirection: 'row', alignSelf: 'flex-end', width: '100%'}}>
-          {
-            !this.onFirstStep() && <Button onPress={this.onPressBack} style={{ flex: 1 }}>
-              <Text>Back</Text>
+        <Footer>
+          <View style={{ flexDirection: 'row', alignSelf: 'flex-end', width: '100%' }}>
+            {
+              !this.onFirstStep() && <Button onPress={this.onPressBack} style={{ flex: 1 }}>
+                <Text>Back</Text>
+              </Button>
+            }
+            <Button onPress={this.onPressNext} style={{ flex: 1 }}>
+              <Text>{this.onLastStep() ? 'Add Product' : 'Next'}</Text>
             </Button>
-          }
-          <Button onPress={this.onPressNext} style={{ flex: 1 }}>
-            <Text>{this.onLastStep() ? 'Add Product' : 'Next'}</Text>
-          </Button>
-        </View>     
+          </View>  
+        </Footer>
       </View>
     );
   }

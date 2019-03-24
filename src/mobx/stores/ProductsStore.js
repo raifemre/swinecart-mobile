@@ -58,10 +58,10 @@ class ProductsStore {
   }
 
   @action toggleStatus(id) {
-    runInAction(() => {
+    // runInAction(() => {
       const product = this.findProduct(id);
       product.toggleStatus();
-    });
+    // });
     // this.products.push({});
     // set(this.productsMap, `${id}`, product);
   }

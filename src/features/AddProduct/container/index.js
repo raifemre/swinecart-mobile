@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, View, Left, Right } from 'native-base';
+import { Container, View, Left, Right, Content } from 'native-base';
 import { observer, inject } from 'mobx-react';
 import { NavigationEvents } from 'react-navigation';
 
@@ -31,9 +31,9 @@ class AddProduct extends Component {
             <BodyWrapper title='Add Product' />
             <Right />
           </HeaderWrapper>
-          <View style={{ flex: 1 }}>
+          <Content contentContainerStyle={{ flex: 1 }}>
             <ProductForm />
-          </View>
+          </Content>
         </Container>
       </React.Fragment>
     );

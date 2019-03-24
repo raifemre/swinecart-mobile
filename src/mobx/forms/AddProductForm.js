@@ -23,10 +23,17 @@ class AddProductForm {
         allowEmpty: false
       }
     },
+    minPrice: {
+
+    },
+    maxPrice: {
+
+    }
   }
 
   steps = [
-    [ 'name', 'type' ]
+    [ 'name', 'type', 'minPrice', 'maxPrice' ],
+    [ 'breed', 'type', 'minPrice', 'maxPrice' ],
   ]
 
   @observable loading = false;
@@ -34,11 +41,16 @@ class AddProductForm {
   @observable form = {
     name: '',
     type: '',
+    minPrice: '',
+    maxPrice: '',
+    breed: '',
   }
 
   @observable errors = {
     name: '',
     type: '',
+    minPrice: '',
+    maxPrice: '',
   }
 
   @action setValue(field, value) {
@@ -52,6 +64,7 @@ class AddProductForm {
 
   @action validateStep(index) {
     const errors = validate(getValues(this.steps[index], this.form), this.formRules);
+    console.log(toJS(this.form));
     this.steps[index].map(field => this.errors[field] = '');
     if (errors) {
       this.steps[index].map(field => {

@@ -37,9 +37,9 @@ class Product {
   }
 
   @action toggleStatus() {
-    runInAction(() => {
+    // runInAction(() => {
       this.status = this.status === 'displayed' ? 'hidden' : 'displayed';
-    });
+    // });
   }
 
   @action toggleChecked() {

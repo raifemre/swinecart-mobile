@@ -36,7 +36,7 @@ class TextField extends Component {
   render() {
 
     const {
-      form, placeholder, field, editable
+      form, placeholder, field, editable = true, keyboardType
     } = this.props;
 
     const { inputStyle, containerStyle } = styles;
@@ -74,6 +74,7 @@ class TextField extends Component {
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
             editable={editable}
+            keyboardType={keyboardType}
           />
         </View>
         {

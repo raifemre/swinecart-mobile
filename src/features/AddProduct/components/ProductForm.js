@@ -3,9 +3,8 @@ import { observer, inject } from 'mobx-react';
 
 import Wizard from '../../../shared/Wizard';
 
+import ProductInfoStep from './ProductInfoStep';
 import SwineInfoStep from './SwineInfoStep';
-import FormStep from './FormStep';
-
 @inject('AddProductForm')
 @observer
 class ProductForm extends Component {
@@ -23,9 +22,9 @@ class ProductForm extends Component {
     const { AddProductForm } = this.props;
 
     const steps = [
-      { component: SwineInfoStep, routeName: 'Step1' },
+      { component: ProductInfoStep, routeName: 'Step1' },
       { component: SwineInfoStep, routeName: 'Step2' },
-      { component: SwineInfoStep, routeName: 'Step3' },
+      { component: ProductInfoStep, routeName: 'Step3' },
     ];
 
     return (
