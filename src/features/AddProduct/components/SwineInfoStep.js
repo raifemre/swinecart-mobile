@@ -22,28 +22,6 @@ function ProductInfoStep({ AddProductForm }) {
         placeholder='Breed'
         field='breed'
       />
-      <TextField
-        form={AddProductForm}
-        placeholder='Type'
-        field='type'
-      />
-      <TextWrapper
-        text='Price'
-        font='OpenSans-Bold'
-        size={18}
-        color='#004d40'
-      />
-      <TextField
-        form={AddProductForm}
-        placeholder='Min Price'
-        field='minPrice'
-        keyboardType='numeric'
-      />
-      <TextField
-        form={AddProductForm}
-        placeholder='Max Price'
-        field='maxPrice'
-      />
     </ScrollView>
   )
 }

@@ -14,13 +14,16 @@ class TextField extends Component {
 
   componentWillMount() {
     const { form, field } = this.props;
-    this._animatedIsFocused = new Animated.Value(form.form[field] === '' ? 0 : 1);
+    this._animatedIsFocused = new Animated.Value(
+      (!form.form[field] || form.form[field] === '')
+        ? 0
+        : 1);
   }
 
   componentDidUpdate() {
     const { form, field } = this.props;
     Animated.timing(this._animatedIsFocused, {
-      toValue: (this.state.isFocused || form.form[field] !== '') ? 1 : 0,
+      toValue: (this.state.isFocused || (form.form[field] && form.form[field] !== '')) ? 1 : 0,
       duration: 300
     }).start();
   }

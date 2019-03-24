@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Text } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { View } from 'native-base';
 import { observer } from 'mobx-react';
 import { CustomPicker } from 'react-native-custom-picker';
 
@@ -20,10 +20,10 @@ class PickerWrapper extends Component {
       <View style={styles.fieldStyle}>
         <View>
           <TextWrapper
-            text={selectedItem ? selectedItem : defaultText}
+            text={selectedItem ? getLabel(selectedItem) : defaultText}
             font='OpenSans-Bold'
             size={16}
-            color='#7f8c8d'
+            color={selectedItem ? '#000000' : '#7f8c8d'}
           />
         </View>
       </View>
@@ -38,7 +38,10 @@ class PickerWrapper extends Component {
 
   render() {
 
-    const options = ['Boar', 'Sow', 'Gilt', 'Semen'];
+    const options = [{
+      label: 'Boar',
+      id: 1
+    }];
 
     const { placeholder, form, field } = this.props;
 
@@ -53,11 +56,11 @@ class PickerWrapper extends Component {
           />
         </View>
         <CustomPicker
-          placeholder='Choose'
+          placeholder={`Choose ${placeholder}`}
           fieldTemplate={this.renderField}
           options={options}
           onValueChange={this.onValueChange}
-          defaultValue='Choose'
+          getLabel={item => item.label}
         />
         {
           form.errors[field] !== ''

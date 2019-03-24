@@ -9,7 +9,8 @@ import PickerWrapper from '../../../shared/PickerWrapper';
 
 function ProductInfoStep({ AddProductForm }) {
   return (
-    <ScrollView style={{ flex: 1, paddingTop: 16, backgroundColor: '#ffffff', paddingHorizontal: 8, }}>
+    <ScrollView style={{ flex: 2, paddingTop: 16, backgroundColor: '#ffffff', paddingHorizontal: 8 }}
+    >
       <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 8, }}>
         <TextWrapper
           text='Product Information'
@@ -29,7 +30,7 @@ function ProductInfoStep({ AddProductForm }) {
         placeholder='Type'
         field='type'
       />
-      {/* <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, lineHeight: 25 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, marginBottom: 5 }}>
         <TextWrapper
           text='Price'
           font='OpenSans-SemiBold'
@@ -42,7 +43,26 @@ function ProductInfoStep({ AddProductForm }) {
           size={14}
           color='#95a5a6'
         />
-      </View> */}
+      </View>
+      <TextField
+        form={AddProductForm}
+        placeholder='Minimum Price'
+        field='minPrice'
+        keyboardType='numeric'
+      />
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <TextWrapper
+          text='to'
+          font='OpenSans-Bold'
+          size={14}
+          color='#95a5a6'
+        />
+      </View>
+      <TextField
+        form={AddProductForm}
+        placeholder='Maximum Price'
+        field='maxPrice'
+      />
     </ScrollView>
   )
 }

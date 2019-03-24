@@ -24,10 +24,14 @@ class AddProductForm {
       }
     },
     minPrice: {
-
+      numericality: {
+        message: '^Minimum Price must be a number'
+      },
     },
     maxPrice: {
-
+      numericality: {
+        message: '^Maximum Price must be a number'
+      },
     }
   }
 
@@ -39,11 +43,11 @@ class AddProductForm {
   @observable loading = false;
 
   @observable form = {
-    name: '',
-    type: '',
-    minPrice: '',
-    maxPrice: '',
-    breed: '',
+    name: null,
+    type: null,
+    minPrice: null,
+    maxPrice: null,
+    breed: null,
   }
 
   @observable errors = {
@@ -61,7 +65,7 @@ class AddProductForm {
     const error = validate({ [field]: value }, this.formRules);
     this.errors[field] = error ? error[field][0] : '';
   }
-
+  
   @action validateStep(index) {
     const errors = validate(getValues(this.steps[index], this.form), this.formRules);
     console.log(toJS(this.form));
@@ -72,7 +76,8 @@ class AddProductForm {
       });
       return false;
     }
-    return true;
+    // return true;
+    return false;
   }
 
   @action resetForm() {
