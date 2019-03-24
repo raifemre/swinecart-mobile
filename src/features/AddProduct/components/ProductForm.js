@@ -5,6 +5,8 @@ import Wizard from '../../../shared/Wizard';
 
 import ProductInfoStep from './ProductInfoStep';
 import SwineInfoStep from './SwineInfoStep';
+import OtherDetailsStep from './OtherDetailsStep';
+
 @inject('AddProductForm')
 @observer
 class ProductForm extends Component {
@@ -24,7 +26,7 @@ class ProductForm extends Component {
     const steps = [
       { component: ProductInfoStep, routeName: 'Step1' },
       { component: SwineInfoStep, routeName: 'Step2' },
-      // { component: ProductInfoStep, routeName: 'Step3' },
+      { component: OtherDetailsStep, routeName: 'Step3' },
     ];
 
     return (

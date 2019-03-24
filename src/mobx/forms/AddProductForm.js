@@ -73,6 +73,7 @@ class AddProductForm {
   steps = [
     [ 'name', 'type', 'minPrice', 'maxPrice' ],
     [ 'breed', 'fatherBreed', 'motherBreed' ],
+    [ 'otherDetails' ],
   ]
 
   @observable loading = false;
@@ -95,6 +96,7 @@ class AddProductForm {
     lsba: null,
     leftTeats: null,
     rightTeats: null,
+    otherDetails: null
   }
 
   @observable errors = {
@@ -113,6 +115,7 @@ class AddProductForm {
     lsba: '',
     leftTeats: '',
     rightTeats: '',
+    otherDetails: ''
   }
 
   @action setValue(field, value) {
@@ -135,7 +138,7 @@ class AddProductForm {
       this.steps[index].map(field => {
         this.errors[field] = errors[field] ? errors[field][0] : '';
       });
-      return false;
+      return true;
     }
     return true;
   }
