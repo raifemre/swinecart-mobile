@@ -3,7 +3,6 @@ import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
 
 import Farm from './Farm';
-import { toJS } from 'mobx';
 @inject('FarmStore')
 @observer
 class Farms extends Component {
@@ -13,7 +12,6 @@ class Farms extends Component {
   }
 
   renderItem({ item }) {
-    console.log(toJS(item));
     return (
       <Farm farm={item}/>
     );
@@ -23,7 +21,7 @@ class Farms extends Component {
     this.setState({
       refreshing: true
     }, async () => {
-      // await this.props.MessageStore.getThreads();
+      await this.props.FarmStore.getFarms();
       this.setState({ refreshing: false });
     });
   };

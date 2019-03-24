@@ -14,13 +14,15 @@ class FarmStore {
 
   defaultState = {
     products: [],
-    page: 1
+    farm: null
   }
 
   limit = 10
 
   @observable farms = [];
   @observable page = 1;
+
+  @observable farm = null;
 
   @action resetData(prop) {
     this[prop] = this.defaultState[prop];
@@ -39,6 +41,17 @@ class FarmStore {
       this.farms = farms;
     });
   }
+
+  @action async getFarm(id) {
+    const { data } = await BreederFarms.getFarm(id);
+    const { farm } = data;
+    console.log(farm);
+    runInAction(() => {
+      this.farm = farm;
+    });
+
+  }
+
 }
 
 export default new FarmStore();

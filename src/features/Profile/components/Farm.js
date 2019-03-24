@@ -6,7 +6,7 @@ import { toJS } from 'mobx';
 import { startCase } from 'lodash';
 
 import TextWrapper from '../../../shared/TextWrapper';
-import FlatButton from '../../../shared/FlatButton';
+import IconButton from '../../../shared/IconButton';
 import IconWrapper from '../../../shared/IconWrapper';
 
 import Navigation from '../../../services/navigation';
@@ -17,6 +17,7 @@ import Navigation from '../../../services/navigation';
 class Farm extends Component {
 
   goToFarm = () => {
+    const { farm } = this.props;
     Navigation.navigate('FarmDetails', { farm });
   }
 
@@ -44,15 +45,20 @@ class Farm extends Component {
                     font={'OpenSans-Bold'}
                     color={'#7f8c8d'}
                     text={`Farm Province: ${startCase(farm.province)}`}
-                    size={13}
+                    size={12}
                   />
                 </Row>
               </Grid>
             </Body>
             <Right>
-              <FlatButton transparent onPress={this.goToFarm}>
-                <IconWrapper name='arrow-forward' size={26} color='#000000' />
-              </FlatButton>
+              <IconButton
+                marginLeft={0}
+                marginRight={0}
+                size={24}
+                name='more-vert'
+                type='MaterialIcons'
+                onPress={this.goToFarm}
+              />
             </Right>
           </CardItem>
         </Card>
@@ -68,12 +74,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardStyle: {
-    borderRadius: 0,
+    borderRadius: 5,
     borderColor: 'transparent',
     borderColor: '#f7f7f7',
     shadowColor: '#f7f7f7',
     shadowRadius: 0,
-    elevation: 2,
+    elevation: 1,
   }
 }); 
 
