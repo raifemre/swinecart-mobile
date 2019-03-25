@@ -45,7 +45,7 @@ class FarmStore {
   @action async getFarm(id) {
     const { data } = await BreederFarms.getFarm(id);
     const { farm } = data;
-    console.log(farm);
+    console.dir('Farm', farm);
     runInAction(() => {
       this.farm = farm;
     });

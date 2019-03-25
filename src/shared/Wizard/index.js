@@ -34,7 +34,6 @@ export default class Wizard extends Component {
 
     if (form.validateStep(currentStepIndex)) {
       if (this.onLastStep()) {
-        console.log('Submitting Form...');
         onSubmitForm();
       }
       else {

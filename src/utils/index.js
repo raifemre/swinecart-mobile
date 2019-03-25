@@ -3,6 +3,8 @@ import moment from 'moment';
 import { Toast } from 'native-base';
 import { has, get, set } from 'mobx';
 
+import { toLower } from 'lodash';
+
 export function formatBirthdate(birthdate) {
   return moment(new Date(birthdate)).format('LL');
 }
@@ -65,4 +67,20 @@ export function getValues(fields, object) {
     accu[field] = object[field];
     return accu;
   }, {});
+}
+
+export function toAddProdRequest(newProduct) {
+
+  const { 
+    breed, breedType, fatherBreed, motherBreed, name, birthDate,
+    type, farmFrom
+  } = newProduct;
+
+  return {
+    name,
+    breed: breedType === 'pure' ? toLower(breed) : toLower(`${fatherBreed}+${motherBreed}`),
+    type: type.data,
+    farm_from_id: farmFrom.id,
+    birthdate: birthDate
+  }
 }

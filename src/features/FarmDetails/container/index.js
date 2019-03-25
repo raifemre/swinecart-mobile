@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, View, Left, Right } from 'native-base';
+import { Container, View, Left, Right, Spinner } from 'native-base';
 import { observer, inject } from 'mobx-react';
 import { NavigationEvents } from 'react-navigation';
 
@@ -11,14 +11,11 @@ import BackButton from '../../../shared/BackButton';
 import { Navigation } from '../../../services';
 
 import FarmInfo from '../components/FarmInfo';
+import TextWrapper from '../../../shared/TextWrapper';
 
 @inject('ProductsStore', 'FarmStore')
 @observer
 class FarmDetails extends Component {
-
-  componentDidMount() {
-    this.props.FarmStore.getFarms();
-  }
 
   deleteFarm = () => {
     alert('Delete Farm');
@@ -64,6 +61,12 @@ class FarmDetails extends Component {
             </Right>
           </HeaderWrapper>
           <View style={{ flex: 1 }}>
+            {
+              !FarmStore.farm &&
+              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+                <Spinner color='#00695C' />
+              </View>
+            } 
             {
               FarmStore.farm && 
               <FarmInfo farm={FarmStore.farm} />

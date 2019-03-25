@@ -1,5 +1,5 @@
 import {
-  observable, action, runInAction, get, set, has, autorun, remove
+  observable, action, runInAction, get, set, has, autorun, remove, toJS
 } from 'mobx';
 
 import { 
@@ -8,7 +8,7 @@ import {
 
 import Product from '../models/Product';
 
-import { filterNewItems } from '../../utils';
+import { filterNewItems, toAddProdRequest } from '../../utils';
 
 class ProductsStore {
 
@@ -70,6 +70,14 @@ class ProductsStore {
     const product = this.findProduct(id);
     this.products.remove(product);
   }
+
+  @action async addProduct(newProduct) {
+    console.dir(toJS(newProduct), toAddProdRequest(newProduct));
+    // const { error, data } = await BreederProducts.addProduct(newProduct);
+    // console.dir(error, data);
+    // console.log(newProduct);
+  }
+
 }
 
 export default new ProductsStore();

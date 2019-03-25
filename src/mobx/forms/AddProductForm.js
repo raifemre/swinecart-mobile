@@ -6,6 +6,8 @@ import { showToast, cleanFields, getValues } from '../../utils';
 
 import { validate } from 'validate.js';
 
+import ProductsStore from '../stores/ProductsStore';
+
 class AddProductForm {
 
   constructor() {
@@ -185,7 +187,7 @@ class AddProductForm {
   }
 
   @action async submitForm() {
-    console.dir(toJS(this.form));
+    ProductsStore.addProduct(this.form);
   }
 
 }

@@ -6,6 +6,7 @@ import TextWrapper from '../../../shared/TextWrapper';
 import TextField from '../../../shared/TextField';
 import IconButton from '../../../shared/IconButton';
 import PickerWrapper from '../../../shared/PickerWrapper';
+import { toJS } from 'mobx';
 
 
 @inject('FarmStore', 'AddProductForm')
@@ -15,11 +16,11 @@ class FarmInfo extends Component {
 
   render() {
     const { FarmStore, AddProductForm } = this.props
-    const { farm,  } = FarmStore;
+    const { farm } = FarmStore;
 
     return (
       <View style={{ padding: 16 }}>
-        <View style={{ flexDirection: 'row', alignSelf: 'center',}}>
+        <View style={{ flexDirection: 'row', alignSelf: 'center', marginBottom: 8,}}>
           <TextWrapper
             text={farm.name}
             font='OpenSans-Bold'
