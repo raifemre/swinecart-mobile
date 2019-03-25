@@ -36,7 +36,7 @@ class Products extends Component {
       <FlatGrid
         itemDimension={150}
         spacing={8}
-        items={toJS(this.props.ProductsStore.products)}
+        items={toJS(this.props.ProductsStore.products) || []}
         renderItem={this.renderProduct}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}

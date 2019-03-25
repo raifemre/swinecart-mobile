@@ -13,13 +13,13 @@ import { filterNewItems, toAddProdRequest } from '../../utils';
 class ProductsStore {
 
   defaultState = {
-    products: [],
+    products: null,
     page: 1
   }
 
   limit = 10
 
-  @observable products = [];
+  @observable products = null;
   @observable productsMap = new Map();
   @observable page = 1;
 
@@ -28,7 +28,7 @@ class ProductsStore {
   }
 
   @action resetAll() {
-    this.products = [];
+    this.products = null;
     this.page = 1;
   }
 
@@ -38,7 +38,7 @@ class ProductsStore {
     runInAction(() => {
       this.page = 1;
       this.productsMap = new Map();
-      this.products = [];
+      this.products = null;
       this.products = filterNewItems(this.productsMap, products, Product);
     });
   }

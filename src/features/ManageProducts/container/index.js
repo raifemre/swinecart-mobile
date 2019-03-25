@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, View, Left, Right } from 'native-base';
+import { Container, View, Left, Right, Spinner } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
 import Products from '../components/Products';
@@ -56,7 +56,9 @@ class ManageProducts extends Component {
           </Right>
         </HeaderWrapper>
         <View style={flex1}>
-          <Products />
+          { !this.props.ProductsStore.products 
+            && <View style={[flex1, { justifyContent: 'center', alignItems: 'center' }]}><Spinner color='#00695C' /></View>}
+          { this.props.ProductsStore.products && <Products /> }
         </View>
       </Container>
     );
