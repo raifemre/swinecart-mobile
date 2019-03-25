@@ -46,36 +46,51 @@ class ProductsStore {
   @action async getMoreProducts() {
     const { data } = await BreederProducts.getProducts(this.page + 1, this.limit);
     const { count, products } = data;
-    // runInAction(() => {
-    //   if(count >= this.limit) { this.page = this.page + 1; }
-    //   const newItems = filterNewItems(this.productsMap, products);
-    //   this.products.push(...newItems);
-    // });
+    runInAction(() => {
+      if(count >= this.limit) { this.page = this.page + 1; }
+      const newItems = filterNewItems(this.productsMap, products, Product);
+      this.products.push(...newItems);
+    });
   }
 
   @action findProduct(id) {
-    return this.products.find(p => p.id === id);
+    return this.products.findIndex(p => p.id === id);
   }
 
-  @action toggleStatus(id) {
-    // runInAction(() => {
-      const product = this.findProduct(id);
-      product.toggleStatus();
-    // });
+  @action async toggleStatus(id) {
+    const { error, message, data } = await BreederProducts.toggleStatus([id]);
+    const { status } = data;
+    runInAction(() => {
+      const index = this.findProduct(id);
+      this.products[index].status = status;
+      // this.products[index] = this.products[index];
+    });
     // this.products.push({});
     // set(this.productsMap, `${id}`, product);
   }
 
-  @action deleteProduct(id) {
-    const product = this.findProduct(id);
-    this.products.remove(product);
+  @action async deleteProduct(id) {
+    const { error, message } = await BreederProducts.deleteProduct([id]);
+    runInAction(() => {
+      const index = this.findProduct(id);
+      this.products.remove(this.products[index]);
+    });
   }
 
   @action async addProduct(newProduct) {
-    console.dir(toJS(newProduct), toAddProdRequest(newProduct));
-    // const { error, data } = await BreederProducts.addProduct(newProduct);
-    // console.dir(error, data);
-    // console.log(newProduct);
+    const requestData = toAddProdRequest(newProduct);
+    const { error, message, data } = await BreederProducts.addProduct(requestData);
+    
+    if (error) {
+
+    }
+    else {
+      if (data) {
+        const { product } = data;
+        this.products.unshift(product);
+      }
+    }
+
   }
 
 }

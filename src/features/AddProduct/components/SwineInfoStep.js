@@ -11,8 +11,8 @@ import PickerWrapper from '../../../shared/PickerWrapper';
 function ProductInfoStep({ AddProductForm, FarmStore }) {
   
   const houseTypeOptions = [
-    { label: 'Tunnel Ventilated', data: 'tunnel-ventilated' },
-    { label: 'Open Sided', data: 'open-sided' },
+    { label: 'Tunnel Ventilated', data: 'tunnelventilated' },
+    { label: 'Open Sided', data: 'opensided' },
   ];
 
   return (

@@ -50,9 +50,9 @@ export function filterNewItems(mobxMap, items, Model) {
   return items.reduce((array, element) => {
     const id = `${element.id}`;
     if(!has(mobxMap, id, element)) {
-      const newModel = new Model(element);
-      set(mobxMap, id, newModel);
-      array.push(newModel);
+      // const newModel = new Model(element);
+      set(mobxMap, id, element);
+      array.push(element);
     }
     return array;
   }, []);
@@ -73,14 +73,23 @@ export function toAddProdRequest(newProduct) {
 
   const { 
     breed, breedType, fatherBreed, motherBreed, name, birthDate,
-    type, farmFrom
+    type, farmFrom, adg, fcr, bft, lsba, houseType, birthWeight,
+    minPrice, maxPrice, leftTeats, rightTeats, otherDetails
   } = newProduct;
 
   return {
-    name,
-    breed: breedType === 'pure' ? toLower(breed) : toLower(`${fatherBreed}+${motherBreed}`),
-    type: type.data,
     farm_from_id: farmFrom.id,
-    birthdate: birthDate
+    name,
+    type: type.data,
+    breed: breedType === 'pure' ? toLower(breed) : toLower(`${fatherBreed}+${motherBreed}`),
+    birthdate: birthDate,
+    adg, fcr, bft, lsba,
+    house_type: houseType? houseType.data : null,
+    birth_weight: birthWeight,
+    min_price: minPrice,
+    max_price: maxPrice,
+    left_teats: leftTeats,
+    right_teats: rightTeats,
+    other_details: otherDetails
   }
 }

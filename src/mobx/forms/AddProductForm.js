@@ -7,6 +7,7 @@ import { showToast, cleanFields, getValues } from '../../utils';
 import { validate } from 'validate.js';
 
 import ProductsStore from '../stores/ProductsStore';
+import { Navigation } from '../../services';
 
 class AddProductForm {
 
@@ -42,6 +43,20 @@ class AddProductForm {
     minPrice: null,
     maxPrice: null,
     breed: null,
+    breedType: 'pure',
+    fatherBreed: null,
+    motherBreed: null,
+    birthDate: null,
+    birthWeight: null,
+    farmFrom: null,
+    houseType: null,
+    adg: null,
+    fcr: null,
+    bft: null,
+    lsba: null,
+    leftTeats: null,
+    rightTeats: null,
+    otherDetails: null
   }
 
   formRules = {
@@ -152,6 +167,14 @@ class AddProductForm {
     otherDetails: ''
   }
 
+  @observable pickerRefs = [
+
+  ];
+
+  @action addRef(ref) {
+    this.pickerRefs.push(ref);
+  }
+
   @action setValue(field, value) {
     this.form[field] = value;
   }
@@ -183,11 +206,14 @@ class AddProductForm {
           this.form[field] = this.defaultFormState[field];
         }
       }
+      this.pickerRefs.map(clear => clear());
     });
   }
 
   @action async submitForm() {
-    ProductsStore.addProduct(this.form);
+    await ProductsStore.addProduct(this.form);
+    this.resetForm();
+    Navigation.back();
   }
 
 }

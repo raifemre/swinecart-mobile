@@ -15,7 +15,10 @@ class PickerWrapper extends Component {
   }
 
   renderField = settings => {
+    const { form } = this.props;
     const { selectedItem, defaultText, getLabel, clear } = settings;
+    
+    form.addRef(clear);
 
     return (
       <View style={styles.fieldStyle}>
@@ -78,6 +81,7 @@ class PickerWrapper extends Component {
         <CustomPicker
           placeholder={`Choose ${placeholder}`}
           fieldTemplate={this.renderField}
+          defaultValue={null}
           options={options}
           onValueChange={this.onValueChange}
           getLabel={getLabel}
