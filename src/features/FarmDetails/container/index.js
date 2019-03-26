@@ -51,13 +51,13 @@ class FarmDetails extends Component {
               title='Farm Information'
             />
             <Right style={{ flex: 1 }}>
-              <IconButton marginLeft={0} marginRight={0}
+              {/* <IconButton marginLeft={0} marginRight={0}
                 size={26}
                 color='#ffffff'
                 name='delete'
                 type='MaterialIcons'
                 onPress={this.deleteFarm}
-              />
+              /> */}
             </Right>
           </HeaderWrapper>
           <View style={{ flex: 1 }}>

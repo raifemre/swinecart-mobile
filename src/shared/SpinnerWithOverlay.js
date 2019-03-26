@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import Overlay from 'react-native-loading-spinner-overlay';
-import Spinner from 'react-native-spinkit';
+// import Spinner from 'react-native-spinkit';
+import { Spinner } from 'native-base';
 
-function SpinnerWithOverlay({ visible, textContent = 'Loading...' }) {
+function SpinnerWithOverlay({ visible  }) {
   return (
     <Overlay
       visible={visible}
-      overlayColor='rgba(255, 255, 255, 0.70)'
+      overlayColor='rgba(0, 0, 0, 0.5)'
       customIndicator={(
         <Spinner
-          type='Pulse'
-          color='#00695C'
-          size={100}
+          color='#ffffff'
         />
       )}
-      textContent={textContent}
-      textStyle={{
-        fontFamily: 'OpenSans-SemiBold',
-        color: '#00695C',
-        fontSize: 18,
-      }}
     />
   );
 }

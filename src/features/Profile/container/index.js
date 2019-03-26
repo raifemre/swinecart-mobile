@@ -19,6 +19,7 @@ import OfficeInfo from '../components/OfficeInfo';
 import Farms from '../components/Farms';
 import ChangePassword from '../components/ChangePassword';
 import Segments from '../../../shared/Segments';
+import IconButton from '../../../shared/IconButton';
 @inject('FarmStore', 'AuthStore')
 @observer
 class Profile extends Component {
@@ -56,22 +57,29 @@ class Profile extends Component {
             </Left>
             <BodyWrapper title='Profile' />
             <Right style={[contentStyle]}>
-              <FlatButton transparent onPress={this.logout}>
-                <IconWrapper name='filter-list' color='#ffffff' />
-              </FlatButton>
+              <IconButton
+                marginLeft={0}
+                marginRight={0}
+                size={30}
+                name='logout-variant'
+                color='#ffffff'
+                type='MaterialCommunityIcons'
+                onPress={this.logout}
+              />
             </Right>
           </HeaderWrapper>
           <Segments
-            values={['Office Info', 'Farms', 'Change Password']}
+            // values={['Office Info', 'Farms', 'Change Password']}
+            values={['Farms', 'Change Password']}
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.setIndex}
           />
           <Content padder>
-            {this.state.selectedIndex === 0 && <OfficeInfo />}
+            {/* {this.state.selectedIndex === 0 && <OfficeInfo />} */}
             {
-              this.state.selectedIndex === 1 && <Farms />
+              this.state.selectedIndex === 0 && <Farms />
             }
-            {this.state.selectedIndex === 2 && <ChangePassword />}
+            {this.state.selectedIndex === 1 && <ChangePassword />}
           </Content>
         </Container>
       </React.Fragment>

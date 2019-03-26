@@ -51,14 +51,14 @@ class Farm extends Component {
               </Grid>
             </Body>
             <Right>
-              <IconButton
+              {/* <IconButton
                 marginLeft={0}
                 marginRight={0}
                 size={24}
                 name='more-vert'
                 type='MaterialIcons'
                 onPress={this.goToFarm}
-              />
+              /> */}
             </Right>
           </CardItem>
         </Card>
