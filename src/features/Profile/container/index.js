@@ -9,10 +9,8 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import FlatButton from '../../../shared/FlatButton';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
-import IconWrapper from '../../../shared/IconWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 import OfficeInfo from '../components/OfficeInfo';
@@ -69,17 +67,15 @@ class Profile extends Component {
             </Right>
           </HeaderWrapper>
           <Segments
-            // values={['Office Info', 'Farms', 'Change Password']}
-            values={['Farms', 'Change Password']}
+            values={['Office Info', 'Farms', 'Change Password']}
+            // values={['Farms', 'Change Password']}
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.setIndex}
           />
           <Content padder>
-            {/* {this.state.selectedIndex === 0 && <OfficeInfo />} */}
-            {
-              this.state.selectedIndex === 0 && <Farms />
-            }
-            {this.state.selectedIndex === 1 && <ChangePassword />}
+            {this.state.selectedIndex === 0 && <OfficeInfo />}
+            {this.state.selectedIndex === 1 && <Farms />}
+            {this.state.selectedIndex === 2 && <ChangePassword />}
           </Content>
         </Container>
       </React.Fragment>
