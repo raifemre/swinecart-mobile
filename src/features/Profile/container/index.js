@@ -23,11 +23,11 @@ import IconButton from '../../../shared/IconButton';
 class Profile extends Component {
 
   componentDidMount() {
-    this.props.FarmStore.getFarms();
+    // this.props.FarmStore.getFarms();
   }
 
   state = {
-    selectedIndex: 1
+    selectedIndex: 2
   }
 
   setIndex = index => {

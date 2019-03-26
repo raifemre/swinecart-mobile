@@ -1,40 +1,17 @@
 import React, { Component } from 'react';
-import { Form, View } from 'native-base';
+import { View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
 import PasswordField from '../../../shared/PasswordField';
-import PrimaryButton from '../../../shared/PrimaryButton';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
-import TextWrapper from '../../../shared/TextWrapper';
+import ButtonWrapper from '../../../shared/ButtonWrapper';
 
-import ChangePasswordDialog from './ChangePasswordDialog';
 @inject('UserStore', 'ChangePasswordForm')
 @observer
 class ChangePassword extends Component {
 
-  state = {
-    visible: false
-  }
-
-  submit = () => {
-    this.closeDialog();
+  onClick = () => {
     this.props.ChangePasswordForm.submitForm();
-  }
-
-  handleClick = () => {
-    const { ChangePasswordForm } = this.props;
-    const form = ChangePasswordForm.cleanForm();
-    if (ChangePasswordForm.validateFields(form)) {
-      this.openDialog();
-    }
-  }
-
-  openDialog = () => {
-    this.setState({ visible: true });
-  }
-
-  closeDialog = () => {
-    this.setState({ visible: false });
   }
 
   render() {
@@ -43,8 +20,7 @@ class ChangePassword extends Component {
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={ChangePasswordForm.loading} textContent='Changing Password...'/>
-        <ChangePasswordDialog visible={this.state.visible} submit={this.submit} closeDialog={this.closeDialog} />
-        <Form style={{ paddingTop: 10 }}>
+        <View style={{ marginTop: 10 }}>
           <PasswordField
             form={ChangePasswordForm}
             field={'currentPassword'}
@@ -58,18 +34,16 @@ class ChangePassword extends Component {
           <PasswordField
             form={ChangePasswordForm}
             field={'newPasswordConfirmation'}
-            placeholder='Confirm New Password'
+            placeholder='Re-type New Password'
           />
-        </Form>
+        </View>
         <View style={{ marginTop: 10 }}>
-          <PrimaryButton block onPress={this.handleClick}>
-            <TextWrapper
-              text='Submit'
-              font='OpenSans-Bold'
-              size={16}
-              color='#ffffff'
-            />
-          </PrimaryButton>
+          <ButtonWrapper 
+            onPress={this.onClick}
+            text='Submit'
+            textColor='#ffffff'
+            textSize={18}
+          />
         </View>
       </React.Fragment>
     );

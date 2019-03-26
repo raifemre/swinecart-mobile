@@ -1,14 +1,11 @@
-import {
-  observable, action, runInAction, toJS
-} from 'mobx';
-
-import { showToast, cleanFields, sleep } from '../../utils';
+import { observable, action, runInAction } from 'mobx';
+import { showMessage } from "react-native-flash-message";
+import { validate } from 'validate.js';
+import { forOwn } from 'lodash';
 
 import AuthStore from '../stores/AuthStore';
-import CommonStore from '../stores/CommonStore';
-import UserStore from '../stores/UserStore';
-
-import { Navigation } from '../../services';
+import errorMessages from './errorMessages';
+import MessageToast from '../../shared/MessageToast';
 
 class LoginForm {
 
@@ -19,7 +16,11 @@ class LoginForm {
 
   formRules = {
     email: {
+      presence: errorMessages.presence,
       email: true,
+    },
+    password: {
+      presence: errorMessages.presence
     }
   }
 
@@ -28,21 +29,36 @@ class LoginForm {
   @observable form = {
     email: 'kylee.streich@bechtelar.org',
     password: 'secret12'
+    // email: null,
+    // password: null
   }
 
   @observable errors = {
-    email: '',
-    password: ''
+    email: null,
+    password: null
+  }
+
+  @observable clearErrors = (errors) => {
+    forOwn(this.errors, (value, key) => {
+      if (errors) {
+        if (!errors[key] && value !== errors[key]) {
+          this.errors[key] = null;
+        }
+      }
+      else {
+        this.errors[key] = null;
+      }
+    });
+  }
+
+  @observable showErrors = errors => {
+    forOwn(errors, (value, key) => {
+      this.errors[key] = value[0];
+    });
   }
 
   @action setValue(field, value) {
-    // this.validateField(field, value);
-    this.form[field] = value;
-  }
-
-  @action validateField(field, value) {
-    // const error = validate({ [field]: value }, this.formRules);
-    this.errors[field] = error ? error[field][0] : '';
+    this.form[field] = value === '' ? null : value;
   }
 
   @action resetForm() {
@@ -56,40 +72,35 @@ class LoginForm {
   }
 
   @action validateFields(form) {
-    // const errors = validate(form, this.formRules);
-    
-    // if(errors) {
-    //   for (const field in errors) {
-    //     if (errors.hasOwnProperty(field)) {
-    //       this.errors[field] = errors[field][0];
-    //     }
-    //   }
-    //   return false;
-    // }
-
-    // for (const field in this.errors) {
-    //   if (this.errors.hasOwnProperty(field)) {
-    //     this.errors[field] = '';
-    //   }
-    // }
-
+    const errors = validate(form, this.formRules);
+    this.clearErrors(errors);
+    if (errors) {
+      this.showErrors(errors);
+      // console.dir(errors);
+      return false;
+    }
     return true;
   }
 
   @action async submitForm() {
-    this.loading = true;
     try {
-      const form = cleanFields(toJS(this.form));
-      if (this.validateFields(form)) {
-        await AuthStore.login(form);
+      this.loading = true;
+      if (this.validateFields(this.form)) {
+        await AuthStore.login(this.form);
       }
     }
-    catch (error) {
-      showToast(error.message, 'danger', 'bottom');
+    catch(err) {
+      showMessage({
+        message: err.message,
+        type: 'danger'
+      });
     }
-    runInAction(() => {
-      this.loading = false;
-    });
+    finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+
   }
 
 }

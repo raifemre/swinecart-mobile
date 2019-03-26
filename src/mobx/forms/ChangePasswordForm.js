@@ -2,8 +2,10 @@ import {
   observable, action, runInAction, toJS
 } from 'mobx';
 
-import { showToast, cleanFields, sleep } from '../../utils';
-import UserStore from '../stores/UserStore';
+import { validate } from 'validate.js';
+import { forOwn } from 'lodash';
+
+import { cleanFields } from '../../utils';
 
 class ChangePasswordForm {
 
@@ -14,23 +16,72 @@ class ChangePasswordForm {
   }
 
   formRules = {
-
+    currentPassword: {
+      presence: {
+        allowEmpty: false,
+        message: "^This field is required"
+      }
+    },
+    newPassword: {
+      presence: {
+        allowEmpty: false,
+        message: "^New Password can't be blank"
+      },
+      length: {
+        minimum: 8,
+        tooShort: "^New Password is too short"
+      }
+    },
+    newPasswordConfirmation: {
+      presence: {
+        allowEmpty: false,
+        message: "^Confirm New Password can't be blank"
+      },
+      equality: {
+        attribute: 'newPassword',
+        message: '^Must be the same as New Password',
+        comparator: function (v1, v2) {
+          return v1 === v2;
+        }
+      }
+    }
   }
 
   @observable loading = false;
 
   @observable form = {
-    currentPassword: 'secret121',
+    currentPassword: 'secret12',
     newPassword: 'secret12',
     newPasswordConfirmation: 'secret12'
   }
 
-  @action setValue(field, value) {
-    this.form[field] = value;
+  @observable errors = {
+    currentPassword: null,
+    newPassword: null,
+    newPasswordConfirmation: null
   }
 
-  @action validateField(field, validator, failMessage) {
+  @observable clearErrors = (errors) => {
+    forOwn(this.errors, (value, key) => {
+      if (errors) {
+        if (!errors[key] && value !== errors[key]) {
+          this.errors[key] = null;
+        }
+      }
+      else {
+        this.errors[key] = null;
+      }
+    });
+  }
 
+  @observable showErrors = errors => {
+    forOwn(errors, (value, key) => {
+      this.errors[key] = value[0];
+    });
+  }
+
+  @action setValue(field, value) {
+    this.form[field] = value === '' ? null : value;
   }
 
   @action cleanForm() {
@@ -48,53 +99,20 @@ class ChangePasswordForm {
   }
 
   @action validateFields(form) {
-    const { currentPassword, newPassword, newPasswordConfirmation } = form;
-
-    if(currentPassword === '') {
-      showToast('Current Password is required!', 'danger', 'bottom');
+    const errors = validate(form, this.formRules);
+    this.clearErrors(errors);
+    if (errors) {
+      this.showErrors(errors);
+      // console.dir(errors);
       return false;
     }
-
-    if (newPassword === '') {
-      showToast('New Password is required!', 'danger', 'bottom');
-      return false;
-    }
-
-    if (newPasswordConfirmation === '') {
-      showToast('Confirm New Password is required!', 'danger', 'bottom');
-      return false;
-    }
-
-    if (newPassword.length < 8) {
-      showToast('New Password length must be 8 or longer!', 'danger', 'bottom');
-      return false;
-    }
-
-    if (newPassword !== newPasswordConfirmation) {
-      showToast('Passwords must be equal!', 'danger', 'bottom');
-      return false;
-    }
-
     return true;
   }
 
   @action async submitForm() {
-    this.loading = true;
-    try {
-      const form = this.cleanForm();
-      // if (this.validateFields(form)) {
-        const { message } = await UserStore.changePassword(form);
-        // await UserStore.changePassword(form);
-        showToast(message, 'success', 'bottom');
-        // this.resetForm();
-      // }
+    if (this.validateFields(this.form)) {
+
     }
-    catch(err) {
-      showToast(err.message, 'danger', 'bottom');
-    }
-    runInAction(() => {
-      this.loading = false;
-    });
   }
 
 }

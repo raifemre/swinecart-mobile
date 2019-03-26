@@ -147,29 +147,27 @@ class AddProductForm {
   }
 
   @observable errors = {
-    name: '',
-    type: '',
-    minPrice: '',
-    maxPrice: '',
-    breed: '',
-    fatherBreed: '',
-    motherBreed: '',
-    birthDate: '',
-    birthWeight: '',
-    farmFrom: '',
-    houseType: '',
-    adg: '',
-    fcr: '',
-    bft: '',
-    lsba: '',
-    leftTeats: '',
-    rightTeats: '',
-    otherDetails: ''
+    name: null,
+    type: null,
+    minPrice: null,
+    maxPrice: null,
+    breed: null,
+    fatherBreed: null,
+    motherBreed: null,
+    birthDate: null,
+    birthWeight: null,
+    farmFrom: null,
+    houseType: null,
+    adg: null,
+    fcr: null,
+    bft: null,
+    lsba: null,
+    leftTeats: null,
+    rightTeats: null,
+    otherDetails: null
   }
 
-  @observable pickerRefs = [
-
-  ];
+  @observable pickerRefs = [];
 
   @action addRef(ref) {
     this.pickerRefs.push(ref);

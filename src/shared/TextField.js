@@ -54,7 +54,7 @@ class TextField extends Component {
       }),
       fontSize: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [16, 13],
+        outputRange: [16, 12],
       }),
       color: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
@@ -63,7 +63,7 @@ class TextField extends Component {
     };
 
     return (
-      <View style={{ marginVertical: 15 }}>
+      <View style={{ marginVertical: 10 }}>
         <View style={[{ borderColor: editable ? '#2d3436' : '#95a5a6' }, containerStyle]}>
           <Animated.Text style={labelStyle}>
             {placeholder}
@@ -81,10 +81,10 @@ class TextField extends Component {
           />
         </View>
         {
-          form.errors[field] !== ''
+          form.errors[field]
             &&
-          <View style={{ paddingLeft: 10 }}>
-            <TextWrapper text={form.errors[field]} size={13} color='#db222a' />
+          <View style={{ paddingLeft: 15 }}>
+            <TextWrapper text={form.errors[field]} size={12} color='#db222a' />
           </View> 
         }
       </View>

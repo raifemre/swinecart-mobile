@@ -1,12 +1,6 @@
-import {
-  observable, action, runInAction, computed
-} from 'mobx';
+import { observable, action, runInAction, computed } from 'mobx';
+import { Auth } from '../../services';
 
-import {
-  Auth, BreederProfile
-} from '../../services';
-
-import { transformChangePass } from '../../utils';
 class UserStore {
 
   @observable user = null;
@@ -28,22 +22,6 @@ class UserStore {
     runInAction(() => {
       this.user = undefined;
     });
-  }
-
-  @action async changePassword(form) {
-    const { error, message, data } = await BreederProfile.changePassword(transformChangePass(form));
-    if (error) {
-      const { current_password } = error;
-      if(current_password) {
-        throw new Error(current_password[0]);
-      }
-      else {
-        throw new Error('Something happened!');
-      }
-    }
-    else {
-      return { message, data };
-    }
   }
 
   @computed get userId() {
