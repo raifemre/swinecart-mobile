@@ -13,10 +13,6 @@ import {
 class OfficeInfo extends Component {
 
   render() {
-    const { UserStore, OfficeInfoForm } = this.props;
-    const { isEditable } = this.state;
-    // console.log(UserStore.breederProfile);
-
     return (
       <React.Fragment>
       </React.Fragment>

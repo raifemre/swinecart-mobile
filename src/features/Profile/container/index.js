@@ -68,7 +68,6 @@ class Profile extends Component {
           </HeaderWrapper>
           <Segments
             values={['Office Info', 'Farms', 'Change Password']}
-            // values={['Farms', 'Change Password']}
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.setIndex}
           />
