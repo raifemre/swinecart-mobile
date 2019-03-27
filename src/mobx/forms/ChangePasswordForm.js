@@ -95,29 +95,27 @@ class ChangePasswordForm {
   }
 
   @action async submitForm() {
-    if (this.validateFields(this.data)) {
-      try {
-        this.loading = true;
-        if (this.validateFields(this.data)) {
-          await ProfileStore.changePassword(this.data);
-          this.resetForm();
-          showMessage({
-            message: 'Change Password Successful!',
-            type: 'success',
-          });
-        }
-      }
-      catch (err) {
+    try {
+      this.loading = true;
+      if (this.validateFields(this.data)) {
+        await ProfileStore.changePassword(this.data);
+        this.resetForm();
         showMessage({
-          message: err.message,
-          type: 'danger'
+          message: 'Change Password Successful!',
+          type: 'success',
         });
       }
-      finally {
-        runInAction(() => {
-          this.loading = false;
-        });
-      }
+    }
+    catch (err) {
+      showMessage({
+        message: err.message,
+        type: 'danger'
+      });
+    }
+    finally {
+      runInAction(() => {
+        this.loading = false;
+      });
     }
   }
 
