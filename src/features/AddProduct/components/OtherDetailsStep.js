@@ -1,9 +1,8 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { ScrollView } from 'react-native';
-import { View, Button, Grid, Col } from 'native-base';
+import { View } from 'native-base';
 
-import TextField from '../../../shared/TextField';
 import TextWrapper from '../../../shared/TextWrapper';
 import TextAreaWrapper from '../../../shared/TextAreaWrapper';
 

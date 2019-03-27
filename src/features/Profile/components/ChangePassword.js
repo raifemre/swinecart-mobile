@@ -42,7 +42,7 @@ class ChangePassword extends Component {
             onPress={this.onClick}
             text='Submit'
             textColor='#ffffff'
-            textSize={18}
+            textSize={16}
           />
         </View>
       </React.Fragment>

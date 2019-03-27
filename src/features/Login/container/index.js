@@ -5,7 +5,7 @@ import Divider from 'react-native-divider';
 
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 import IconWrapper from '../../../shared/IconWrapper';
-import PrimaryButton from '../../../shared/PrimaryButton';
+import ButtonWrapper from '../../../shared/ButtonWrapper';
 import FlatButton from '../../../shared/FlatButton';
 import TextWrapper from '../../../shared/TextWrapper';
 import PasswordField from '../../../shared/PasswordField';
@@ -73,15 +73,12 @@ class Login extends Component {
                   field='password'
                 />
                   <View style={{ marginTop: 10 }}>
-                    <PrimaryButton block onPress={this.login}>
-                      <TextWrapper
-                        uppercase={false}
-                        color='#ffffff'
-                        text='Login'
-                        font='OpenSans-Bold'
-                        size={16}
-                      />
-                    </PrimaryButton>
+                    <ButtonWrapper
+                      onPress={this.login}
+                      text='Submit'
+                      textColor='#ffffff'
+                      textSize={16}
+                    />
                   </View>
                   <View style={{ marginVertical: 5 }}>
                     <FlatButton block

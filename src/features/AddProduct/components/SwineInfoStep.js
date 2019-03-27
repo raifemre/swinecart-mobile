@@ -43,7 +43,7 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
               transparent
               onPress={() => AddProductForm.setValue('breedType', 'pure')}
               style={{ 
-                backgroundColor: AddProductForm.form.breedType === 'pure' ? '#00695C' : '#ffffff',
+                backgroundColor: AddProductForm.data.breedType === 'pure' ? '#00695C' : '#ffffff',
                 borderWidth: 2,
                 borderColor: '#00695C',
                 borderBottomLeftRadius: 5,
@@ -56,7 +56,7 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
                 text='Pure Breed'
                 font='OpenSans-Bold'
                 size={14}
-                color={AddProductForm.form.breedType === 'pure' ? '#ffffff' : '#00695C' }
+                color={AddProductForm.data.breedType === 'pure' ? '#ffffff' : '#00695C' }
             />
             </Button>
           </Col>
@@ -66,7 +66,7 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
               transparent
               onPress={() => AddProductForm.setValue('breedType', 'cross')}
               style={{ 
-                backgroundColor: AddProductForm.form.breedType === 'pure' ? '#ffffff' : '#00695C',
+                backgroundColor: AddProductForm.data.breedType === 'pure' ? '#ffffff' : '#00695C',
                 borderWidth: 2,
                 borderColor: '#00695C',
                 borderBottomLeftRadius: 0,
@@ -79,13 +79,13 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
                 text='Cross Breed'
                 font='OpenSans-Bold'
                 size={14}
-                color={AddProductForm.form.breedType === 'pure' ? '#00695C' : '#ffffff' }
+                color={AddProductForm.data.breedType === 'pure' ? '#00695C' : '#ffffff' }
               />
             </Button>
           </Col>
         </Grid>
         {
-          AddProductForm.form.breedType === 'pure' &&
+          AddProductForm.data.breedType === 'pure' &&
           <TextField
             form={AddProductForm}
             placeholder='Breed'
@@ -93,7 +93,7 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
           />
         }
         {
-          AddProductForm.form.breedType === 'cross' &&
+          AddProductForm.data.breedType === 'cross' &&
           <React.Fragment>
             <TextField
               form={AddProductForm}

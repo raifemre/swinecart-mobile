@@ -15,6 +15,7 @@ function ButtonWrapper(props) {
       style={{ 
         borderRadius: 5,
         backgroundColor: buttonColor,
+        elevation: 0
       }}>
       <TextWrapper
         color={textColor}

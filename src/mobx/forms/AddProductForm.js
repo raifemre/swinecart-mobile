@@ -124,7 +124,7 @@ class AddProductForm {
 
   @observable loading = false;
 
-  @observable form = {
+  @observable data = {
     name: null,
     type: null,
     minPrice: null,
@@ -167,30 +167,48 @@ class AddProductForm {
     otherDetails: null
   }
 
-  @observable pickerRefs = [];
+  @observable clearErrors = (errors) => {
+    forOwn(this.errors, (value, field) => {
+      if (errors) {
+        if (!errors[field] && value !== errors[field]) {
+          this.errors[field] = null;
+        }
+      }
+      else {
+        this.errors[field] = null;
+      }
+    });
+  }
+
+  @observable showErrors = errors => {
+    forOwn(errors, (value, field) => {
+      this.errors[field] = value[0];
+    });
+  }
+
+  @observable showError = (field, error) => {
+    runInAction(() => {
+      this.errors[field] = error;
+    });
+  }
 
   @action addRef(ref) {
     this.pickerRefs.push(ref);
   }
 
   @action setValue(field, value) {
-    this.form[field] = value;
+    this.data[field] = value;
   }
 
-  @action validateField(field, value) {
-    const error = validate({ [field]: value }, this.formRules);
-    this.errors[field] = error ? error[field][0] : '';
-  }
-  
   @action validateStep(index) {
     const errors = validate(
-      getValues(this.steps[index], this.form),
+      getValues(this.steps[index], this.data),
       getValues(this.steps[index], this.formRules),
     );
-    this.steps[index].map(field => this.errors[field] = '');
+    this.steps[index].map(field => this.errors[field] = null);
     if (errors) {
       this.steps[index].map(field => {
-        this.errors[field] = errors[field] ? errors[field][0] : '';
+        this.errors[field] = errors[field] ? errors[field][0] : null;
       });
       return false;
     }
@@ -199,18 +217,17 @@ class AddProductForm {
 
   @action resetForm() {
     runInAction(() => {
-      for (const field in this.form) {
-        if (this.form.hasOwnProperty(field)) {
-          this.form[field] = this.defaultFormState[field];
+      for (const field in this.data) {
+        if (this.data.hasOwnProperty(field)) {
+          this.data[field] = this.defaultFormState[field];
         }
       }
-      this.pickerRefs.map(clear => clear());
     });
   }
 
   @action async submitForm() {
-    await ProductsStore.addProduct(this.form);
     this.resetForm();
+    // await ProductsStore.addProduct(this.data);
     Navigation.back();
   }
 

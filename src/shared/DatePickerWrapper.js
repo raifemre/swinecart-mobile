@@ -23,18 +23,10 @@ class DatePickerWrapper extends Component {
 
     return (
       <View style={{ marginTop: 15, marginBottom: 15 }}>
-        {form.form[field] && <View style={{ position: 'absolute', top: -20, left: 10 }}>
-          <TextWrapper
-            text={'Birth Date'}
-            font='OpenSans-Bold'
-            size={13}
-            color='#000000'
-          />
-        </View>}
         <DatePicker
           style={{ width: '100%', height: 40 }}
           mode='date'
-          date={form.form[field]}
+          date={form.data[field]}
           showIcon={false}
           placeholder={`Choose ${placeholder}`}
           format='MMMM Do YYYY'
