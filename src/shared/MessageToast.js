@@ -8,10 +8,13 @@ function MessageToast({ message: props }) {
 
   const colors = {
     success: "#5cb85c",
-    info: "#5bc0de",
-    warning: "#f0ad4e",
     danger: '#e74c3c',
   };
+
+  const icons = {
+    success: 'check-circle',
+    danger: 'alert-circle',
+  }
 
   const { message, type } = props;
 
@@ -26,7 +29,7 @@ function MessageToast({ message: props }) {
             <IconWrapper
               size={30}
               color='#ffffff'
-              name='alert-circle'
+              name={icons[type]}
               type='MaterialCommunityIcons'
               style={{ marginLeft: 0, marginRight: 4 }}
             />

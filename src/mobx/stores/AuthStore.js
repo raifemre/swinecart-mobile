@@ -19,8 +19,7 @@ class AuthStore {
 
   @action async login(form) {
     const { error, data }  = await Auth.login(form);
-
-    if(error) {
+    if (error) {
       throw new Error(error);
     }
     else {

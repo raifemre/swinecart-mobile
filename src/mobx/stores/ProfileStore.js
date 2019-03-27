@@ -1,10 +1,8 @@
 import {
-  observable, action, runInAction, computed
+  observable, action, runInAction, toJS
 } from 'mobx';
 
-import {
-  BreederProfile
-} from '../../services';
+import { BreederProfile } from '../../services';
 
 import UserStore from './UserStore';
 
@@ -23,6 +21,18 @@ class ProfileStore {
       }
       catch (e) {
         console.log(e);
+      }
+    }
+  }
+
+  @action async changePassword(requestData) {
+    if (UserStore.userRole === 'Breeder') {
+      const { error, data, message } = await BreederProfile.changePassword(toJS(requestData));
+      if (error) {
+        throw new Error(error);
+      }
+      else {
+        // console.dir(data, message);
       }
     }
   }

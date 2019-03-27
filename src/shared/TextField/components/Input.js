@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 function Input(props) {
 
-  const { form, field, onBlur, onFocus, keyboardType } = props;
+  const { value, onBlur, onFocus, keyboardType } = props;
 
   const onChangeText = value => {
     const { form, field } = this.props;
@@ -17,7 +17,7 @@ function Input(props) {
       selectionColor='#000000'
       underlineColorAndroid='transparent'
       style={styles.inputStyle}
-      value={form.data[field]}
+      value={value}
       onFocus={onFocus}
       onBlur={onBlur}
       keyboardType={keyboardType}

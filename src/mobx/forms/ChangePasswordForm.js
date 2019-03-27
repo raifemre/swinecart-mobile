@@ -1,11 +1,10 @@
-import { observable, action, runInAction } from 'mobx';
+import { observable, action, runInAction, toJS } from 'mobx';
 import { showMessage } from 'react-native-flash-message';
 import { validate } from 'validate.js';
 import { forOwn } from 'lodash';
 
 import ProfileStore from '../stores/ProfileStore';
 import errorMessages from './errorMessages';
-
 
 class ChangePasswordForm {
 
@@ -41,9 +40,9 @@ class ChangePasswordForm {
   @observable loading = false;
 
   @observable data = {
-    currentPassword: null,
-    newPassword: null,
-    newPasswordConfirmation: null
+    currentPassword: 'secret12',
+    newPassword: 'secret12',
+    newPasswordConfirmation: 'secret12'
   }
 
   @observable errors = {
@@ -97,7 +96,28 @@ class ChangePasswordForm {
 
   @action async submitForm() {
     if (this.validateFields(this.data)) {
-
+      try {
+        this.loading = true;
+        if (this.validateFields(this.data)) {
+          await ProfileStore.changePassword(this.data);
+          this.resetForm();
+          showMessage({
+            message: 'Change Password Successful!',
+            type: 'success',
+          });
+        }
+      }
+      catch (err) {
+        showMessage({
+          message: err.message,
+          type: 'danger'
+        });
+      }
+      finally {
+        runInAction(() => {
+          this.loading = false;
+        });
+      }
     }
   }
 

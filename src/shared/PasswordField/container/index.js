@@ -23,21 +23,37 @@ class PasswordField extends Component {
     this.isFocused = new Animated.Value(form.data[field] ? 1 : 0);
   }
 
-  onFocus = () => {
+  componentWillUpdate(nextProps) {
+
+    const nextValue = nextProps.form.data[nextProps.field];
+
+    if (!nextValue) {
+      this.animate(0);
+    }
+    else {
+      const currValue = this.props.form.data[this.props.field];
+      if (currValue.length === 1) {
+        this.animate(1);
+      }
+    }
+  };
+  
+
+  animate = toValue => {
     Animated.timing(this.isFocused, {
-      toValue: 1,
+      toValue,
       duration: 500,
     }).start();
-    
+  }
+
+  onFocus = () => {
+    this.animate(1);
   }
 
   onBlur = () => {
     const { form, field } = this.props;
     if (!form.data[field]) {
-      Animated.timing(this.isFocused, {
-        toValue: 0,
-        duration: 500,
-      }).start();
+      this.animate(0);
     }
   }
 
@@ -64,7 +80,7 @@ class PasswordField extends Component {
       }),
       color: this.isFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: ['#7f8c8d', '#000'],
+        outputRange: ['#7f8c8d', '#000000'],
       }),
     };
 
@@ -75,6 +91,7 @@ class PasswordField extends Component {
           <Input 
             form={form}
             field={field}
+            value={form.data[field]}
             onBlur={this.onBlur}
             onFocus={this.onFocus}
             hidePassword={hidePassword}
