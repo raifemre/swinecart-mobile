@@ -96,7 +96,7 @@ export function toAddProdRequest(newProduct) {
 
 export function formatError(error) {
   if (isString(error)) {
-    return error;
+    return { errorMessage: error };
   }
   else if (isObject(error)) {
     const field = keys(error)[0];

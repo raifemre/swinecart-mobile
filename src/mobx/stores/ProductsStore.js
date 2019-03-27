@@ -10,7 +10,7 @@ import {
 
 import Product from '../models/Product';
 
-import { filterNewItems, toAddProdRequest } from '../../utils';
+import { filterNewItems, toAddProdRequest, formatError } from '../../utils';
 
 class ProductsStore {
 
@@ -66,7 +66,6 @@ class ProductsStore {
       const { error, data, message } = await BreederProducts.toggleStatus([id]);
       const { status } = data;
 
-      
       if (error) {
         throw new Error(error);
       }
@@ -83,7 +82,7 @@ class ProductsStore {
 
     }
     catch (err) {
-      console.log(err);
+
     }
     finally {
       runInAction(() => {
@@ -95,21 +94,28 @@ class ProductsStore {
   @action async deleteProduct(id) {
     try {
       this.loading = true;
-      // const { error, message } = await BreederProducts.deleteProduct([id]);
-      // runInAction(() => {
-      //   const index = this.findProduct(id);
-      //   this.products.remove(this.products[index]);
-      // });
+      const { error, message } = await BreederProducts.deleteProduct([id]);
+      if (error) {
+        throw new Error(formatError(error));
+      }
+      else {
+        runInAction(() => {
+          const index = this.findProduct(id);
+          this.products.remove(this.products[index]);
+          showMessage({
+            message: 'Deleted Product!',
+            type: 'success',
+          });
+        });
+      }
     }
     catch (err) {
       
     }
     finally {
-      setTimeout(() => {
-        runInAction(() => {
-          this.loading = false;
-        });
-      }, 3000);
+      runInAction(() => {
+        this.loading = false;
+      });
     }
   }
 

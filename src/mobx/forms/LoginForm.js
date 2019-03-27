@@ -28,7 +28,7 @@ class LoginForm {
   @observable loading = false;
 
   @observable data = {
-    email: 'kylee.streich@bechtelar.org',
+    email: 'kylee.streich@bechtelar.orgd',
     password: 'secret12'
     // email: null,
     // password: null
@@ -110,7 +110,7 @@ class LoginForm {
       }
     }
     catch(err) {
-      console.log(err);
+      // console.log(err);
       showMessage({
         message: err.message,
         type: 'danger'
