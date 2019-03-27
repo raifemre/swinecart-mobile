@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet, TextInput, Animated } from 'react-native';
 import { observer } from 'mobx-react';
 import { View } from 'native-base';
 
 import ErrorMessage from '../components/ErrorMessage';
 import Placeholder from '../components/Placeholder';
 import Input from '../components/Input';
-import RevealButton from '../components/RevealButton';
-
 
 @observer
-class PasswordField extends Component {
-
-  state = {
-    hidePassword: true
-  }
-
-  togglePassword = () => this.setState({ hidePassword: !this.state.hidePassword });
+class TextField extends Component {
 
   componentWillMount() {
     const { form, field } = this.props;
@@ -28,7 +20,7 @@ class PasswordField extends Component {
       toValue: 1,
       duration: 500,
     }).start();
-    
+
   }
 
   onBlur = () => {
@@ -43,17 +35,16 @@ class PasswordField extends Component {
 
   render() {
 
-    const { form, placeholder, field } = this.props;
+    const { form, placeholder, field, keyboardType } = this.props;
     const { fieldStyle } = styles;
-    const { hidePassword } = this.state;
 
     const error = form.errors[field];
     const borderColor = error ? '#e74c3c' : '#2d3436';
 
     const labelStyle = {
       position: 'absolute',
-      fontFamily: 'OpenSans-Bold',
       left: 10,
+      fontFamily: 'OpenSans-Bold',
       top: this.isFocused.interpolate({
         inputRange: [0, 1],
         outputRange: [7, -22],
@@ -72,19 +63,15 @@ class PasswordField extends Component {
       <View style={{ marginVertical: 10, paddingTop: 0 }}>
         <View style={[fieldStyle, { borderColor }]}>
           <Placeholder placeholder={placeholder} labelStyle={labelStyle} />
-          <Input 
+          <Input
             form={form}
             field={field}
             onBlur={this.onBlur}
             onFocus={this.onFocus}
-            hidePassword={hidePassword}
-          />
-          <RevealButton
-            hidePassword={hidePassword}
-            togglePassword={this.togglePassword}
+            keyboardType={keyboardType}
           />
         </View>
-        { error && <ErrorMessage error={error}/> }
+        { error && <ErrorMessage error={error} /> }
       </View>
     );
   }
@@ -93,7 +80,7 @@ class PasswordField extends Component {
 const styles = StyleSheet.create({
   fieldStyle: {
     paddingTop: 0,
-    borderColor: '#2d3436', 
+    borderColor: '#2d3436',
     borderWidth: 2,
     height: 42,
     flexDirection: 'row',
@@ -101,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PasswordField;
+export default TextField;

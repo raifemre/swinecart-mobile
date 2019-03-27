@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 function Input(props) {
 
-  const { form, field, hidePassword, onBlur, onFocus } = props;
+  const { form, field, onBlur, onFocus, keyboardType } = props;
 
   const onChangeText = value => {
     const { form, field } = this.props;
@@ -20,7 +20,7 @@ function Input(props) {
       value={form.form[field]}
       onFocus={onFocus}
       onBlur={onBlur}
-      secureTextEntry={hidePassword}
+      keyboardType={keyboardType}
     />
   );
 
