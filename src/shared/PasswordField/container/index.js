@@ -69,9 +69,11 @@ class PasswordField extends Component {
       }),
     };
 
+    const borderColor = error ? '#e74c3c' : '#2d3436';
+
     return (
       <View style={{ marginVertical: 10, paddingTop: 0 }}>
-        <View style={fieldStyle}>
+        <View style={[fieldStyle, { borderColor }]}>
           <Placeholder placeholder={placeholder} labelStyle={labelStyle} />
           <Input 
             form={form}
