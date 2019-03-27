@@ -36,7 +36,7 @@ function ProductInfoStep({ AddProductForm, FarmStore }) {
           size={16}
           color='#004d40'
         />
-        <Grid style={{ marginTop: 10, marginBottom: 20, }}>
+        <Grid style={{ marginTop: 10, marginBottom: 20 }}>
           <Col>
             <Button 
               full

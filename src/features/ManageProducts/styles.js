@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   cardItemFirst: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 4,
-    paddingRight: 4,
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     borderTopLeftRadius: 5,
@@ -49,7 +49,10 @@ const styles = StyleSheet.create({
     width: 150,
     flex: 1,
     alignSelf: 'center',
-    borderRadius: 5
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5
   },
   flex1: {
     flex: 1

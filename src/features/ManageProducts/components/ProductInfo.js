@@ -32,8 +32,11 @@ function ProductInfo({ product, selected }) {
               font='OpenSans-Bold'
               color={ternary(selected, true, '#ffffff', '#2e3131')}
               size={15}
+              style={{ flex: 1 }}
             />
-            <StatusBadge status={product.status} />
+            <View style={{ flex: 1 }}>
+              <StatusBadge status={product.status} />
+            </View>
           </View>
           <TextWrapper
             text={`${type} - ${breed}`}

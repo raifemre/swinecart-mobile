@@ -12,7 +12,7 @@ function StatusBadge({ status }) {
         borderColor: status === 'displayed' ? '#00695C' : '#95A5A6',
         borderRadius: 5,
         borderWidth: 1,
-        alignSelf: 'flex-start',
+        alignSelf: 'flex-end',
         padding: 3,
         marginLeft: 4,
       }}>

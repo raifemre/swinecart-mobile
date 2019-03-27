@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'native-base';
 
-function TextWrapper(props) {
+function TextWrapper({ style, ...props }) {
   const { 
     text, 
     uppercase = false, 
@@ -13,7 +13,7 @@ function TextWrapper(props) {
   return (
     <Text
       uppercase={uppercase} 
-      style={{ fontSize: size, color, fontFamily: font, flex: 1 }}
+      style={{ fontSize: size, color, fontFamily: font, ...style }}
       numberOfLines={1}
     >
       {text}
