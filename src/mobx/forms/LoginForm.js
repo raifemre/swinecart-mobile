@@ -5,7 +5,6 @@ import { forOwn } from 'lodash';
 
 import AuthStore from '../stores/AuthStore';
 import errorMessages from './errorMessages';
-import MessageToast from '../../shared/MessageToast';
 
 class LoginForm {
 
@@ -17,7 +16,9 @@ class LoginForm {
   formRules = {
     email: {
       presence: errorMessages.presence,
-      email: true,
+      email: {
+        message: '^This is not a valid email'
+      },
     },
     password: {
       presence: errorMessages.presence
@@ -58,7 +59,7 @@ class LoginForm {
   }
 
   @action setValue(field, value) {
-    this.form[field] = value === '' ? null : value;
+    this.form[field] = value;
   }
 
   @action resetForm() {
@@ -76,7 +77,6 @@ class LoginForm {
     this.clearErrors(errors);
     if (errors) {
       this.showErrors(errors);
-      // console.dir(errors);
       return false;
     }
     return true;

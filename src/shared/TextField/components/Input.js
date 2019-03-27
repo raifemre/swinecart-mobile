@@ -8,7 +8,7 @@ function Input(props) {
 
   const onChangeText = value => {
     const { form, field } = this.props;
-    form.setValue(field, value);
+    form.setValue(field, value === '' ? null : value);
   }
 
   return (
