@@ -20,7 +20,7 @@ class PasswordField extends Component {
 
   componentWillMount() {
     const { form, field } = this.props;
-    this.isFocused = new Animated.Value(form.form[field] ? 1 : 0);
+    this.isFocused = new Animated.Value(form.data[field] ? 1 : 0);
   }
 
   onFocus = () => {
@@ -33,7 +33,7 @@ class PasswordField extends Component {
 
   onBlur = () => {
     const { form, field } = this.props;
-    if (!form.form[field]) {
+    if (!form.data[field]) {
       Animated.timing(this.isFocused, {
         toValue: 0,
         duration: 500,

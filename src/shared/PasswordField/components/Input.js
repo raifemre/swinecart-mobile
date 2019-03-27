@@ -17,7 +17,7 @@ function Input(props) {
       selectionColor='#000000'
       underlineColorAndroid='transparent'
       style={styles.inputStyle}
-      value={form.form[field]}
+      value={form.data[field]}
       onFocus={onFocus}
       onBlur={onBlur}
       secureTextEntry={hidePassword}

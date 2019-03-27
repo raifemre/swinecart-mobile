@@ -1,42 +1,33 @@
-import {
-  observable, action, runInAction, toJS
-} from 'mobx';
-
+import { observable, action, runInAction } from 'mobx';
+import { showMessage } from 'react-native-flash-message';
 import { validate } from 'validate.js';
 import { forOwn } from 'lodash';
 
-import { cleanFields } from '../../utils';
+import ProfileStore from '../stores/ProfileStore';
+import errorMessages from './errorMessages';
+
 
 class ChangePasswordForm {
 
   defaultFormState = {
-    currentPassword: '',
-    newPassword: '',
-    newPasswordConfirmation: ''
+    currentPassword: null,
+    newPassword: null,
+    newPasswordConfirmation: null
   }
 
   formRules = {
     currentPassword: {
-      presence: {
-        allowEmpty: false,
-        message: "^This field is required"
-      }
+      presence: errorMessages.presence
     },
     newPassword: {
-      presence: {
-        allowEmpty: false,
-        message: "^New Password can't be blank"
-      },
+      presence: errorMessages.presence,
       length: {
         minimum: 8,
         tooShort: "^New Password is too short"
       }
     },
     newPasswordConfirmation: {
-      presence: {
-        allowEmpty: false,
-        message: "^Confirm New Password can't be blank"
-      },
+      presence: errorMessages.presence,
       equality: {
         attribute: 'newPassword',
         message: '^Must be the same as New Password',
@@ -49,10 +40,10 @@ class ChangePasswordForm {
 
   @observable loading = false;
 
-  @observable form = {
-    currentPassword: 'secret12',
-    newPassword: 'secret12',
-    newPasswordConfirmation: 'secret12'
+  @observable data = {
+    currentPassword: null,
+    newPassword: null,
+    newPasswordConfirmation: null
   }
 
   @observable errors = {
@@ -81,18 +72,14 @@ class ChangePasswordForm {
   }
 
   @action setValue(field, value) {
-    this.form[field] = value === '' ? null : value;
-  }
-
-  @action cleanForm() {
-    return cleanFields(toJS(this.form));
+    this.data[field] = value === '' ? null : value;
   }
 
   @action resetForm() {
     runInAction(() => {
-      for (const field in this.form) {
-        if (this.form.hasOwnProperty(field)) {
-          this.form[field] = this.defaultFormState[field];
+      for (const field in this.data) {
+        if (this.data.hasOwnProperty(field)) {
+          this.data[field] = this.defaultFormState[field];
         }
       }
     });
@@ -103,14 +90,13 @@ class ChangePasswordForm {
     this.clearErrors(errors);
     if (errors) {
       this.showErrors(errors);
-      // console.dir(errors);
       return false;
     }
     return true;
   }
 
   @action async submitForm() {
-    if (this.validateFields(this.form)) {
+    if (this.validateFields(this.data)) {
 
     }
   }

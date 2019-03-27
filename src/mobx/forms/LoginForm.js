@@ -1,5 +1,5 @@
 import { observable, action, runInAction } from 'mobx';
-import { showMessage } from "react-native-flash-message";
+import { showMessage } from 'react-native-flash-message';
 import { validate } from 'validate.js';
 import { forOwn } from 'lodash';
 
@@ -9,8 +9,8 @@ import errorMessages from './errorMessages';
 class LoginForm {
 
   defaultFormState = {
-    email: '',
-    password: ''
+    email: null,
+    password: null
   }
 
   formRules = {
@@ -27,7 +27,7 @@ class LoginForm {
 
   @observable loading = false;
 
-  @observable form = {
+  @observable data = {
     email: 'kylee.streich@bechtelar.org',
     password: 'secret12'
     // email: null,
@@ -59,14 +59,14 @@ class LoginForm {
   }
 
   @action setValue(field, value) {
-    this.form[field] = value;
+    this.data[field] = value;
   }
 
   @action resetForm() {
     runInAction(() => {
-      for (const field in this.form) {
-        if (this.form.hasOwnProperty(field)) {
-          this.form[field] = this.defaultFormState[field];
+      for (const field in this.data) {
+        if (this.data.hasOwnProperty(field)) {
+          this.data[field] = this.defaultFormState[field];
         }
       }
     });
@@ -85,8 +85,8 @@ class LoginForm {
   @action async submitForm() {
     try {
       this.loading = true;
-      if (this.validateFields(this.form)) {
-        await AuthStore.login(this.form);
+      if (this.validateFields(this.data)) {
+        await AuthStore.login(this.data);
       }
     }
     catch(err) {
