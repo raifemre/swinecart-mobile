@@ -110,6 +110,7 @@ class LoginForm {
       }
     }
     catch(err) {
+      console.log(err);
       showMessage({
         message: err.message,
         type: 'danger'

@@ -2,6 +2,8 @@ import {
   observable, action, runInAction, get, set, has, autorun, remove, toJS
 } from 'mobx';
 
+import { showMessage } from 'react-native-flash-message';
+
 import { 
   BreederProducts, Navigation
 } from '../../services';
@@ -22,6 +24,7 @@ class ProductsStore {
   @observable products = null;
   @observable productsMap = new Map();
   @observable page = 1;
+  @observable loading = null;
 
   @action resetData(prop) {
     this[prop] = this.defaultState[prop];
@@ -58,23 +61,56 @@ class ProductsStore {
   }
 
   @action async toggleStatus(id) {
-    const { error, message, data } = await BreederProducts.toggleStatus([id]);
-    const { status } = data;
-    runInAction(() => {
-      const index = this.findProduct(id);
-      this.products[index].status = status;
-      // this.products[index] = this.products[index];
-    });
-    // this.products.push({});
-    // set(this.productsMap, `${id}`, product);
+    try {
+      this.loading = true;
+      const { error, data, message } = await BreederProducts.toggleStatus([id]);
+      const { status } = data;
+
+      
+      if (error) {
+        throw new Error(error);
+      }
+      else {
+        runInAction(() => {
+          const index = this.findProduct(id);
+          this.products[index].status = status;
+          showMessage({
+            message: `Product is now ${status}!`,
+            type: 'success',
+          });
+        });
+      }
+
+    }
+    catch (err) {
+      console.log(err);
+    }
+    finally {
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
   }
 
   @action async deleteProduct(id) {
-    const { error, message } = await BreederProducts.deleteProduct([id]);
-    runInAction(() => {
-      const index = this.findProduct(id);
-      this.products.remove(this.products[index]);
-    });
+    try {
+      this.loading = true;
+      // const { error, message } = await BreederProducts.deleteProduct([id]);
+      // runInAction(() => {
+      //   const index = this.findProduct(id);
+      //   this.products.remove(this.products[index]);
+      // });
+    }
+    catch (err) {
+      
+    }
+    finally {
+      setTimeout(() => {
+        runInAction(() => {
+          this.loading = false;
+        });
+      }, 3000);
+    }
   }
 
   @action async addProduct(newProduct) {

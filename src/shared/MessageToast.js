@@ -22,7 +22,7 @@ function MessageToast({ message: props }) {
     <FlashMessageWrapper>
       {wrapperInset => (
         <View 
-          style={{ flex: 1, backgroundColor: colors[type], height: 48, paddingLeft: 16 }}
+          style={{ flex: 1, backgroundColor: colors[type], height: 60, paddingLeft: 16 }}
         >
             <View style={{
             flex: 1, flexDirection: 'row', alignItems: 'center' }}>

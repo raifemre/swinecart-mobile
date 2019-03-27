@@ -16,7 +16,7 @@ function ProductFooter({ product, selected, ProductsStore }) {
   }
 
   onDeleteProduct = () => {
-    ProductsStore.deleteProduct(id)
+    ProductsStore.deleteProduct(id);
   }
 
   onToggleSelected = () => {
