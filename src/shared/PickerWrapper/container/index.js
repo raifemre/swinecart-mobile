@@ -8,6 +8,7 @@ import { CustomPicker } from 'react-native-custom-picker';
 import ErrorMessage from '../components/ErrorMessage';
 import Placeholder from '../components/Placeholder';
 import Input from '../components/Input';
+import Option from '../components/Option';
 
 @observer
 class PickerWrapper extends Component {
@@ -23,6 +24,12 @@ class PickerWrapper extends Component {
       <Input settings={settings} form={form} field={field} />
     );
 
+  }
+
+  renderOption = settings => {
+    return (
+      <Option settings={settings} />
+    );
   }
 
   onValueChange = value => {
@@ -54,6 +61,7 @@ class PickerWrapper extends Component {
           <CustomPicker
             placeholder={`Choose ${placeholder}`}
             fieldTemplate={this.renderField}
+            optionTemplate={this.renderOption}
             defaultValue={null}
             options={options}
             onValueChange={this.onValueChange}
