@@ -13,7 +13,8 @@ function TextWrapper(props) {
   return (
     <Text
       uppercase={uppercase} 
-      style={{ fontSize: size, color, fontFamily: font }}
+      style={{ fontSize: size, color, fontFamily: font, flex: 1 }}
+      numberOfLines={1}
     >
       {text}
     </Text>
