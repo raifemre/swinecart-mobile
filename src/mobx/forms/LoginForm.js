@@ -58,6 +58,12 @@ class LoginForm {
     });
   }
 
+  @observable showError = (field, error) => {
+    runInAction(() => {
+      this.errors[field] = error;
+    });
+  }
+
   @action setValue(field, value) {
     this.data[field] = value;
   }
@@ -86,7 +92,21 @@ class LoginForm {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        await AuthStore.login(this.data);
+        const { error, data, message } = await AuthStore.login(this.data);
+        if (error) {
+          const { field, errorMessage } = error;
+          if (field) {
+            this.showError(field, errorMessage);
+          }
+          else {
+            throw new Error(errorMessage);
+          }
+        }
+        else {
+          const { access_token } = data;
+          this.resetForm();
+          AuthStore.loginFlow(access_token);
+        }
       }
     }
     catch(err) {

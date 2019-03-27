@@ -12,18 +12,17 @@ import NotificationStore from './NotificationStore';
 import MessageStore from './MessageStore';
 import ProfileStore from './ProfileStore';
 
-class AuthStore {
+import { formatError } from '../../utils';
 
-  @observable loadingLogin = false;
+class AuthStore {
   @observable loadingLogout = false;
 
   @action async login(form) {
-    const { error, data }  = await Auth.login(form);
-    if (error) {
-      throw new Error(error);
-    }
-    else {
-      await this.loginFlow(data.access_token);
+    const { error, data, message }  = await Auth.login(form);
+    return {
+      error: formatError(error),
+      data,
+      message
     }
   }
 

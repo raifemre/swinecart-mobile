@@ -104,7 +104,7 @@ class ChangePasswordForm {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        const { error, data, message } =  await ProfileStore.changePassword(this.data);
+        const { error, data, message } = await ProfileStore.changePassword(this.data);
         if (error) {
           const { field, errorMessage } = error;
           if (field) {
