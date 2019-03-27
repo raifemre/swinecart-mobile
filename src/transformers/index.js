@@ -14,7 +14,6 @@ function changePassword(data) {
   return transformedData;
 }
 
-
 const transformers = {
   changePassword: memoize(changePassword)
 }

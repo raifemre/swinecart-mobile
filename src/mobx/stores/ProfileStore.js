@@ -6,6 +6,8 @@ import { BreederProfile } from '../../services';
 
 import UserStore from './UserStore';
 
+import { formatError } from '../../utils';
+
 class ProfileStore {
 
   @observable profile = null;
@@ -28,11 +30,10 @@ class ProfileStore {
   @action async changePassword(requestData) {
     if (UserStore.userRole === 'Breeder') {
       const { error, data, message } = await BreederProfile.changePassword(toJS(requestData));
-      if (error) {
-        throw new Error(error);
-      }
-      else {
-        // console.dir(data, message);
+      return {
+        error: formatError(error),
+        data,
+        message
       }
     }
   }

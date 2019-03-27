@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Toast } from 'native-base';
 import { has, get, set } from 'mobx';
 
-import { toLower } from 'lodash';
+import { toLower, isString, isObject, keys, camelCase } from 'lodash';
 
 export function formatBirthdate(birthdate) {
   return moment(new Date(birthdate)).format('LL');
@@ -91,5 +91,18 @@ export function toAddProdRequest(newProduct) {
     left_teats: leftTeats,
     right_teats: rightTeats,
     other_details: otherDetails
+  }
+}
+
+export function formatError(error) {
+  if (isString(error)) {
+    return error;
+  }
+  else if (isObject(error)) {
+    const field = keys(error)[0];
+    return {
+      field: camelCase(field),
+      errorMessage: error[field][0]
+    };
   }
 }

@@ -40,7 +40,7 @@ class ChangePasswordForm {
   @observable loading = false;
 
   @observable data = {
-    currentPassword: 'secret12',
+    currentPassword: 'secret121',
     newPassword: 'secret12',
     newPasswordConfirmation: 'secret12'
   }
@@ -52,21 +52,27 @@ class ChangePasswordForm {
   }
 
   @observable clearErrors = (errors) => {
-    forOwn(this.errors, (value, key) => {
+    forOwn(this.errors, (value, field) => {
       if (errors) {
-        if (!errors[key] && value !== errors[key]) {
-          this.errors[key] = null;
+        if (!errors[field] && value !== errors[field]) {
+          this.errors[field] = null;
         }
       }
       else {
-        this.errors[key] = null;
+        this.errors[field] = null;
       }
     });
   }
 
   @observable showErrors = errors => {
-    forOwn(errors, (value, key) => {
-      this.errors[key] = value[0];
+    forOwn(errors, (value, field) => {
+      this.errors[field] = value[0];
+    });
+  }
+
+  @observable showError = (field, error) => {
+    runInAction(() => {
+      this.errors[field] = error;
     });
   }
 
@@ -98,18 +104,29 @@ class ChangePasswordForm {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        await ProfileStore.changePassword(this.data);
-        this.resetForm();
-        showMessage({
-          message: 'Change Password Successful!',
-          type: 'success',
-        });
+        const { error, data, message } =  await ProfileStore.changePassword(this.data);
+        if (error) {
+          const { field, errorMessage } = error;
+          if (field) {
+            this.showError(field, errorMessage);
+          }
+          else {
+            throw new Error(errorMessage);
+          }
+        }
+        else {
+          this.resetForm();
+          showMessage({
+            message: 'Change Password Successful!',
+            type: 'success',
+          });
+        }
       }
     }
     catch (err) {
       showMessage({
         message: err.message,
-        type: 'danger'
+        type: 'danger',
       });
     }
     finally {
