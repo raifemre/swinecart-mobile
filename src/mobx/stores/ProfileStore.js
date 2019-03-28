@@ -27,9 +27,9 @@ class ProfileStore {
     }
   }
 
-  @action async changePassword(requestData) {
+  @action async changePassword(formData) {
     if (UserStore.userRole === 'Breeder') {
-      const { error, data, message } = await BreederProfile.changePassword(toJS(requestData));
+      const { error, data, message } = await BreederProfile.changePassword(toJS(formData));
       return {
         error: formatError(error),
         data,

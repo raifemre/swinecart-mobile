@@ -16,10 +16,6 @@ class ProductForm extends Component {
     await AddProductForm.submitForm();
   }
 
-  onPressNext = () => {
-    alert('hello');
-  }
-
   render() {
 
     const { AddProductForm } = this.props;
@@ -34,7 +30,6 @@ class ProductForm extends Component {
       <Wizard
         form={AddProductForm}
         onSubmitForm={this.onSubmitForm}
-        onPressNext={this.onPressNext}
         steps={steps}
       />
     );

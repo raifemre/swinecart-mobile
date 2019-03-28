@@ -5,12 +5,11 @@ import {
 import { showMessage } from 'react-native-flash-message';
 
 import { 
-  BreederProducts, Navigation
+  BreederProducts
 } from '../../services';
 
-import Product from '../models/Product';
 
-import { filterNewItems, toAddProdRequest, formatError } from '../../utils';
+import { filterNewItems, formatError } from '../../utils';
 
 class ProductsStore {
 
@@ -42,7 +41,7 @@ class ProductsStore {
       this.page = 1;
       this.productsMap = new Map();
       this.products = null;
-      this.products = filterNewItems(this.productsMap, products, Product);
+      this.products = filterNewItems(this.productsMap, products);
     });
   }
 
@@ -51,7 +50,7 @@ class ProductsStore {
     const { count, products } = data;
     runInAction(() => {
       if(count >= this.limit) { this.page = this.page + 1; }
-      const newItems = filterNewItems(this.productsMap, products, Product);
+      const newItems = filterNewItems(this.productsMap, products);
       this.products.push(...newItems);
     });
   }
@@ -60,10 +59,23 @@ class ProductsStore {
     return this.products.findIndex(p => p.id === id);
   }
 
+  @action _addProduct(product) {
+    runInAction(() => {
+      const newItems = filterNewItems(this.productsMap, [ product ]);
+      this.products.unshift(...newItems);
+    })
+  }
+  
+  @action _removeProduct(id) {
+    const index = this.findProduct(id);
+    this.products.remove(this.products[index]);
+    remove(this.productsMap, `${id}`);
+  }
+
   @action async toggleStatus(id) {
     try {
       this.loading = true;
-      const { error, data, message } = await BreederProducts.toggleStatus([id]);
+      const { error, data } = await BreederProducts.toggleStatus([id]);
       const { status } = data;
 
       if (error) {
@@ -94,14 +106,13 @@ class ProductsStore {
   @action async deleteProduct(id) {
     try {
       this.loading = true;
-      const { error, message } = await BreederProducts.deleteProduct([id]);
+      const { error } = await BreederProducts.deleteProduct([id]);
       if (error) {
         throw new Error(formatError(error));
       }
       else {
         runInAction(() => {
-          const index = this.findProduct(id);
-          this.products.remove(this.products[index]);
+          this._removeProduct(id);
           showMessage({
             message: 'Deleted Product!',
             type: 'success',
@@ -119,20 +130,13 @@ class ProductsStore {
     }
   }
 
-  @action async addProduct(newProduct) {
-    const requestData = toAddProdRequest(newProduct);
-    const { error, message, data } = await BreederProducts.addProduct(requestData);
-    
-    if (error) {
-
+  @action async addProduct(formData) {
+    const { error, message, data } = await BreederProducts.addProduct(toJS(formData));
+    return {
+      error: formatError(error),
+      data,
+      message
     }
-    else {
-      if (data) {
-        const { product } = data;
-        this.products.unshift(product);
-      }
-    }
-
   }
 
 }

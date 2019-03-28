@@ -25,7 +25,7 @@ function otherDetailsStep({ AddProductForm }) {
         <TextAreaWrapper
           form={AddProductForm}
           field='otherDetails'
-          placeholder='Enter other product details...'
+          placeholder={'Enter other details about the product'}
         />
       </ScrollView>
     </React.Fragment>

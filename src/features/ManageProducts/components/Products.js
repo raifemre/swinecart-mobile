@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { FlatGrid } from 'react-native-super-grid';
-import { observer, inject, Observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import Product from './Product';
-import { toJS } from 'mobx';
 
 @inject('ProductsStore')
 @observer
@@ -36,7 +35,7 @@ class Products extends Component {
       <FlatGrid
         itemDimension={150}
         spacing={8}
-        items={toJS(this.props.ProductsStore.products) || []}
+        items={this.props.ProductsStore.products}
         renderItem={this.renderProduct}
         refreshing={this.state.refreshing}
         onRefresh={this.handleOnRefresh}

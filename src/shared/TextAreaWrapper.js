@@ -6,7 +6,7 @@ function TextAreaWrapper(props) {
 
   const onChangeText = value => {
     const { form, field } = this.props;
-    form.setValue(field, value === '' ? null : value);
+    form.setValue(field, value);
   }
 
   const {
@@ -14,17 +14,16 @@ function TextAreaWrapper(props) {
   } = props;
 
   return (
-    null
-    // <Textarea
-    //   containerStyle={{ borderColor: '#2d3436', borderWidth: 2, borderRadius: 5, padding: 0 }}
-    //   style={{ fontFamily: 'OpenSans-Bold', fontSize: 16, }}
-    //   onChangeText={onChangeText}
-    //   defaultText={form.data[field]}
-    //   placeholder={placeholder}
-    //   underlineColorAndroid={'transparent'}
-    //   placeholderTextColor={'#c7c7c7'}
-    //   maxLength={500}
-    // />
+    <Textarea
+      containerStyle={{ borderColor: '#2d3436', borderWidth: 2, borderRadius: 5, padding: 0 }}
+      style={{ fontFamily: 'OpenSans-Bold', fontSize: 16, }}
+      onChangeText={onChangeText}
+      defaultValue={form.data[field]}
+      placeholder={placeholder}
+      underlineColorAndroid={'transparent'}
+      placeholderTextColor={'#c7c7c7'}
+      maxLength={500}
+    />
   )
 }
 

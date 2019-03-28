@@ -32,8 +32,6 @@ export default class Wizard extends Component {
     const { currentStepIndex } = this.state;
     const { form, onSubmitForm } = this.props;
 
-    // form.resetForm();
-
     if (form.validateStep(currentStepIndex)) {
       if (this.onLastStep()) {
         onSubmitForm();

@@ -7,7 +7,7 @@ import IconWrapper from './IconWrapper';
 function MessageToast({ message: props }) {
 
   const colors = {
-    success: "#5cb85c",
+    success: '#5cb85c',
     danger: '#e74c3c',
   };
 
@@ -36,7 +36,7 @@ function MessageToast({ message: props }) {
             <TextWrapper
               text={message}
               font='OpenSans-Bold'
-              size={14}
+              size={16}
               color='#ffffff'
             />
           </View>

@@ -1,36 +1,32 @@
 import {
-  observable, action, runInAction, toJS
+  observable, action, runInAction
 } from 'mobx';
-
-import { showToast, cleanFields, getValues } from '../../utils';
-
 import { validate } from 'validate.js';
+import { forOwn, pick } from 'lodash';
+import { showMessage } from 'react-native-flash-message';
 
 import ProductsStore from '../stores/ProductsStore';
+import errorMessages from './errorMessages';
 import { Navigation } from '../../services';
 
 class AddProductForm {
 
   constructor() {
     validate.validators.mustExist = function (value, options, key, attributes) {
-
-      // console.dir(value, options, key, attributes);
-
       const { breedType, breed, motherBreed, fatherBreed } = attributes;
-
       if (breedType === 'pure') {
         if (!breed) {
           if (key === 'breed') {
-            return `^Breed cant be blank`;
+            return `^This field cannot be empty`;
           }
         }
       }
       else {
         if (key === 'motherBreed' && !motherBreed) {
-          return `^Mother Breed cant be blank`;
+          return `^This field cannot be empty`;
         }
         if (key === 'fatherBreed' && !fatherBreed) {
-          return `^Father Breed cant be blank`;
+          return `^This field cannot be empty`;
         }
       }
     };
@@ -61,14 +57,10 @@ class AddProductForm {
 
   formRules = {
     name: {
-      presence: {
-        allowEmpty: false
-      }
+      presence: errorMessages.presence
     },
     type: {
-      presence: {
-        allowEmpty: false
-      }
+      presence: errorMessages.presence
     },
     minPrice: {
       numericality: {
@@ -98,21 +90,16 @@ class AddProductForm {
       mustExist: true
     },
     breedType: {
-      presence: {
-        allowEmpty: false
-      }
+      presence: errorMessages.presence
     },
-    fatherBreed: {
+    fatherBreed: {  
       mustExist: true
     },
     motherBreed: {
       mustExist: true
     },
     farmFrom: {
-      presence: {
-        allowEmpty: false,
-        message: "^Farm From can't be blank"
-      },
+      presence: errorMessages.presence,
     }
   }
 
@@ -125,25 +112,25 @@ class AddProductForm {
   @observable loading = false;
 
   @observable data = {
-    name: null,
-    type: null,
-    minPrice: null,
-    maxPrice: null,
-    breed: null,
-    breedType: 'pure',
-    fatherBreed: null,
-    motherBreed: null,
-    birthDate: null,
-    birthWeight: null,
-    farmFrom: null,
-    houseType: null,
-    adg: null,
-    fcr: null,
-    bft: null,
-    lsba: null,
-    leftTeats: null,
-    rightTeats: null,
-    otherDetails: null
+    name: '1233213',
+    type: { label: 'Boar', data: 'boar' },
+    minPrice: '12345',
+    maxPrice: '12345',
+    breed: 'Landrace',
+    breedType: 'cross',
+    fatherBreed: 'Landrace',
+    motherBreed: 'Duroc',
+    birthDate: 'March 19 2019',
+    birthWeight: '123',
+    farmFrom: { id: 28, name: 'Ut', province: 'Rizal' },
+    houseType: { label: 'Open Sided', data: 'opensided' },
+    adg: '123',
+    fcr: '123',
+    bft: '123',
+    lsba: '123',
+    leftTeats: '6',
+    rightTeats: '6',
+    otherDetails: 'hellooooo'
   }
 
   @observable errors = {
@@ -192,24 +179,30 @@ class AddProductForm {
     });
   }
 
-  @action addRef(ref) {
-    this.pickerRefs.push(ref);
-  }
-
   @action setValue(field, value) {
     this.data[field] = value;
   }
 
   @action validateStep(index) {
-    const errors = validate(
-      getValues(this.steps[index], this.data),
-      getValues(this.steps[index], this.formRules),
-    );
-    this.steps[index].map(field => this.errors[field] = null);
+
+    const stepFields = this.steps[index];
+    const data = pick(this.data, stepFields);
+    const rules = pick(this.formRules, stepFields);
+    const errors = validate(data, rules);
+
+    this.clearErrors(errors);
     if (errors) {
-      this.steps[index].map(field => {
-        this.errors[field] = errors[field] ? errors[field][0] : null;
-      });
+      this.showErrors(errors);
+      return false;
+    }
+    return true;
+  }
+
+  @action validateFields(form) {
+    const errors = validate(form, this.formRules);
+    this.clearErrors(errors);
+    if (errors) {
+      this.showErrors(errors);
       return false;
     }
     return true;
@@ -226,9 +219,35 @@ class AddProductForm {
   }
 
   @action async submitForm() {
-    this.resetForm();
-    // await ProductsStore.addProduct(this.data);
-    Navigation.back();
+    try {
+      this.loading = true;
+      if (this.validateFields(this.data)) {
+        const { error, data } = await ProductsStore.addProduct(this.data);
+        if (error) {
+
+        }
+        else {
+          const { product } = data;
+          ProductsStore._addProduct(product);
+          this.resetForm();
+          showMessage({
+            message: 'Added Product!',
+            type: 'success',
+          });
+          Navigation.back();
+        }
+      }
+    }
+    catch (err) {
+
+    }
+    finally {
+      // setTimeout(() => {
+      runInAction(() => {
+        this.loading = false;
+      });
+      // }, 2000);
+    }
   }
 
 }
