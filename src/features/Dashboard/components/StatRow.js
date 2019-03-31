@@ -12,7 +12,7 @@ function StatRow({ text, data }) {
           color='#ffffff'
           text={text}
           font='OpenSans-SemiBold'
-          size={16}
+          size={14}
         />
       </Col>
       <Col style={[styles.container]}>
@@ -20,7 +20,7 @@ function StatRow({ text, data }) {
           color='#ffffff'
           text={data}
           font='OpenSans-SemiBold'
-          size={18}
+          size={14}
         />
       </Col>
     </Row>

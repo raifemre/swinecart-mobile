@@ -21,7 +21,7 @@ import Segments from '../../../shared/Segments';
 class Dashboard extends Component {
 
   state = {
-    selectedIndex: 1
+    selectedIndex: 0
   }
 
   componentDidMount() {
