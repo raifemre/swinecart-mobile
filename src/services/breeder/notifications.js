@@ -3,11 +3,11 @@ import API from '../api';
 const URL_PREFIX = `/breeder/notifications`;
 
 const service = {
-  getNotifs() {
-    return API.get(`${URL_PREFIX}/`);
+  async getNotifications(page, limit) {
+    const { data } = await API.get(`${URL_PREFIX}`);
+    return data;
   },
   seeNotif(id) {
-    const URL_PREFIX = `/breeder/notifications`;
     return API.post(`${URL_PREFIX}/${id}`);
   }
 }

@@ -49,15 +49,15 @@ const navigator = createBottomTabNavigator({
   // 'Messaging': {
   //   screen: MessagingStack
   // },
-  // 'Notifications': {
-  //   screen: Notifications
-  // },
+  'Notifications': {
+    screen: Notifications
+  },
   'Profile': {
     screen: ProfileStack,
   },
 },
 {
-  initialRouteName: 'Dashboard',
+  initialRouteName: 'Notifications',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

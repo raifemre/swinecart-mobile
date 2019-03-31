@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { StyleSheet } from 'react-native';
+import { Card, CardItem, Body, View, Left, Right } from 'native-base';
+
 import TextWrapper from '../../../shared/TextWrapper';
-import { Card, CardItem, Body, View } from 'native-base';
+import IconButton from '../../../shared/IconButton';
 @inject('NotificationStore')
 @observer
 class Notification extends Component {
@@ -10,6 +12,7 @@ class Notification extends Component {
   onPress = () => {
     const { notification } = this.props;
     const { id } = notification;
+    console.dir(id);
   }
 
   render() {
@@ -17,23 +20,38 @@ class Notification extends Component {
     const { notification } = this.props;
     
     return (
-      <View style={{ paddingHorizontal: 5 }}>
+      <View style={{ paddingHorizontal: 10 }}>
         <Card style={[cardStyle]}>
           <CardItem>
-            <Body>
+            <Left>
+
+            </Left>
+            <Body style={{ flex: 4 }}>
               <TextWrapper
                 font={'OpenSans-Bold'}
                 text={notification.message}
                 color={notification.read_at ? '#7f8c8d' : '#000000'}
-                size={14}
+                numberOfLines={5}
+                size={12}
+
               />
               <TextWrapper
                 font={'OpenSans-Bold'}
                 color={'#7f8c8d'}
-                text={notification.ago}
-                size={13}
+                text={notification.created_at}
+                size={12}
               />
             </Body>
+            <Right>
+              <IconButton
+                marginLeft={0}
+                marginRight={0}
+                size={24}
+                name='more-vert'
+                type='MaterialIcons'
+                onPress={this.onPress}
+              />
+            </Right>
           </CardItem>
         </Card>
       </View>

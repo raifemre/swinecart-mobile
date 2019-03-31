@@ -3,40 +3,25 @@ import {
 } from 'mobx';
 
 import {
-  Notifications
+  BreederNotifications
 } from '../../services';
 
-import Notification from '../models/Notification';
 
 class NotificationStore {
-  @observable notifications = [];
 
-  @action async getNotifs() {
-    const { data: { data } } = await Notifications.getNotifs();
-    const notifications = data.map(d => new Notification(d));
+  @observable notifications = null;
+
+  @observable page = 1;
+
+  limit = 10
+
+  @action async getNotifications() {
+    const { data } = await BreederNotifications.getNotifications(1, this.limit);
+    const { count, notifications } = data;
+    console.dir(count, notifications);
     runInAction(() => {
       this.notifications = notifications;
     });
-  }
-
-  @action async readNotifications() {
-    this.unread.map(async ({ id }) => {
-      await Notifications.seeNotif(id);
-    });
-    await this.getNotifs();
-  }
-
-  @computed get unread() {
-    const unread = this.notifications.filter(n => !n.read_at);
-    return unread;
-  }
-
-  @computed get unreadCount() {
-    return this.unread.length;
-  }
-
-  @action clearNotifs() {
-    this.notifications = [];
   }
 }
 

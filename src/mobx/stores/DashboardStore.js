@@ -67,7 +67,7 @@ class DashboardStore {
   @action async getReviews() {
     try {
       this.getReviewsLoading = true;
-      const { data } = await BreederDashboard.getReviews(this.page, this.limit);
+      const { data } = await BreederDashboard.getReviews(1, this.limit);
       const { reviews } = data;
       runInAction(() => {
         this.page = 1;

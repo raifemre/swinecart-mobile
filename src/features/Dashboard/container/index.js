@@ -50,7 +50,7 @@ class Dashboard extends Component {
           selectedIndex={selectedIndex}
           onTabPress={this.setIndex}
         />
-        <Content padder style={{ flex: 1 }}>
+        <Content padder>
           { selectedIndex === 0 && <ProductStats /> }
           { selectedIndex === 1 && <ReviewRatings /> }
         </Content>
