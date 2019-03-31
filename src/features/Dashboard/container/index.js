@@ -10,7 +10,7 @@ import {
 
 
 import ProductStats from '../components/ProductStats';
-import Reviews from '../components/Reviews';
+import ReviewRatings from '../components/ReviewRatings';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
@@ -21,11 +21,12 @@ import Segments from '../../../shared/Segments';
 class Dashboard extends Component {
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 1
   }
 
   componentDidMount() {
     this.props.DashboardStore.getStats();
+    this.props.DashboardStore.getRatings();
   }
 
   setIndex = index => {
@@ -50,7 +51,7 @@ class Dashboard extends Component {
         />
         <Content padder style={{ flex: 1 }}>
           { selectedIndex === 0 && <ProductStats /> }
-          {/* { selectedIndex === 1 && <Reviews /> } */}
+          { selectedIndex === 1 && <ReviewRatings /> }
         </Content>
       </Container>
     );

@@ -14,8 +14,10 @@ class DashboardStore {
   // Loaders
 
   @observable getStatsLoading = false;
+  @observable getRatingsLoading = false;
 
   @observable stats = null;
+  @observable ratings = null;
 
   @action async getStats() {
     try {
@@ -32,6 +34,26 @@ class DashboardStore {
     finally {
       runInAction(() => {
         this.getStatsLoading = false;
+      })
+    }
+  }
+
+  @action async getRatings() {
+    try {
+      this.getRatingsLoading = true;
+      const { data } = await BreederDashboard.getRatings();
+      const { ratings } = data;
+      console.dir(ratings);
+      runInAction(() => {
+        this.ratings = ratings;
+      });
+    } 
+    catch (err) {
+      throw new Error(formatError(err));
+    }
+    finally {
+      runInAction(() => {
+        this.getRatingsLoading = false;
       })
     }
   }

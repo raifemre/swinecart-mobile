@@ -7,6 +7,10 @@ const service = {
     const { data }  = await API.get(`${URL_PREFIX}/stats`);
     return data;
   },
+  async getRatings() {
+    const { data } = await API.get(`${URL_PREFIX}/ratings`);
+    return data;
+  },
 }
 
 export default service;
