@@ -165,14 +165,14 @@ android {
 
 configurations.all {
     resolutionStrategy {
-        force 'org.webkit:android-jsc:r225067'
+        force 'org.webkit:android-jsc:r241213'
     }
 }
 
 dependencies {
-    compile project(':react-native-svg')
-    compile project(':react-native-cardview')
     compile project(':react-native-spinkit')
+    compile project(':react-native-cardview')
+    compile project(':react-native-svg')
     compile project(':react-native-fast-image')
     implementation project(':react-native-spinkit')
     implementation fileTree(dir: "libs", include: ["*.jar"])

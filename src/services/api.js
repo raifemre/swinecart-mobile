@@ -5,8 +5,6 @@ import CommonStore from '../mobx/stores/CommonStore';
 
 import Navigation from './navigation';
 
-import { showToast } from '../utils';
-
 const instance = apisauce.create({
   baseURL: API_URL,
   timeout: 3000,
@@ -29,7 +27,7 @@ instance.addResponseTransform(response => {
 
   if (!ok) {
     if (problem === 'NETWORK_ERROR') {
-      showToast('Something went wrong!', 'danger', 'bottom');
+      Navigation.navigate('Login');
     }
     if (problem === 'CLIENT_ERROR') {
       console.log('STATUS CODE:', status);

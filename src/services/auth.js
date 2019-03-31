@@ -5,6 +5,7 @@ const URL_PREFIX = '/auth'
 const service = {
   async login({ email, password }) {
     const { data } = await API.post(`${URL_PREFIX}/login`, { email, password });
+    console.dir(data);
     return data;
   },
   async me() {
