@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet
-} from 'react-native';
 
 import {
-  Container, Content, Body, Title, View
+  Container, Content
 } from 'native-base';
 
 import {
@@ -51,9 +48,9 @@ class Dashboard extends Component {
           selectedIndex={selectedIndex}
           onTabPress={this.setIndex}
         />
-        <Content padder>
+        <Content padder style={{ flex: 1 }}>
           { selectedIndex === 0 && <ProductStats /> }
-          { selectedIndex === 1 && <Reviews /> }
+          {/* { selectedIndex === 1 && <Reviews /> } */}
         </Content>
       </Container>
     );

@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     shadowColor: '#f7f7f7',
     shadowRadius: 0.1,
     elevation: 1,
+    flex: 1
   }
 });
 

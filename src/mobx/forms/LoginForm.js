@@ -28,7 +28,7 @@ class LoginForm {
   @observable loading = false;
 
   @observable data = {
-    email: 'kylee.streich@bechtelar.orgd',
+    email: 'kylee.streich@bechtelar.org',
     password: 'secret12'
     // email: null,
     // password: null
@@ -104,8 +104,8 @@ class LoginForm {
         }
         else {
           const { access_token } = data;
-          this.resetForm();
           AuthStore.loginFlow(access_token);
+          this.resetForm();
         }
       }
     }

@@ -10,7 +10,6 @@ const service = {
     return data;
   },
   async addProduct(requestData) {
-    // console.dir(transform('addProduct')(requestData));
     const { data } = await API.post(`${URL_PREFIX}`, transform('addProduct')(requestData));
     return data;
   },

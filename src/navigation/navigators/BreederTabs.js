@@ -43,9 +43,9 @@ const navigator = createBottomTabNavigator({
   // 'ProductInventory': {
   //   screen: ProductInventoryStack
   // },
-  // 'Dashboard': {
-  //   screen: Dashboard
-  // },
+  'Dashboard': {
+    screen: Dashboard
+  },
   // 'Messaging': {
   //   screen: MessagingStack
   // },
@@ -57,7 +57,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'ManageProducts',
+  initialRouteName: 'Dashboard',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {
