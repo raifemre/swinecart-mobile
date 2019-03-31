@@ -7,7 +7,6 @@ import { startCase } from 'lodash';
 
 import TextWrapper from '../../../shared/TextWrapper';
 import IconButton from '../../../shared/IconButton';
-import IconWrapper from '../../../shared/IconWrapper';
 
 import Navigation from '../../../services/navigation';
 

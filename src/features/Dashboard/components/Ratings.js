@@ -12,58 +12,57 @@ function Ratings({ DashboardStore }) {
 
   const { container, cardStyle } = styles;
 
-  return (
-    <Card style={[cardStyle]}>
-      { 
-        !DashboardStore.ratings
-          ? <LoadingView />
-          : <React.Fragment>
-            <CardItem style={{ backgroundColor: '#00695C', paddingTop: 8, paddingBottom: 8, borderRadius: 5 }}>
-              <Grid>
-                <Row style={[container]}>
-                  <TextWrapper
-                    color='#ffffff'
-                    text='Overall Average Rating'
-                    font='OpenSans-Bold'
-                    size={13}
-                  />
-                </Row>
-                <Row style={[container]}>
-                  <StarRating
-                    disabled={true}
-                    maxStars={5}
-                    rating={DashboardStore.ratings.overall}
-                    fullStarColor='#F7CA18'
-                    emptyStar={'star-border'}
-                    fullStar={'star'}
-                    halfStar={'star-half'}
-                    iconSet={'MaterialIcons'}
-                    starSize={40}
-                  />
-                </Row>
-                <Row style={[container, { marginBottom: 15 }]}>
-                  <TextWrapper
-                    color='#ffffff'
-                    text={`(${DashboardStore.ratings.overall})`}  
-                    font='OpenSans-Bold'
-                    size={12}
-                  />
-                </Row>
-                <Row style={[container]}>
-                  <RatingRow title='Delivery Rating: ' data={DashboardStore.ratings.delivery} />
-                </Row>
-                <Row style={[container]}>
-                  <RatingRow title='Product Quality Rating: ' data={DashboardStore.ratings.productQuality} />
-                </Row>
-                <Row style={[container]}>
-                  <RatingRow title='Transaction Rating: ' data={DashboardStore.ratings.transaction} />
-                </Row>
-              </Grid>
-            </CardItem>
-          </React.Fragment>
-      }
-    </Card>
-  )
+  if (DashboardStore.ratings) {
+    return (
+      <Card style={[cardStyle]}>
+        <CardItem style={{ backgroundColor: '#00695C', paddingTop: 8, paddingBottom: 8, borderRadius: 5 }}>
+          <Grid>
+            <Row style={[container]}>
+              <TextWrapper
+                color='#ffffff'
+                text='Overall Average Rating'
+                font='OpenSans-Bold'
+                size={13}
+              />
+            </Row>
+            <Row style={[container]}>
+              <StarRating
+                disabled={true}
+                maxStars={5}
+                rating={DashboardStore.ratings.overall}
+                fullStarColor='#F7CA18'
+                emptyStar={'star-border'}
+                fullStar={'star'}
+                halfStar={'star-half'}
+                iconSet={'MaterialIcons'}
+                starSize={40}
+              />
+            </Row>
+            <Row style={[container, { marginBottom: 15 }]}>
+              <TextWrapper
+                color='#ffffff'
+                text={`(${DashboardStore.ratings.overall})`}
+                font='OpenSans-Bold'
+                size={12}
+              />
+            </Row>
+            <Row style={[container]}>
+              <RatingRow title='Delivery Rating ' data={DashboardStore.ratings.delivery} />
+            </Row>
+            <Row style={[container]}>
+              <RatingRow title='Product Quality Rating ' data={DashboardStore.ratings.productQuality} />
+            </Row>
+            <Row style={[container]}>
+              <RatingRow title='Transaction Rating ' data={DashboardStore.ratings.transaction} />
+            </Row>
+          </Grid>
+        </CardItem>
+      </Card>
+    )
+  }
+  else {
+    return <LoadingView />;
+  }
 }
 
 const styles = StyleSheet.create({

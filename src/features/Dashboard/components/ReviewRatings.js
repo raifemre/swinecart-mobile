@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react';
 import Ratings from './Ratings';
+import Reviews from './Reviews';
 
-@inject('DashboardStore')
-@observer
-class Reviews extends Component {
+function ReviewRatings(props) {
 
-  render() {
-
-    return (
-      <React.Fragment>
-        <Ratings />
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <Ratings />
+      <Reviews />
+    </React.Fragment>
+  );
 
 }
 
-export default Reviews;
+export default inject('DashboardStore')(observer(ReviewRatings));

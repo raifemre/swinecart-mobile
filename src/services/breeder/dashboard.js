@@ -11,6 +11,10 @@ const service = {
     const { data } = await API.get(`${URL_PREFIX}/ratings`);
     return data;
   },
+  async getReviews(page, limit) {
+    const { data } = await API.get(`${URL_PREFIX}/reviews`, { page, limit });
+    return data;
+  },
 }
 
 export default service;

@@ -21,12 +21,13 @@ import Segments from '../../../shared/Segments';
 class Dashboard extends Component {
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 1
   }
 
   componentDidMount() {
     this.props.DashboardStore.getStats();
     this.props.DashboardStore.getRatings();
+    this.props.DashboardStore.getReviews();
   }
 
   setIndex = index => {

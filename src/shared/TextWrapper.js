@@ -7,14 +7,15 @@ function TextWrapper({ style, ...props }) {
     uppercase = false, 
     size = 16, 
     color = '#000000', 
-    font = 'OpenSans-Bold'
+    font = 'OpenSans-Bold',
+    numberOfLines = 1
   } = props;
 
   return (
     <Text
       uppercase={uppercase} 
       style={{ fontSize: size, color, fontFamily: font, ...style }}
-      numberOfLines={1}
+      numberOfLines={numberOfLines}
     >
       {text}
     </Text>
