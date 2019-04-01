@@ -18,9 +18,15 @@ class NotificationStore {
   @action async getNotifications() {
     const { data } = await BreederNotifications.getNotifications(1, this.limit);
     const { count, notifications } = data;
-    console.dir(count, notifications);
+    // console.dir(count, notifications);
     runInAction(() => {
       this.notifications = notifications;
+    });
+  }
+
+  @action clear() {
+    runInAction(() => {
+      this.notifications = null;
     });
   }
 }

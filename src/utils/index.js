@@ -34,3 +34,7 @@ export function formatError(error) {
     };
   }
 }
+
+export function fromNow(date) {
+  return moment(date).fromNow();
+}

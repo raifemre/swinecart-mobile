@@ -14,6 +14,8 @@ import ProfileStore from './ProfileStore';
 
 import { formatError } from '../../utils';
 
+import initNotifications from '../../boot/initNotifications';
+
 class AuthStore {
   @observable loadingLogout = false;
 
@@ -32,7 +34,7 @@ class AuthStore {
     await CommonStore.removeToken();
     runInAction(() => {
       UserStore.forgetUser();
-      NotificationStore.clearNotifs();
+      NotificationStore.clear();
       MessageStore.setSocket(null);
       this.loadingLogout = false;
       Navigation.navigate('Public');

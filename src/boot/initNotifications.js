@@ -1,34 +1,22 @@
-import UserStore from '../mobx/stores/UserStore';
+import { PUSHER_URL } from 'react-native-dotenv';
 import NotificationStore from '../mobx/stores/NotificationStore';
+import wamp from 'wamp.js';
 
 const connect = () => {
-  const ws = new WebSocket('ws://swinecart.test/pusher');
-
-  ws.onopen = () => {
-    console.log('WebSocket(Notifs):', 'Connected!');
-
-  }
-
-  ws.onmessage = ({ data }) => {
-    const message = JSON.parse(data);
-    console.log(message);
-  }
-
-  ws.onerror = (e) => {
-    console.log('WebSocket(Notifs):', e.message);
+  // console.dir(PUSHER_URL, wamp);
+  wamp.debugOn();
+  const connection = new wamp.Connection({ url: 'ws://swinecart.test/pusher', realm: 'realm1' });
+  connection.onopen = () => {
+    console.log('Hello');
   };
+  connection.onclose = (reason, details) => {
+    console.dir(reason, details);
+  }
+  connection.open();
+};
 
-  ws.onclose = (e) => {
-    if (UserStore.userId) {
-      setTimeout(() => {
-        console.log('WebSocket(Notifs):', 'Reconnecting!...');
-        connect();
-      }, 3000);
-    }
-  };
-}
 
 export default async function() {
-  await NotificationStore.getNotifs();
-  // connect();
+  await NotificationStore.getNotifications();
+  connect();
 }

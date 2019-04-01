@@ -21,7 +21,7 @@ import NotificationList from '../components/Notifications';
 class Notifications extends Component {
 
   componentDidMount() {
-    this.props.NotificationStore.getNotifications();
+    // this.props.NotificationStore.getNotifications();
   }
 
   render() {

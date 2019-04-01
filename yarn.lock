@@ -6145,6 +6145,11 @@ walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
+wamp.js@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/wamp.js/-/wamp.js-0.2.5.tgz#1220ef23fed0c8d1a5cb8bab058249fd3a82cd69"
+  integrity sha1-EiDvI/7QyNGly4urBYJJ/TqCzWk=
+
 wampy-cra@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/wampy-cra/-/wampy-cra-0.1.1.tgz#6130a76e78b8a19b258bae9e775b273c975a9564"

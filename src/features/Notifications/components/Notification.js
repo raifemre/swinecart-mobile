@@ -5,6 +5,8 @@ import { Card, CardItem, Body, View, Left, Right } from 'native-base';
 
 import TextWrapper from '../../../shared/TextWrapper';
 import IconButton from '../../../shared/IconButton';
+
+import { fromNow } from '../../../utils';
 @inject('NotificationStore')
 @observer
 class Notification extends Component {
@@ -12,7 +14,7 @@ class Notification extends Component {
   onPress = () => {
     const { notification } = this.props;
     const { id } = notification;
-    console.dir(id);
+    // console.dir(id);
   }
 
   render() {
@@ -23,9 +25,6 @@ class Notification extends Component {
       <View style={{ paddingHorizontal: 10 }}>
         <Card style={[cardStyle]}>
           <CardItem>
-            <Left>
-
-            </Left>
             <Body style={{ flex: 4 }}>
               <TextWrapper
                 font={'OpenSans-Bold'}
@@ -37,12 +36,12 @@ class Notification extends Component {
               />
               <TextWrapper
                 font={'OpenSans-Bold'}
-                color={'#7f8c8d'}
-                text={notification.created_at}
+                color={notification.read_at ? '#7f8c8d' : '#000000'}
+                text={fromNow(notification.created_at)}
                 size={12}
               />
             </Body>
-            <Right>
+            {/* <Right>
               <IconButton
                 marginLeft={0}
                 marginRight={0}
@@ -51,7 +50,7 @@ class Notification extends Component {
                 type='MaterialIcons'
                 onPress={this.onPress}
               />
-            </Right>
+            </Right> */}
           </CardItem>
         </Card>
       </View>
