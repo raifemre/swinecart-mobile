@@ -1,133 +1,43 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { observer } from 'mobx-react';
+import { Body, View } from 'native-base';
 
-import { StyleSheet } from 'react-native';
-
-import {
-  View, Text, Card, CardItem, Grid, Col, Row
-} from 'native-base';
-
-import { startCase } from 'lodash';
-import { observer, inject } from 'mobx-react';
-
-import { Navigation } from '../../../services';
-
-import PrimaryButton from '../../../shared/PrimaryButton';
 import TextWrapper from '../../../shared/TextWrapper';
+import CardItemHeader from '../../../shared/CardItemHeader';
+import CardWrapper from '../../../shared/CardWrapper';
+import CardItemBody from '../../../shared/CardItemBody';
+import CardItemFooter from '../../../shared/CardItemFooter';
 
-@inject('DashboardStore', 'UserStore')
-@observer
-class RequestedCard extends Component {
+function RequestedCard() {
 
-  seeRequests = () => {
-    const { product, DashboardStore } = this.props;
-    DashboardStore.setSelectedProduct(product);
-    Navigation.navigate('ProductRequests');
-  }
+  const { name, img_path, type, breed } = this.props.product;
 
-  render() {
-
-    const { openSansBold, cardStyle } = styles;
-
-    const { product } = this.props;
-    const { name, type, breed } = product;
-
-    return (
-      <View style={{ paddingHorizontal: 5 }}>
-        <Card style={[cardStyle]}>
-          <CardItem>
-            <Grid>
-              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
-                <Col>
-                  <Text style={[openSansBold, { fontSize: 15 }]}>Name</Text>
-                </Col>
-                <Col>
-                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Text style={[openSansBold, { fontSize: 18 }]}>{name}</Text>
-                  </View>
-                </Col>
-              </Row>
-              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
-                <Col>
-                  <Text style={[openSansBold, { fontSize: 15 }]}>Type</Text>
-                </Col>
-                <Col>
-                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Text style={[openSansBold, { fontSize: 14 }]}>{startCase(type)}</Text>
-                  </View>
-                </Col>
-              </Row>
-              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
-                <Col>
-                  <Text style={[openSansBold, { fontSize: 15 }]}>Breed</Text>
-                </Col>
-                <Col>
-                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Text style={[openSansBold, { fontSize: 14 }]}>{breed}</Text>
-                  </View>
-                </Col>
-              </Row>
-              <Row style={{ paddingHorizontal: 0, marginBottom: 5 }}>
-                <Col>
-                  <Text style={[openSansBold, { fontSize: 15 }]}>Status</Text>
-                </Col>
-                <Col>
-                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Text style={[openSansBold, { fontSize: 14 }]}>Requested</Text>
-                  </View>
-                </Col>
-              </Row>
-              <Row style={{ marginTop: 10 }}>
-                <View style={{ flex: 1 }}>
-                  <PrimaryButton block onPress={this.seeRequests}>
-                    <TextWrapper
-                      color='#ffffff'
-                      text='See Requests'
-                      font='OpenSans-Bold'
-                      size={15}
-                    />
-                  </PrimaryButton>
-                </View>
-              </Row>
-            </Grid>
-          </CardItem>
-        </Card>
-      </View>
-    );
-  }
-
+  return (
+    <CardWrapper>
+      <CardItemHeader uri={img_path} />
+      <CardItemBody>
+        <Body>
+          <View style={{ flexDirection: 'row' }}>
+            <TextWrapper
+              text={name}
+              font='OpenSans-Bold'
+              color='#2e3131'
+              size={13}
+              style={{ flex: 1 }}
+            />
+          </View>
+          <TextWrapper
+            text={`${type} - ${breed}`}
+            font='OpenSans-SemiBold'
+            color='#2e3131'
+            size={11}
+          />
+        </Body>
+      </CardItemBody>
+      <CardItemFooter>
+      </CardItemFooter>
+    </CardWrapper>
+  );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  cardStyle: {
-    borderColor: 'transparent',
-    borderColor: '#f7f7f7',
-    shadowColor: '#f7f7f7',
-    shadowRadius: 0.1,
-    elevation: 1
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
-  },
-});
-
-export default RequestedCard;
+export default observer(RequestedCard);

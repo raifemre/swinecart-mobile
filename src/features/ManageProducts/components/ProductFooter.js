@@ -44,14 +44,17 @@ function ProductFooter({ product, selected, ProductsStore }) {
                   onPress={onToggleStatus}
                 />
             }
-            <IconButton
-              marginLeft={8}
-              marginRight={0}
-              size={24}
-              name='delete'
-              type='MaterialCommunityIcons'
-              onPress={onDeleteProduct}
-            />
+            {
+              product.status !== 'requested' &&
+              <IconButton
+                marginLeft={8}
+                marginRight={0}
+                size={24}
+                name='delete'
+                type='MaterialCommunityIcons'
+                onPress={onDeleteProduct}
+              />
+            }
           </View>
         </Right>
       </CardItem>

@@ -40,24 +40,24 @@ const navigator = createBottomTabNavigator({
   'ManageProducts': {
     screen: ManageProductsStack
   },
-  // 'ProductInventory': {
-  //   screen: ProductInventoryStack
-  // },
-  'Dashboard': {
-    screen: Dashboard
+  'ProductInventory': {
+    screen: ProductInventoryStack
   },
+  // 'Dashboard': {
+  //   screen: Dashboard
+  // },
   // 'Messaging': {
   //   screen: MessagingStack
   // },
-  'Notifications': {
-    screen: Notifications
-  },
+  // 'Notifications': {
+  //   screen: Notifications
+  // },
   'Profile': {
     screen: ProfileStack,
   },
 },
 {
-  initialRouteName: 'Notifications',
+  initialRouteName: 'ProductInventory',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

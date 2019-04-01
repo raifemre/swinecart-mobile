@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Body, Title, View } from 'native-base';
+import { Container, View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
 import Segments from '../../../shared/Segments';
 
-import Products from '../components/Products';
+import RequestedProducts from '../components/RequestedProducts';
 
-@inject('UserStore', 'DashboardStore')
+@inject('InventoryStore')
 @observer
 class Inventory extends Component {
 
@@ -17,8 +17,7 @@ class Inventory extends Component {
   }
 
   componentDidMount() {
-    const { DashboardStore } = this.props;
-    DashboardStore.getProducts();
+    this.props.InventoryStore.getReservedProducts();
   }
 
   setIndex = index => {
@@ -26,25 +25,24 @@ class Inventory extends Component {
       selectedIndex: index
     });
   }
+  
 
   render() {
-    const { DashboardStore } = this.props;
+
+    const { selectedIndex } = this.state;
 
     return (
       <Container>
-        <HeaderWrapper hasTabs>
+        <HeaderWrapper hasSegment>
           <BodyWrapper title='Product Inventory' />
         </HeaderWrapper>
         <Segments
           values={['Requested', 'Reserved', 'On Delivery', 'Sold']}
-          selectedIndex={this.state.selectedIndex}
+          selectedIndex={selectedIndex}
           onTabPress={this.setIndex}
         />
-        <View style={{ marginTop: 0 }}>
-          {this.state.selectedIndex === 0 && <Products status='requested' products={DashboardStore.requestedProducts} />}
-          {this.state.selectedIndex === 1 && <Products status='reserved' products={DashboardStore.reservedProducts} />}
-          {this.state.selectedIndex === 2 && <Products status='onDelivery' products={DashboardStore.onDeliveryProducts} />}
-          {this.state.selectedIndex === 3 && <Products status='sold' products={DashboardStore.soldProducts} />}
+        <View style={{ flex: 1 }}>
+          {selectedIndex === 0 && <RequestedProducts />}
         </View>
       </Container>
     );
