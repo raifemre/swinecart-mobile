@@ -5,7 +5,7 @@ import TextWrapper from './TextWrapper';
 
 function ButtonWrapper(props) {
 
-  const { onPress, text, textColor = '#ffffff', textFont = 'OpenSans-Bold', textSize = 30, buttonColor = '#00695C'} = props;
+  const { onPress, text, textColor = '#ffffff', textFont = 'OpenSans-Bold', textSize = 30, buttonColor = '#00695C', style = {} } = props;
 
   return (
     <Button 
@@ -13,6 +13,7 @@ function ButtonWrapper(props) {
       transparent
       onPress={onPress}
       style={{ 
+        ...style,
         borderRadius: 5,
         backgroundColor: buttonColor,
         elevation: 0,

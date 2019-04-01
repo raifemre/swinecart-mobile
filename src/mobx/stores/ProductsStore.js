@@ -1,5 +1,5 @@
 import {
-  observable, action, runInAction, get, set, has, autorun, remove, toJS
+  observable, action, runInAction, remove, toJS
 } from 'mobx';
 
 import { showMessage } from 'react-native-flash-message';

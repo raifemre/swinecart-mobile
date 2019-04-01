@@ -7,25 +7,31 @@ import CardItemHeader from '../../../shared/CardItemHeader';
 import CardWrapper from '../../../shared/CardWrapper';
 import CardItemBody from '../../../shared/CardItemBody';
 import CardItemFooter from '../../../shared/CardItemFooter';
+import ButtonWrapper from '../../../shared/ButtonWrapper';
+
+import { Navigation } from '../../../services';
 
 function RequestedCard() {
 
-  const { name, img_path, type, breed } = this.props.product;
+  const { product } = this.props;
+  const { id, name, img_path, type, breed } = product;
+
+  const onPress = () => {
+    Navigation.navigate('ProductRequests', { product });
+  }
 
   return (
     <CardWrapper>
       <CardItemHeader uri={img_path} />
       <CardItemBody>
         <Body>
-          <View style={{ flexDirection: 'row' }}>
-            <TextWrapper
-              text={name}
-              font='OpenSans-Bold'
-              color='#2e3131'
-              size={13}
-              style={{ flex: 1 }}
-            />
-          </View>
+          <TextWrapper
+            text={name}
+            font='OpenSans-Bold'
+            color='#2e3131'
+            size={13}
+            style={{ flex: 1 }}
+          />
           <TextWrapper
             text={`${type} - ${breed}`}
             font='OpenSans-SemiBold'
@@ -35,6 +41,15 @@ function RequestedCard() {
         </Body>
       </CardItemBody>
       <CardItemFooter>
+        <View style={{ flex: 1 }}>
+          <ButtonWrapper
+            onPress={onPress}
+            text='See Requests'
+            textColor='#ffffff'
+            textSize={12}
+            style={{ height: 30 }}
+          />
+        </View>
       </CardItemFooter>
     </CardWrapper>
   );

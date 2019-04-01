@@ -34,7 +34,6 @@ class FarmDetails extends Component {
   render() {
 
     const { navigation, FarmStore } = this.props;
-    const farm = navigation.getParam('farm');
 
     return (
       <React.Fragment>

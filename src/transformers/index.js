@@ -58,9 +58,20 @@ function addProduct(data) {
 
 }
 
+function reserveProduct(data) {
+
+  const transformedData = {
+    status: 'reserved',
+    ...data
+  }
+
+  return transformedData;
+}
+
 const transformers = {
   changePassword: memoize(changePassword),
   addProduct: memoize(addProduct),
+  reserveProduct: memoize(reserveProduct),
 }
 
 export default function (type) {

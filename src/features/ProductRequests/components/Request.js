@@ -1,125 +1,97 @@
 import React, { Component } from 'react';
-
-import { StyleSheet, Alert } from 'react-native';
-
-import {
-  View, Text, Card, CardItem, Button, Grid, Col, Row,
-} from 'native-base';
-
+import { StyleSheet } from 'react-native';
+import { Body, Card, CardItem, Right, View, Left } from 'native-base';
 import { observer, inject } from 'mobx-react';
+
+import TextWrapper from '../../../shared/TextWrapper';
+import ButtonWrapper from '../../../shared/ButtonWrapper';
 
 import { Navigation } from '../../../services';
 
-import { alertDialog } from '../../../utils';
+import DetailsModal from './DetailsModal';
 
-@inject('DashboardStore', 'UserStore')
+@inject('InventoryStore')
 @observer
 class Request extends Component {
 
+  state = {
+    isModalVisible: false
+  }
+
   reserveProduct = async () => {
-    const { request, DashboardStore } = this.props;
-    await DashboardStore.reserveProduct(request);
-    Navigation.back();
-    setTimeout(() => DashboardStore.setActiveTab(1), 300);
+    const { InventoryStore, request } = this.props;
+    await InventoryStore.reserveProduct(request);
   }
 
-  handleReserve = () => {
-    const { request, DashboardStore } = this.props;
-    const { selectedProduct } = DashboardStore;
-    const { customerName } = request;
-    const { name } = selectedProduct;
-    const dialogText = `Are you sure you want to reserve ${name} to ${customerName}?`;
-
-    alertDialog(dialogText,
-      { text: 'Yes', onPress: this.reserveProduct },
-      { text: 'Close', onPress: () => { console.log('Cancelled!') } }
-    );
+  showModal = () => {
+    this.setState({
+      isModalVisible: true
+    });
   }
 
-  messageBreeder = () => {
-
+  hideModal = () => {
+    this.setState({
+      isModalVisible: false
+    });
   }
 
   render() {
 
-    const { openSansBold, cardStyle, flatButton, container } = styles;
+    const { cardStyle } = styles;
 
     const { request } = this.props;
-    const {
-      customerName, customerProvince, requestQuantity, specialRequest
+
+    const { 
+      customer_name, customer_province, request_quantity, special_request, date_needed
     } = request;
 
+
     return (
-      <Card style={[cardStyle]}>
-        <CardItem>
-          <Grid>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <Col>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Customer Name</Text>
-              </Col>
-              <Col>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 16 }]}>{customerName}</Text>
-                </View>
-              </Col>
-            </Row>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <Col>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Customer Province</Text>
-              </Col>
-              <Col>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 16 }]}>{customerProvince}</Text>
-                </View>
-              </Col>
-            </Row>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <Col>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Request Quantity</Text>
-              </Col>
-              <Col>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Text style={[openSansBold, { fontSize: 16 }]}>{requestQuantity}</Text>
-                </View>
-              </Col>
-            </Row>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <View style={[container]}>
-                <Text style={[openSansBold, { fontSize: 15 }]}>Special Request</Text>
+      <React.Fragment>
+        <DetailsModal
+          isModalVisible={this.state.isModalVisible}
+          hideModal={this.hideModal}
+          requestQuantity={request_quantity}
+          specialRequest={special_request}
+          dateNeeded={date_needed}
+        />
+        <Card style={[cardStyle]}>
+          <CardItem button onPress={this.showModal}>
+            <Body style={{ flex: 3, justifyContent: 'center' }}>
+              <TextWrapper
+                font={'OpenSans-Bold'}
+                color={'#000000'}
+                text={customer_name}
+                size={14}
+              />
+              <TextWrapper
+                font={'OpenSans-Bold'}
+                color={'#7f8c8d'}
+                text={customer_province}
+                size={12}
+              />
+            </Body>
+            <Right style={{ flex: 2 }}>
+              <View>
+                <ButtonWrapper
+                  onPress={this.reserveProduct}
+                  text='Reserve'
+                  textColor='#ffffff'
+                  textSize={14}
+                  style={{ height: 24, marginBottom: 4, }}
+                />
+                <ButtonWrapper
+                  onPress={this.login}
+                  text='Message'
+                  textColor='#ffffff'
+                  textSize={14}
+                  style={{ height: 24, marginTop: 4, }}
+                />
               </View>
-            </Row>
-            <Row style={{ paddingHorizontal: 10, marginBottom: 5 }}>
-              <View style={[container]}>
-                <Text style={[openSansBold, { fontSize: 15 }]}>{specialRequest}</Text>
-              </View>
-            </Row>
-            <Row>
-              <Col style={{ paddingHorizontal: 5 }}>
-                <View style={{ flex: 1 }}>
-                  <Button
-                    block
-                    onPress={this.handleReserve}
-                    style={[flatButton, { backgroundColor: '#00695C', marginTop: 10 }]}
-                  >
-                    <Text uppercase={false} style={[openSansBold, { fontSize: 15 }]}>Reserve</Text>
-                  </Button>
-                </View>
-              </Col>
-              <Col style={{ paddingHorizontal: 5 }}>
-                <View style={{ flex: 1 }}>
-                  <Button
-                    block
-                    onPress={this.messageBreeder}
-                    style={[flatButton, { backgroundColor: '#00695C', marginTop: 10 }]}
-                  >
-                    <Text uppercase={false} style={[openSansBold, { fontSize: 15 }]}>Message</Text>
-                  </Button>
-                </View>
-              </Col>
-            </Row>
-          </Grid>
-        </CardItem>
-      </Card>
+            </Right>
+          </CardItem>
+        </Card>
+      </React.Fragment>
     );
   }
 
@@ -150,11 +122,6 @@ const styles = StyleSheet.create({
     shadowColor: '#f7f7f7',
     shadowRadius: 0.1,
     elevation: 1
-  },
-  flatButton: {
-    elevation: 0,
-    borderColor: 'transparent',
-    borderBottomWidth: 0
   },
 });
 

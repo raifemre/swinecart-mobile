@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-
 import { FlatList } from 'react-native';
-
 import { observer, inject } from 'mobx-react';
 
-import { toJS } from 'mobx';
+import LoadingView from '../../../shared/LoadingView';
 
 import Request from './Request';
 
-@inject('DashboardStore', 'UserStore')
+@inject('InventoryStore')
 @observer
 class Requests extends Component {
-
-  componentDidMount() {
-  }
 
   state = {
     refreshing: false
@@ -21,38 +16,30 @@ class Requests extends Component {
 
   renderRequest = ({ item }) => {
     return (
-      <Request request={item}/>
+      <Request request={item} />
     );
-  }
-
-  handleOnRefresh = () => {
-    this.setState({
-      refreshing: true
-    }, async () => {
-      await this.props.DashboardStore.getProductRequests();
-      this.setState({ refreshing: false });
-    });
-  };
-
-  getMoreProducts = async ({ distanceFromEnd }) => {
   }
 
   render() {
 
-    const { DashboardStore } = this.props;
-    const productRequests = toJS(DashboardStore.productRequests);
+    const { InventoryStore } = this.props;
 
-    return (
-      <FlatList
-        data={productRequests}
-        renderItem={this.renderRequest}
-        keyExtractor={request => `${request.customerId}`}
-        refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
-        onEndReached={this.getMoreProducts}
-        onEndReachedThreshold={0.5}
-      />
-    );
+    if (InventoryStore.requests) {
+      return (
+        <FlatList
+          data={InventoryStore.requests}
+          renderItem={this.renderRequest}
+          keyExtractor={request => `${request.customer_id}`}
+          refreshing={this.state.refreshing}
+          onEndReachedThreshold={0.5}
+        />
+      );
+    }
+    else {
+      return (
+        <LoadingView />
+      );
+    }
   }
 }
 

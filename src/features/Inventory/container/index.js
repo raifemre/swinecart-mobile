@@ -6,7 +6,8 @@ import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
 import Segments from '../../../shared/Segments';
 
-import RequestedProducts from '../components/RequestedProducts';
+import Products from '../components/Products';
+import RequestedCard from '../components/RequestedCard';
 
 @inject('InventoryStore')
 @observer
@@ -17,7 +18,10 @@ class Inventory extends Component {
   }
 
   componentDidMount() {
-    this.props.InventoryStore.getReservedProducts();
+    this.props.InventoryStore.getProducts('requested');
+    this.props.InventoryStore.getProducts('reserved');
+    this.props.InventoryStore.getProducts('on_delivery');
+    this.props.InventoryStore.getProducts('sold');
   }
 
   setIndex = index => {
@@ -25,7 +29,6 @@ class Inventory extends Component {
       selectedIndex: index
     });
   }
-  
 
   render() {
 
@@ -42,7 +45,10 @@ class Inventory extends Component {
           onTabPress={this.setIndex}
         />
         <View style={{ flex: 1 }}>
-          {selectedIndex === 0 && <RequestedProducts />}
+          {selectedIndex === 0 && <Products status='requested' CardComponent={RequestedCard} />}
+          {selectedIndex === 1 && <Products status='reserved' CardComponent={RequestedCard} />}
+          {selectedIndex === 2 && <Products status='on_delivery' CardComponent={RequestedCard} />}
+          {selectedIndex === 3 && <Products status='sold' CardComponent={RequestedCard} />}
         </View>
       </Container>
     );
