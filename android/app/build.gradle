@@ -170,6 +170,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-uuid-generator')
     compile project(':react-native-spinkit')
     compile project(':react-native-cardview')
     compile project(':react-native-svg')

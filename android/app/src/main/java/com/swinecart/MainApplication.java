@@ -3,6 +3,7 @@ package com.swinecart;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.kishanjvaghela.cardview.RNCardViewPackage;
 import com.horcrux.svg.SvgPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNUUIDGeneratorPackage(),
             new RNSpinkitPackage(),
             new RNCardViewPackage(),
             new SvgPackage(),

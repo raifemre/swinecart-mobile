@@ -1,4 +1,4 @@
-import uuid from 'react-native-uuid';
+import UUIDGenerator from 'react-native-uuid-generator';
 import UserStore from '../stores/UserStore';
 
 class Message {
@@ -8,12 +8,16 @@ class Message {
     this.DBFormat = Message.toDBFormat(props);
   }
 
-  static toGCFormat(message) {
+  static async generateUUID() {
+    await UUIDGenerator.getRandomUUID();
+  }
+
+  static async toGCFormat(message) {
 
     if(message.from) {
       const { message: text, from_id } = message;
       return {
-        _id: uuid.v4(),
+        _id: await generateUUID(),
         text,
         user: {
           _id: from_id
@@ -24,7 +28,7 @@ class Message {
       const { message: text, direction, customer_id, breeder_id } = message;
       const senderId = direction === 0? customer_id : breeder_id;
       return {
-        _id: uuid.v4(),
+        _id: await generateUUID(),
         text,
         user: {
           _id: senderId
@@ -33,7 +37,7 @@ class Message {
     }
   }
 
-  static toDBFormat(message) {
+  static async toDBFormat(message) {
     const { text } = message;
     const userRole = UserStore.userRole;
     const userId = UserStore.userId;
