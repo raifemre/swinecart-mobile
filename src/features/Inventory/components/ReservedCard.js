@@ -10,6 +10,7 @@ import CardItemFooter from '../../../shared/CardItemFooter';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
 
 import DetailsModal from './DetailsModal';
+import DateModal from './DateModal';
 
 import { Navigation } from '../../../services';
 import { toJS } from 'mobx';
@@ -19,7 +20,14 @@ import { toJS } from 'mobx';
 class ReservedCard extends Component {
 
   state = {
-    isDetModVisible: false
+    isDetModVisible: false,
+    isDateModVisible: false
+  }
+
+  hideDateModal = () => {
+    this.setState({
+      isDateModVisible: false
+    });
   }
 
   hideDetailsModal = () => {
@@ -29,7 +37,9 @@ class ReservedCard extends Component {
   }
 
   onPressSend = () => {
-
+    this.setState({
+      isDateModVisible: true
+    });
   }
 
   onPressCancel = async () => {
@@ -55,6 +65,12 @@ class ReservedCard extends Component {
           isModalVisible={this.state.isDetModVisible}
           hideModal={this.hideDetailsModal}
           reservation={reservation}
+        />
+        <DateModal
+          isModalVisible={this.state.isDateModVisible}
+          hideModal={this.hideDateModal}
+          reservation={reservation}
+          product={product}
         />
         <CardWrapper>
           <CardItemHeader uri={img_path} />
