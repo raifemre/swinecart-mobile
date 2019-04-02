@@ -6,13 +6,10 @@ import TextWrapper from '../../../shared/TextWrapper';
 import CardItemHeader from '../../../shared/CardItemHeader';
 import CardWrapper from '../../../shared/CardWrapper';
 import CardItemBody from '../../../shared/CardItemBody';
-import CardItemFooter from '../../../shared/CardItemFooter';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
 
 import DetailsModal from './DetailsModal';
-
-import { Navigation } from '../../../services';
-import { toJS } from 'mobx';
+import CardItemFooter from '../../../shared/CardItemFooter';
 
 @inject('InventoryStore')
 @observer
@@ -28,16 +25,6 @@ class OnDeliveryCard extends Component {
     });
   }
 
-  onPressConfirm = async () => {
-    const { InventoryStore, product } = this.props;
-    await InventoryStore.confirmSold(product);
-  }
-
-  onPressCancel = async () => {
-    const { InventoryStore, product } = this.props;
-    await InventoryStore.cancelTransaction('on_delivery', product);
-  }
-
   onPressView = () => {
     this.setState({
       isDetModVisible: true
@@ -47,8 +34,8 @@ class OnDeliveryCard extends Component {
   render() {
 
     const { product } = this.props;
-    const { id, name, img_path, type, breed, reservation } = product;
-    const { customer_name, status_time, delivery_date } = reservation;
+    const { name, img_path, type, breed, reservation } = product;
+    const { customer_name, status_time } = reservation;
 
     return (
       <React.Fragment>
@@ -77,7 +64,7 @@ class OnDeliveryCard extends Component {
               </View>
               <View style={{ marginBottom: 10, }}>
                 <TextWrapper
-                  text={`Reserved to ${customer_name}`}
+                  text={`Sold to ${customer_name}`}
                   font='OpenSans-Bold'
                   color='#2e3131'
                   size={10}
@@ -88,43 +75,18 @@ class OnDeliveryCard extends Component {
                   color='#2e3131'
                   size={10}
                 />
-                <TextWrapper
-                  text={`Expected to arrive on ${delivery_date}`}
-                  font='OpenSans-Bold'
-                  color='#2e3131'
-                  size={10}
-                  numberOfLines={2}
-                />
               </View>
-              <ButtonWrapper
-                onPress={this.onPressView}
-                buttonColor='#ffffff'
-                text='View Details'
-                textColor='#000000'
-                textSize={12}
-                style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
-              />
             </Body>
           </CardItemBody>
           <CardItemFooter>
-            <View style={{ flex: 1, flexDirection: 'row', }}>
-              <ButtonWrapper
-                onPress={this.onPressConfirm}
-                buttonColor='#00695C'
-                text='Confirm'
-                textColor='#ffffff'
-                textSize={12}
-                style={{ height: 24, flex: 1, marginRight: 2, }}
-              />
-              <ButtonWrapper
-                onPress={this.onPressCancel}
-                text='Cancel'
-                buttonColor='#f44336'
-                textColor='#ffffff'
-                textSize={12}
-                style={{ height: 24, flex: 1, marginLeft: 2, }}
-              />
-            </View>
+            <ButtonWrapper
+              onPress={this.onPressView}
+              buttonColor='#ffffff'
+              text='View Details'
+              textColor='#000000'
+              textSize={12}
+              style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
+            />
           </CardItemFooter>
         </CardWrapper>
       </React.Fragment>

@@ -11,6 +11,7 @@ import Products from '../components/Products';
 import RequestedCard from '../components/RequestedCard';
 import ReservedCard from '../components/ReservedCard';
 import OnDeliveryCard from '../components/OnDeliveryCard';
+import SoldCard from '../components/SoldCard';
 
 @inject('InventoryStore')
 @observer
@@ -48,7 +49,7 @@ class Inventory extends Component {
             {InventoryStore.selectedIndex === 0 && <Products status='requested' CardComponent={RequestedCard} />}
             {InventoryStore.selectedIndex === 1 && <Products status='reserved' CardComponent={ReservedCard} />}
             {InventoryStore.selectedIndex === 2 && <Products status='on_delivery' CardComponent={OnDeliveryCard} />}
-            {InventoryStore.selectedIndex === 3 && <Products status='sold' CardComponent={RequestedCard} />}
+            {InventoryStore.selectedIndex === 3 && <Products status='sold' CardComponent={SoldCard} />}
           </View>
         </Container>
       </React.Fragment>

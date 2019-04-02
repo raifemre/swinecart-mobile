@@ -8,7 +8,7 @@ class InventoryStore {
 
   limit = 8
 
-  @observable selectedIndex = 2;
+  @observable selectedIndex = 1;
   @observable products = {}
   @observable pages = {}
   @observable maps = {}
@@ -151,7 +151,7 @@ class InventoryStore {
   @action _addProduct(status, product) {
     runInAction(() => {
       const newItems = filterNewItems(this.maps[status], [product], status === 'requested' ? 'id' : 'reservation.id');
-      this.products[status].push(...newItems);
+      this.products[status].unshift(...newItems);
     })
   }
 
