@@ -42,7 +42,7 @@ class PasswordField extends Component {
   animate = toValue => {
     Animated.timing(this.isFocused, {
       toValue,
-      duration: 500,
+      duration: 200,
     }).start();
   }
 

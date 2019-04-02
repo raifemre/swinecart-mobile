@@ -61,7 +61,7 @@ class ProductsStore {
 
   @action _addProduct(product) {
     runInAction(() => {
-      const newItems = filterNewItems(this.productsMap, [ product ]);
+      const newItems = filterNewItems(this.productsMap, [ product ], 'id');
       this.products.unshift(...newItems);
     })
   }

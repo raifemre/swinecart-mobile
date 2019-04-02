@@ -32,7 +32,7 @@ class FlatGridWrapper extends Component {
         refreshing={this.state.refreshing}
         onRefresh={this.onRefresh}
         onEndReached={onEndReached}
-        onEndReachedThreshold={0.2}
+        onEndReachedThreshold={0.5}
         maxToRenderPerBatch={4}
         initialNumToRender={8}
       />

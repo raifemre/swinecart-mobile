@@ -5,6 +5,7 @@ const URL_PREFIX = '/auth'
 const service = {
   async login({ email, password }) {
     const { data } = await API.post(`${URL_PREFIX}/login`, { email, password });
+    console.log(data);
     return data;
   },
   async me() {
@@ -12,7 +13,7 @@ const service = {
     return data;
   },
   logout() {
-    return API.post(`${URL_PREFIX}/logout`);s
+    return API.post(`${URL_PREFIX}/logout`);
   }
 }
 

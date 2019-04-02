@@ -224,7 +224,13 @@ class AddProductForm {
       if (this.validateFields(this.data)) {
         const { error, data } = await ProductsStore.addProduct(this.data);
         if (error) {
-
+          const { field, errorMessage } = error;
+          if (field) {
+            this.showError(field, errorMessage);
+          }
+          else {
+            throw new Error(errorMessage);
+          }
         }
         else {
           const { product } = data;
@@ -239,7 +245,10 @@ class AddProductForm {
       }
     }
     catch (err) {
-
+      showMessage({
+        message: err.message,
+        type: 'danger',
+      });
     }
     finally {
       // setTimeout(() => {

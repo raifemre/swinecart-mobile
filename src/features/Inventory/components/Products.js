@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 
 import FlatGridWrapper from '../../../shared/FlatGridWrapper';
 import LoadingView from '../../../shared/LoadingView';
+import { toJS } from 'mobx';
 
 function Products({ InventoryStore, status, CardComponent }) {
 
@@ -23,7 +24,7 @@ function Products({ InventoryStore, status, CardComponent }) {
   if (InventoryStore.products[status]) {
     return (
       <FlatGridWrapper
-        items={InventoryStore.products[status]}
+        items={toJS(InventoryStore.products[status])}
         renderItem={renderItem}
         onRefresh={onRefresh}
         onEndReached={onEndReached}
