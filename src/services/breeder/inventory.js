@@ -16,6 +16,14 @@ const service = {
   async reserveProduct(requestData) {
     const { data } = await API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, transform('reserveProduct')(requestData));
     return data;
+  },
+  async cancelTransaction(requestData) {
+    const { data } = await API.delete(`${URL_PREFIX}/products/${requestData.id}/order-status`, transform('cancelTransaction')(requestData));
+    return data;
+  },
+  async confirmSold(requestData) {
+    const { data } = await API.post(`${URL_PREFIX}/products/${requestData.id}/order-status`, transform('confirmSold')(requestData));
+    return data;
   }
 }
 

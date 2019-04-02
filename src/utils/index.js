@@ -1,17 +1,17 @@
 import moment from 'moment';
-import { has, get, set } from 'mobx';
+import { has, set } from 'mobx';
 
-import { isString, isObject, keys, camelCase } from 'lodash';
+import { isString, isObject, keys, camelCase, get } from 'lodash';
 
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function filterNewItems(mobxMap, items) {
+export function filterNewItems(mobxMap, items, id = 'id') {
   return items.reduce((array, element) => {
-    const id = `${element.id}`;
-    if(!has(mobxMap, id, element)) {
-      set(mobxMap, id, element);
+    const key = `${get(element, id)}`;
+    if(!has(mobxMap, key, element)) {
+      set(mobxMap, key, element);
       array.push(element);
     }
     return array;

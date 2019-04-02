@@ -68,10 +68,36 @@ function reserveProduct(data) {
   return transformedData;
 }
 
+function cancelTransaction(data) {
+
+  const { reservation } = data;
+
+  const transformedData = {
+    status: 'cancel_transaction',
+    reservation_id: reservation.id
+  }
+
+  return transformedData;
+}
+
+function confirmSold(data) {
+
+  const { reservation } = data;
+
+  const transformedData = {
+    status: 'sold',
+    reservation_id: reservation.id
+  }
+
+  return transformedData;
+}
+
 const transformers = {
   changePassword: memoize(changePassword),
   addProduct: memoize(addProduct),
   reserveProduct: memoize(reserveProduct),
+  cancelTransaction: memoize(cancelTransaction),
+  confirmSold: memoize(confirmSold),
 }
 
 export default function (type) {

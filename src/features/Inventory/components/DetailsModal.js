@@ -7,7 +7,10 @@ import Modal from 'react-native-modal';
 import TextWrapper from '../../../shared/TextWrapper';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
 
-function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, specialRequest }) {
+function DetailsModal({ isModalVisible, hideModal, reservation }) {
+
+  const { customer_name, date_needed, quantity, special_request } = reservation;
+
   return (
     <Modal
       isVisible={isModalVisible}
@@ -20,13 +23,28 @@ function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, 
             <TextWrapper
               font={'OpenSans-Bold'}
               color={'#000000'}
+              text={'Customer Name: '}
+              size={12}
+            />
+            <TextWrapper
+              font={'OpenSans-Bold'}
+              color={'#7f8c8d'}
+              text={customer_name}
+              size={12}
+              numberOfLines={5}
+            />
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TextWrapper
+              font={'OpenSans-Bold'}
+              color={'#000000'}
               text={'Date Needed: '}
               size={12}
             />
             <TextWrapper
               font={'OpenSans-Bold'}
               color={'#7f8c8d'}
-              text={dateNeeded}
+              text={date_needed}
               size={12}
               numberOfLines={5}
             />
@@ -41,7 +59,7 @@ function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, 
             <TextWrapper
               font={'OpenSans-Bold'}
               color={'#7f8c8d'}
-              text={requestQuantity}
+              text={quantity}
               size={12}
               numberOfLines={5}
             />
@@ -55,7 +73,7 @@ function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, 
           <TextWrapper
             font={'OpenSans-Bold'}
             color={'#7f8c8d'}
-            text={specialRequest}
+            text={special_request}
             size={12}
             numberOfLines={99}
           />

@@ -38,6 +38,7 @@ function MessageToast({ message: props }) {
               font='OpenSans-Bold'
               size={16}
               color='#ffffff'
+              numberOfLines={3}
             />
           </View>
         </View>

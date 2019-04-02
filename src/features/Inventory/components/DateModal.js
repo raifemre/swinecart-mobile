@@ -7,7 +7,7 @@ import Modal from 'react-native-modal';
 import TextWrapper from '../../../shared/TextWrapper';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
 
-function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, specialRequest }) {
+function DateModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, specialRequest }) {
   return (
     <Modal
       isVisible={isModalVisible}
@@ -21,7 +21,7 @@ function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, 
               font={'OpenSans-Bold'}
               color={'#000000'}
               text={'Date Needed: '}
-              size={12}
+              size={14}
             />
             <TextWrapper
               font={'OpenSans-Bold'}
@@ -36,7 +36,7 @@ function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, 
               font={'OpenSans-Bold'}
               color={'#000000'}
               text={'Request Quantity: '}
-              size={12}
+              size={14}
             />
             <TextWrapper
               font={'OpenSans-Bold'}
@@ -50,7 +50,7 @@ function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, 
             font={'OpenSans-Bold'}
             color={'#000000'}
             text={'Special Request:'}
-            size={12}
+            size={14}
           />
           <TextWrapper
             font={'OpenSans-Bold'}
@@ -72,4 +72,4 @@ function DetailsModal({ isModalVisible, hideModal, dateNeeded, requestQuantity, 
   );
 }
 
-export default observer(DetailsModal);
+export default observer(DateModal);

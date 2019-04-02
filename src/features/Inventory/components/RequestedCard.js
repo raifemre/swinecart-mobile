@@ -11,9 +11,8 @@ import ButtonWrapper from '../../../shared/ButtonWrapper';
 
 import { Navigation } from '../../../services';
 
-function RequestedCard() {
+function RequestedCard({ product }) {
 
-  const { product } = this.props;
   const { id, name, img_path, type, breed } = product;
 
   const onPress = () => {
@@ -47,7 +46,7 @@ function RequestedCard() {
             text='See Requests'
             textColor='#ffffff'
             textSize={12}
-            style={{ height: 30 }}
+            style={{ height: 24 }}
           />
         </View>
       </CardItemFooter>
