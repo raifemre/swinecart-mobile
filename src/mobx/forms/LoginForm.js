@@ -29,8 +29,9 @@ class LoginForm {
 
   @observable data = {
     // email: 'dayana75@yahoo.com',
-    // email: 'yconsidine@yahoo.com',
-    // password: 'secret12'
+    email: 'delilah39@mitchell.com',
+    // email: 'mathilde.towne@emard.biz',
+    password: 'secret12'
     // email: null,
     // password: null
   }

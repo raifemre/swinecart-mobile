@@ -2,23 +2,25 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
 import Wizard from '../../../shared/Wizard';
+import LoadingView from '../../../shared/LoadingView';
+
 
 import ProductInfoStep from './ProductInfoStep';
 import SwineInfoStep from './SwineInfoStep';
 import OtherDetailsStep from './OtherDetailsStep';
 
-@inject('AddProductForm')
+@inject('EditProductForm', 'ProductsStore')
 @observer
 class ProductForm extends Component {
 
   onSubmitForm = async () => {
-    const { AddProductForm } = this.props;
-    await AddProductForm.submitForm();
+    const { EditProductForm } = this.props;
+    await EditProductForm.submitForm();
   }
 
   render() {
 
-    const { AddProductForm } = this.props;
+    const { EditProductForm, ProductsStore } = this.props;
 
     const steps = [
       { component: ProductInfoStep, routeName: 'Step1' },
@@ -26,14 +28,21 @@ class ProductForm extends Component {
       { component: OtherDetailsStep, routeName: 'Step3' },
     ];
 
-    return (
-      <Wizard
-        form={AddProductForm}
-        onSubmitForm={this.onSubmitForm}
-        steps={steps}
-        lastStepText='Add Product'
-      />
-    );
+    if (ProductsStore.product) {
+      return (
+        <Wizard
+          form={EditProductForm}
+          onSubmitForm={this.onSubmitForm}
+          steps={steps}
+          lastStepText='Finish Editing'
+        />
+      );
+    }
+    else {
+      return (
+        <LoadingView />
+      );
+    }
   }
 
 }

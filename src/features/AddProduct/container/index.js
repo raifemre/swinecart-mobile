@@ -14,10 +14,6 @@ import ProductForm from '../components/ProductForm';
 @observer
 class AddProduct extends Component {
 
-  initializeForm = () => {
-
-  }
-
   render() {    
     return (
       <React.Fragment>

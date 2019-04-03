@@ -24,6 +24,7 @@ class ProductsStore {
   @observable productsMap = new Map();
   @observable page = 1;
   @observable loading = null;
+  @observable product = null
 
   @action resetData(prop) {
     this[prop] = this.defaultState[prop];
@@ -55,12 +56,25 @@ class ProductsStore {
     });
   }
 
+  @action async getProductDetails(id) {
+    const { data } = await BreederProducts.getProductDetails(id);
+    const { product } = data;
+    return product;
+  }
+
+  @action async selectProduct(product) {
+    runInAction(() => {
+      this.product = product;
+    });
+  }
+
   @action findProduct(id) {
     return this.products.findIndex(p => p.id === id);
   }
 
   @action _addProduct(product) {
     runInAction(() => {
+      remove(this.productsMap, `${product.id}`);
       const newItems = filterNewItems(this.productsMap, [ product ], 'id');
       this.products.unshift(...newItems);
     })

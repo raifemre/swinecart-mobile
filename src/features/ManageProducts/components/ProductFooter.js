@@ -6,6 +6,9 @@ import IconButton from '../../../shared/IconButton';
 import styles from '../styles';
 import { ternary } from '../../../utils';
 
+import { Navigation } from '../../../services';
+
+
 function ProductFooter({ product, selected, ProductsStore }) {
   
   const { flex1, cardItemLast, flexDirRow } = styles;
@@ -23,20 +26,31 @@ function ProductFooter({ product, selected, ProductsStore }) {
 
   }
 
+  onPressEdit = () => {
+    Navigation.navigate('EditProduct', { product });
+  }
+
   return (
     <React.Fragment>
       <CardItem last style={cardItemLast}>
-        <Left>
+        {/* <Left>
           <IconButton size={24} onPress={onToggleSelected}
             name={ternary(selected, true, 'check-circle', 'checkbox-blank-circle-outline')}
             type='MaterialCommunityIcons'
           />
-        </Left>
+        </Left> */}
         <Right style={flex1}>
           <View style={flexDirRow}>
             {
               product.status !== 'requested' && 
-              <IconButton marginLeft={0} marginRight={8} size={24} name='edit' type='MaterialIcons' />
+              <IconButton
+                marginLeft={0}
+                marginRight={8}
+                size={24}
+                name='edit'
+                onPress={onPressEdit}
+                type='MaterialIcons'
+              />
             }
             {
               product.status !== 'requested' &&

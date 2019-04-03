@@ -15,6 +15,7 @@ const service = {
   },
   async reserveProduct(requestData) {
     const { data } = await API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, transform('reserveProduct')(requestData));
+    console.log(data);
     return data;
   },
   async sendForDelivery(requestData) {

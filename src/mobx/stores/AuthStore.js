@@ -25,7 +25,7 @@ class AuthStore {
       error: formatError(error),
       data,
       message
-    }
+    };
   }
 
   @action async logout() {

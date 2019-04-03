@@ -9,6 +9,10 @@ const service = {
     const { data } = await API.get(`${URL_PREFIX}`, { page, limit });
     return data;
   },
+  async getProductDetails(id) {
+    const { data } = await API.get(`${URL_PREFIX}/${id}/details`);
+    return data;
+  },
   async addProduct(requestData) {
     const { data } = await API.post(`${URL_PREFIX}`, transform('addProduct')(requestData));
     return data;

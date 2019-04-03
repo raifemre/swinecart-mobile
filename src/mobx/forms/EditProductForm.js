@@ -1,15 +1,17 @@
 import {
-  observable, action, runInAction
+  observable, action, runInAction, toJS
 } from 'mobx';
 import { validate } from 'validate.js';
-import { forOwn, pick } from 'lodash';
+import { forOwn, pick, find, toString, camelCase, split, includes } from 'lodash';
 import { showMessage } from 'react-native-flash-message';
 
 import ProductsStore from '../stores/ProductsStore';
+import FarmStore from '../stores/FarmStore';
+
 import errorMessages from './errorMessages';
 import { Navigation } from '../../services';
 
-class AddProductForm {
+class EditProductForm {
 
   constructor() {
     validate.validators.mustExist = function (value, options, key, attributes) {
@@ -32,6 +34,18 @@ class AddProductForm {
     };
 
   }
+
+  typeOptions = [
+    { 'label': 'Boar', 'data': 'boar' },
+    { 'label': 'Sow', 'data': 'sow' },
+    { 'label': 'Gilt', 'data': 'gilt' },
+    { 'label': 'Semen', 'data': 'semen' },
+  ];
+
+  houseTypeOptions = [
+    { label: 'Tunnel Ventilated', data: 'tunnelventilated' },
+    { label: 'Open Sided', data: 'opensided' },
+  ];
 
   defaultFormState = {
     name: null,
@@ -92,7 +106,7 @@ class AddProductForm {
     breedType: {
       presence: errorMessages.presence
     },
-    fatherBreed: {  
+    fatherBreed: {
       mustExist: true
     },
     motherBreed: {
@@ -104,9 +118,9 @@ class AddProductForm {
   }
 
   steps = [
-    [ 'name', 'type', 'minPrice', 'maxPrice' ],
-    [ 'breed', 'breedType', 'farmFrom', 'fatherBreed', 'motherBreed' ],
-    [ 'otherDetails' ],
+    ['name', 'type', 'minPrice', 'maxPrice'],
+    ['breed', 'breedType', 'farmFrom', 'fatherBreed', 'motherBreed'],
+    ['otherDetails'],
   ]
 
   @observable loading = false;
@@ -171,6 +185,36 @@ class AddProductForm {
     leftTeats: null,
     rightTeats: null,
     otherDetails: null
+  }
+
+  @action setFormData = product => {
+    forOwn(product, (value, field) => {
+      if (field === 'type') {
+        this.data[field] = find(this.typeOptions, { label: value });
+        return;
+      }
+      else if (field === 'farm_from_id') {
+        this.data['farmFrom'] = find(toJS(FarmStore.farms), { id: value });
+        return;
+      }
+      else if (field === 'house_type') {
+        this.data['houseType'] = find(this.houseTypeOptions, { data: value });
+        return;
+      }
+      else if (field === 'breed') {
+        if (includes(value, 'x')) {
+          this.data['breedType'] = 'cross';
+          const [ fatherBreed, motherBreed ] = split(value, 'x');
+          this.data['fatherBreed'] = fatherBreed;
+          this.data['motherBreed'] = motherBreed;
+        }
+        else {
+          this.data[field] = value;
+        }
+        return;
+      }
+      this.data[camelCase(field)] = toString(value);
+    });
   }
 
   @action clearErrors = (errors) => {
@@ -240,28 +284,13 @@ class AddProductForm {
   @action async submitForm() {
     try {
       this.loading = true;
-      if (this.validateFields(this.data)) {
-        const { error, data } = await ProductsStore.addProduct(this.data);
-        if (error) {
-          const { field, errorMessage } = error;
-          if (field) {
-            this.showError(field, errorMessage);
-          }
-          else {
-            throw new Error(errorMessage);
-          }
-        }
-        else {
-          const { product } = data;
-          ProductsStore._addProduct(product);
-          this.resetForm();
-          showMessage({
-            message: 'Added Product!',
-            type: 'success',
-          });
-          Navigation.back();
-        }
-      }
+      // ProductsStore._addProduct(this.data);
+      // this.resetForm();
+      // showMessage({
+      //   message: 'Added Product!',
+      //   type: 'success',
+      // });
+      Navigation.back();
     }
     catch (err) {
       showMessage({
@@ -270,14 +299,12 @@ class AddProductForm {
       });
     }
     finally {
-      // setTimeout(() => {
       runInAction(() => {
         this.loading = false;
       });
-      // }, 2000);
     }
   }
 
 }
 
-export default new AddProductForm();
+export default new EditProductForm();

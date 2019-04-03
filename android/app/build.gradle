@@ -87,7 +87,7 @@ apply from: "../../node_modules/react-native/react.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = false
+def enableSeparateBuildPerCPUArchitecture = true
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -104,13 +104,18 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters 'armeabi-v7a', 'x86', 'armeabi', 'arm64-v8a'
         }
 
         packagingOptions {
-            exclude "lib/arm64-v8a/libgnustl_shared.so"
+            exclude 'lib/arm64-v8a/libgnustl_shared.so'
+            exclude '/lib/mips64/**'
+            exclude '/lib/arm64-v8a/**'
+            exclude '/lib/x86_64/*'
         }
+
         testBuildType System.getProperty('testBuildType', 'debug')  //this will later be used to control the test apk build type
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         missingDimensionStrategy "minReactNative", "minReactNative46" //read note
@@ -127,10 +132,10 @@ android {
     }
     splits {
         abi {
-            enable true
+            enable false
             reset()
-            // include 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a' //select ABIs to build APKs for
-            // universalApk true //generate an additional APK that contains all the ABIs
+            include 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'mips', 'mips64', 'x86', 'x86_64'
+            universalApk true //generate an additional APK that contains all the ABIs
         }
     }
     buildTypes {

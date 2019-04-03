@@ -81,7 +81,7 @@ export default class Wizard extends Component {
   }
 
   render() {
-    const { steps } = this.props;
+    const { steps, lastStepText } = this.props;
 
     return (
       <View style={styles.container}>
@@ -105,7 +105,7 @@ export default class Wizard extends Component {
             onPress={this.onPressNext}
             style={{ flex: 1, backgroundColor: '#00695C' }}>
             <TextWrapper
-              text={this.onLastStep() ? 'Add Product' : 'Next'}
+              text={this.onLastStep() ? lastStepText : 'Next'}
               size={16}
               color='#f7f7f7'
               style={{ alignSelf: 'center', }}

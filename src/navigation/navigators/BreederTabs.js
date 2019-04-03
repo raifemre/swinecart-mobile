@@ -43,9 +43,9 @@ const navigator = createBottomTabNavigator({
   'ProductInventory': {
     screen: ProductInventoryStack
   },
-  // 'Dashboard': {
-  //   screen: Dashboard
-  // },
+  'Dashboard': {
+    screen: Dashboard
+  },
   // 'Messaging': {
   //   screen: MessagingStack
   // },

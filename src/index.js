@@ -1,7 +1,7 @@
 import React from 'React';
 import { configure } from 'mobx';
-import { Provider} from 'mobx-react';
-import { Root, Text, View } from 'native-base';
+import { Provider } from 'mobx-react';
+import { Root } from 'native-base';
 
 import RootNavigator from './navigation/navigators';
 

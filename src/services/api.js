@@ -4,6 +4,7 @@ import { API_URL } from 'react-native-dotenv';
 import CommonStore from '../mobx/stores/CommonStore';
 
 import Navigation from './navigation';
+import { showMessage } from 'react-native-flash-message';
 
 const instance = apisauce.create({
   baseURL: API_URL,
@@ -12,6 +13,8 @@ const instance = apisauce.create({
     // 'Accept-Encoding' : 'gzip'
   }
 });
+
+console.log(API_URL);
 
 instance.addRequestTransform(request => {
   const token = CommonStore.token;
@@ -27,6 +30,10 @@ instance.addResponseTransform(response => {
 
   if (!ok) {
     if (problem === 'NETWORK_ERROR') {
+      showMessage({
+        message: 'Please Try Again later',
+        type: 'danger',
+      });
       Navigation.navigate('Login');
     }
     if (problem === 'CLIENT_ERROR') {
@@ -52,7 +59,7 @@ instance.addMonitor(({ config: request, ...response }) => {
   console.dir(resDuration, 'Request Endpoint:', endpoint);
 
   // console.dir('Response Headers: ', resHeaders);
-  // console.dir('Response Data: ', resData);
+  // console.dir('Response Data: ', response);
 });
 
 
