@@ -40,9 +40,12 @@ class ChangePasswordForm {
   @observable loading = false;
 
   @observable data = {
-    currentPassword: 'secret121',
-    newPassword: 'secret12',
-    newPasswordConfirmation: 'secret12'
+    // currentPassword: 'secret121',
+    // newPassword: 'secret12',
+    // newPasswordConfirmation: 'secret12'
+    currentPassword: null,
+    newPassword: null,
+    newPasswordConfirmation: null
   }
 
   @observable errors = {

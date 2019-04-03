@@ -92,10 +92,26 @@ function confirmSold(data) {
   return transformedData;
 }
 
+function sendForDelivery(data) {
+
+  const { reservation, delivery_date } = data;
+
+  const transformedData = {
+    status: 'on_delivery',
+    reservation_id: reservation.id,
+    delivery_date
+
+  }
+
+  return transformedData;
+}
+
+
 const transformers = {
   changePassword: memoize(changePassword),
   addProduct: memoize(addProduct),
   reserveProduct: memoize(reserveProduct),
+  sendForDelivery: memoize(sendForDelivery),
   cancelTransaction: memoize(cancelTransaction),
   confirmSold: memoize(confirmSold),
 }

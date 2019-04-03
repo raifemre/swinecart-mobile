@@ -64,6 +64,44 @@ class InventoryStore {
     }
   }
 
+  @action async sendForDelivery(requestData) {
+    try {
+      this.reserveLoading = true;
+      const { error, data, message } = await BreederInventory.reserveProduct(toJS(requestData));
+      if (error) {
+        const { field, errorMessage } = formatError(error);
+        if (field) {
+          this.showError(field, errorMessage);
+        }
+        else {
+          throw new Error(errorMessage);
+        }
+      }
+      else {
+        const { product } = data;
+        this._addProduct('reserved', product);
+        this._removeProduct('requested', product.id);
+        showMessage({
+          message: `Product is now reserved!`,
+          type: 'success',
+        });
+        Navigation.back();
+        this.onSelectIndex(1);
+      }
+    }
+    catch (err) {
+      showMessage({
+        message: err.message,
+        type: 'danger',
+      });
+    }
+    finally {
+      runInAction(() => {
+        this.reserveLoading = false;
+      });
+    }
+  }
+
   @action async confirmSold(requestData) {
     try {
       this.confirmSoldLoading = true;
