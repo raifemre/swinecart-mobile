@@ -22,8 +22,10 @@ class MessageStore {
     const { count, threads } = data;
     runInAction(() => {
       map(threads, thread => {
-        const { user, message } = thread;
-        set(this.allMessages, `${user.id}`, [ toGCFormat(1, user, message) ]);
+        const { message } = thread;
+        const { direction } = message;
+        const user = direction === 1 ? UserStore.user : this.selectedUser;
+        set(this.allMessages, `${thread.user.id}`, [ toGCFormat(1, user, message) ]);
       });
       this.threads = threads;
     });
@@ -31,7 +33,7 @@ class MessageStore {
 
   @action async getMessages() {
     const { id } = this.selectedUser;
-    const { data } = await BreederMessaging.getMessages(id, 1, 5);
+    const { data } = await BreederMessaging.getMessages(id, 1, 1000);
     const { count, messages } = data;
     const newMessages = map(messages, message => {
       const { direction } = message;
