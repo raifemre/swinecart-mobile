@@ -80,7 +80,7 @@ class Login extends Component {
                       textSize={16}
                     />
                   </View>
-                  {/* <View style={{ marginVertical: 5 }}>
+                  <View style={{ marginVertical: 5 }}>
                     <FlatButton block
                       onPress={this.navigateToForgotPassword}
                       style={{ backgroundColor: 'transparent', borderColor: '#000000', borderWidth: 2 }}
@@ -93,7 +93,7 @@ class Login extends Component {
                         size={12}
                       />
                     </FlatButton>
-                  </View> */}
+                  </View>
                 </Form>
               </View>
               <Divider orientation='center'>
@@ -104,7 +104,7 @@ class Login extends Component {
                   size={14}
                 />
               </Divider>
-              {/* <Grid style={{ marginTop: 20 }}>
+              <Grid style={{ marginTop: 20 }}>
                 <Row style={{ height: 60 }}>
                   <Col style={{ paddingRight: 5 }}>
                     <FlatButton block
@@ -153,7 +153,7 @@ class Login extends Component {
                     </FlatButton>
                   </Col>
                 </Row>
-              </Grid> */}
+              </Grid>
             </Content>
           </Container>
       </React.Fragment>

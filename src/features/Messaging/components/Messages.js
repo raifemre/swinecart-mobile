@@ -16,7 +16,7 @@ class Messages extends Component {
     return <Thread thread={item} />;
   }
 
-  handleOnRefresh = () => {
+  onRefresh = () => {
     this.setState({
       refreshing: true
     }, async () => {
@@ -25,16 +25,13 @@ class Messages extends Component {
     });
   };
 
-  getMoreProducts = async ({ distanceFromEnd }) => {
-  }
-
   render() {
     return (
       <FlatList
         data={this.props.MessageStore.threads}
         renderItem={this.renderItem}
         refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
+        onRefresh={this.onRefresh}
         keyExtractor={item => `${item.id}`}
         initialNumToRender={8}
       />

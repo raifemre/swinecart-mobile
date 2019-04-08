@@ -14,7 +14,7 @@ import {
 } from 'mobx-react';
 
 import {
-  toJS
+  toJS, get
 } from 'mobx';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
@@ -69,7 +69,7 @@ class Chat extends Component {
           <Right></Right>
         </HeaderWrapper>
         <View style={[contentStyle]}>
-          <StatusIndicator />
+          {/* <StatusIndicator /> */}
           <GiftedChat
             textInputProps={{
               autoFocus: false
@@ -77,7 +77,7 @@ class Chat extends Component {
             renderBubble={this.renderBubble}
             showAvatarForEveryMessage={false}
             renderAvatar={null}
-            messages={toJS(this.props.MessageStore.messages)}
+            messages={toJS(get(this.props.MessageStore.allMessages, `${MessageStore.selectedUser.id}`))}
             onSend={messages => this.onSend(messages)}
             user={{
               _id: UserStore.userId,

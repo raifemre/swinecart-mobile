@@ -1,6 +1,6 @@
 import moment from 'moment';
-import { has, set } from 'mobx';
-
+import { has, set, toJS } from 'mobx';
+import UUIDGenerator from 'react-native-uuid-generator';
 import { isString, isObject, keys, camelCase, get } from 'lodash';
 
 export function sleep(ms) {
@@ -37,4 +37,93 @@ export function formatError(error) {
 
 export function fromNow(date) {
   return moment(date).fromNow();
+}
+
+export function toGCFormat(type, user, message) {
+  if (type === 1) {
+
+    const {
+      id: userId, 
+      name
+    } = user;
+
+    const {
+      content, created_at, read_at, direction, id: messageId
+    } = message;
+
+    const newMessage = {
+      _id: messageId,
+      text: content,
+      readAt: read_at,
+      direction,
+      createdAt: created_at,
+      user: {
+        _id: userId,
+        name
+      }
+    }
+
+    return newMessage;
+  }
+
+  else if (type === 2) {
+
+    const {
+      created_at, direction, from, from_id, id, message: content, read_at,
+    } = message;
+
+    const newMessage = {
+      _id: id,
+      text: content,
+      createdAt: created_at,
+      readAt: read_at,
+      direction,
+      user: {
+        _id: from_id,
+        name: from
+      }
+    };
+
+    return newMessage;
+  }
+
+  else if (type === 3) {
+    
+    const {
+      created_at, content, read_at, direction, id: messageId,
+    } = message;
+
+    const { id: userId, name } = user;
+
+    const newMessage = {
+      _id: messageId,
+      text: content,
+      createdAt: created_at,
+      readAt: read_at,
+      direction,
+      user: {
+        _id: userId,
+        name
+      }
+    };
+
+    return newMessage;
+
+  }
+
+}
+
+export function toDBFormat(toID, userRole, message) {
+  
+  const { text, user } = message;
+  const { _id } = user;
+
+  const newMessage = {
+    message: text,
+    direction: userRole === 'Breeder' ? 1 : 0,
+    from: `${_id}`,
+    to: `${toID}`
+  };
+
+  return newMessage;
 }

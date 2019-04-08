@@ -5,6 +5,7 @@ import {  observer, inject } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
+import LoadingView from '../../../shared/LoadingView';
 
 import Messages from '../components/Messages';
 @inject('MessageStore')
@@ -12,19 +13,21 @@ import Messages from '../components/Messages';
 class Conversations extends Component {
 
   componentDidMount() {
-    const { MessageStore } = this.props;
-    MessageStore.getThreads();
+    this.props.MessageStore.getThreads();
   }
 
   render() {
 
+    const { threads } = this.props.MessageStore;
+    
     return (
       <Container>
         <HeaderWrapper>
           <BodyWrapper title='Messages' />
         </HeaderWrapper>
-        <View style={[{ backgroundColor: '#F2F2F2', paddingBottom: 50, flex: 1 }]}>
-          <Messages />
+        <View style={{ backgroundColor: '#F2F2F2', flex: 1 }}>
+          { threads && <Messages/> }
+          { !threads && <LoadingView/> }
         </View>
       </Container>
     );

@@ -22,15 +22,20 @@ const connect = () => {
     ws.send(JSON.stringify(message));
   }
 
+
+  ws.sendMessage = data => {
+    ws.send(JSON.stringify(data));
+  }
+
   ws.onmessage = ({ data }) => {
     const message = JSON.parse(data);
     const { to } = message;
     if (UserStore.userId === parseInt(to)) {
-      MessageStore.handleReceivedMessage(message);
+      MessageStore.onReceiveMessage(message);
     }
 
   }
-
+  
   ws.onerror = (e) => {
     console.log('WebSocket(Chat):', e.message);
   };

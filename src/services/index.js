@@ -3,7 +3,7 @@ import Auth from './auth';
 import Navigation from './navigation';
 
 import BreederProducts from './breeder/products';
-import BreederMessages from './breeder/messages';
+import BreederMessaging from './breeder/messaging';
 import BreederNotifications from './breeder/notifications';
 import BreederProfile from './breeder/profile';
 import BreederDashboard from './breeder/dashboard';
@@ -17,7 +17,7 @@ export {
   Auth,
   Navigation,
   BreederProducts,
-  BreederMessages,
+  BreederMessaging,
   BreederNotifications,
   BreederProfile,
   BreederDashboard,

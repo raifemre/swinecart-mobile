@@ -15,6 +15,7 @@ import ProfileStore from './ProfileStore';
 import { formatError } from '../../utils';
 
 import initNotifications from '../../boot/initNotifications';
+import initChat from '../../boot/initChat';
 
 class AuthStore {
   @observable loadingLogout = false;
@@ -45,7 +46,7 @@ class AuthStore {
     await CommonStore.setToken(token);
     await UserStore.getUser();
     await ProfileStore.getProfile();
-    // initChat();
+    initChat();
     // await initNotifications();
     Navigation.navigate(UserStore.userRole);
   }

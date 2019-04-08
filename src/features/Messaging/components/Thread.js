@@ -4,22 +4,15 @@ import { observer, inject } from 'mobx-react';
 import { Card, CardItem, View } from 'native-base';
 
 import TextWrapper from '../../../shared/TextWrapper';
-import { toJS } from 'mobx';
+import { get } from 'mobx';
 
-import {
-  Navigation
-} from '../../../services'
+import { Navigation } from '../../../services'
 
 import moment from 'moment';
 
 @inject('MessageStore')
 @observer
 class Thread extends Component {
-
-  componentDidMount() {
-
-  }
-
 
   onPress = () => {
     const { MessageStore, thread } = this.props;
@@ -29,27 +22,33 @@ class Thread extends Component {
 
   render() {
     const { cardStyle } = styles;
-    const { thread } = this.props;
-    const { user, message, direction, read_at, created_at } = thread;
-    const { name } = user;
-    const createdAt = moment(created_at).format('h:mm:ss a'); // January 29th 2019, 6:20:43 pm
-    const text = direction === 1 ? `You: ${message} ${createdAt}` : `${message} - ${createdAt}`;
-
+    const { thread, MessageStore } = this.props;
+    const { user } = thread;
+    const { id, name } = user;
+    const { text, createdAt: created_at, readAt, direction } = get(MessageStore.allMessages, `${id}`)[0];
+    const createdAt = moment(created_at).format('h:mm:ss a');
+    const msg = direction === 1 ? `You: ${text}` : `${text}`;
     return (
-      <View style={{ paddingHorizontal: 10 }}>
+      <View style={{ paddingHorizontal: 5 }}>
         <Card style={[cardStyle]}>
-          <CardItem button onPress={this.onPress} style={{ borderRadius: 20 }}>
+          <CardItem button onPress={this.onPress} style={{ borderRadius: 5 }}>
             <View>
               <TextWrapper
-                font={'OpenSans-Bold'}
+                font={'OpenSans-SemiBold'}
                 text={name}
-                size={16}
+                size={14}
               />
               <TextWrapper
-                font={'OpenSans-Bold'}
-                color={read_at ? '#7f8c8d' : '#000000'}
-                text={text}
-                size={13}
+                font={'OpenSans-SemiBold'}
+                color={readAt ? '#7f8c8d' : '#000000'}
+                text={msg}
+                size={12}
+              />
+              <TextWrapper
+                font={'OpenSans-SemiBold'}
+                color={readAt ? '#7f8c8d' : '#000000'}
+                text={createdAt}
+                size={12}
               />
             </View>
           </CardItem>
@@ -61,31 +60,13 @@ class Thread extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
   cardStyle: {
-    borderRadius: 20,
+    borderRadius: 5,
     borderColor: 'transparent',
     borderColor: '#f7f7f7',
     shadowColor: '#f7f7f7',
-    shadowRadius: 0,
-    elevation: 2,
+    shadowRadius: 1,
+    elevation: 1,
   }
 });
 
