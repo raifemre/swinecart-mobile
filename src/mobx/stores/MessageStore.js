@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction, get, has, remove, set
+  observable, action, toJS, runInAction, get, set
 } from 'mobx';
 
 import { map } from 'lodash';
@@ -24,7 +24,7 @@ class MessageStore {
       map(threads, thread => {
         const { message } = thread;
         const { direction } = message;
-        const user = direction === 1 ? UserStore.user : this.selectedUser;
+        const user = direction === 1 ? UserStore.user : thread.user;
         set(this.allMessages, `${thread.user.id}`, [ toGCFormat(1, user, message) ]);
       });
       this.threads = threads;
@@ -33,7 +33,7 @@ class MessageStore {
 
   @action async getMessages() {
     const { id } = this.selectedUser;
-    const { data } = await BreederMessaging.getMessages(id, 1, 1000);
+    const { data } = await BreederMessaging.getMessages(id, 1, 10);
     const { count, messages } = data;
     const newMessages = map(messages, message => {
       const { direction } = message;

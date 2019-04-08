@@ -45,6 +45,9 @@ class Chat extends Component {
     this.props.MessageStore.getMessages();
   }
 
+  onLoadEarlier = () => {
+  }
+
   onSend(messages = []) {
     const { MessageStore } = this.props;
     if(MessageStore.socket) {
@@ -74,6 +77,8 @@ class Chat extends Component {
             textInputProps={{
               autoFocus: false
             }}
+            loadEarlier={true}
+            onLoadEarlier={this.onLoadEarlier}
             renderBubble={this.renderBubble}
             showAvatarForEveryMessage={false}
             renderAvatar={null}

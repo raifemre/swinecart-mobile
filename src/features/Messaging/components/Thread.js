@@ -25,7 +25,7 @@ class Thread extends Component {
     const { thread, MessageStore } = this.props;
     const { user } = thread;
     const { id, name } = user;
-    const { text, createdAt: created_at, readAt, direction } = get(MessageStore.allMessages, `${id}`)[0];
+    const { text, createdAt: created_at, readAt, direction } = MessageStore.getLatestMessage(id);
     const createdAt = moment(created_at).format('h:mm:ss a');
     const msg = direction === 1 ? `You: ${text}` : `${text}`;
     return (
