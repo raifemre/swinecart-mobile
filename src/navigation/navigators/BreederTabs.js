@@ -37,18 +37,18 @@ ManageProductsStack.navigationOptions = ({ navigation }) => {
 };
 
 const navigator = createBottomTabNavigator({
-  'ManageProducts': {
-    screen: ManageProductsStack
-  },
-  'ProductInventory': {
-    screen: ProductInventoryStack
-  },
-  'Dashboard': {
-    screen: Dashboard
-  },
-  'Messaging': {
-    screen: MessagingStack
-  },
+  // 'ManageProducts': {
+  //   screen: ManageProductsStack
+  // },
+  // 'ProductInventory': {
+  //   screen: ProductInventoryStack
+  // },
+  // 'Dashboard': {
+  //   screen: Dashboard
+  // },
+  // 'Messaging': {
+  //   screen: MessagingStack
+  // },
   // 'Notifications': {
   //   screen: Notifications
   // },
@@ -57,7 +57,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'Messaging',
+  initialRouteName: 'Profile',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {
