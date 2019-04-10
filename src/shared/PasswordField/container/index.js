@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   fieldStyle: {
     paddingTop: 0,
     borderColor: '#2d3436', 
-    borderWidth: 2,
+    borderWidth: 1.5,
     height: 42,
     flexDirection: 'row',
     borderRadius: 5

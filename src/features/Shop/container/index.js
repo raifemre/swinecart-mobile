@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Container, View, Input, Item, Icon, Right } from 'native-base';
+import { Container, View, Right } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
-import FlatButton from '../../../shared/FlatButton';
-import IconWrapper from '../../../shared/IconWrapper';
+import IconButton from '../../../shared/IconButton';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 import Products from '../components/Products';
+import SearchBar from '../components/SearchBar';
 
 import Navigation from '../../../services/navigation';
 
-@inject('ShopStore')
+@inject('ShopStore', 'SwineCartStore')
 @observer
 class Shop extends Component {
 
@@ -22,7 +22,7 @@ class Shop extends Component {
     this.props.ShopStore.getProducts();
   }
 
-  handleOnFocus = () => {
+  onFocusSearchBar = () => {
     Navigation.navigate('SearchProduct');
   }
 
@@ -33,23 +33,29 @@ class Shop extends Component {
   render() {
 
     const { contentStyle } = styles;
+    const { ShopStore, SwineCartStore } = this.props;
 
     return (
       <React.Fragment>
-        <SpinnerWithOverlay visible={false} />
+        <SpinnerWithOverlay visible={SwineCartStore.loadingAdd} />
         <Container>
-          <HeaderWrapper searchBar rounded>
-            <Item style={{ flex: 3 }}>
-              <Icon name='ios-search' />
-              <Input placeholder='Search' onFocus={this.handleOnFocus}/>
-            </Item>
+          <HeaderWrapper>
+            <View style={{ flex: 5 }}>
+              <SearchBar />
+            </View>
             <Right>
-              <FlatButton transparent onPress={this.navigateToFilter}>
-                <IconWrapper name='filter-list' color='#ffffff'/>
-              </FlatButton>
+              <IconButton
+                marginLeft={0}
+                marginRight={0}
+                size={30}
+                name='filter-outline'
+                color='#ffffff'
+                type='MaterialCommunityIcons'
+                onPress={this.logout}
+              />
             </Right>
           </HeaderWrapper>
-          <View style={[contentStyle, { paddingTop: 16, paddingBottom: 50 }]}>
+          <View style={contentStyle}>
             <Products />
           </View>
         </Container>
@@ -60,6 +66,7 @@ class Shop extends Component {
 
 const styles = StyleSheet.create({
   contentStyle: {
+    flex: 1, paddingTop: 10,
   },
 });
 

@@ -36,10 +36,18 @@ ManageProductsStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+ProfileStack.navigationOptions = ({ navigation }) => {
+  return {
+    // tabBarVisible: false
+    tabBarVisible: navigation.state.index > 0 ? false : true,
+  };
+};
+
 const navigator = createBottomTabNavigator({
-  // 'ManageProducts': {
-  //   screen: ManageProductsStack
-  // },
+  'ManageProducts': {
+    screen: ManageProductsStack,
+    tabBarLabel: 'My Products'
+  },
   // 'ProductInventory': {
   //   screen: ProductInventoryStack
   // },
@@ -57,7 +65,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'Profile',
+  initialRouteName: 'ManageProducts',
   navigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {
@@ -82,7 +90,7 @@ const navigator = createBottomTabNavigator({
       borderTopWidth: 0,
       borderTopColor: 'transparent'
     },
-    showLabel : false
+    showLabel: false
   },
   lazy: true,
 });

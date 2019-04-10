@@ -8,7 +8,7 @@ function Segments({ selectedIndex, onTabPress, values }) {
       selectedIndex={selectedIndex}
       onTabPress={onTabPress}
       borderRadius={5}
-      tabsContainerStyle={{ height: 40, backgroundColor: 'transparent', marginTop: 10, marginHorizontal: 10, marginBottom: 10, }}
+      tabsContainerStyle={{ height: 40, backgroundColor: 'transparent', marginTop: 5, marginHorizontal: 5, marginBottom: 10, }}
       tabStyle={{ backgroundColor: '#ffffff', borderWidth: 2, borderColor: '#00695C' }}
       tabTextStyle={{ color: '#00695C', fontFamily: 'OpenSans-Bold', fontSize: 12 }}
       activeTabStyle={{ backgroundColor: '#00695C', marginTop: 0 }}

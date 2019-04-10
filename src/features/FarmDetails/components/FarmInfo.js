@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ScrollView } from 'react-native';
 import { View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 
@@ -11,28 +12,19 @@ import { toJS } from 'mobx';
 
 @inject('FarmStore', 'AddProductForm')
 @observer
-class FarmInfo extends Component { 
-  
-
+class FarmInfo extends Component {
   render() {
     const { FarmStore, AddProductForm } = this.props
     const { farm } = FarmStore;
 
     return (
-      <View style={{ padding: 16 }}>
+      <ScrollView contentContainerStyle={{ padding: 16 }}>
         <View style={{ flexDirection: 'row', alignSelf: 'center', marginBottom: 8,}}>
           <TextWrapper
             text={farm.name}
             font='OpenSans-Bold'
             size={20}
             color='#004d40'
-          />
-          <IconButton marginLeft={8} marginRight={0}
-            size={26}
-            color='#004d40'
-            name='edit'
-            type='MaterialIcons'
-            onPress={this.deleteFarm}
           />
         </View>
         <TextField
@@ -71,7 +63,7 @@ class FarmInfo extends Component {
           keyboardType='numeric'
         />
 
-      </View>
+      </ScrollView>
     );
   }
 

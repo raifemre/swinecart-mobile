@@ -10,13 +10,14 @@ import {
 class ShopStore {
 
   page = 1;
-  perpage = 8;
-  @observable products = [];
+  limit = 8;
+  @observable products = null;
 
   @observable selectedProduct = null;
 
   @action async getProducts() {
-    const { data: { error, data } } = await Shop.getProducts(1, this.perpage);
+    const { error, data } = await Shop.getProducts(1, this.limit);
+
     if (error) {
       throw new Error(error);
     }
@@ -30,7 +31,8 @@ class ShopStore {
   }
 
   @action async getMoreProducts() {
-    const { data: { error, data } } = await Shop.getProducts(this.page + 1, this.perpage);
+    const { error, data } = await Shop.getProducts(this.page + 1, this.limit);
+
     if (error) {
       throw new Error(error);
     }

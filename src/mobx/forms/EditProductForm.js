@@ -213,7 +213,7 @@ class EditProductForm {
         }
         return;
       }
-      this.data[camelCase(field)] = toString(value);
+      this.data[camelCase(field)] = value && toString(value);
     });
   }
 

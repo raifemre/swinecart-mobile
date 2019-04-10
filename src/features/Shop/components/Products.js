@@ -3,6 +3,8 @@ import { FlatGrid } from 'react-native-super-grid';
 import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
 
+import LoadingView from '../../../shared/LoadingView';
+
 import Product from './Product';
 
 @inject('ShopStore')
@@ -19,7 +21,7 @@ class Products extends Component {
     );
   }
 
-  handleOnRefresh = () => {
+  onRefresh = () => {
     this.setState({
       refreshing: true
     }, async () => {
@@ -28,24 +30,34 @@ class Products extends Component {
     });
   };
   
-  handleOnEndReached = () => {
+  onEndRefresh = () => {
     this.props.ShopStore.getMoreProducts();
   }
 
   render() {
-    return (
-      <FlatGrid
-        itemDimension={130}
-        spacing={16}
-        items={this.props.ShopStore.products}
-        renderItem={this.renderItem}
-        refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
-        initialNumToRender={6}
-        onEndReached={this.handleOnEndReached}
-        onEndReachedThreshold={0.3}
-      />
-    );
+
+    const { ShopStore } = this.props;
+
+    if (ShopStore.products) {
+      return (
+        <FlatGrid
+          itemDimension={150}
+          spacing={10}
+          items={ShopStore.products}
+          renderItem={this.renderItem}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+          initialNumToRender={8}
+          onEndReached={this.onEndRefresh}
+          onEndReachedThreshold={0.2}
+        />
+      );
+    }
+    else {
+      return (
+        <LoadingView />
+      );
+    }
   }
 }
 

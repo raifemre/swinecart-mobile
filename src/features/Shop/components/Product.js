@@ -1,91 +1,96 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { observer, inject } from 'mobx-react';
-import { View } from 'native-base';
-import CardView from 'react-native-cardview';
+import { View, Body } from 'native-base';
 
 import TextWrapper from '../../../shared/TextWrapper';
-import ImageWrapper from '../../../shared/ImageWrapper';
-import OutlinedButton from '../../../shared/OutlinedButton';
-import IconWrapper from '../../../shared/IconWrapper';
-import FlatButton from '../../../shared/FlatButton';
+import CardItemHeader from '../../../shared/CardItemHeader';
+import CardWrapper from '../../../shared/CardWrapper';
+import CardItemBody from '../../../shared/CardItemBody';
+import CardItemFooter from '../../../shared/CardItemFooter';
+import ButtonWrapper from '../../../shared/ButtonWrapper';
 
 import Navigation from '../../../services/navigation';
-import { Shop } from '../../../services';
+import { toJS } from 'mobx';
 
 @inject('ShopStore', 'SwineCartStore')
 @observer
 class Product extends Component {
 
-  navigateToProductDetails = async () => {
-    const { product: { id },  ShopStore } = this.props;
-    const { product, rating } = await ShopStore.getProductDetails(id);
-    Navigation.navigate('ProductDetailsCustomer', { product, rating });
+  onPressView = async () => {
+
   }
 
-  addToCart = async () => {
+  onPressAdd = async () => {
     const { product, SwineCartStore } = this.props;
     await SwineCartStore.addItem(product.id);
   }
 
   render() {
-    const { container } = styles;
+    // const { container } = styles;
     const { product } = this.props;
-    const { id, age, breed, name, type, img_path } = product;
+    const { breeder, age, breed, name, type, img_path } = product;
+    // console.dir(toJS(product));
 
     return (
-      <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={5} style={{ height: 200, flex: 1 }}>
-        <View style={container}>
-          <ImageWrapper width={200} height={100} uri={img_path} />
-        </View>
-        <View style={{ flex: 1, paddingHorizontal: 8 }}>
-          <TextWrapper text={name} size={18} color='#000000' /> 
-          <TextWrapper text={`${type} - ${breed}`} size={12} color='#8E8E8E' /> 
-          <TextWrapper text={`${age} days old`} size={12} color='#8E8E8E' /> 
-        </View>
-        <View style={{ flex: 1, justifyContent: 'flex-end', padding: 8 }}>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flex: 1 }}>
-              <OutlinedButton onPress={this.navigateToProductDetails} style={{ borderColor: '#373f51', paddingLeft: 0, paddingRight: 0, height: 20 }}>
-                <TextWrapper text='View Item' size={12} color='#373f51' />
-              </OutlinedButton>
+      <CardWrapper>
+        <CardItemHeader uri={img_path} />
+        <CardItemBody>
+          <Body>
+            <View style={{ marginBottom: 5, }}>
+              <TextWrapper
+                text={name}
+                font='OpenSans-Bold'
+                color='#2e3131'
+                size={13}
+              />
+              <TextWrapper
+                text={`${type} - ${breed}`}
+                font='OpenSans-SemiBold'
+                color='#2e3131'
+                size={11}
+              />
+              <TextWrapper
+                text={`${age} days old`}
+                font='OpenSans-SemiBold'
+                color='#2e3131'
+                size={11}
+              />
+              <TextWrapper
+                text={`${breeder}`}
+                font='OpenSans-Bold'
+                color='#2e3131'
+                size={11}
+              />
             </View>
-            <FlatButton onPress={this.addToCart} transparent style={{ borderColor: '#373f51', paddingTop: 0, paddingBottom: 0, height: 20 }}>
-              <IconWrapper name='add-shopping-cart' color='#ff715b' />
-            </FlatButton>
+          </Body>
+        </CardItemBody>
+        <CardItemFooter>
+          <View style={{ flex: 1, flexDirection: 'row', }}>
+            <ButtonWrapper
+              onPress={this.onPressView}
+              buttonColor='#ffffff'
+              text='View'
+              textColor='#000000'
+              textSize={12}
+              style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
+            />
+            <ButtonWrapper
+              onPress={this.onPressAdd}
+              text='Add'
+              buttonColor='#00695C'
+              textColor='#ffffff'
+              textSize={10}
+              style={{ height: 24, flex: 1, marginLeft: 2, }}
+            />
           </View>
-        </View>
-      </CardView>
+        </CardItemFooter>
+      </CardWrapper>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  cardStyle: {
-    borderColor: 'transparent',
-    borderColor: '#f7f7f7',
-    borderRadius: 10,
-    shadowColor: '#f7f7f7',
-    shadowRadius: 0,
-    elevation: 1,
-  }
 });
 
 export default Product;

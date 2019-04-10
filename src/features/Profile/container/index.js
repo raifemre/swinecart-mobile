@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import {
-  Container, Content, Left, Right
+  Container, View, Left, Right
 } from 'native-base';
 
 import {
@@ -23,11 +23,11 @@ import IconButton from '../../../shared/IconButton';
 class Profile extends Component {
 
   componentDidMount() {
-    // this.props.FarmStore.getFarms();
+    this.props.FarmStore.getFarms();
   }
 
   state = {
-    selectedIndex: 2
+    selectedIndex: 1
   }
 
   setIndex = index => {
@@ -71,11 +71,11 @@ class Profile extends Component {
             selectedIndex={this.state.selectedIndex}
             onTabPress={this.setIndex}
           />
-          <Content padder>
+          <View style={{ flex: 1 }}>
             {this.state.selectedIndex === 0 && <OfficeInfo />}
             {this.state.selectedIndex === 1 && <Farms />}
             {this.state.selectedIndex === 2 && <ChangePassword />}
-          </Content>
+          </View>
         </Container>
       </React.Fragment>
     );

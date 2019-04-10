@@ -17,7 +17,7 @@ class Farms extends Component {
     );
   }
 
-  handleOnRefresh = () => {
+  onRefresh = () => {
     this.setState({
       refreshing: true
     }, async () => {
@@ -33,7 +33,7 @@ class Farms extends Component {
         data={this.props.FarmStore.farms}
         renderItem={this.renderItem}
         refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
+        onRefresh={this.onRefresh}
         keyExtractor={item => `${item.id}`}
         initialNumToRender={8}
       />

@@ -4,12 +4,13 @@ import {
 
 import { sortBy } from 'lodash';
 
+import { showMessage } from 'react-native-flash-message';
 
 import {
   SwineCart
 } from '../../services';
+import { formatError } from '../../utils';
 
-import { showMessage, hideMessage } from "react-native-flash-message";
 
 class SwineCartStore {
 
@@ -18,20 +19,37 @@ class SwineCartStore {
 
   @observable items = [];
 
+  @observable loadingAdd = false;
+
   @action async addItem(id) {
-    const { data: { error, data } } = await SwineCart.addItem(id);
-    if(error) {
+    try {
+      this.loadingAdd = true;
+      const { error, data, message } = await SwineCart.addItem(id);
+      if (error) {
+        throw new Error(formatError(error).errorMessage);
+      }
+      else {
+        if (data) {
+
+        }
+        else {
+          showMessage({
+            message: message,
+            type: 'success',
+          });
+        }
+      }
+    }
+    catch (err) {
       showMessage({
-        message: 'Error',
-        description: error,
+        message: err.message,
         type: 'danger',
       });
     }
-    else {
-      const { item } = data;
+    finally {
       runInAction(() => {
-        this.items.push(item);
-      });
+        this.loadingAdd = false;
+      })
     }
   }
 

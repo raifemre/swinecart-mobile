@@ -76,7 +76,7 @@ class PickerWrapper extends Component {
 
 const styles = StyleSheet.create({
   fieldStyle: {
-    borderWidth: 2, height: 40, borderRadius: 5,
+    borderWidth: 1.5, height: 42, borderRadius: 5,
     paddingHorizontal: 10, borderColor: '#2d3436',
     justifyContent: 'center'
   },

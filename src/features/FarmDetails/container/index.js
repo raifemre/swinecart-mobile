@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, View, Left, Right, Spinner } from 'native-base';
+import { Container, View, Left, Right, Spinner, Content } from 'native-base';
 import { observer, inject } from 'mobx-react';
 import { NavigationEvents } from 'react-navigation';
 
@@ -11,7 +11,6 @@ import BackButton from '../../../shared/BackButton';
 import { Navigation } from '../../../services';
 
 import FarmInfo from '../components/FarmInfo';
-import TextWrapper from '../../../shared/TextWrapper';
 
 @inject('ProductsStore', 'FarmStore')
 @observer
@@ -19,6 +18,10 @@ class FarmDetails extends Component {
 
   deleteFarm = () => {
     alert('Delete Farm');
+  }
+
+  editFarm = () => {
+    alert('Edit Farm');
   }
 
   getFarmDetails = () => {
@@ -33,7 +36,7 @@ class FarmDetails extends Component {
 
   render() {
 
-    const { navigation, FarmStore } = this.props;
+    const { FarmStore } = this.props;
 
     return (
       <React.Fragment>
@@ -50,16 +53,25 @@ class FarmDetails extends Component {
               title='Farm Information'
             />
             <Right style={{ flex: 1 }}>
-              {/* <IconButton marginLeft={0} marginRight={0}
-                size={26}
-                color='#ffffff'
-                name='delete'
-                type='MaterialIcons'
-                onPress={this.deleteFarm}
-              /> */}
+              <View style={{ flexDirection: 'row', }}>
+                <IconButton marginLeft={0} marginRight={5}
+                  size={26}
+                  color='#ffffff'
+                  name='edit'
+                  type='MaterialIcons'
+                  onPress={this.editFarm}
+                />
+                <IconButton marginLeft={5} marginRight={0}
+                  size={26}
+                  color='#ffffff'
+                  name='delete'
+                  type='MaterialIcons'
+                  onPress={this.deleteFarm}
+                />
+              </View>
             </Right>
           </HeaderWrapper>
-          <View style={{ flex: 1 }}>
+          <Content contentContainerStyle={{ flex: 1 }}>
             {
               !FarmStore.farm &&
               <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
@@ -70,7 +82,7 @@ class FarmDetails extends Component {
               FarmStore.farm && 
               <FarmInfo farm={FarmStore.farm} />
             } 
-          </View>
+          </Content>
         </Container>
       </React.Fragment>
     );

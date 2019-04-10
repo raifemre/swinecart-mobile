@@ -20,30 +20,32 @@ class ChangePassword extends Component {
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={ChangePasswordForm.loading} textContent='Changing Password...'/>
-        <View style={{ marginTop: 10 }}>
-          <PasswordField
-            form={ChangePasswordForm}
-            field={'currentPassword'}
-            placeholder='Current Password'
-          />
-          <PasswordField
-            form={ChangePasswordForm}
-            field={'newPassword'}
-            placeholder='New Password'
-          />
-          <PasswordField
-            form={ChangePasswordForm}
-            field={'newPasswordConfirmation'}
-            placeholder='Re-type New Password'
-          />
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <ButtonWrapper 
-            onPress={this.onClick}
-            text='Submit'
-            textColor='#ffffff'
-            textSize={16}
-          />
+        <View style={{ paddingHorizontal: 5 }}>
+          <View style={{ marginTop: 5 }}>
+            <PasswordField
+              form={ChangePasswordForm}
+              field={'currentPassword'}
+              placeholder='Current Password'
+            />
+            <PasswordField
+              form={ChangePasswordForm}
+              field={'newPassword'}
+              placeholder='New Password'
+            />
+            <PasswordField
+              form={ChangePasswordForm}
+              field={'newPasswordConfirmation'}
+              placeholder='Re-type New Password'
+            />
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <ButtonWrapper
+              onPress={this.onClick}
+              text='Submit'
+              textColor='#ffffff'
+              textSize={16}
+            />
+          </View>
         </View>
       </React.Fragment>
     );
