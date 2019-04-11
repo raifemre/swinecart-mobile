@@ -1,83 +1,90 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { observer, inject } from 'mobx-react';
-import { View, Grid, Row, Col } from 'native-base';
-import CardView from 'react-native-cardview';
+import { Body, View } from 'native-base';
 
 import TextWrapper from '../../../shared/TextWrapper';
-import ImageWrapper from '../../../shared/ImageWrapper';
-import OutlinedButton from '../../../shared/OutlinedButton';
-
+import CardItemHeader from '../../../shared/CardItemHeader';
+import CardWrapper from '../../../shared/CardWrapper';
+import CardItemBody from '../../../shared/CardItemBody';
+import CardItemFooter from '../../../shared/CardItemFooter';
+import ButtonWrapper from '../../../shared/ButtonWrapper';
 import Navigation from '../../../services/navigation';
 import { toJS } from 'mobx';
 
 @inject('ShopStore', 'SwineCartStore')
 @observer
-class Product extends Component {
+class Item extends Component {
 
-  requestItem = () => {
-    Navigation.navigate('RequestItem', { item: this.props.item });
+  onPressRequest = () => {
+
   }
 
-  deleteItem = async () => {
+  onPressRemove = () => {
     const { item, SwineCartStore } = this.props;
-    await SwineCartStore.deleteItem(item.id);
+    SwineCartStore.removeItem('not_requested', item);
   }
 
   render() {
-    const { container } = styles;
+    // const { container } = styles;
+
     const { item } = this.props;
-    const { breeder, product_breed, product_name, product_type, img_path } = item;
+    const { product } = item;
+    const { breeder, breed, name, type, img_path } = product;
     
     return (
-      <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={5} style={{ height: 250 }}>
-        <View style={[container]}>
-          <ImageWrapper width={200} height={100} uri={img_path} />
-        </View>
-        <View style={{ flex: 1, paddingHorizontal: 8 }}>
-          <TextWrapper text={product_name} size={18} color='#000000' />
-          <TextWrapper text={`${product_type} - ${product_breed}`} size={12} color='#8E8E8E' />
-          <TextWrapper text={breeder} size={12} color='#8E8E8E' />
-        </View>
-        <View style={{ flex: 1, justifyContent: 'flex-end', padding: 8, marginTop: 8 }}>
-          <OutlinedButton block onPress={this.requestItem} style={{ borderColor: '#373f51', paddingLeft: 0, paddingRight: 0, height: 20 }}>
-            <TextWrapper text='Request Item' size={12} color='#373f51' />
-          </OutlinedButton>
-          <OutlinedButton block onPress={this.deleteItem} style={{ borderColor: '#ff715b', paddingLeft: 0, paddingRight: 0, height: 20, marginTop: 8 }}>
-            <TextWrapper text='Remove Item' size={12} color='#ff715b' />
-          </OutlinedButton>
-        </View>
-      </CardView>
+      <CardWrapper>
+        <CardItemHeader uri={img_path} />
+        <CardItemBody>
+          <Body>
+            <View style={{ marginBottom: 5 }}>
+              <TextWrapper
+                text={name}
+                font='OpenSans-Bold'
+                color='#2e3131'
+                size={13}
+              />
+              <TextWrapper
+                text={`${type} - ${breed}`}
+                font='OpenSans-SemiBold'
+                color='#2e3131'
+                size={11}
+              />
+              <TextWrapper
+                text={`${breeder}`}
+                font='OpenSans-Bold'
+                color='#2e3131'
+                size={11}
+              />
+            </View>
+          </Body>
+        </CardItemBody>
+        <CardItemFooter>
+          <View style={{ flex: 1, flexDirection: 'row', }}>
+            <ButtonWrapper
+              onPress={this.onPressRequest}
+              buttonColor='#64b5f6'
+              text='Request'
+              textColor='#ffffff'
+              textSize={12}
+              style={{ height: 24, flex: 1, marginRight: 2 }}
+            />
+            <ButtonWrapper
+              onPress={this.onPressRemove}
+              text='Remove'
+              buttonColor='#ffffff'
+              textColor='#000000'
+              textSize={12}
+              style={{ height: 24, flex: 1, marginLeft: 2, }}
+            />
+          </View>
+        </CardItemFooter>
+      </CardWrapper>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  contentStyle: {
-    flex: 1,
-  },
-  center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  openSansBold: {
-    fontFamily: 'OpenSans-Bold'
-  },
-  openSansSemiBold: {
-    fontFamily: 'OpenSans-SemiBold'
-  },
-  cardStyle: {
-    borderColor: 'transparent',
-    borderColor: '#f7f7f7',
-    borderRadius: 10,
-    shadowColor: '#f7f7f7',
-    shadowRadius: 0,
-    elevation: 1,
-  }
 });
 
-export default Product;
+export default Item;

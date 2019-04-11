@@ -23,7 +23,7 @@ class Product extends Component {
 
   onPressAdd = async () => {
     const { product, SwineCartStore } = this.props;
-    await SwineCartStore.addItem(product.id);
+    await SwineCartStore.addItem('not_requested', product.id);
   }
 
   render() {
@@ -80,7 +80,7 @@ class Product extends Component {
               text='Add'
               buttonColor='#00695C'
               textColor='#ffffff'
-              textSize={10}
+              textSize={12}
               style={{ height: 24, flex: 1, marginLeft: 2, }}
             />
           </View>

@@ -3,8 +3,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import { observer, inject } from 'mobx-react';
 import { toJS } from 'mobx';
 
-import Item from './Item';
-import RequestedItem from './RequestedItem';
+import LoadingView from '../../../shared/LoadingView';
 
 @inject('SwineCartStore')
 @observer
@@ -15,47 +14,46 @@ class Items extends Component {
   }
 
   renderItem = ({ item }) => {
-    if(item.request_status === 1) {
-      return (
-        <RequestedItem item={item} />
-      );
-    }
-    else {
-      return (
-        <Item item={item} />
-      );
-    }
-    
+    const { CardComponent } = this.props;
+    return <CardComponent item={item} />     
   }
 
-  handleOnRefresh = () => {
+  onRefresh = () => {
     this.setState({
       refreshing: true
     }, async () => {
-      await this.props.SwineCartStore.getItems();
+      await this.props.SwineCartStore.getItems(this.props.status);
       this.setState({ refreshing: false });
     });
   };
 
-  handleOnEndReached = () => {
-    // this.props.SwineCartStore.getMoreItems();
+  onEndReached = () => {
+    // this.props.SwineCartStore.getMoreItems(this.props.status);
   }
 
   render() {
 
-    return (
-      <FlatGrid
-        itemDimension={130}
-        spacing={16}
-        items={this.props.SwineCartStore.items}
-        renderItem={this.renderItem}
-        refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
-        initialNumToRender={6}
-        onEndReached={this.handleOnEndReached}
-        onEndReachedThreshold={0.3}
-      />
-    );
+    const { SwineCartStore, status } = this.props;
+    if (SwineCartStore.items[status]) {
+      return (
+        <FlatGrid
+          itemDimension={150}
+          spacing={5}
+          items={SwineCartStore.items[status]}
+          renderItem={this.renderItem}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+          initialNumToRender={8}
+          onEndReached={this.onEndReached}
+          onEndReachedThreshold={0.3}
+        />
+      );
+    }
+    else {
+      return (
+        <LoadingView />
+      );
+    }
   }
 }
 

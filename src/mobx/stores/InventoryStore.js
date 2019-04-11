@@ -9,9 +9,9 @@ class InventoryStore {
   limit = 8
 
   @observable selectedIndex = 1;
-  @observable products = {}
-  @observable pages = {}
-  @observable maps = {}
+  @observable products = {};
+  @observable pages = {};
+  @observable maps = {};
   @observable requests = null;
 
   @observable reserveLoading = false;

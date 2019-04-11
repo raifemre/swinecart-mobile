@@ -17,7 +17,7 @@ import moment from 'moment';
 
 @inject('ShopStore', 'SwineCartStore')
 @observer
-class Product extends Component {
+class Status extends Component {
 
   rateBreeder = () => {
 
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Product;
+export default Status;

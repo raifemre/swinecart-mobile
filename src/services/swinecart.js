@@ -7,11 +7,13 @@ const service = {
     const { data } = await API.post(`${URL_PREFIX}/items/${id}`);
     return data;
   },
-  deleteItem(id) {
-    return API.delete(`${URL_PREFIX}/items/${id}`);
+  async removeItem(id) {
+    const { data } = await API.delete(`${URL_PREFIX}/items/${id}`);
+    return data;
   },
-  getItems(status = 'not_requested', page, perpage) {
-    return API.get(`${URL_PREFIX}/items`, { status, page, perpage });
+  async getItems(status = 'not_requested', page, limit) {
+    const { data } = await API.get(`${URL_PREFIX}/items?status=${status}`, { page, limit });
+    return data;
   },
   requestItem(id, data) {
     return API.put(`${URL_PREFIX}/items/${id}`, { ...data });
