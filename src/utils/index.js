@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { has, set, toJS } from 'mobx';
-import UUIDGenerator from 'react-native-uuid-generator';
 import { isString, isObject, keys, camelCase, get } from 'lodash';
 
 export function sleep(ms) {

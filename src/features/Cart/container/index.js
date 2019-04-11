@@ -18,7 +18,9 @@ import RequestedItem from '../components/RequestedItem';
 class Cart extends Component {
 
   componentDidMount() {
-    this.props.SwineCartStore.getItems('not_requested');
+    const { SwineCartStore } = this.props;
+    SwineCartStore.getItemCount();
+    SwineCartStore.getItems('not_requested');
   }
 
   render() {

@@ -18,16 +18,33 @@ class SwineCartStore {
   @observable items = {};
   @observable pages = {};
   @observable maps = {};
+  @observable itemCount = 0;
 
   @observable loadingAdd = false;
   @observable loadingRemove = false;
 
   @observable selectedIndex = 1;
 
-  @computed get itemCount() {
-    const notRequestedItems = this.items['not_requested'];
-    return notRequestedItems ? notRequestedItems.length : 0;
+  @action async getItemCount() {
+    try {
+      const { error, data } = await SwineCart.getItemCount();
+      if (error) {
+
+      }
+      else {
+        if (data) {
+          const { itemCount } = data;
+          runInAction(() => {
+            this.itemCount = itemCount;
+          });
+        }
+      }
+    }
+    catch (err) {
+      console.dir(err.message);
+    }
   }
+
   @action async getItems(status) {
     try {
       const { error, data } = await SwineCart.getItems(status, 1, this.limit);
@@ -55,7 +72,28 @@ class SwineCartStore {
 
   }
 
-  @action async getMoreItems() {
+  @action async getMoreItems(status) {
+    try {
+      const { error, data } = await SwineCart.getItems(status, this.pages[status], this.limit);
+      if (error) {
+
+      }
+      else {
+        if (data) {
+          const { count, items } = data;
+          runInAction(() => {
+            if (count >= this.limit) {
+              this.pages[status] = this.pages[status] + 1;
+            }
+            this.items[status].push(...filterNewItems(this.maps[status], items, 'id'));
+          });
+        }
+      }
+    }
+    catch (err) {
+      console.dir(err.message);
+    }
+
   }
 
   // Utility Functions
@@ -88,6 +126,7 @@ class SwineCartStore {
       else {
         if (data) {
           const { item } = data;
+          await this.getItemCount();
           this._addProduct(status, item);
         }
         showMessage({
@@ -113,11 +152,13 @@ class SwineCartStore {
     try {
       this.loadingRemove = true;
       const { error, data, message } = await SwineCart.removeItem(item.id);
+
       // console.dir(error, data, message);
       if (error) {
         throw new Error(formatError(error).errorMessage);
       }
       else {
+        await this.getItemCount();
         this._removeProduct(status, item.id);
         showMessage({
           message: 'Remove Item successful!',

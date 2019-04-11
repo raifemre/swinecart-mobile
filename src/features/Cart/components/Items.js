@@ -28,7 +28,7 @@ class Items extends Component {
   };
 
   onEndReached = () => {
-    // this.props.SwineCartStore.getMoreItems(this.props.status);
+    this.props.SwineCartStore.getMoreItems(this.props.status);
   }
 
   render() {

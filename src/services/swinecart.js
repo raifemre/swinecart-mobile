@@ -15,6 +15,10 @@ const service = {
     const { data } = await API.get(`${URL_PREFIX}/items?status=${status}`, { page, limit });
     return data;
   },
+  async getItemCount() {
+    const { data } = await API.get(`${URL_PREFIX}/items/count`);
+    return data;
+  },
   requestItem(id, data) {
     return API.put(`${URL_PREFIX}/items/${id}`, { ...data });
   }
