@@ -5,17 +5,17 @@ import {
 import { observer, inject } from 'mobx-react';
 
 function SwineCartIcon({ focused, SwineCartStore }) {
-  const count = Math.min(SwineCartStore.itemCount, 99);
+  const count = SwineCartStore.itemCount >= 99 ? '99+' : SwineCartStore.itemCount;
   return (
     <View>
       {
-        count > 0
+        SwineCartStore.itemCount > 0
           ? <View
             style={{
               position: 'absolute',
               bottom: 15,
               left: 15,
-              width: 17,
+              width: 20,
               height: 17,
               borderRadius: 10,
               backgroundColor: '#ff0000',
