@@ -4,13 +4,18 @@ import { observer } from 'mobx-react';
 import DatePicker from 'react-native-datepicker'
 import moment from 'moment';
 
-import TextWrapper from './TextWrapper';
+import IconButton from './IconButton';
 
 @observer
 class DatePickerWrapper extends Component {
 
   formatString = date => {
     return moment(date).format('MMMM D YYYY');
+  }
+  
+  resetValue = () => {
+    const { form, field } = this.props;
+    form.setValue(field, null);
   }
 
   onDateChange = value => {
@@ -19,37 +24,53 @@ class DatePickerWrapper extends Component {
   }
 
   render() {
-    const { form, field, placeholder } = this.props;
+    const { form, field, placeholder, minDate, maxDate } = this.props;
 
     return (
       <View style={{ marginTop: 10, marginBottom: 10 }}>
-        <DatePicker
-          style={{ width: '100%', height: 40 }}
-          mode='date'
-          date={form.data[field]}
-          showIcon={false}
-          placeholder={`Choose ${placeholder}`}
-          format='MMMM Do YYYY'
-          maxDate={new Date()}
-          confirmBtnText='Ok'
-          cancelBtnText='Cancel'
-          getDateStr={this.formatString}
-          customStyles={{
-            dateInput: {
-              borderColor: '#2d3436', borderWidth: 2, borderRadius: 5,
-              padding: 10,
-            },
-            dateText: {
-              fontSize: 16, fontFamily: 'OpenSans-Bold',
-              alignSelf: 'flex-start',
-            },
-            placeholderText: {
-              fontSize: 16, fontFamily: 'OpenSans-Bold',
-              alignSelf: 'flex-start', color: '#7f8c8d'
-            }
-          }}
-          onDateChange={this.onDateChange}
-        />
+        <View style={{ borderColor: '#2d3436', borderWidth: 1.5, borderRadius: 5, flexDirection: 'row',}}>
+          <View style={{ flex: 1 }}>
+            <DatePicker
+              style={{ width: '100%', height: 40 }}
+              mode='date'
+              date={form.data[field]}
+              showIcon={false}
+              placeholder={`Choose ${placeholder}`}
+              format='MMMM Do YYYY'
+              minDate={minDate}
+              maxDate={maxDate}
+              confirmBtnText='Ok'
+              cancelBtnText='Cancel'
+              getDateStr={this.formatString}
+              customStyles={{
+                dateInput: {
+                  borderColor: 'transparent',
+                  paddingLeft: 10,
+                },
+                dateText: {
+                  fontSize: 16, fontFamily: 'OpenSans-Bold',
+                  alignSelf: 'flex-start',
+                },
+                placeholderText: {
+                  fontSize: 16, fontFamily: 'OpenSans-Bold',
+                  alignSelf: 'flex-start', color: '#7f8c8d'
+                }
+              }}
+              onDateChange={this.onDateChange}
+            />
+          </View>
+          <View style={{ justifyContent: 'center', alignContent: 'center', }}>
+            <IconButton
+              marginLeft={0}
+              marginRight={10}
+              size={24}
+              name='close'
+              color='#000000'
+              type='MaterialCommunityIcons'
+              onPress={this.resetValue}
+            />
+          </View>
+        </View>
       </View>
     );
   }

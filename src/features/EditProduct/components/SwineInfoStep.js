@@ -110,6 +110,7 @@ function ProductInfoStep({ EditProductForm, FarmStore }) {
           form={EditProductForm}
           placeholder='Birth Date'
           field='birthDate'
+          maxDate={new Date()}
         />
         <TextField
           form={EditProductForm}

@@ -1,6 +1,7 @@
 import ChangePasswordForm from './ChangePasswordForm';
 import LoginForm from './LoginForm';
 import OfficeInfoForm from './OfficeInfoForm';
+import RequestItemForm from './RequestItemForm';
 import AddProductForm from './AddProductForm';
 import EditProductForm from './EditProductForm';
 
@@ -9,7 +10,7 @@ const forms = {
   ChangePasswordForm,
   EditProductForm,
   AddProductForm,
-  OfficeInfoForm,
+  RequestItemForm,
   OfficeInfoForm,
 }
 

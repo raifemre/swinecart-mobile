@@ -15,7 +15,7 @@ const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
   Public: PublicStackNavigator,
   Customer: CustomerStackNavigator,
-  // Breeder: BreederTabNavigator
+  Breeder: BreederTabNavigator
 }, {
   initialRouteName: 'AuthChecker'
 });

@@ -1,43 +1,29 @@
 import { observable, action, runInAction } from 'mobx';
 import { showMessage } from 'react-native-flash-message';
 import { validate } from 'validate.js';
-import { forOwn } from 'lodash';
+import { forOwn, repeat } from 'lodash';
 
-import AuthStore from '../stores/AuthStore';
 import errorMessages from './errorMessages';
 
-class LoginForm {
+class RequestItemForm {
 
   defaultFormState = {
-    email: null,
-    password: null
+    specialRequest: null
   }
 
   formRules = {
-    email: {
-      presence: errorMessages.presence,
-      email: {
-        message: '^This is not a valid email'
-      },
-    },
-    password: {
-      presence: errorMessages.presence
-    }
   }
 
   @observable loading = false;
 
   @observable data = {
-    email: 'tess.bernhard@gmail.com',
-    // email: 'leopoldo.toy@lind.net',
-    password: 'secret12'
-    // email: null,
-    // password: null
+    // specialRequest: null
+    specialRequest: repeat('abcde', 500)
   }
 
   @observable errors = {
-    email: null,
-    password: null
+    specialRequest: null,
+    dateNeeded: null,
   }
 
   @observable clearErrors = (errors) => {
@@ -93,24 +79,10 @@ class LoginForm {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        const { error, data, message } = await AuthStore.login(this.data);
-        if (error) {
-          const { field, errorMessage } = error;
-          if (field) {
-            this.showError(field, errorMessage);
-          }
-          else {
-            throw new Error(errorMessage);
-          }
-        }
-        else {
-          const { access_token } = data;
-          AuthStore.loginFlow(access_token);
-          this.resetForm();
-        }
+        this.resetForm();
       }
     }
-    catch(err) {
+    catch (err) {
       showMessage({
         message: err.message,
         type: 'danger'
@@ -126,4 +98,4 @@ class LoginForm {
 
 }
 
-export default new LoginForm();
+export default new RequestItemForm();

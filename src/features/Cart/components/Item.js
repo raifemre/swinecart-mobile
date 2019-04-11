@@ -25,7 +25,7 @@ class Item extends Component {
 
 
   onPressRequest = () => {
-
+    Navigation.navigate('RequestItem', { item: this.props.item });
   }
 
   showRCModal = () => this.setState({ isRCModalVis: true });

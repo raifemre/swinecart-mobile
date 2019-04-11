@@ -2,7 +2,7 @@ import {
   observable, action, runInAction, toJS
 } from 'mobx';
 import { validate } from 'validate.js';
-import { forOwn, pick, find, toString, camelCase, split, includes } from 'lodash';
+import { forOwn, pick, find, toString, camelCase, split, includes, trim } from 'lodash';
 import { showMessage } from 'react-native-flash-message';
 
 import ProductsStore from '../stores/ProductsStore';
@@ -205,15 +205,15 @@ class EditProductForm {
         if (includes(value, 'x')) {
           this.data['breedType'] = 'cross';
           const [ fatherBreed, motherBreed ] = split(value, 'x');
-          this.data['fatherBreed'] = fatherBreed;
-          this.data['motherBreed'] = motherBreed;
+          this.data['fatherBreed'] = trim(fatherBreed);
+          this.data['motherBreed'] = trim(motherBreed);
         }
         else {
           this.data[field] = value;
         }
         return;
       }
-      this.data[camelCase(field)] = value && toString(value);
+      this.data[camelCase(field)] = value && trim(toString(value));
     });
   }
 

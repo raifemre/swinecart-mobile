@@ -15,14 +15,13 @@ function TextAreaWrapper(props) {
 
   return (
     <Textarea
-      containerStyle={{ borderColor: '#2d3436', borderWidth: 2, borderRadius: 5, padding: 0 }}
-      style={{ fontFamily: 'OpenSans-Bold', fontSize: 16, }}
+      containerStyle={{ borderColor: '#2d3436', borderWidth: 1, borderRadius: 5, padding: 0, height: 200 }}
+      style={{ fontFamily: 'OpenSans-Bold', fontSize: 16, textAlignVertical: 'top', height: 200 }}
       onChangeText={onChangeText}
       defaultValue={form.data[field]}
       placeholder={placeholder}
       underlineColorAndroid={'transparent'}
       placeholderTextColor={'#c7c7c7'}
-      maxLength={500}
     />
   )
 }
