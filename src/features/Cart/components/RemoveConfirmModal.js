@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react';
 import { View } from 'native-base';
 import Modal from 'react-native-modal';
@@ -6,14 +6,11 @@ import Modal from 'react-native-modal';
 import TextWrapper from '../../../shared/TextWrapper';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
 
-@observer
-class RemoveConfirmModal extends Component {
-
-  render () {
+function RemoveConfirmModal(props) {
 
     const {
       isVisible, onBackdropPress, product, onPressCancel, onPressOkay
-    } = this.props;
+    } = props;
 
     return (
       <Modal
@@ -21,10 +18,10 @@ class RemoveConfirmModal extends Component {
         isVisible={isVisible}
         onBackdropPress={onBackdropPress}
       >
-        <View style={{ backgroundColor: '#ffffff', borderRadius: 5, padding: 10 }}>
-          <View>
+        <View style={{ backgroundColor: '#ffffff', borderRadius: 5 }}>
+          <View style={{ padding: 10, }}>
             <TextWrapper
-              text={'Delete Item?'}
+              text={'Delete Product?'}
               font='OpenSans-Bold'
               color='#000000'
               size={15}
@@ -37,14 +34,14 @@ class RemoveConfirmModal extends Component {
               numberOfLines={3}
             />
           </View>
-          <View style={{ flexDirection: 'row', marginTop: 10 }}>
+          <View style={{ flexDirection: 'row', backgroundColor: '#f2f2f2', padding: 10, borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
             <ButtonWrapper
               onPress={onPressCancel}
               text='No'
-              buttonColor='#f2f2f2'
+              buttonColor='#ffffff'
               textColor='#000000'
               textSize={12}
-              style={{ height: 24, flex: 1, marginRight: 2.5, }}
+              style={{ height: 24, flex: 1, marginRight: 5, }}
             />
             <ButtonWrapper
               onPress={onPressOkay}
@@ -52,15 +49,14 @@ class RemoveConfirmModal extends Component {
               text='Remove the Product'
               textColor='#ffffff'
               textSize={12}
-              style={{ height: 24, flex: 1, marginLeft: 2.5 }}
+              style={{ height: 24, flex: 1, marginLeft: 5 }}
             />
           </View>
         </View>
       </Modal>
 
     );
-  }
 
 }
 
-export default RemoveConfirmModal;
+export default observer(RemoveConfirmModal);

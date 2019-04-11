@@ -38,6 +38,7 @@ class Item extends Component {
   onPressOkay = async () => {
     const { item, SwineCartStore } = this.props;
     await SwineCartStore.removeItem('not_requested', item);
+    this.hideRCModal();
   }
 
   render() {
@@ -55,6 +56,7 @@ class Item extends Component {
           product={product}
           onPressCancel={this.hideRCModal}
           onPressOkay={this.onPressOkay}
+          hideModalContentWhileAnimating={true}
         />
         <CardWrapper>
           <CardItemHeader uri={img_path} />
