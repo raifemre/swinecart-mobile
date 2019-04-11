@@ -1,13 +1,18 @@
-import { observable, action, runInAction } from 'mobx';
+import { observable, action, runInAction, toJS } from 'mobx';
 import { showMessage } from 'react-native-flash-message';
 import { validate } from 'validate.js';
 import { forOwn, repeat } from 'lodash';
 
 import errorMessages from './errorMessages';
+import SwineCartStore from '../stores/SwineCartStore';
+
+import Navigation from '../../services/navigation';
 
 class RequestItemForm {
 
   defaultFormState = {
+    requestQuantity: 2,
+    dateNeeded: null,
     specialRequest: null
   }
 
@@ -17,8 +22,9 @@ class RequestItemForm {
   @observable loading = false;
 
   @observable data = {
-    // specialRequest: null
-    specialRequest: repeat('abcde', 500)
+    requestQuantity: 2,
+    dateNeeded: null,
+    specialRequest: repeat('abcde', 100)
   }
 
   @observable errors = {
@@ -75,11 +81,26 @@ class RequestItemForm {
     return true;
   }
 
-  @action async submitForm() {
+  @action async submitForm(id) {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        this.resetForm();
+        const { error, data, message } = await SwineCartStore.requestItem(id, this.data);
+        if (error) {
+
+        }
+        else {
+          await SwineCartStore.getItemCount();
+          SwineCartStore._removeProduct('not_requested', id);
+          this.resetForm();
+          showMessage({
+            message: 'Request Product successful',
+            type: 'success'
+          });
+
+          Navigation.back();
+          
+        }
       }
     }
     catch (err) {

@@ -22,6 +22,7 @@ class SwineCartStore {
 
   @observable loadingAdd = false;
   @observable loadingRemove = false;
+  @observable loadingRequest = false;
 
   @observable selectedIndex = 1;
 
@@ -179,8 +180,13 @@ class SwineCartStore {
     }
   }
 
-  @action async requestItem(id, request) {
-
+  @action async requestItem(id, requestData) {
+    const { error, data, message } = await SwineCart.requestItem(id, toJS(requestData));
+    return {
+      error: formatError(error),
+      data,
+      message
+    }
   }
 
 }

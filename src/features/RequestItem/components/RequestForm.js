@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { View } from 'native-base';
 import { observer, inject } from 'mobx-react';
+import Divider from 'react-native-divider';
 
 import TextWrapper from '../../../shared/TextWrapper';
 import TextAreaWrapper from '../../../shared/TextAreaWrapper';
@@ -10,18 +11,15 @@ import DatePickerWrapper from '../../../shared/DatePickerWrapper';
 
 import InfoMessage from './InfoMessage';
 import WarningMessage from './WarningMessage';
+import Stepper from './Stepper';
 
 @inject('SwineCartStore', 'RequestItemForm')
 @observer
 class RequestForm extends Component {
 
-
-  maxDate = () => {
-
-  }
-
   onPressRequest = () => {
-    this.props.RequestItemForm.submitForm();
+    const { item, RequestItemForm } = this.props;
+    RequestItemForm.submitForm(item.id);
   }
 
   render() {
@@ -36,14 +34,30 @@ class RequestForm extends Component {
           <InfoMessage name={name} />
           <WarningMessage type={type} />
         </View>
-        <View>
-          <DatePickerWrapper
-            form={RequestItemForm}
-            minDate={new Date()}
-            placeholder='Date Needed'
-            field='dateNeeded'
+        <Divider orientation='center'>
+          <TextWrapper
+            color='#7f8c8d'
+            text='Request Form'
+            font='OpenSans-Bold'
+            size={14}
           />
-        </View>
+        </Divider>
+        {
+          type === 'Semen' &&
+            <React.Fragment>
+            <View>
+              <Stepper form={RequestItemForm} field='requestQuantity' placeholder='Request Quantity' />
+            </View>
+            <View>
+              <DatePickerWrapper
+                form={RequestItemForm}
+                minDate={new Date()}
+                placeholder='Date Needed'
+                field='dateNeeded'
+              />
+            </View>
+            </React.Fragment>
+        }
         <View style={{ flex: 1, marginTop: 10 }}>
           <TextWrapper
             text={'Message / Special Request'}

@@ -1,6 +1,7 @@
 import API from './api';
 
 const URL_PREFIX = 'customer/swinecart';
+import transform from '../transformers';
 
 const service = {
   async addItem(id) {
@@ -19,8 +20,10 @@ const service = {
     const { data } = await API.get(`${URL_PREFIX}/items/count`);
     return data;
   },
-  requestItem(id, data) {
-    return API.put(`${URL_PREFIX}/items/${id}`, { ...data });
+  async requestItem(id, requestData) {
+    // console.dir(transform('requestItem')(requestData));
+    const { data } = await API.put(`${URL_PREFIX}/items/${id}`, transform('requestItem')(requestData));
+    return data;
   }
 }
 

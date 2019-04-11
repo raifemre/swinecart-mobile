@@ -12,6 +12,7 @@ import Navigation from '../../../services/navigation';
 import { toJS } from 'mobx';
 
 import RequestForm from '../components/RequestForm';
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 @inject('SwineCartStore', 'RequestItemForm')
 @observer
@@ -21,12 +22,10 @@ class RequestItem extends Component {
 
     const { navigation, RequestItemForm } = this.props;
     const item = navigation.getParam('item');
-    const { product } = item;
-    const { name } = product;
-    console.dir(toJS(item));
 
     return (
       <React.Fragment>
+        <SpinnerWithOverlay visible={RequestItemForm.loading}/>
         <Container>
           <HeaderWrapper>
             <Left style={[{ flex: 1 }]}>

@@ -106,6 +106,17 @@ function sendForDelivery(data) {
   return transformedData;
 }
 
+function requestItem(data) {
+
+  const { dateNeeded, requestQuantity, specialRequest } = data;
+
+  const transformedData = {
+    ...data
+  };
+
+  return transformedData;
+
+}
 
 const transformers = {
   changePassword: memoize(changePassword),
@@ -114,6 +125,7 @@ const transformers = {
   sendForDelivery: memoize(sendForDelivery),
   cancelTransaction: memoize(cancelTransaction),
   confirmSold: memoize(confirmSold),
+  requestItem: memoize(requestItem),
 }
 
 export default function (type) {
