@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction, get, remove,
+  observable, action, toJS, runInAction, get, remove, computed,
 } from 'mobx';
 
 import { showMessage } from 'react-native-flash-message';
@@ -24,6 +24,10 @@ class SwineCartStore {
 
   @observable selectedIndex = 1;
 
+  @computed get itemCount() {
+    const notRequestedItems = this.items['not_requested'];
+    return notRequestedItems ? notRequestedItems.length : 0;
+  }
   @action async getItems(status) {
     try {
       const { error, data } = await SwineCart.getItems(status, 1, this.limit);

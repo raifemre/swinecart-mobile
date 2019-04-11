@@ -6,6 +6,7 @@ import { Icon } from 'native-base';
 import Notifications from '../../features/Notifications';
 
 import NotificationsIcon from '../../shared/NotificationsIcon';
+import SwineCartIcon from '../../shared/SwineCartIcon';
 
 import MessagingStack from './MessagingStack';
 import ProfileStack from './ProfileStack';
@@ -58,6 +59,11 @@ const navigator = createBottomTabNavigator({
         if(routeName === 'Notifications') {
           return (
             <NotificationsIcon focused={focused} />
+          );
+        }
+        else if (routeName === 'Cart') {
+          return (
+            <SwineCartIcon focused={focused} />
           );
         }
         else {
