@@ -12,6 +12,8 @@ import BreederInventory from './breeder/inventory';
 import CustomerTransaction from './customer/transactions';
 import CustomerShop from './customer/shop';
 import CustomerSwineCart from './customer/swinecart';
+import CustomerFarms from './customer/farms';
+import CustomerProfile from './customer/profile';
 
 import Messaging from './messaging';
 
@@ -27,6 +29,8 @@ export {
   BreederInventory,
   BreederFarms,
 
+  CustomerProfile,
+  CustomerFarms,
   CustomerSwineCart,
   CustomerTransaction,
   CustomerShop,

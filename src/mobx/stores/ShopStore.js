@@ -13,7 +13,8 @@ class ShopStore {
   limit = 8;
   @observable products = null;
   
-  @observable selectedProduct = null;
+  @observable product = null;
+  @observable media = null;
 
   @action async getProducts() {
     const { error, data } = await CustomerShop.getProducts(1, this.limit);
@@ -46,13 +47,29 @@ class ShopStore {
   }
 
   @action async getProductDetails(id) {
-    const { data: { error, data } } = await CustomerShop.getProductDetails(id);
+    const { error, data }  = await CustomerShop.getProductDetails(id);
     if (error) {
       throw new Error(error);
     }
     else {
-      const { ratings, product } = data;
-      return { ratings, product };
+      const { product } = data;
+      console.dir(product);
+      runInAction(() => {
+        this.product = product;
+      });
+    }
+  }
+
+  @action async getProductMedia(id) {
+    const { error, data } = await CustomerShop.getProductMedia(id);
+    if (error) {
+      throw new Error(error);
+    }
+    else {
+      const { images } = data;
+      runInAction(() => {
+        this.media = images;
+      });
     }
   }
 

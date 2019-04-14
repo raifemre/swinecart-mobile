@@ -7,8 +7,13 @@ const service = {
     const { data } = await API.get(`${URL_PREFIX}`, { page, limit });
     return data;
   },
-  getProductDetails(id) {
-    return API.get(`/breeder/products/${id}/details`);
+  async getProductDetails(id) {
+    const { data } = await API.get(`/breeder/products/${id}/details`);
+    return data;
+  },
+  async getProductMedia(id) {
+    const { data } = await API.get(`/breeder/products/${id}/media`);
+    return data;
   }
 }
 

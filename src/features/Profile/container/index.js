@@ -13,12 +13,12 @@ import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
-import OfficeInfo from '../components/OfficeInfo';
-import Farms from '../components/Farms';
-import ChangePassword from '../components/ChangePassword';
-import Segments from '../../../shared/Segments';
 import IconButton from '../../../shared/IconButton';
-@inject('FarmStore', 'AuthStore')
+
+import BreederProfile from '../components/BreederProfile';
+import CustomerProfile from '../components/CustomerProfile';
+
+@inject('FarmStore', 'AuthStore', 'UserStore')
 @observer
 class Profile extends Component {
 
@@ -27,7 +27,7 @@ class Profile extends Component {
   }
 
   state = {
-    selectedIndex: 1
+    selectedIndex: 0
   }
 
   setIndex = index => {
@@ -46,9 +46,11 @@ class Profile extends Component {
       contentStyle
     } = styles;
 
+    const { AuthStore, UserStore } = this.props;
+
     return (
       <React.Fragment>
-        <SpinnerWithOverlay visible={this.props.AuthStore.loadingLogout} textContent='Logging out...' />
+        <SpinnerWithOverlay visible={AuthStore.loadingLogout} textContent='Logging out...' />
         <Container>
           <HeaderWrapper hasSegment>
             <Left style={[contentStyle]}>
@@ -66,16 +68,10 @@ class Profile extends Component {
               />
             </Right>
           </HeaderWrapper>
-          <Segments
-            values={['Office Info', 'Farms', 'Change Password']}
-            selectedIndex={this.state.selectedIndex}
-            onTabPress={this.setIndex}
-          />
-          <View style={{ flex: 1 }}>
-            {this.state.selectedIndex === 0 && <OfficeInfo />}
-            {this.state.selectedIndex === 1 && <Farms />}
-            {this.state.selectedIndex === 2 && <ChangePassword />}
-          </View>
+          {UserStore.userRole === 'Breeder' 
+            && <BreederProfile selectedIndex={this.state.selectedIndex} setIndex={this.setIndex} /> }
+          {UserStore.userRole === 'Customer'
+            && <CustomerProfile selectedIndex={this.state.selectedIndex} setIndex={this.setIndex} />}
         </Container>
       </React.Fragment>
     );

@@ -24,7 +24,7 @@ class SwineCartStore {
   @observable loadingRemove = false;
   @observable loadingRequest = false;
 
-  @observable selectedIndex = 2;
+  @observable selectedIndex = 0;
 
   @action onSelectIndex(index) {
     runInAction(() => {

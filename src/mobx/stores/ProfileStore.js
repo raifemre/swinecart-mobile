@@ -2,7 +2,7 @@ import {
   observable, action, runInAction, toJS
 } from 'mobx';
 
-import { BreederProfile } from '../../services';
+import { BreederProfile, CustomerProfile } from '../../services';
 
 import UserStore from './UserStore';
 
@@ -30,6 +30,14 @@ class ProfileStore {
   @action async changePassword(formData) {
     if (UserStore.userRole === 'Breeder') {
       const { error, data, message } = await BreederProfile.changePassword(toJS(formData));
+      return {
+        error: formatError(error),
+        data,
+        message
+      }
+    }
+    else {
+      const { error, data, message } = await CustomerProfile.changePassword(toJS(formData));
       return {
         error: formatError(error),
         data,

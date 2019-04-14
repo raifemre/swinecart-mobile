@@ -17,8 +17,9 @@ import { toJS } from 'mobx';
 @observer
 class Product extends Component {
 
-  onPressView = async () => {
-
+  onPressView = () => {
+    const { product } = this.props;
+    Navigation.navigate('ProductDetailsCustomer', { product });
   }
 
   onPressAdd = async () => {

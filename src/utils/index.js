@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { has, set, toJS } from 'mobx';
-import { isString, isObject, keys, camelCase, get } from 'lodash';
+import { isString, isObject, keys, camelCase, get, map } from 'lodash';
 
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -125,4 +125,17 @@ export function toDBFormat(toID, userRole, message) {
   };
 
   return newMessage;
+}
+
+export function formatMedia(medias) {
+  return map(medias, media => {
+    const { link } = media;
+    return {
+      source: {
+        uri: link
+      },
+      width: 806,
+      height: 720
+    }
+  });
 }

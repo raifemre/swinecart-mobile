@@ -1,14 +1,12 @@
 import {
-  observable, action, runInAction, get, set, has, autorun, remove
+  observable, action, runInAction
 } from 'mobx';
 
 import {
-  BreederFarms
+  BreederFarms, CustomerFarms
 } from '../../services';
 
-import Product from '../models/Product';
-
-import { filterNewItems } from '../../utils';
+import UserStore from './UserStore';
 
 class FarmStore {
 
@@ -34,12 +32,22 @@ class FarmStore {
   }
 
   @action async getFarms() {
-    const { data } = await BreederFarms.getFarms(1, 1000);
-    const { count, farms } = data;
-    runInAction(() => {
-      this.page = 1;
-      this.farms = farms;
-    });
+    if (UserStore.userRole === 'Breeder') {
+      const { data } = await BreederFarms.getFarms(1, 1000);
+      const { count, farms } = data;
+      runInAction(() => {
+        this.page = 1;
+        this.farms = farms;
+      });
+    }
+    else {
+      const { data } = await CustomerFarms.getFarms(1, 1000);
+      const { count, farms } = data;
+      runInAction(() => {
+        this.page = 1;
+        this.farms = farms;
+      });
+    }
   }
 
   @action async getFarm(id) {
