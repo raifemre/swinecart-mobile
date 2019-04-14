@@ -1,11 +1,11 @@
 import {
-  observable, action, toJS, runInAction, get, remove, computed,
+  observable, action, toJS, runInAction, get, remove,
 } from 'mobx';
 
 import { showMessage } from 'react-native-flash-message';
 
 import {
-  SwineCart
+  CustomerSwineCart
 } from '../../services';
 import { formatError, filterNewItems } from '../../utils';
 
@@ -24,11 +24,17 @@ class SwineCartStore {
   @observable loadingRemove = false;
   @observable loadingRequest = false;
 
-  @observable selectedIndex = 1;
+  @observable selectedIndex = 4;
+
+  @action onSelectIndex(index) {
+    runInAction(() => {
+      this.selectedIndex = index;
+    });
+  }
 
   @action async getItemCount() {
     try {
-      const { error, data } = await SwineCart.getItemCount();
+      const { error, data } = await CustomerSwineCart.getItemCount();
       if (error) {
 
       }
@@ -48,7 +54,7 @@ class SwineCartStore {
 
   @action async getItems(status) {
     try {
-      const { error, data } = await SwineCart.getItems(status, 1, this.limit);
+      const { error, data } = await CustomerSwineCart.getItems(status, 1, this.limit);
       if (error) {
 
       }
@@ -75,7 +81,7 @@ class SwineCartStore {
 
   @action async getMoreItems(status) {
     try {
-      const { error, data } = await SwineCart.getItems(status, this.pages[status], this.limit);
+      const { error, data } = await CustomerSwineCart.getItems(status, this.pages[status], this.limit);
       if (error) {
 
       }
@@ -120,7 +126,7 @@ class SwineCartStore {
   @action async addItem(status, id) {
     try {
       this.loadingAdd = true;
-      const { error, data, message } = await SwineCart.addItem(id);
+      const { error, data, message } = await CustomerSwineCart.addItem(id);
       if (error) {
         throw new Error(formatError(error).errorMessage);
       }
@@ -152,7 +158,7 @@ class SwineCartStore {
   @action async removeItem(status, item) {
     try {
       this.loadingRemove = true;
-      const { error, data, message } = await SwineCart.removeItem(item.id);
+      const { error, data, message } = await CustomerSwineCart.removeItem(item.id);
 
       // console.dir(error, data, message);
       if (error) {
@@ -181,7 +187,7 @@ class SwineCartStore {
   }
 
   @action async requestItem(id, requestData) {
-    const { error, data, message } = await SwineCart.requestItem(id, toJS(requestData));
+    const { error, data, message } = await CustomerSwineCart.requestItem(id, toJS(requestData));
     return {
       error: formatError(error),
       data,

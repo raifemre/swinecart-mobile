@@ -1,5 +1,4 @@
 import API from '../api';
-
 import transform from '../../transformers';
 
 const URL_PREFIX = '/breeder/inventory';

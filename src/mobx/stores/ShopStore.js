@@ -3,7 +3,7 @@ import {
 } from 'mobx';
 
 import {
-  Shop
+  CustomerShop
 } from '../../services';
 
 
@@ -16,7 +16,7 @@ class ShopStore {
   @observable selectedProduct = null;
 
   @action async getProducts() {
-    const { error, data } = await Shop.getProducts(1, this.limit);
+    const { error, data } = await CustomerShop.getProducts(1, this.limit);
 
     if (error) {
       throw new Error(error);
@@ -31,7 +31,7 @@ class ShopStore {
   }
 
   @action async getMoreProducts() {
-    const { error, data } = await Shop.getProducts(this.page + 1, this.limit);
+    const { error, data } = await CustomerShop.getProducts(this.page + 1, this.limit);
 
     if (error) {
       throw new Error(error);
@@ -46,7 +46,7 @@ class ShopStore {
   }
 
   @action async getProductDetails(id) {
-    const { data: { error, data } } = await Shop.getProductDetails(id);
+    const { data: { error, data } } = await CustomerShop.getProductDetails(id);
     if (error) {
       throw new Error(error);
     }

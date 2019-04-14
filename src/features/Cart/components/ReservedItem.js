@@ -11,38 +11,24 @@ import CardItemFooter from '../../../shared/CardItemFooter';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
 
 import Navigation from '../../../services/navigation';
-import { toJS } from 'mobx';
-
-import DetailsModal from './DetailsModal';
 
 @inject('ShopStore', 'SwineCartStore')
 @observer
-class RequestedItem extends Component {
+class ReservedItem extends Component {
 
-  state = {
-    isDModalVis: false
+
+  onPressMessage = () => {
+    alert('Message Breeder');
   }
-
-  onPressView = () => {
-    this.showDModal();
-  }
-
-  showDModal = () => this.setState({ isDModalVis: true });
-  hideDModal = () => this.setState({ isDModalVis: false });
 
   render() {
 
     const { item } = this.props;
-    const { product, status_time, request } = item;
+    const { product, status_time } = item;
     const { breeder, breed, name, type, img_path } = product;
 
     return (
       <React.Fragment>
-        <DetailsModal
-          isModalVisible={this.state.isDModalVis}
-          hideModal={this.hideDModal}
-          reservation={request}
-        />
         <CardWrapper>
           <CardItemHeader uri={img_path} />
           <CardItemBody>
@@ -78,12 +64,11 @@ class RequestedItem extends Component {
           <CardItemFooter>
             <View style={{ flex: 1, flexDirection: 'row', }}>
               <ButtonWrapper
-                onPress={this.onPressView}
-                buttonColor='#ffffff'
-                text='View Details'
-                textColor='#000000'
+                onPress={this.onPressMessage}
+                text='Message Breeder'
+                textColor='#ffffff'
                 textSize={12}
-                style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
+                style={{ height: 24, flex: 1, marginRight: 2 }}
               />
             </View>
           </CardItemFooter>
@@ -93,4 +78,4 @@ class RequestedItem extends Component {
   }
 }
 
-export default RequestedItem;
+export default ReservedItem;

@@ -18,7 +18,7 @@ class InventoryStore {
   @observable cancelTranLoading = false;
   @observable confirmSoldLoading = false;
 
-  @observable onSelectIndex(index) {
+  @action onSelectIndex(index) {
     runInAction(() => {
       this.selectedIndex = index;
     });

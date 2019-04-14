@@ -73,8 +73,7 @@ class RequestForm extends Component {
         <View style={{ marginTop: 10 }}>
           <ButtonWrapper
             onPress={this.onPressRequest}
-            buttonColor='#64b5f6'
-            text='Confirm Product Request'
+            text='Submit'
             textColor='#ffffff'
             textSize={16}
           />

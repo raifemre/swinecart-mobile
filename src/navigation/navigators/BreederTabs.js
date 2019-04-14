@@ -48,9 +48,9 @@ const navigator = createBottomTabNavigator({
     screen: ManageProductsStack,
     tabBarLabel: 'My Products'
   },
-  // 'ProductInventory': {
-  //   screen: ProductInventoryStack
-  // },
+  'ProductInventory': {
+    screen: ProductInventoryStack
+  },
   // 'Dashboard': {
   //   screen: Dashboard
   // },

@@ -17,32 +17,21 @@ import DetailsModal from './DetailsModal';
 
 @inject('ShopStore', 'SwineCartStore')
 @observer
-class RequestedItem extends Component {
+class OnDeliveryItem extends Component {
 
-  state = {
-    isDModalVis: false
+  onPressMessage = () => {
+    alert('Message Breeder');
   }
-
-  onPressView = () => {
-    this.showDModal();
-  }
-
-  showDModal = () => this.setState({ isDModalVis: true });
-  hideDModal = () => this.setState({ isDModalVis: false });
 
   render() {
 
     const { item } = this.props;
-    const { product, status_time, request } = item;
+    const { product, status_time, reservation } = item;
     const { breeder, breed, name, type, img_path } = product;
-
+    const { delivery_date } = reservation;
+  
     return (
       <React.Fragment>
-        <DetailsModal
-          isModalVisible={this.state.isDModalVis}
-          hideModal={this.hideDModal}
-          reservation={request}
-        />
         <CardWrapper>
           <CardItemHeader uri={img_path} />
           <CardItemBody>
@@ -67,6 +56,13 @@ class RequestedItem extends Component {
                   size={11}
                 />
                 <TextWrapper
+                  text={`Expected to arrive on: ${delivery_date}`}
+                  font='OpenSans-Bold'
+                  color='#2e3131'
+                  size={11}
+                  numberOfLines={2}
+                />
+                <TextWrapper
                   text={`${status_time}`}
                   font='OpenSans-Bold'
                   color='#2e3131'
@@ -78,12 +74,11 @@ class RequestedItem extends Component {
           <CardItemFooter>
             <View style={{ flex: 1, flexDirection: 'row', }}>
               <ButtonWrapper
-                onPress={this.onPressView}
-                buttonColor='#ffffff'
-                text='View Details'
-                textColor='#000000'
+                onPress={this.onPressMessage}
+                text='Message Breeder'
+                textColor='#ffffff'
                 textSize={12}
-                style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
+                style={{ height: 24, flex: 1, marginRight: 2 }}
               />
             </View>
           </CardItemFooter>
@@ -93,4 +88,4 @@ class RequestedItem extends Component {
   }
 }
 
-export default RequestedItem;
+export default OnDeliveryItem;

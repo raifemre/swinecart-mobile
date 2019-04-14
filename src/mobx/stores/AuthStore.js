@@ -46,7 +46,7 @@ class AuthStore {
     await CommonStore.setToken(token);
     await UserStore.getUser();
     await ProfileStore.getProfile();
-    initChat();
+    // initChat();
     // await initNotifications();
     Navigation.navigate(UserStore.userRole);
   }

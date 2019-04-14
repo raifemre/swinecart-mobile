@@ -118,6 +118,16 @@ function requestItem(data) {
 
 }
 
+function rateBreeder(data) {
+
+  const transformedData = {
+    ...data,
+    comment: data.comment ? data.comment : ''
+  };
+
+  return transformedData;
+}
+
 const transformers = {
   changePassword: memoize(changePassword),
   addProduct: memoize(addProduct),
@@ -126,6 +136,7 @@ const transformers = {
   cancelTransaction: memoize(cancelTransaction),
   confirmSold: memoize(confirmSold),
   requestItem: memoize(requestItem),
+  rateBreeder: memoize(rateBreeder),
 }
 
 export default function (type) {

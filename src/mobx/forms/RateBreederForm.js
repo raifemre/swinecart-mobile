@@ -4,32 +4,38 @@ import { validate } from 'validate.js';
 import { forOwn, repeat } from 'lodash';
 
 import errorMessages from './errorMessages';
+import TransactionStore from '../stores/TransactionStore';
 import SwineCartStore from '../stores/SwineCartStore';
 
 import Navigation from '../../services/navigation';
 
-class RequestItemForm {
+class RateBreederForm {
 
   defaultFormState = {
-    requestQuantity: 2,
-    dateNeeded: null,
-    specialRequest: null
+    comment: null,
+    delivery: 0,
+    transaction: 0,
+    productQuality: 0
   }
 
   formRules = {
+
   }
 
-  @observable loading = false;
+  @observable loading = false;  
 
   @observable data = {
-    requestQuantity: 2,
-    dateNeeded: null,
-    specialRequest: repeat('abcde', 100)
+    comment: null,
+    delivery: 0,
+    transaction: 0,
+    productQuality: 0
   }
 
   @observable errors = {
-    specialRequest: null,
-    dateNeeded: null,
+    comment: null,
+    delivery: null,
+    transaction: null,
+    productQuality: null
   }
 
   @action clearErrors = (errors) => {
@@ -81,26 +87,30 @@ class RequestItemForm {
     return true;
   }
 
-  @action async submitForm(id) {
+  @action async submitForm(breeder, item) {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        const { error, data, message } = await SwineCartStore.requestItem(id, this.data);
+        const { breeder_id } = breeder;
+        const { id } = item;
+        const { error, data, message } = await TransactionStore.rateBreeder(breeder_id, {
+          item_id: id,
+          ...this.data
+        });
+        
         if (error) {
-
+          console.dir(error);
         }
         else {
-          await SwineCartStore.getItemCount();
-          SwineCartStore._removeProduct('not_requested', id);
+          SwineCartStore._removeProduct('sold', id);
           this.resetForm();
           showMessage({
-            message: 'Request Product successful',
+            message: 'Rate Breeder successful',
             type: 'success'
           });
-
           Navigation.back();
-          
         }
+
       }
     }
     catch (err) {
@@ -119,4 +129,4 @@ class RequestItemForm {
 
 }
 
-export default new RequestItemForm();
+export default new RateBreederForm();

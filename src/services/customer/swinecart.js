@@ -1,7 +1,7 @@
-import API from './api';
+import API from '../api';
+import transform from '../../transformers';
 
 const URL_PREFIX = 'customer/swinecart';
-import transform from '../transformers';
 
 const service = {
   async addItem(id) {

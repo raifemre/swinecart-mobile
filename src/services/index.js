@@ -10,8 +10,10 @@ import BreederDashboard from './breeder/dashboard';
 import BreederFarms from './breeder/farms';
 import BreederInventory from './breeder/inventory';
 
-import Shop from './shop';
-import SwineCart from './swinecart';
+import CustomerTransaction from './customer/transactions';
+
+import CustomerShop from './customer/shop';
+import CustomerSwineCart from './customer/swinecart';
 
 export {
   Auth,
@@ -23,6 +25,7 @@ export {
   BreederDashboard,
   BreederInventory,
   BreederFarms,
-  Shop,
-  SwineCart
+  CustomerTransaction,
+  CustomerShop,
+  CustomerSwineCart
 };
