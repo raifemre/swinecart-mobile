@@ -5,7 +5,7 @@ import {
 import { map } from 'lodash';
 
 import { Messaging } from '../../services';
-import { toGCFormat, toDBFormat } from '../../utils';
+import { toGCFormat, toDBFormat, filterNewItems } from '../../utils';
 
 import UserStore from './UserStore';
 
@@ -17,6 +17,7 @@ class MessageStore {
 
   @observable threads = null;
   @observable pages = {};
+  @observable maps = {};
   @observable allMessages = new Map();
   @observable selectedUser = null;
 
@@ -36,20 +37,20 @@ class MessageStore {
       this.threads = threads;
     });
   }
-
+  
   @action async getMessages() {
     const { id } = this.selectedUser;
     const { data } = await Messaging.getMessages(UserStore.userRole, id, 1, this.limit);
     const { count, messages } = data;
 
-    const newMessages = map(messages, message => {
-      const { from_id } = message; 
-      const user = from_id === UserStore.userId ? UserStore.user : this.selectedUser;
-      return toGCFormat(3, user, message);
-    });
-
     runInAction(() => {
       this.pages[id]= 1;
+      this.maps[id] = new Map();
+      const newMessages = map(filterNewItems(this.maps[id], messages), message => {
+        const { from_id } = message;
+        const user = from_id === UserStore.userId ? UserStore.user : this.selectedUser;
+        return toGCFormat(3, user, message);
+      });
       set(this.allMessages, `${id}`, newMessages);
     });
   }
@@ -59,16 +60,19 @@ class MessageStore {
     const { data } = await Messaging.getMessages(UserStore.userRole, id, this.pages[id] + 1, this.limit);
     const { count, messages } = data;
 
-    const newMessages = map(messages, message => {
-      const { from_id } = message;
-      const user = from_id === UserStore.userId ? UserStore.user : this.selectedUser;
-      return toGCFormat(3, user, message);
-    });
-
     const chatMessages = get(this.allMessages, `${id}`);
 
+
+
     runInAction(() => {
-      this.pages[id] = this.pages[id] + 1;
+      if (count >= this.limit) {
+        this.pages[id] = this.pages[id] + 1;
+      }
+      const newMessages = map(filterNewItems(this.maps[id], messages), message => {
+        const { from_id } = message;
+        const user = from_id === UserStore.userId ? UserStore.user : this.selectedUser;
+        return toGCFormat(3, user, message);
+      });
       set(this.allMessages, `${id}`, [ ...chatMessages, ...newMessages ]);
     });
   }

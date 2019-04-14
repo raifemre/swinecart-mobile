@@ -73,7 +73,6 @@ class Chat extends Component {
           <Right></Right>
         </HeaderWrapper>
         <View style={[contentStyle]}>
-          <StatusIndicator />
           <GiftedChat
             textInputProps={{
               autoFocus: false
