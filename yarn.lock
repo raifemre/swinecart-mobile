@@ -4618,13 +4618,6 @@ react-native-button@^2.3.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-cardview@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-cardview/-/react-native-cardview-2.0.2.tgz#e07c13c61fbfce2152c1a2c18579895c7d9e7956"
-  integrity sha512-GSJv5lMxbCFPdOzEQizJhfFgHIA8xK16jO2lXpK0prcN8vTEoGsyzhiZJJEbY4SFbMfr+Q6cW4gAjBLNxWrTuw==
-  dependencies:
-    prop-types "^15.6.0"
-
 react-native-communications@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
@@ -4690,10 +4683,10 @@ react-native-easy-grid@0.2.1:
   dependencies:
     lodash "4.17.11"
 
-react-native-fast-image@5.0.10:
-  version "5.0.10"
-  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-5.0.10.tgz#56d229b4a872e4f01bb5ecb7fe465eee34e5238f"
-  integrity sha512-9WRINd7xk0Hhv3ublbJqGpU+dEApzMmabHU/5ULGvQ0LBWdCFF/4ScQMPJlI0dnCMu/++/emRshn4ML6sQ1yhQ==
+react-native-fast-image@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-5.2.0.tgz#6730eb06951ea6f9a79abe02a733bc05b7a73412"
+  integrity sha512-S+2gmv9HfLc7CGjjnQ3kO/QoZD9BJnjfwWhsJWgjEvaeOPbpHZaXSUkINSqLcHD5KIHcYidu+U2lgXdEv4Jamg==
 
 react-native-flash-message@0.1.10:
   version "0.1.10"
@@ -4724,6 +4717,13 @@ react-native-image-carousel@0.4.6:
   integrity sha512-hjtfqpam1ES8uX+au5KCXQQCtyt+w0FJwZeK9PErG/fJtrBabnKzExBGoIhsJCVFCczlkxTNBzMlNn6dNWP8Ew==
   dependencies:
     react-swipeable-views-native "^0.13.2"
+
+react-native-image-fallback@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-image-fallback/-/react-native-image-fallback-0.0.6.tgz#c2cc8790663c5c40d52ca4515ebe8254d69c7ed1"
+  integrity sha512-6AhtGRJXYeSDuNbPsxo/K3IHN2HI34Y4caP5teLTumuPAdemWhxP4Z2R6CWqGKD7gQgeSG34MFwFYzV5HRzbyQ==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-image-pan-zoom@^2.1.9:
   version "2.1.11"
@@ -6423,8 +6423,3 @@ yargs@^9.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^7.0.0"
-
-yarn@^1.15.2:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.15.2.tgz#7a064ca81ca34235f16376ad2f796ed432f9e285"
-  integrity sha512-DhqaGe2FcYKduO42d2hByXk7y8k2k42H3uzYdWBMTvcNcgWKx7xCkJWsVAQikXvaEQN2GyJNrz8CboqUmaBRrw==

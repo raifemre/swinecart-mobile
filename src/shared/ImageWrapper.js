@@ -1,45 +1,49 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { View } from 'native-base';
 import FastImage from 'react-native-fast-image';
+import { observer } from 'mobx-react';
+import LoadingView from './LoadingView';
 
-class ImageWrapper extends PureComponent {
+class ImageWrapper extends Component {
 
   state = {
-    height: 0,
-    width: 0,
+    isLoaded: false
   }
 
   onLoad = e => {
-    const {
-      nativeEvent: { width, height },
-    } = e
-    this.setState({ width, height });
+    // console.log(e.nativeEvent.width, e.nativeEvent.height);
+    this.setState({ isLoaded: true });
   }
 
-  getHeight = () => {
-    if (!this.state.height) return this.props.defaultHeight
-    const ratio = this.state.height / this.state.width
-    const height = this.props.width * ratio
-    return height;
+  onError = e => {
+    console.log(e);
   }
 
   render () {
 
-    const { uri, ...props } = this.props;
-    const height = this.getHeight();
-
-    return (
-      <FastImage
-        style={[{ width: props.width, height: props.height || height }, this.props.style]}
-        onLoad={this.onLoad}
-        source={{
-          uri: uri,
-          priority: FastImage.priority.normal,
-        }}
-        resizeMode={FastImage.resizeMode.scale}
-        {...props}
-      />
-    );
+    const { uri, resizeMode, style } = this.props;
+    // if (this.state.isLoaded) {
+      return (
+        <FastImage
+          style={style}
+          source={{
+            uri: `${uri}`,
+            priority: FastImage.priority.high,
+          }}
+          onLoad={this.onLoad}
+          onError={this.onError}
+          resizeMode={FastImage.resizeMode[resizeMode]}
+        />
+      );
+    // }
+    // else {
+    //   return (
+    //     <View style={style}>
+    //       <LoadingView />
+    //     </View>
+    //   );
+    // }
   }
 }
 
-export default ImageWrapper;
+export default observer(ImageWrapper);

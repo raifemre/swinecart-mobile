@@ -2,7 +2,8 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { StyleSheet } from 'react-native';
 import { CardItem } from 'native-base';
-import FastImage from 'react-native-fast-image';
+
+import ImageWrapper from './ImageWrapper';
 
 function CardItemHeader({ uri }) {
 
@@ -10,7 +11,7 @@ function CardItemHeader({ uri }) {
 
   return (
     <CardItem style={cardItemFirst}>
-      <FastImage source={{ uri }} resizeMode='stretch' style={image} />
+      <ImageWrapper uri={uri} resizeMode='stretch' style={image} />
     </CardItem>
   );
 }

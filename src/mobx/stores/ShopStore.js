@@ -12,7 +12,7 @@ class ShopStore {
   page = 1;
   limit = 8;
   @observable products = null;
-
+  
   @observable selectedProduct = null;
 
   @action async getProducts() {
