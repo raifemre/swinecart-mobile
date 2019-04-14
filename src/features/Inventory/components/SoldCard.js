@@ -11,7 +11,8 @@ import ButtonWrapper from '../../../shared/ButtonWrapper';
 import DetailsModal from './DetailsModal';
 import CardItemFooter from '../../../shared/CardItemFooter';
 
-@inject('InventoryStore')
+import Navigation from '../../../services/navigation';
+@inject('InventoryStore', 'MessageStore')
 @observer
 class OnDeliveryCard extends Component {
 
@@ -19,10 +20,21 @@ class OnDeliveryCard extends Component {
     isDetModVisible: false
   }
 
+  
   hideDetailsModal = () => {
     this.setState({
       isDetModVisible: false
     });
+  }
+
+  onPressMessage = () => {
+    const { MessageStore, product: { reservation } } = this.props;
+    const { customer_name, user_id } = reservation;
+    MessageStore.setSelectedUser({
+      name: customer_name,
+      id: user_id
+    });
+    Navigation.navigate('Chat');
   }
 
   onPressView = () => {
@@ -79,14 +91,23 @@ class OnDeliveryCard extends Component {
             </Body>
           </CardItemBody>
           <CardItemFooter>
-            <ButtonWrapper
-              onPress={this.onPressView}
-              buttonColor='#ffffff'
-              text='View Details'
-              textColor='#000000'
-              textSize={12}
-              style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
-            />
+            <View style={{ flex: 1 }}>
+              <ButtonWrapper
+                onPress={this.onPressView}
+                buttonColor='#ffffff'
+                text='View Details'
+                textColor='#000000'
+                textSize={12}
+                style={{ height: 24, flex: 1, borderColor: '#000000', borderWidth: 2, marginBottom: 5 }}
+              />
+              <ButtonWrapper
+                onPress={this.onPressMessage}
+                text='Message Customer'
+                textColor='#ffffff'
+                textSize={12}
+                style={{ height: 24, flex: 1 }}
+              />
+            </View>
           </CardItemFooter>
         </CardWrapper>
       </React.Fragment>

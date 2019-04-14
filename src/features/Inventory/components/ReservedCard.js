@@ -14,7 +14,7 @@ import DetailsModal from './DetailsModal';
 import { Navigation } from '../../../services';
 import { toJS } from 'mobx';
 
-@inject('InventoryStore')
+@inject('InventoryStore', 'MessageStore')
 @observer
 class ReservedCard extends Component {
 
@@ -26,6 +26,16 @@ class ReservedCard extends Component {
     this.setState({
       isDetModVisible: false
     });
+  }
+
+  onPressMessage = () => {
+    const { MessageStore, product: { reservation } } = this.props;
+    const { customer_name, user_id } = reservation;
+    MessageStore.setSelectedUser({
+      name: customer_name,
+      id: user_id
+    });
+    Navigation.navigate('Chat');
   }
 
   onPressSend = () => {
@@ -47,8 +57,10 @@ class ReservedCard extends Component {
   render () {
 
     const { product } = this.props;
-    const { id, name, img_path, type, breed, reservation } = product;
+    const { name, img_path, type, breed, reservation } = product;
     const { customer_name, status_time } = reservation;
+
+    console.dir(toJS(product));
 
     return (
       <React.Fragment>
@@ -95,7 +107,14 @@ class ReservedCard extends Component {
                 text='View Details'
                 textColor='#000000'
                 textSize={12}
-                style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
+                style={{ height: 24, flex: 1, borderColor: '#000000', borderWidth: 2, marginBottom: 5 }}
+              />
+              <ButtonWrapper
+                onPress={this.onPressMessage}
+                text='Message Customer'
+                textColor='#ffffff'
+                textSize={12}
+                style={{ height: 24, flex: 1 }}
               />
             </Body>
           </CardItemBody>

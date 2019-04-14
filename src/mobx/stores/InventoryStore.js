@@ -180,6 +180,9 @@ class InventoryStore {
   @action async getProducts(status) {
     const { data } = await BreederInventory.getProducts(status, 1, this.limit);
     const { count, products } = data;
+    // if (status === 'reserved') {
+    //   console.dir(products);
+    // }
     runInAction(() => {
       this.pages[status] = 1;
       this.products[status] = [];

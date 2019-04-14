@@ -9,8 +9,9 @@ import ButtonWrapper from '../../../shared/ButtonWrapper';
 import { Navigation } from '../../../services';
 
 import DetailsModal from './DetailsModal';
+import { toJS } from 'mobx';
 
-@inject('InventoryStore')
+@inject('InventoryStore', 'MessageStore')
 @observer
 class Request extends Component {
 
@@ -18,7 +19,17 @@ class Request extends Component {
     isModalVisible: false
   }
 
-  reserveProduct = async () => {
+  onPressMessage = () => {
+    const { MessageStore, request } = this.props;
+    const { customer_name, user_id } = request;
+    MessageStore.setSelectedUser({
+      name: customer_name,
+      id: user_id
+    });
+    Navigation.navigate('Chat');
+  }
+
+  onPressReserve = async () => {
     const { InventoryStore, request } = this.props;
     await InventoryStore.reserveProduct(request);
   }
@@ -45,6 +56,8 @@ class Request extends Component {
       customer_name, customer_province, request_quantity, special_request, date_needed
     } = request;
 
+
+    console.dir(toJS(request));
 
     return (
       <React.Fragment>
@@ -74,14 +87,14 @@ class Request extends Component {
             <Right style={{ flex: 2 }}>
               <View>
                 <ButtonWrapper
-                  onPress={this.reserveProduct}
+                  onPress={this.onPressReserve}
                   text='Reserve'
                   textColor='#ffffff'
                   textSize={14}
                   style={{ height: 24, marginBottom: 4, }}
                 />
                 <ButtonWrapper
-                  onPress={this.login}
+                  onPress={this.onPressMessage}
                   text='Message'
                   textColor='#ffffff'
                   textSize={14}
