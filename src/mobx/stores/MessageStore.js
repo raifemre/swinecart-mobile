@@ -102,8 +102,9 @@ class MessageStore {
 
   @action onReceiveMessage(message) {
     const { from_id } = message;
+    const newMessage = filterNewItems(this.maps[from_id], [ message ])[0];
     const array = get(this.allMessages, `${from_id}`);
-    array.unshift(toGCFormat(2, null, message));
+    array.unshift(toGCFormat(2, null, newMessage));
     set(this.allMessages, `${from_id}`, array);
   }
 
