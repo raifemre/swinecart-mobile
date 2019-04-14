@@ -4,9 +4,11 @@ import {
 
 import Inventory from '../../features/Inventory';
 import ProductRequests from '../../features/ProductRequests';
+import SendForDelivery from '../../features/SendForDelivery';
 
 const navigator = createStackNavigator({
   Inventory: Inventory,
+  SendForDelivery: SendForDelivery,
   ProductRequests: ProductRequests,
 }, {
     initialRouteName: 'Inventory',

@@ -1,46 +1,31 @@
-import { observable, action, runInAction } from 'mobx';
+import { observable, action, runInAction, toJS } from 'mobx';
 import { showMessage } from 'react-native-flash-message';
 import { validate } from 'validate.js';
-import { forOwn } from 'lodash';
+import { forOwn, repeat } from 'lodash';
 
-import AuthStore from '../stores/AuthStore';
 import errorMessages from './errorMessages';
+import InventoryStore from '../stores/InventoryStore';
 
-class LoginForm {
+import Navigation from '../../services/navigation';
+
+class SendForDeliveryForm {
 
   defaultFormState = {
-    email: null,
-    password: null
   }
 
   formRules = {
-    email: {
-      presence: errorMessages.presence,
-      email: {
-        message: '^This is not a valid email'
-      },
-    },
-    password: {
-      presence: errorMessages.presence
-    }
+
   }
 
   @observable loading = false;
 
   @observable data = {
-    // email: 'leopoldo.toy@lind.net',
-    email: 'tess.bernhard@gmail.com',
-    password: 'secret12'
-    // email: null,
-    // password: null
   }
 
   @observable errors = {
-    email: null,
-    password: null
   }
 
-  @observable clearErrors = (errors) => {
+  @action clearErrors = (errors) => {
     forOwn(this.errors, (value, key) => {
       if (errors) {
         if (!errors[key] && value !== errors[key]) {
@@ -53,13 +38,13 @@ class LoginForm {
     });
   }
 
-  @observable showErrors = errors => {
+  @action showErrors = errors => {
     forOwn(errors, (value, key) => {
       this.errors[key] = value[0];
     });
   }
 
-  @observable showError = (field, error) => {
+  @action showError = (field, error) => {
     runInAction(() => {
       this.errors[field] = error;
     });
@@ -89,28 +74,13 @@ class LoginForm {
     return true;
   }
 
-  @action async submitForm() {
+  @action async submitForm(breeder, item) {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        const { error, data, message } = await AuthStore.login(this.data);
-        if (error) {
-          const { field, errorMessage } = error;
-          if (field) {
-            this.showError(field, errorMessage);
-          }
-          else {
-            throw new Error(errorMessage);
-          }
-        }
-        else {
-          const { access_token } = data;
-          AuthStore.loginFlow(access_token);
-          this.resetForm();
-        }
       }
     }
-    catch(err) {
+    catch (err) {
       showMessage({
         message: err.message,
         type: 'danger'
@@ -126,4 +96,4 @@ class LoginForm {
 
 }
 
-export default new LoginForm();
+export default new SendForDeliveryForm();

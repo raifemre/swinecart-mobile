@@ -17,7 +17,7 @@ function DetailsModal({ isModalVisible, hideModal, reservation }) {
       onBackdropPress={hideModal}
       useNativeDriver={true}
     >
-      <View style={{ backgroundColor: '#ffffff', padding: 16, height: 300 }}>
+      <View style={{ backgroundColor: '#ffffff', padding: 16, height: 300, borderRadius: 5, }}>
         <ScrollView style={{ height: 200 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <TextWrapper
@@ -81,7 +81,8 @@ function DetailsModal({ isModalVisible, hideModal, reservation }) {
         <ButtonWrapper
           onPress={hideModal}
           text='Close'
-          textColor='#ffffff'
+          textColor='#000000'
+          buttonColor='#f2f2f2'
           textSize={12}
           style={{ height: 30, marginTop: 10, }}
         />
