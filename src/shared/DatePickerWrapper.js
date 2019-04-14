@@ -5,6 +5,7 @@ import DatePicker from 'react-native-datepicker'
 import moment from 'moment';
 
 import IconButton from './IconButton';
+import TextWrapper from './TextWrapper';
 
 @observer
 class DatePickerWrapper extends Component {
@@ -26,9 +27,11 @@ class DatePickerWrapper extends Component {
   render() {
     const { form, field, placeholder, minDate, maxDate } = this.props;
 
+    const error = form.errors[field]
+    const borderColor = error ? '#e74c3c' : '#2d3436';
     return (
       <View style={{ marginTop: 10, marginBottom: 10 }}>
-        <View style={{ borderColor: '#2d3436', borderWidth: 1.5, borderRadius: 5, flexDirection: 'row',}}>
+        <View style={{ borderColor: borderColor, borderWidth: 1.5, borderRadius: 5, flexDirection: 'row',}}>
           <View style={{ flex: 1 }}>
             <DatePicker
               style={{ width: '100%', height: 40 }}
@@ -71,6 +74,9 @@ class DatePickerWrapper extends Component {
             />
           </View>
         </View>
+        {error && <View style={{ paddingLeft: 13 }}>
+          <TextWrapper text={error} size={12} color='#db222a' />
+        </View>}
       </View>
     );
   }

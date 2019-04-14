@@ -33,7 +33,6 @@ class InventoryStore {
       if (error) {
         const { field, errorMessage } = formatError(error);
         if (field) {
-          this.showError(field, errorMessage);
         }
         else {
           throw new Error(errorMessage);
@@ -67,26 +66,11 @@ class InventoryStore {
   @action async sendForDelivery(requestData) {
     try {
       this.reserveLoading = true;
-      const { error, data, message } = await BreederInventory.reserveProduct(toJS(requestData));
-      if (error) {
-        const { field, errorMessage } = formatError(error);
-        if (field) {
-          this.showError(field, errorMessage);
-        }
-        else {
-          throw new Error(errorMessage);
-        }
-      }
-      else {
-        const { product } = data;
-        this._addProduct('reserved', product);
-        this._removeProduct('requested', product.id);
-        showMessage({
-          message: `Product is now reserved!`,
-          type: 'success',
-        });
-        Navigation.back();
-        this.onSelectIndex(1);
+      const { error, data, message } = await BreederInventory.sendForDelivery(toJS(requestData));
+      return {
+        error: formatError(error),
+        data,
+        message
       }
     }
     catch (err) {
@@ -109,7 +93,6 @@ class InventoryStore {
       if (error) {
         const { field, errorMessage } = formatError(error);
         if (field) {
-          this.showError(field, errorMessage);
         }
         else {
           throw new Error(errorMessage);
@@ -147,7 +130,6 @@ class InventoryStore {
       if (error) {
         const { field, errorMessage } = formatError(error);
         if (field) {
-          this.showError(field, errorMessage);
         }
         else {
           throw new Error(errorMessage);

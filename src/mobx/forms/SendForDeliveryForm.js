@@ -8,21 +8,28 @@ import InventoryStore from '../stores/InventoryStore';
 
 import Navigation from '../../services/navigation';
 
+import moment from 'moment';
+
 class SendForDeliveryForm {
 
   defaultFormState = {
+    deliveryDate: moment().add(5, 'days')
   }
 
   formRules = {
-
+    deliveryDate: {
+      presence: errorMessages.presence
+    },
   }
 
   @observable loading = false;
 
   @observable data = {
+    deliveryDate: moment().add(5, 'days').format('MMMM D YYYY')
   }
 
   @observable errors = {
+    deliveryDate: null
   }
 
   @action clearErrors = (errors) => {
@@ -74,10 +81,38 @@ class SendForDeliveryForm {
     return true;
   }
 
-  @action async submitForm(breeder, item) {
+  @action async submitForm(product) {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
+        const { reservation } = product;
+        const requestData = {
+          product_id: product.id,
+          reservation,
+          ...this.data
+        };
+        const { error, data, message } = await InventoryStore.sendForDelivery(requestData);
+        if (error) {
+          const { field, errorMessage } = formatError(error);
+          if (field) {
+            this.showError(field, errorMessage);
+          }
+          else {
+            throw new Error(errorMessage);
+          }
+        }
+        else {
+          const { product } = data;
+          InventoryStore._addProduct('on_delivery', product);
+          InventoryStore._removeProduct('reserved', product.id);
+          showMessage({
+            message: `Product is now on the way!`,
+            type: 'success',
+          });
+          Navigation.back();
+          this.resetForm();
+          InventoryStore.onSelectIndex(2);
+        }
       }
     }
     catch (err) {

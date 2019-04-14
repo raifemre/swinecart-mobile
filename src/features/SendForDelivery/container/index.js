@@ -11,6 +11,7 @@ import BodyWrapper from '../../../shared/BodyWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
 import DeliveryForm from '../components/DeliveryForm';
+import { toJS } from 'mobx';
 
 @inject('SwineCartStore', 'SendForDeliveryForm')
 @observer
@@ -19,8 +20,7 @@ class RequestItem extends Component {
   render() {
 
     const { navigation, SendForDeliveryForm } = this.props;
-    const item = navigation.getParam('item');
-
+    const product = navigation.getParam('product');
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={SendForDeliveryForm.loading} />
@@ -29,12 +29,12 @@ class RequestItem extends Component {
             <Left style={[{ flex: 1 }]}>
               <BackButton icon='close' />
             </Left>
-            <BodyWrapper title={`Request Product`} />
+            <BodyWrapper title={`Send Product`} />
             <Right />
           </HeaderWrapper>
           <Content>
             <View style={{ padding: 5, flex: 1, justifyContent: 'center', alignContent: 'center', }}>
-              <DeliveryForm item={item} />
+              <DeliveryForm product={product} />
             </View>
           </Content>
         </Container>

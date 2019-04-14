@@ -94,12 +94,12 @@ function confirmSold(data) {
 
 function sendForDelivery(data) {
 
-  const { reservation, delivery_date } = data;
+  const { reservation, deliveryDate } = data;
 
   const transformedData = {
     status: 'on_delivery',
     reservation_id: reservation.id,
-    delivery_date
+    delivery_date: deliveryDate
 
   }
 
