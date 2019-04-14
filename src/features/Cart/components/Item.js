@@ -46,7 +46,7 @@ class Item extends Component {
     const { item } = this.props;
     const { isRCModalVis } = this.state;
     const { product } = item;
-    const { breeder, breed, name, type, img_path } = product;
+    const { breeder_name, breed, name, type, img_path } = product;
     
     return (
       <React.Fragment>
@@ -76,7 +76,7 @@ class Item extends Component {
                   size={11}
                 />
                 <TextWrapper
-                  text={`${breeder}`}
+                  text={`${breeder_name}`}
                   font='OpenSans-Bold'
                   color='#2e3131'
                   size={11}

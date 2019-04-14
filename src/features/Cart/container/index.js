@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Container, View, Right, Left } from 'native-base';
+import { Container, View } from 'native-base';
 
 import { observer, inject } from 'mobx-react';
 

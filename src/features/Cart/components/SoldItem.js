@@ -18,7 +18,7 @@ class SoldItem extends Component {
   onPressRate = () => {
     const { item } = this.props;
     const { product } = item;
-    const { breeder: breeder_name, breeder_id } = product;
+    const { breeder_name, breeder_id } = product;
     const breeder = {
       breeder_name,
       breeder_id
@@ -32,7 +32,7 @@ class SoldItem extends Component {
 
     const { item } = this.props;
     const { product, status_time } = item;
-    const { breeder, breed, name, type, img_path } = product;
+    const { breeder_name, breed, name, type, img_path } = product;
 
     return (
       <React.Fragment>
@@ -54,7 +54,7 @@ class SoldItem extends Component {
                   size={11}
                 />
                 <TextWrapper
-                  text={`${breeder}`}
+                  text={`${breeder_name}`}
                   font='OpenSans-Bold'
                   color='#2e3131'
                   size={11}

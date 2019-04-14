@@ -38,7 +38,7 @@ class RateForm extends Component {
           />
           <TextAreaWrapper
             form={RateBreederForm}
-            field='specialRequest'
+            field='comment'
           />
         </View>
         <View style={{ marginTop: 10 }}>

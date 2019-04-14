@@ -21,8 +21,6 @@ class MessageStore {
     const { data } = await Messaging.getThreads(UserStore.userRole, 1, 15);
     const { count, threads } = data;
 
-    console.dir(threads);
-
     runInAction(() => {
       map(threads, thread => {
         const { message } = thread;
@@ -70,6 +68,7 @@ class MessageStore {
   }
 
   @action setSelectedUser(selectedUser) {
+    console.dir(selectedUser);
     this.selectedUser = selectedUser;
   }
 

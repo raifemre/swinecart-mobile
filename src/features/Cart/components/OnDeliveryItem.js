@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import { Body, View } from 'native-base';
 
@@ -11,23 +10,24 @@ import CardItemFooter from '../../../shared/CardItemFooter';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
 
 import Navigation from '../../../services/navigation';
-import { toJS } from 'mobx';
-
-import DetailsModal from './DetailsModal';
-
-@inject('ShopStore', 'SwineCartStore')
+@inject('ShopStore', 'SwineCartStore', 'MessageStore')
 @observer
 class OnDeliveryItem extends Component {
 
   onPressMessage = () => {
-    alert('Message Breeder');
+    const { item: { product: { breeder_name, user_id } }, MessageStore } = this.props;
+    MessageStore.setSelectedUser({
+      name: breeder_name, 
+      id: user_id
+    });
+    Navigation.navigate('Chat');
   }
 
   render() {
 
     const { item } = this.props;
     const { product, status_time, reservation } = item;
-    const { breeder, breed, name, type, img_path } = product;
+    const { breeder_name, breed, name, type, img_path } = product;
     const { delivery_date } = reservation;
   
     return (
@@ -50,7 +50,7 @@ class OnDeliveryItem extends Component {
                   size={11}
                 />
                 <TextWrapper
-                  text={`${breeder}`}
+                  text={`${breeder_name}`}
                   font='OpenSans-Bold'
                   color='#2e3131'
                   size={11}
