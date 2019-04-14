@@ -1,10 +1,10 @@
 import {
-  observable, action, toJS, runInAction, get, set
+  observable, action, toJS, runInAction, get, set, computed
 } from 'mobx';
 
 import { map } from 'lodash';
 
-import { BreederMessaging } from '../../services';
+import { Messaging } from '../../services';
 import { toGCFormat, toDBFormat } from '../../utils';
 
 import UserStore from './UserStore';
@@ -18,13 +18,17 @@ class MessageStore {
   @observable selectedUser = null;
 
   @action async getThreads() {
-    const { data } = await BreederMessaging.getThreads(1, 15);
+    const { data } = await Messaging.getThreads(UserStore.userRole, 1, 15);
     const { count, threads } = data;
+
+    console.dir(threads);
+
     runInAction(() => {
       map(threads, thread => {
         const { message } = thread;
-        const { direction } = message;
-        const user = direction === 1 ? UserStore.user : thread.user;
+        const { from_id } = message;
+        const user = from_id === UserStore.userId ? UserStore.user : thread.user;
+  
         set(this.allMessages, `${thread.user.id}`, [ toGCFormat(1, user, message) ]);
       });
       this.threads = threads;
@@ -33,21 +37,18 @@ class MessageStore {
 
   @action async getMessages() {
     const { id } = this.selectedUser;
-    const { data } = await BreederMessaging.getMessages(id, 1, 10);
+    const { data } = await Messaging.getMessages(UserStore.userRole, id, 1, 30);
     const { count, messages } = data;
+
     const newMessages = map(messages, message => {
-      const { direction } = message;
-      const user = direction === 1 ? UserStore.user : this.selectedUser;
+      const { from_id } = message; 
+      const user = from_id === UserStore.userId ? UserStore.user : this.selectedUser;
       return toGCFormat(3, user, message);
     });
+
     runInAction(() => {
       set(this.allMessages, `${id}`, newMessages);
     });
-  }
-
-  @action getLatestMessage(id) {
-    const messages = get(this.allMessages, `${id}`);
-    return messages[0];
   }
 
   @action addMessage(messages) {

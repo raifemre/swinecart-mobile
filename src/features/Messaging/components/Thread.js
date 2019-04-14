@@ -4,13 +4,13 @@ import { observer, inject } from 'mobx-react';
 import { Card, CardItem, View } from 'native-base';
 
 import TextWrapper from '../../../shared/TextWrapper';
-import { get } from 'mobx';
+import { get, toJS } from 'mobx';
 
 import { Navigation } from '../../../services'
 
 import moment from 'moment';
 
-@inject('MessageStore')
+@inject('MessageStore', 'UserStore')
 @observer
 class Thread extends Component {
 
@@ -22,12 +22,14 @@ class Thread extends Component {
 
   render() {
     const { cardStyle } = styles;
-    const { thread, MessageStore } = this.props;
-    const { user } = thread;
+    const { thread, MessageStore, UserStore } = this.props;
+    const { user } = thread; 
     const { id, name } = user;
-    const { text, createdAt: created_at, readAt, direction } = MessageStore.getLatestMessage(id);
+    const { 
+      text, createdAt: created_at, readAt, user: { _id }
+    } = get(MessageStore.allMessages, `${id}`)[0];
     const createdAt = moment(created_at).format('h:mm:ss a');
-    const msg = direction === 1 ? `You: ${text}` : `${text}`;
+    const msg = UserStore.userId === _id ? `You: ${text}` : `${text}`;
     return (
       <View style={{ paddingHorizontal: 5 }}>
         <Card style={[cardStyle]}>

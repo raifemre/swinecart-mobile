@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
 
+import LoadingView from '../../../shared/LoadingView';
+
 import Thread from './Thread';
 
 @inject('MessageStore')
@@ -26,16 +28,26 @@ class Messages extends Component {
   };
 
   render() {
-    return (
-      <FlatList
-        data={this.props.MessageStore.threads}
-        renderItem={this.renderItem}
-        refreshing={this.state.refreshing}
-        onRefresh={this.onRefresh}
-        keyExtractor={item => `${item.id}`}
-        initialNumToRender={8}
-      />
-    );
+
+    if (this.props.MessageStore.threads) {
+      return (
+        <FlatList
+          data={this.props.MessageStore.threads}
+          renderItem={this.renderItem}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+          keyExtractor={item => `${item.id}`}
+          initialNumToRender={8}
+        />
+      );
+    }
+    else {
+      return (
+        <LoadingView />
+      );
+    }
+
+    
   }
 }
 
