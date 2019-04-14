@@ -34,11 +34,11 @@ function RemoveConfirmModal(props) {
               numberOfLines={3}
             />
           </View>
-          <View style={{ flexDirection: 'row', backgroundColor: '#f2f2f2', padding: 10, borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
+          <View style={{ flexDirection: 'row', padding: 10, borderBottomLeftRadius: 5, borderBottomRightRadius: 5 }}>
             <ButtonWrapper
               onPress={onPressCancel}
               text='No'
-              buttonColor='#ffffff'
+              buttonColor='#f2f2f2'
               textColor='#000000'
               textSize={12}
               style={{ height: 24, flex: 1, marginRight: 5, }}

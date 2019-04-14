@@ -17,7 +17,7 @@ function DetailsModal({ isModalVisible, hideModal, reservation }) {
       onBackdropPress={hideModal}
       useNativeDriver={true}
     >
-      <View style={{ backgroundColor: '#ffffff', padding: 16, height: 300 }}>
+      <View style={{ backgroundColor: '#ffffff', padding: 16, height: 300, borderRadius: 5, }}>
         <ScrollView style={{ height: 200 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <TextWrapper
