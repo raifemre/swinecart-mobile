@@ -45,7 +45,8 @@ class Chat extends Component {
     this.props.MessageStore.getMessages();
   }
 
-  onLoadEarlier = () => {
+  onEndReached = async () => {
+    await this.props.MessageStore.getMoreMessages();
   }
 
   onSend(messages = []) {
@@ -72,16 +73,19 @@ class Chat extends Component {
           <Right></Right>
         </HeaderWrapper>
         <View style={[contentStyle]}>
-          {/* <StatusIndicator /> */}
+          <StatusIndicator />
           <GiftedChat
             textInputProps={{
               autoFocus: false
             }}
             loadEarlier={true}
-            onLoadEarlier={this.onLoadEarlier}
+            onLoadEarlier={this.onEndReached}
+            timeFormat={'LTS'}
+            dateFormat={'LL'}
             renderBubble={this.renderBubble}
             showAvatarForEveryMessage={false}
             renderAvatar={null}
+            scrollToBottom={true}
             messages={toJS(get(this.props.MessageStore.allMessages, `${MessageStore.selectedUser.id}`))}
             onSend={messages => this.onSend(messages)}
             user={{

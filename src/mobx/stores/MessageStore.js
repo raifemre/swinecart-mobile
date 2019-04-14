@@ -1,5 +1,5 @@
 import {
-  observable, action, toJS, runInAction, get, set, computed
+  observable, action, toJS, runInAction, get, set, has
 } from 'mobx';
 
 import { map } from 'lodash';
@@ -11,9 +11,12 @@ import UserStore from './UserStore';
 
 class MessageStore {
 
+  limit = 15;
+
   @observable socket = null;
 
   @observable threads = null;
+  @observable pages = {};
   @observable allMessages = new Map();
   @observable selectedUser = null;
 
@@ -26,8 +29,9 @@ class MessageStore {
         const { message } = thread;
         const { from_id } = message;
         const user = from_id === UserStore.userId ? UserStore.user : thread.user;
-  
-        set(this.allMessages, `${thread.user.id}`, [ toGCFormat(1, user, message) ]);
+        if (!has(this.allMessages, `${thread.user.id}`)) {
+          set(this.allMessages, `${thread.user.id}`, [toGCFormat(1, user, message)]);
+        }
       });
       this.threads = threads;
     });
@@ -35,7 +39,7 @@ class MessageStore {
 
   @action async getMessages() {
     const { id } = this.selectedUser;
-    const { data } = await Messaging.getMessages(UserStore.userRole, id, 1, 30);
+    const { data } = await Messaging.getMessages(UserStore.userRole, id, 1, this.limit);
     const { count, messages } = data;
 
     const newMessages = map(messages, message => {
@@ -45,7 +49,27 @@ class MessageStore {
     });
 
     runInAction(() => {
+      this.pages[id]= 1;
       set(this.allMessages, `${id}`, newMessages);
+    });
+  }
+
+  @action async getMoreMessages() {
+    const { id } = this.selectedUser;
+    const { data } = await Messaging.getMessages(UserStore.userRole, id, this.pages[id] + 1, this.limit);
+    const { count, messages } = data;
+
+    const newMessages = map(messages, message => {
+      const { from_id } = message;
+      const user = from_id === UserStore.userId ? UserStore.user : this.selectedUser;
+      return toGCFormat(3, user, message);
+    });
+
+    const chatMessages = get(this.allMessages, `${id}`);
+
+    runInAction(() => {
+      this.pages[id] = this.pages[id] + 1;
+      set(this.allMessages, `${id}`, [ ...chatMessages, ...newMessages ]);
     });
   }
 
