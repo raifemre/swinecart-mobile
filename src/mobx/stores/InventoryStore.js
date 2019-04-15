@@ -8,7 +8,7 @@ class InventoryStore {
 
   limit = 8
 
-  @observable selectedIndex = 1;
+  @observable selectedIndex = 0;
   @observable products = {};
   @observable pages = {};
   @observable maps = {};

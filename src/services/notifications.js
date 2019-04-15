@@ -6,8 +6,9 @@ const service = {
     const { data } = await API.get(`${lowerCase(userRole)}/notifications`, { page, limit });
     return data;
   },
-  seeNotif(id) {
-    return API.post(`${URL_PREFIX}/${id}`);
+  async seeNotif(userRole, id) {
+    const { data } = await API.patch(`${lowerCase(userRole)}/notifications/${id}`);
+    return data;
   }
 }
 

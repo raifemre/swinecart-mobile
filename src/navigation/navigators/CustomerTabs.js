@@ -49,9 +49,9 @@ const navigator = createBottomTabNavigator({
   'Messaging': {
     screen: MessagingStack
   },
-  // 'Notifications': {
-  //   screen: Notifications
-  // },
+  'Notifications': {
+    screen: Notifications
+  },
   'Profile': {
     screen: ProfileStack,
   },

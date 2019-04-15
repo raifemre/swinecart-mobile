@@ -18,10 +18,20 @@ import SoldCard from '../components/SoldCard';
 class Inventory extends Component {
 
   componentDidMount() {
-    this.props.InventoryStore.getProducts('requested');
-    this.props.InventoryStore.getProducts('reserved');
-    this.props.InventoryStore.getProducts('on_delivery');
-    this.props.InventoryStore.getProducts('sold');
+
+    const { InventoryStore, navigation } = this.props;
+
+    InventoryStore.getProducts('requested');
+    InventoryStore.getProducts('reserved');
+    InventoryStore.getProducts('on_delivery');
+    InventoryStore.getProducts('sold');
+
+    // const selectedIndex = navigation.getParam('selectedIndex');
+    // console.log(selectedIndex);
+    // if (index) {
+    //   InventoryStore.onSelectIndex(index);
+    // }
+
   }
 
   setIndex = index => {
@@ -30,8 +40,7 @@ class Inventory extends Component {
 
   render() {
 
-    const { InventoryStore } = this.props;
-
+    const { InventoryStore, navigation } = this.props;
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={InventoryStore.cancelTranLoading} />

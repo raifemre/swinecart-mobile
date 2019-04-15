@@ -15,16 +15,23 @@ import Navigation from '../../../services/navigation';
 class Notification extends Component {
 
   onPress = () => {
-    const { notification } = this.props;
-    const { id } = notification;
-    // console.dir(id);
+    const { notification, NotificationStore } = this.props;
+    const { id, type } = notification;
+    // NotificationStore.seeNotification(id);
+    if (type === 'BreederRated') {
+      Navigation.navigate('Dashboard');
+    }
+    else if (type === 'ProductRequested') {
+      // const index = { index: 1 }
+      Navigation.navigate('ProductInventory', { selectedIndex: 1 });
+    }
   }
   
   render() {
     const { cardStyle } = styles;
     const { notification } = this.props;
     
-    console.dir(toJS(notification));
+    // console.dir(toJS(notification));
     return (
       <View style={{ paddingHorizontal: 5 }}>
         <Card style={[cardStyle]}>

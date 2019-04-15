@@ -59,9 +59,6 @@ class ReservedCard extends Component {
     const { product } = this.props;
     const { name, img_path, type, breed, reservation } = product;
     const { customer_name, status_time } = reservation;
-
-    console.dir(toJS(product));
-
     return (
       <React.Fragment>
         <DetailsModal
