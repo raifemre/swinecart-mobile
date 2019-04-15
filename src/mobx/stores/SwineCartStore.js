@@ -48,7 +48,7 @@ class SwineCartStore {
       }
     }
     catch (err) {
-      console.dir(err.message);
+      // console.dir(err.message);
     }
   }
 
@@ -74,7 +74,7 @@ class SwineCartStore {
       }
     }
     catch (err) {
-      console.dir(err.message);
+      // console.dir(err.message);
     }
 
   }
@@ -98,7 +98,7 @@ class SwineCartStore {
       }
     }
     catch (err) {
-      console.dir(err.message);
+      // console.dir(err.message);
     }
 
   }
@@ -133,8 +133,8 @@ class SwineCartStore {
       else {
         if (data) {
           const { item } = data;
-          await this.getItemCount();
           this._addProduct(status, item);
+          await this.getItemCount();
         }
         showMessage({
           message: message,

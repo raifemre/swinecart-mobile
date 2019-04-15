@@ -9,7 +9,6 @@ const service = {
     return data;
   },
   async rateBreeder(id, requestData) {
-    console.dir(id, transform('rateBreeder')(requestData));
     const { data } = await API.post(`${URL_PREFIX}/reviews/${id}`,
       transform('rateBreeder')(requestData));
     return data;

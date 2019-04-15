@@ -56,9 +56,6 @@ class Request extends Component {
       customer_name, customer_province, request_quantity, special_request, date_needed
     } = request;
 
-
-    console.dir(toJS(request));
-
     return (
       <React.Fragment>
         <DetailsModal

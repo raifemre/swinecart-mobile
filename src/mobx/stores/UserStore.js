@@ -8,7 +8,7 @@ class UserStore {
   @action async getUser() {
     const { error, data } = await Auth.me();
     if (error) {
-      console.log(error);
+      // console.log(error);
     }
     else {
       const { user } = data;

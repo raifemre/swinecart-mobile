@@ -16,7 +16,7 @@ class ImageWrapper extends Component {
   }
 
   onError = e => {
-    console.log(e);
+    // console.log(e);
   }
 
   render () {

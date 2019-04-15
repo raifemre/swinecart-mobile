@@ -7,10 +7,10 @@ const connect = () => {
   wamp.debugOn();
   const connection = new wamp.Connection({ url: 'ws://swinecart.test/pusher', realm: 'realm1' });
   connection.onopen = () => {
-    console.log('Hello');
+    // console.log('Hello');
   };
   connection.onclose = (reason, details) => {
-    console.dir(reason, details);
+    // console.dir(reason, details);
   }
   connection.open();
 };

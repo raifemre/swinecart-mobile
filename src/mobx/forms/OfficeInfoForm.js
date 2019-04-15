@@ -67,7 +67,7 @@ class OfficeInfoForm {
 
   @action save() {
     this.setDefaultState(this.form);
-    console.log(toJS(this.defaultFormState));
+    // console.log(toJS(this.defaultFormState));
   }
 }
 

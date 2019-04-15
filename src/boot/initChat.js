@@ -9,7 +9,7 @@ const connect = () => {
   const ws = new WebSocket(`${CHAT_URL}`);
 
   ws.onopen = () => {
-    console.log('WebSocket(Chat):', 'Connected!');
+    // console.log('WebSocket(Chat):', 'Connected!');
     
     const message = {
       from: UserStore.userId,
@@ -37,14 +37,14 @@ const connect = () => {
   }
   
   ws.onerror = (e) => {
-    console.log('WebSocket(Chat):', e.message);
+    // console.log('WebSocket(Chat):', e.message);
   };
 
   ws.onclose = (e) => {
     MessageStore.setSocket(null);
     if (UserStore.userId) {
       setTimeout(() => {
-        console.log('WebSocket(Chat):', 'Reconnecting!...');
+        // console.log('WebSocket(Chat):', 'Reconnecting!...');
         connect();
       }, 3000);
     }
