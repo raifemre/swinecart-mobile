@@ -48,13 +48,13 @@ class ManageProducts extends Component {
             </Left>
             <BodyWrapper title='Manage Products' />
             <Right style={flex1}>
-              <IconButton marginLeft={0} marginRight={0}
+              {/* <IconButton marginLeft={0} marginRight={0}
                 size={26}
                 color='#ffffff'
                 name='filter-outline'
                 type='MaterialCommunityIcons'
                 onPress={this.navigateToFilter}
-              />
+              /> */}
             </Right>
           </HeaderWrapper>
           <View style={flex1}>

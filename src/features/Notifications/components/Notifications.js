@@ -17,11 +17,11 @@ class Notifications extends Component {
     return <Notification notification={item}/>;
   }
 
-  handleOnRefresh = () => {
+  onRefresh = () => {
     this.setState({
       refreshing: true
     }, async () => {
-        await this.props.NotificationStore.getNotifs();
+        await this.props.NotificationStore.getNotifications();
       this.setState({ refreshing: false });
     });
   };
@@ -37,7 +37,7 @@ class Notifications extends Component {
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
         refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
+        onRefresh={this.onRefresh}
         initialNumToRender={8}
       />
     );

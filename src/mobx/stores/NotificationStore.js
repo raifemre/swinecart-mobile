@@ -3,9 +3,10 @@ import {
 } from 'mobx';
 
 import {
-  BreederNotifications
+  Notifications
 } from '../../services';
 
+import UserStore from './UserStore'
 
 class NotificationStore {
 
@@ -16,9 +17,8 @@ class NotificationStore {
   limit = 10
 
   @action async getNotifications() {
-    const { data } = await BreederNotifications.getNotifications(1, this.limit);
+    const { data } = await Notifications.getNotifications(UserStore.userRole, 1, this.limit);
     const { count, notifications } = data;
-    // console.dir(count, notifications);
     runInAction(() => {
       this.notifications = notifications;
     });

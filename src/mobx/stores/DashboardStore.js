@@ -24,7 +24,7 @@ class DashboardStore {
 
   @observable page = 1;
 
-  limit = 10
+  limit = 30
 
   @action async getStats() {
     try {
@@ -91,7 +91,6 @@ class DashboardStore {
       this.getReviewsLoading = true;
       const { data } = await BreederDashboard.getReviews(this.page + 1, this.limit);
       const { count, reviews } = data;
-      console.dir(count, reviews);
       runInAction(() => {
         if (count >= this.limit) { this.page = this.page + 1; }
         const newItems = filterNewItems(this.reviewsMap, reviews);

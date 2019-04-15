@@ -29,12 +29,12 @@ function RatingRow({ title, data }) {
             iconSet={'MaterialIcons'}
             starSize={18}
           />
-          {data && <TextWrapper
+          <TextWrapper
             color='#ffffff'
             text={` (${data})`}
             font='OpenSans-Bold'
             size={12}
-          /> }
+          />
         </View>
       </View>
     </React.Fragment>

@@ -3,7 +3,6 @@ import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
 
 import Review from './Review';
-import { toJS } from 'mobx';
 
 @inject('DashboardStore')
 @observer
@@ -26,7 +25,8 @@ class ReviewList extends Component {
     });
   };
 
-  getMoreProducts = async ({ distanceFromEnd }) => {
+  onEndReached = async () => {
+    await this.props.DashboardStore.getMoreReviews();
   }
 
   render() {
@@ -38,6 +38,8 @@ class ReviewList extends Component {
         keyExtractor={item => `${item.id}`}
         refreshing={this.state.refreshing}
         onRefresh={this.onRefresh}
+        onEndReached={this.onEndReached}
+        onEndReachedThreshold={0.9}
         initialNumToRender={8}
       />
     );

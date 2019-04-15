@@ -50,10 +50,10 @@ function Ratings({ DashboardStore }) {
               <RatingRow title='Delivery Rating ' data={DashboardStore.ratings.delivery} />
             </Row>
             <Row style={[container]}>
-              <RatingRow title='Product Quality Rating ' data={DashboardStore.ratings.productQuality} />
+              <RatingRow title='Transaction Rating ' data={DashboardStore.ratings.transaction} />
             </Row>
             <Row style={[container]}>
-              <RatingRow title='Transaction Rating ' data={DashboardStore.ratings.transaction} />
+              <RatingRow title='Product Quality Rating ' data={DashboardStore.ratings.productQuality} />
             </Row>
           </Grid>
         </CardItem>

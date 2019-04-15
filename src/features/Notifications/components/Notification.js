@@ -7,6 +7,9 @@ import TextWrapper from '../../../shared/TextWrapper';
 import IconButton from '../../../shared/IconButton';
 
 import { fromNow } from '../../../utils';
+import { toJS } from 'mobx';
+import Navigation from '../../../services/navigation';
+
 @inject('NotificationStore')
 @observer
 class Notification extends Component {
@@ -16,13 +19,14 @@ class Notification extends Component {
     const { id } = notification;
     // console.dir(id);
   }
-
+  
   render() {
     const { cardStyle } = styles;
     const { notification } = this.props;
     
+    console.dir(toJS(notification));
     return (
-      <View style={{ paddingHorizontal: 10 }}>
+      <View style={{ paddingHorizontal: 5 }}>
         <Card style={[cardStyle]}>
           <CardItem>
             <Body style={{ flex: 4 }}>
@@ -31,7 +35,7 @@ class Notification extends Component {
                 text={notification.message}
                 color={notification.read_at ? '#7f8c8d' : '#000000'}
                 numberOfLines={5}
-                size={12}
+                size={14}
 
               />
               <TextWrapper
@@ -41,16 +45,16 @@ class Notification extends Component {
                 size={12}
               />
             </Body>
-            {/* <Right>
+            <Right>
               <IconButton
                 marginLeft={0}
                 marginRight={0}
                 size={24}
-                name='more-vert'
+                name='keyboard-arrow-right'
                 type='MaterialIcons'
                 onPress={this.onPress}
               />
-            </Right> */}
+            </Right>
           </CardItem>
         </Card>
       </View>

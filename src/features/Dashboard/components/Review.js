@@ -44,15 +44,15 @@ class Review extends Component {
                   size={12}
                 />
               </Row>
-              <Row>
+              {review.comment != '' && <Row>
                 <TextWrapper
-                  font={'OpenSans-Bold'}  
+                  font={'OpenSans-Bold'}
                   color={'#9e9e9e'}
                   text={`"${review.comment}"`}
                   size={13}
                   numberOfLines={5}
                 />
-              </Row>
+              </Row>}
               <Row>
                 <TextWrapper
                   font={'OpenSans-Bold'}
@@ -81,17 +81,17 @@ class Review extends Component {
             <Grid>
               <Row>
                 <View style={{ flex: 1 }}>
-                  <RatingRow title='Delivery Rating ' data={review.rating.delivery} />
+                  <RatingRow title='Delivery Rating' data={review.rating.delivery} />
                 </View>
               </Row>
               <Row>
                 <View style={{ flex: 1 }}>
-                  <RatingRow title='Product Quality ' data={review.rating.productQuality} />
+                  <RatingRow title='Transaction' data={review.rating.transaction} />
                 </View>
               </Row>
               <Row>
                 <View style={{ flex: 1 }}>
-                  <RatingRow title='Transaction ' data={review.rating.transaction} />
+                  <RatingRow title='Product Quality' data={review.rating.productQuality} />
                 </View>
               </Row>
             </Grid>

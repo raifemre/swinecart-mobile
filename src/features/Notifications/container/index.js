@@ -21,7 +21,7 @@ import NotificationList from '../components/Notifications';
 class Notifications extends Component {
 
   componentDidMount() {
-    // this.props.NotificationStore.getNotifications();
+    this.props.NotificationStore.getNotifications();
   }
 
   render() {
@@ -31,7 +31,7 @@ class Notifications extends Component {
           <HeaderWrapper>
             <BodyWrapper title='Notifications' />
           </HeaderWrapper>
-          <View style={{ paddingBottom: 50, flex: 1 }}>
+          <View style={{ flex: 1 }}>
             <NotificationList />
           </View>
         </Container>
