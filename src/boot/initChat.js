@@ -1,12 +1,12 @@
 import {
-  API_URL
+  CHAT_URL
 } from 'react-native-dotenv';
 
 import UserStore from '../mobx/stores/UserStore';
 import MessageStore from '../mobx/stores/MessageStore';
 
 const connect = () => {
-  const ws = new WebSocket('ws://swinecart.test/chat');
+  const ws = new WebSocket(`${CHAT_URL}`);
 
   ws.onopen = () => {
     console.log('WebSocket(Chat):', 'Connected!');
