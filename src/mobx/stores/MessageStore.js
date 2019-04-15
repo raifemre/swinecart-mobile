@@ -96,7 +96,6 @@ class MessageStore {
   }
 
   @action setSelectedUser(selectedUser) {
-    console.dir(selectedUser);
     this.selectedUser = selectedUser;
   }
 
