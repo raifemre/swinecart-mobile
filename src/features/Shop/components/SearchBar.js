@@ -16,7 +16,7 @@ class SearchBar extends Component {
           selectionColor='#000000'
           underlineColorAndroid='transparent'
           style={styles.inputStyle}
-          value={'Hellodasdsadds'}
+          value={''}
         // onBlur={onBlur}
         // keyboardType={keyboardType}
         />

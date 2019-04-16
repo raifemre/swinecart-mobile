@@ -24,7 +24,7 @@ class RequestItemForm {
   @observable data = {
     requestQuantity: 2,
     dateNeeded: null,
-    specialRequest: repeat('abcde', 100)
+    specialRequest: null
   }
 
   @observable errors = {
@@ -90,8 +90,12 @@ class RequestItemForm {
 
         }
         else {
-          await SwineCartStore.getItemCount();
+
+          // console.log(data);
+
+          SwineCartStore.getItemCount();
           SwineCartStore._removeProduct('not_requested', id);
+
           this.resetForm();
           showMessage({
             message: 'Request Product successful',

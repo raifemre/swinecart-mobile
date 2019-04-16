@@ -66,7 +66,8 @@ function DetailsModal({ isModalVisible, hideModal, reservation }) {
         <ButtonWrapper
           onPress={hideModal}
           text='Close'
-          textColor='#ffffff'
+          buttonColor='#f2f2f2'
+          textColor='#000000'
           textSize={12}
           style={{ height: 30, marginTop: 10, }}
         />

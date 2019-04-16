@@ -39,7 +39,7 @@ class Items extends Component {
         <FlatGrid
           itemDimension={150}
           spacing={5}
-          items={SwineCartStore.items[status]}
+          items={toJS(SwineCartStore.items[status])}
           renderItem={this.renderItem}
           refreshing={this.state.refreshing}
           onRefresh={this.onRefresh}

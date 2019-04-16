@@ -18,7 +18,7 @@ class Products extends Component {
     );
   }
 
-  handleOnRefresh = () => {
+  onRefresh = () => {
     this.setState({
       refreshing: true
     }, async () => {
@@ -39,7 +39,7 @@ class Products extends Component {
         items={toJS(this.props.ProductsStore.products)}
         renderItem={this.renderProduct}
         refreshing={this.state.refreshing}
-        onRefresh={this.handleOnRefresh}
+        onRefresh={this.onRefresh}
         onEndReached={this.getMoreProducts}
         onEndReachedThreshold={0.2}
         maxToRenderPerBatch={2}

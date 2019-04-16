@@ -6,8 +6,9 @@ const URL_PREFIX = '/breeder/products'
 
 const service = {
   async getProducts(page, limit) {
-    const { data } = await API.get(`${URL_PREFIX}`, { page, limit });
-    return data;
+    const response = await API.get(`${URL_PREFIX}`, { page, limit });
+    // console.log(response);
+    return response.data;
   },
   async getProductDetails(id) {
     const { data } = await API.get(`${URL_PREFIX}/${id}/details`);

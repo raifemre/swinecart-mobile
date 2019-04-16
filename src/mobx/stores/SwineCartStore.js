@@ -26,6 +26,7 @@ class SwineCartStore {
 
   @observable selectedIndex = 0;
 
+
   @action onSelectIndex(index) {
     runInAction(() => {
       this.selectedIndex = index;
@@ -54,6 +55,9 @@ class SwineCartStore {
 
   @action async getItems(status) {
     try {
+      this.pages[status] = 1;
+      this.items[status] = [];
+      this.maps[status] = new Map();
       const { error, data } = await CustomerSwineCart.getItems(status, 1, this.limit);
       if (error) {
 
@@ -62,9 +66,6 @@ class SwineCartStore {
         if (data) {
           const { count, items } = data;
           runInAction(() => {
-            this.pages[status] = 1;
-            this.items[status] = [];
-            this.maps[status] = new Map();
             if (count >= this.limit) {
               this.pages[status] = this.pages[status] + 1;
             }

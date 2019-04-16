@@ -33,7 +33,7 @@ class Notifications extends Component {
 
     return (
       <FlatList
-        data={this.props.NotificationStore.notifications}
+        data={toJS(this.props.NotificationStore.notifications)}
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
         refreshing={this.state.refreshing}

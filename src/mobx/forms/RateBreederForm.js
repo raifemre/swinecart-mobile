@@ -99,7 +99,7 @@ class RateBreederForm {
         });
         
         if (error) {
-          console.dir(error);
+          // console.dir(error);
         }
         else {
           SwineCartStore._removeProduct('sold', id);

@@ -68,14 +68,14 @@ class Product extends Component {
         </CardItemBody>
         <CardItemFooter>
           <View style={{ flex: 1, flexDirection: 'row', }}>
-            <ButtonWrapper
+            {/* <ButtonWrapper
               onPress={this.onPressView}
               buttonColor='#ffffff'
               text='View'
               textColor='#000000'
               textSize={12}
               style={{ height: 24, flex: 1, marginRight: 2, borderColor: '#000000', borderWidth: 2, }}
-            />
+            /> */}
             <ButtonWrapper
               onPress={this.onPressAdd}
               text='Add'

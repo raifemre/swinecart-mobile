@@ -53,7 +53,7 @@ class ShopStore {
     }
     else {
       const { product } = data;
-      console.dir(product);
+      // console.dir(product);
       runInAction(() => {
         this.product = product;
       });

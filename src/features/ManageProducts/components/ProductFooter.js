@@ -42,15 +42,15 @@ function ProductFooter({ product, selected, ProductsStore }) {
         <Right style={flex1}>
           <View style={flexDirRow}>
             {
-              product.status !== 'requested' && 
-              <IconButton
-                marginLeft={0}
-                marginRight={8}
-                size={24}
-                name='edit'
-                onPress={onPressEdit}
-                type='MaterialIcons'
-              />
+              // product.status !== 'requested' && 
+              // <IconButton
+              //   marginLeft={0}
+              //   marginRight={8}
+              //   size={24}
+              //   name='edit'
+              //   onPress={onPressEdit}
+              //   type='MaterialIcons'
+              // />
             }
             {
               product.status !== 'requested' &&

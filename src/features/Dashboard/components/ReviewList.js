@@ -3,6 +3,7 @@ import { FlatList } from 'react-native';
 import { observer, inject } from 'mobx-react';
 
 import Review from './Review';
+import { toJS } from 'mobx';
 
 @inject('DashboardStore')
 @observer
@@ -33,7 +34,7 @@ class ReviewList extends Component {
 
     return (
       <FlatList
-        data={this.props.DashboardStore.reviews}
+        data={toJS(this.props.DashboardStore.reviews)}
         renderItem={this.renderItem}
         keyExtractor={item => `${item.id}`}
         refreshing={this.state.refreshing}

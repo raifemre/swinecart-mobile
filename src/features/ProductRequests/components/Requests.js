@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react';
 import LoadingView from '../../../shared/LoadingView';
 
 import Request from './Request';
+import { toJS } from 'mobx';
 
 @inject('InventoryStore')
 @observer
@@ -27,7 +28,7 @@ class Requests extends Component {
     if (InventoryStore.requests) {
       return (
         <FlatList
-          data={InventoryStore.requests}
+          data={toJS(InventoryStore.requests)}
           renderItem={this.renderRequest}
           keyExtractor={request => `${request.customer_id}`}
           refreshing={this.state.refreshing}

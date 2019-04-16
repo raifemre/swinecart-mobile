@@ -86,6 +86,10 @@ class ProductsStore {
     remove(this.productsMap, `${id}`);
   }
 
+  @action replaceProduct(product) {
+    const index = this.findProduct(product.id);
+  }
+
   @action async toggleStatus(id) {
     try {
       this.loading = true;

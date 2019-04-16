@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react';
 import LoadingView from '../../../shared/LoadingView';
 
 import Thread from './Thread';
+import { toJS } from 'mobx';
 
 @inject('MessageStore')
 @observer
@@ -32,7 +33,7 @@ class Messages extends Component {
     if (this.props.MessageStore.threads) {
       return (
         <FlatList
-          data={this.props.MessageStore.threads}
+          data={toJS(this.props.MessageStore.threads)}
           renderItem={this.renderItem}
           refreshing={this.state.refreshing}
           onRefresh={this.onRefresh}
