@@ -36,6 +36,7 @@ class AddProductForm {
   defaultFormState = {
     name: null,
     type: null,
+    quantity: '1',
     minPrice: null,
     maxPrice: null,
     breed: null,
@@ -62,6 +63,13 @@ class AddProductForm {
     type: {
       presence: errorMessages.presence
     },
+    quantity: {
+      presence: errorMessages.presence,
+      numericality: {
+        onlyInteger: true,
+        greaterThan: 0,
+      }
+    },
     minPrice: {
       numericality: {
         message: '^Minimum Price must be a number'
@@ -70,7 +78,10 @@ class AddProductForm {
         attribute: 'maxPrice',
         message: '^Minimum Price must be less than the Maximum Price',
         comparator: function (v1, v2) {
-          return Number(v1) <= Number(v2);
+          if (v1 && v2) {
+            return Number(v1) <= Number(v2);
+          }
+          return true;
         }
       }
     },
@@ -104,7 +115,7 @@ class AddProductForm {
   }
 
   steps = [
-    [ 'name', 'type', 'minPrice', 'maxPrice' ],
+    [ 'name', 'type', 'quantity', 'minPrice', 'maxPrice' ],
     [ 'breed', 'breedType', 'farmFrom', 'fatherBreed', 'motherBreed' ],
     [ 'otherDetails' ],
   ]
@@ -133,6 +144,7 @@ class AddProductForm {
     // otherDetails: 'hellooooo'
     name: null,
     type: null,
+    quantity: '1',
     minPrice: null,
     maxPrice: null,
     breed: null,
@@ -155,6 +167,7 @@ class AddProductForm {
   @observable errors = {
     name: null,
     type: null,
+    quantity: null,
     minPrice: null,
     maxPrice: null,
     breed: null,

@@ -41,6 +41,42 @@ function ProductInfoStep({ AddProductForm }) {
         options={typeOptions}
         getLabel={item => item.label}
       />
+      <View style={{ marginBottom: 10 }}>
+        <TextWrapper
+          text='Is this product unique?'
+          font='OpenSans-SemiBold'
+          size={18}
+          color='#004d40'
+        />
+        <TextWrapper
+          text='If any customer buys a unique product, it will disappear upon being sold'
+          font='OpenSans-Bold'
+          size={14}
+          color='#95a5a6'
+          numberOfLines={5}
+        />
+      </View>
+      <View style={{ marginBottom: 10 }}>
+        <TextWrapper
+          text='Quantity of Product to be Added'
+          font='OpenSans-SemiBold'
+          size={18}
+          color='#004d40'
+        />
+        <TextWrapper
+          text='Unique products will always have a quantity of one(1)'
+          font='OpenSans-Bold'
+          size={14}
+          color='#95a5a6'
+          numberOfLines={5}
+        />
+      </View>
+      <TextField
+        form={AddProductForm}
+        placeholder='Quantity'
+        field='quantity'
+        keyboardType='numeric'
+      />
       <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, marginBottom: 5 }}>
         <TextWrapper
           text='Price'
