@@ -2,9 +2,9 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import Cart from '../../features/Cart';
-import RequestItem from '../../features/RequestItem';
-import RateBreeder from '../../features/RateBreeder';
+import Cart from '../../screens/Cart';
+import RequestItem from '../../screens/RequestItem';
+import RateBreeder from '../../screens/RateBreeder';
 
 const navigator = createStackNavigator({
   Cart: Cart,

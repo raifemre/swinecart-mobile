@@ -2,9 +2,9 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import Inventory from '../../features/Inventory';
-import ProductRequests from '../../features/ProductRequests';
-import SendForDelivery from '../../features/SendForDelivery';
+import Inventory from '../../screens/Inventory';
+import ProductRequests from '../../screens/ProductRequests';
+import SendForDelivery from '../../screens/SendForDelivery';
 
 const navigator = createStackNavigator({
   Inventory: Inventory,

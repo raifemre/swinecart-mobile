@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 
 import { Icon } from 'native-base';
 
-import Notifications from '../../features/Notifications';
+import Notifications from '../../screens/Notifications';
 
 import NotificationsIcon from '../../shared/NotificationsIcon';
 import SwineCartIcon from '../../shared/SwineCartIcon';

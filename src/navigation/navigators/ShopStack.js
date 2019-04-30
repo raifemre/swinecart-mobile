@@ -2,10 +2,10 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import Shop from '../../features/Shop';
-import SearchProduct from '../../features/SearchProduct';
-import ProductDetails from '../../features/ProductDetails';
-import FilterProductsCustomer from '../../features/FilterProductsCustomer';
+import Shop from '../../screens/Shop';
+import SearchProduct from '../../screens/SearchProduct';
+import ProductDetails from '../../screens/ProductDetails';
+import FilterProductsCustomer from '../../screens/FilterProductsCustomer';
 
 const navigator = createStackNavigator({
   SearchProduct: SearchProduct,

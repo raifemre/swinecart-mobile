@@ -2,8 +2,8 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import Profile from '../../features/Profile';
-import FarmDetails from '../../features/FarmDetails';
+import Profile from '../../screens/Profile';
+import FarmDetails from '../../screens/FarmDetails';
 
 const navigator = createStackNavigator({
   Profile: Profile,

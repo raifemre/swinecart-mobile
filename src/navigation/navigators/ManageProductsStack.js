@@ -2,12 +2,12 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import ManageProducts from '../../features/ManageProducts';
-import AddProduct from '../../features/AddProduct';
-import EditProduct from '../../features/EditProduct';
-import FilterProducts from '../../features/FilterProducts';
-import ProductDetails from '../../features/ProductDetails';
-import ProductMedia from '../../features/ProductMedia';
+import ManageProducts from '../../screens/ManageProducts';
+import AddProduct from '../../screens/AddProduct';
+import EditProduct from '../../screens/EditProduct';
+import FilterProducts from '../../screens/FilterProducts';
+import ProductDetails from '../../screens/ProductDetails';
+import ProductMedia from '../../screens/ProductMedia';
 
 const navigator = createStackNavigator({
   Products: ManageProducts,

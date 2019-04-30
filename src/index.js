@@ -7,9 +7,12 @@ import FlashMessage from 'react-native-flash-message';
 
 import RootNavigator from './navigation/navigators';
 
+import NavigationService from './services/navigation';
+
 import StyleProviderWrapper from './shared/StyleProviderWrapper';
 import stores from './mobx/stores';
 import forms from './mobx/forms';
+
 import MessageToast from './shared/MessageToast';
 
 configure({ enforceActions: 'always' });
@@ -20,7 +23,7 @@ export default () => (
   <Root>
     <Provider {...stores} {...forms}>
       <StyleProviderWrapper>
-        <RootNavigator />
+        <RootNavigator ref={NavigationService.setTopLevelNavigator} />
       </StyleProviderWrapper>  
     </Provider>
     <FlashMessage position='top' MessageComponent={MessageToast} />

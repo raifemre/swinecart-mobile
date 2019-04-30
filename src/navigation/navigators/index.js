@@ -1,30 +1,19 @@
-import React, { Component } from 'react';
-import {
-  createSwitchNavigator,
-  createAppContainer
-} from 'react-navigation';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
-import Navigation from '../../services/navigation';
-
-import AuthChecker from '../../features/AuthChecker';
+import AuthChecker from '../../screens/AuthChecker';
 
 import BreederTabNavigator from './BreederTabs';
 import CustomerStackNavigator from './CustomerTabs';
 import PublicStackNavigator from './PublicStack';
 
-const RootNavigator = createAppContainer(createSwitchNavigator({
+const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
   Public: PublicStackNavigator,
   Customer: CustomerStackNavigator,
   Breeder: BreederTabNavigator
 }, {
   initialRouteName: 'AuthChecker'
-}));
+});
 
-class Root extends Component {
-  render() {
-    return <RootNavigator ref={ref => Navigation.setTopLevelNavigator(ref)} />;
-  }
-}
 
-export default Root;
+export default createAppContainer(RootNavigator);

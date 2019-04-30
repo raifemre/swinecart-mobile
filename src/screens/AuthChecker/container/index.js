@@ -15,7 +15,7 @@ import {
   observer, inject
 } from 'mobx-react';
 
-import { Navigation } from '../../../services/';
+import { Navigation } from '../../../services';
 
 @inject('AuthStore')
 @observer

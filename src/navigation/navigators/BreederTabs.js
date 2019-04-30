@@ -5,8 +5,8 @@ import {
 
 import { Icon } from 'native-base';
 
-import Notifications from '../../features/Notifications';
-import Dashboard from '../../features/Dashboard';
+import Notifications from '../../screens/Notifications';
+import Dashboard from '../../screens/Dashboard';
 
 import NotificationsIcon from '../../shared/NotificationsIcon';
 
