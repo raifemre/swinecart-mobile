@@ -1,0 +1,69 @@
+import React, { Component } from 'react';
+import { Container, View } from 'native-base';
+import { observer, inject } from 'mobx-react';
+
+import HeaderWrapper from '../../../shared/HeaderWrapper';
+import BodyWrapper from '../../../shared/BodyWrapper';
+import Segments from '../../../shared/Segments';
+import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
+
+import Products from '../components/Products';
+import RequestedCard from '../components/RequestedCard';
+import ReservedCard from '../components/ReservedCard';
+import OnDeliveryCard from '../components/OnDeliveryCard';
+import SoldCard from '../components/SoldCard';
+
+@inject('InventoryStore')
+@observer
+class Inventory extends Component {
+
+  componentDidMount() {
+
+    const { InventoryStore, navigation } = this.props;
+
+    InventoryStore.getProducts('requested');
+    InventoryStore.getProducts('reserved');
+    InventoryStore.getProducts('on_delivery');
+    InventoryStore.getProducts('sold');
+
+    // const selectedIndex = navigation.getParam('selectedIndex');
+    // console.log(selectedIndex);
+    // if (index) {
+    //   InventoryStore.onSelectIndex(index);
+    // }
+
+  }
+
+  setIndex = index => {
+    this.props.InventoryStore.onSelectIndex(index);
+  }
+
+  render() {
+
+    const { InventoryStore, navigation } = this.props;
+    return (
+      <React.Fragment>
+        <SpinnerWithOverlay visible={InventoryStore.cancelTranLoading} />
+        <SpinnerWithOverlay visible={InventoryStore.confirmSoldLoading} />
+        <Container>
+          <HeaderWrapper hasSegment>
+            <BodyWrapper title='Product Inventory' />
+          </HeaderWrapper>
+          <Segments
+            values={['Requested', 'Reserved', 'On Delivery', 'Sold']}
+            selectedIndex={InventoryStore.selectedIndex}
+            onTabPress={this.setIndex}
+          />
+          <View style={{ flex: 1 }}>
+            {InventoryStore.selectedIndex === 0 && <Products status='requested' CardComponent={RequestedCard} />}
+            {InventoryStore.selectedIndex === 1 && <Products status='reserved' CardComponent={ReservedCard} />}
+            {InventoryStore.selectedIndex === 2 && <Products status='on_delivery' CardComponent={OnDeliveryCard} />}
+            {InventoryStore.selectedIndex === 3 && <Products status='sold' CardComponent={SoldCard} />}
+          </View>
+        </Container>
+      </React.Fragment>
+    );
+  }
+}
+
+export default Inventory;
