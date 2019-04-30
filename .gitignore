@@ -29,7 +29,6 @@ build/
 .gradle
 local.properties
 *.iml
-android/release_logs.txt
 
 # node.js
 #
@@ -55,4 +54,3 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
-hosts
