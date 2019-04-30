@@ -2,16 +2,16 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import Inventory from '../../screens/Inventory';
+import InventoryTabs from './InventoryTabs';
 import ProductRequests from '../../screens/ProductRequests';
 import SendForDelivery from '../../screens/SendForDelivery';
 
 const navigator = createStackNavigator({
-  Inventory: Inventory,
+  InventoryTabs: InventoryTabs,
   SendForDelivery: SendForDelivery,
   ProductRequests: ProductRequests,
 }, {
-    initialRouteName: 'Inventory',
+    initialRouteName: 'InventoryTabs',
     defaultNavigationOptions: ({ navigation }) => {
       return {
         header: null,

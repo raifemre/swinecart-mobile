@@ -1,41 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 
 import FlatGridWrapper from '../../../shared/FlatGridWrapper';
 import LoadingView from '../../../shared/LoadingView';
 import { toJS } from 'mobx';
 
-function Products({ InventoryStore, status, CardComponent }) {
+class Products extends Component {
 
-  const renderItem = ({ item }) => {
+  componentDidMount() {
+    const { InventoryStore, status } = this.props;
+    InventoryStore.getProducts(status);
+  }
+
+  renderItem = ({ item }) => {
+    const { CardComponent } = this.props;
     return (
       <CardComponent product={item} />
     );
   }
 
-  const onRefresh = async () => {
+  onRefresh = async () => {
+    const { InventoryStore, status } = this.props;
     await InventoryStore.getProducts(status);
   }
 
-  const onEndReached = async () => {
+  onEndReached = async () => {
+    const { InventoryStore, status } = this.props;
     InventoryStore.getMoreProducts(status);
   }
 
-  if (InventoryStore.products[status]) {
-    return (
-      <FlatGridWrapper
-        items={toJS(InventoryStore.products[status])}
-        renderItem={renderItem}
-        onRefresh={onRefresh}
-        onEndReached={onEndReached}
-      />
-    );
+  render() {
+    const { InventoryStore, status } = this.props;
+    if (InventoryStore.products[status]) {
+      return (
+        <FlatGridWrapper
+          items={toJS(InventoryStore.products[status])}
+          renderItem={this.renderItem}
+          onRefresh={this.onRefresh}
+          onEndReached={this.onEndReached}
+        />
+      );
+    }
+    else {
+      return (
+        <LoadingView />
+      )
+    }
   }
-  else {
-    return (
-      <LoadingView />
-    )
-  }
+
+
 }
 
 export default inject('InventoryStore')(observer(Products));

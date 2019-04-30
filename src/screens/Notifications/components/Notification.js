@@ -22,8 +22,7 @@ class Notification extends Component {
       Navigation.navigate('Dashboard');
     }
     else if (type === 'ProductRequested') {
-      // const index = { index: 1 }
-      Navigation.navigate('ProductInventory', { selectedIndex: 1 });
+      Navigation.navigate('Requested');
     }
   }
   

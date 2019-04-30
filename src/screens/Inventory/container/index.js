@@ -1,37 +1,35 @@
 import React, { Component } from 'react';
-import { Container, View } from 'native-base';
+import { Container } from 'native-base';
 import { observer, inject } from 'mobx-react';
-
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
-import Segments from '../../../shared/Segments';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
-import Products from '../components/Products';
-import RequestedCard from '../components/RequestedCard';
-import ReservedCard from '../components/ReservedCard';
-import OnDeliveryCard from '../components/OnDeliveryCard';
-import SoldCard from '../components/SoldCard';
+import Tabs from '../components/Tabs';
 
 @inject('InventoryStore')
 @observer
 class Inventory extends Component {
 
+  state = {
+    index: 0,
+    routes: [
+      { key: 'first', title: 'Requested' },
+      { key: 'second', title: 'Reserved' },
+      { key: 'third', title: 'On Delivery' },
+      { key: 'fourth', title: 'Sold' },
+    ],
+  };
+
+
   componentDidMount() {
 
-    const { InventoryStore, navigation } = this.props;
+    const { InventoryStore } = this.props;
 
-    InventoryStore.getProducts('requested');
-    InventoryStore.getProducts('reserved');
-    InventoryStore.getProducts('on_delivery');
-    InventoryStore.getProducts('sold');
-
-    // const selectedIndex = navigation.getParam('selectedIndex');
-    // console.log(selectedIndex);
-    // if (index) {
-    //   InventoryStore.onSelectIndex(index);
-    // }
-
+    // InventoryStore.getProducts('requested');
+    // InventoryStore.getProducts('reserved');
+    // InventoryStore.getProducts('on_delivery');
+    // InventoryStore.getProducts('sold');
   }
 
   setIndex = index => {
@@ -40,26 +38,14 @@ class Inventory extends Component {
 
   render() {
 
-    const { InventoryStore, navigation } = this.props;
+    const { InventoryStore } = this.props;
+
     return (
       <React.Fragment>
         <SpinnerWithOverlay visible={InventoryStore.cancelTranLoading} />
         <SpinnerWithOverlay visible={InventoryStore.confirmSoldLoading} />
         <Container>
-          <HeaderWrapper hasSegment>
-            <BodyWrapper title='Product Inventory' />
-          </HeaderWrapper>
-          <Segments
-            values={['Requested', 'Reserved', 'On Delivery', 'Sold']}
-            selectedIndex={InventoryStore.selectedIndex}
-            onTabPress={this.setIndex}
-          />
-          <View style={{ flex: 1 }}>
-            {InventoryStore.selectedIndex === 0 && <Products status='requested' CardComponent={RequestedCard} />}
-            {InventoryStore.selectedIndex === 1 && <Products status='reserved' CardComponent={ReservedCard} />}
-            {InventoryStore.selectedIndex === 2 && <Products status='on_delivery' CardComponent={OnDeliveryCard} />}
-            {InventoryStore.selectedIndex === 3 && <Products status='sold' CardComponent={SoldCard} />}
-          </View>
+          <Tabs />
         </Container>
       </React.Fragment>
     );
