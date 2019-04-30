@@ -56,10 +56,10 @@ instance.addMonitor(({ config: request, ...response }) => {
   // console.dir('Request Headers: ', reqHeaders);
   // console.dir('Request Token:', reqHeaders.Authorization);
   // console.dir('Request Data: ', reqData);
-  // console.dir(resDuration, 'Request Endpoint:', endpoint);
+  console.dir(resDuration, 'Request Endpoint:', endpoint);
 
   // console.dir('Response Headers: ', resHeaders);
-  // console.dir('Response Data: ', response);
+  // console.dir('Response Data: ', resData);
 });
 
 

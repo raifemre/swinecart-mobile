@@ -37,6 +37,7 @@ class AddProductForm {
     name: null,
     type: null,
     quantity: '1',
+    isUnique: false,
     minPrice: null,
     maxPrice: null,
     breed: null,
@@ -145,6 +146,7 @@ class AddProductForm {
     name: null,
     type: null,
     quantity: '1',
+    isUnique: false,
     minPrice: null,
     maxPrice: null,
     breed: null,
@@ -168,6 +170,7 @@ class AddProductForm {
     name: null,
     type: null,
     quantity: null,
+    isUnique: null,
     minPrice: null,
     maxPrice: null,
     breed: null,
@@ -283,11 +286,9 @@ class AddProductForm {
       });
     }
     finally {
-      // setTimeout(() => {
       runInAction(() => {
         this.loading = false;
       });
-      // }, 2000);
     }
   }
 
