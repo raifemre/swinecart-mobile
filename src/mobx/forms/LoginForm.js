@@ -97,7 +97,7 @@ class LoginForm {
     try {
       this.loading = true;
       if (this.validateFields(this.data)) {
-        const { error, data, message } = await AuthStore.login(this.data);
+        const { error, data } = await AuthStore.login(this.data);
         if (error) {
           const { field, errorMessage } = error;
           if (field) {
@@ -115,10 +115,12 @@ class LoginForm {
       }
     }
     catch(err) {
-      showMessage({
-        message: err.message,
-        type: 'danger'
-      });
+      if(!(err instanceof TypeError)) {
+        showMessage({
+          message: err.message,
+          type: 'danger'
+        });
+      }
     }
     finally {
       runInAction(() => {

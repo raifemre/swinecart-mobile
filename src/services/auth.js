@@ -1,6 +1,6 @@
 import API from './api';
 
-const URL_PREFIX = '/auth'
+const URL_PREFIX = '/auth';
 
 const service = {
   async login({ email, password }) {

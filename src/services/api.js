@@ -34,12 +34,20 @@ instance.addResponseTransform(response => {
         message: 'Please Try Again later',
         type: 'danger',
       });
+
       Navigation.navigate('Login');
+
     }
     if (problem === 'CLIENT_ERROR') {
       // console.log('STATUS CODE:', status);
       if(status === 401) {
         Navigation.navigate('Login');
+      }
+      else if (status === 404) {
+        showMessage({
+          message: 'Please Try Again later',
+          type: 'danger',
+        });
       }
     }
     if (problem === 'TIMEOUT_ERROR')  {
