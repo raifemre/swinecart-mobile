@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { Dimensions } from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import { observer, inject } from 'mobx-react';
 import Product from './Product';
@@ -32,6 +33,10 @@ class Products extends Component {
   }
 
   render() {
+
+    // const { width } = Dimensions.get('window');
+    // console.log(~~width);
+
     return (
       <FlatGrid
         itemDimension={150}

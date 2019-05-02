@@ -48,7 +48,7 @@ class ProductRequests extends Component {
               <BackButton />
             </Left>
             <BodyWrapper 
-              title={`Product Requests for ${name}`}
+              title={`Requests for ${name}`}
             />
             <Right />
           </HeaderWrapper>

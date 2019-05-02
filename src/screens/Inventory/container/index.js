@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { Container } from 'native-base';
+import { View } from 'native-base';
 import { observer, inject } from 'mobx-react';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
-import Tabs from '../components/Tabs';
+
+import Products from '../components/Products';
+import RequestedCard from '../components/RequestedCard';
+import ReservedCard from '../components/ReservedCard';
+import OnDeliveryCard from '../components/OnDeliveryCard';
+import SoldCard from '../components/SoldCard';
 
 @inject('InventoryStore')
 @observer
@@ -26,7 +31,7 @@ class Inventory extends Component {
 
     const { InventoryStore } = this.props;
 
-    // InventoryStore.getProducts('requested');
+    InventoryStore.getProducts('requested');
     // InventoryStore.getProducts('reserved');
     // InventoryStore.getProducts('on_delivery');
     // InventoryStore.getProducts('sold');
@@ -42,11 +47,13 @@ class Inventory extends Component {
 
     return (
       <React.Fragment>
-        <SpinnerWithOverlay visible={InventoryStore.cancelTranLoading} />
-        <SpinnerWithOverlay visible={InventoryStore.confirmSoldLoading} />
-        <Container>
-          <Tabs />
-        </Container>
+        <SpinnerWithOverlay visible={InventoryStore.cancelTranLoading || InventoryStore.confirmSoldLoading} />
+        <HeaderWrapper>
+          <BodyWrapper title='Product Inventory' />
+        </HeaderWrapper>
+        <View style={{ flex: 1 }}>
+          <Products status='requested' CardComponent={RequestedCard} />
+        </View>
       </React.Fragment>
     );
   }

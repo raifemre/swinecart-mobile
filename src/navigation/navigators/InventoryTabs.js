@@ -24,10 +24,14 @@ const FourthRoute = () => (
   <Products status='sold' CardComponent={SoldCard} />
 );
 
-const initialLayout = {
-  height: 0,
-  width: Dimensions.get('window').width,
-};
+// const initialLayout = {
+//   height: 0,
+//   width: Dimensions.get('window').width,
+// };
+
+const { width, height } = Dimensions.get('window');
+
+const w = ~~(Math.max(width, height));
 
 const TabNavigator = createMaterialTopTabNavigator({
   Requested: {
@@ -56,7 +60,7 @@ const TabNavigator = createMaterialTopTabNavigator({
   }
 }, {
   initialRouteName: 'Requested',
-  initialLayout: initialLayout,
+  // initialLayout: initialLayout,
   lazy: true,
   tabBarOptions: {
     scrollEnabled: true,
@@ -65,9 +69,11 @@ const TabNavigator = createMaterialTopTabNavigator({
     upperCaseLabel: false,
     tabStyle: {
       height: 50,
-      width: 150,
+      width: w/4,
     },
-    indicatorStyle: '#00695C',
+    indicatorStyle: {
+      borderBottomColor: '#ffffff',
+    },
     labelStyle: {
       fontFamily: 'OpenSans-Bold',
       fontSize: 15,
