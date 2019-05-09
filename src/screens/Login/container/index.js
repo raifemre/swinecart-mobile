@@ -28,7 +28,7 @@ class Login extends Component {
         <SpinnerWithOverlay visible={LoginForm.loading} />
         <Container>
           <Block center middle flex={1} padding>
-            <Block center middle flex='disabled' marginBottom>
+            <Block center middle flex='disabled' style={{ marginBottom: 50 }}>
               <TextWrapper
                 font={'OpenSans-Bold'}
                 color={'#000000'}
