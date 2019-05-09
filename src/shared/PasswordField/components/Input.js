@@ -31,9 +31,9 @@ function Input(props) {
 
 const styles = StyleSheet.create({
   inputStyle: {
-    height: 38,
+    height: 45,
     fontSize: 16,
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: 'Rubik-Medium',
     paddingVertical: 0,
     paddingLeft: 10,
     width: width - 75

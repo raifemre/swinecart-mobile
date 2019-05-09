@@ -64,15 +64,15 @@ class PasswordField extends Component {
     const { hidePassword } = this.state;
 
     const error = form.errors[field];
-    const borderColor = error ? '#e74c3c' : '#2d3436';
+    const borderColor = error ? '#D63649' : '#2d3436';
 
     const labelStyle = {
       position: 'absolute',
-      fontFamily: 'OpenSans-Bold',
+      fontFamily: 'Rubik-Medium',
       left: 10,
       top: this.isFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [7, -22],
+        outputRange: [15, -22],
       }),
       fontSize: this.isFocused.interpolate({
         inputRange: [0, 1],
@@ -85,7 +85,7 @@ class PasswordField extends Component {
     };
 
     return (
-      <View style={{ marginVertical: 10, paddingTop: 0 }}>
+      <View style={{ marginVertical: 16, paddingTop: 0 }}>
         <View style={[fieldStyle, { borderColor }]}>
           <Placeholder placeholder={placeholder} labelStyle={labelStyle} />
           <Input 
@@ -110,9 +110,8 @@ class PasswordField extends Component {
 const styles = StyleSheet.create({
   fieldStyle: {
     paddingTop: 0,
-    borderColor: '#2d3436', 
     borderWidth: 1.5,
-    height: 42,
+    height: 45,
     flexDirection: 'row',
     borderRadius: 5
   }

@@ -29,14 +29,14 @@ class LoginForm {
 
   @observable data = {
     // email: 'leopoldo.toy@lind.net',
-    email: 'tess.bernhard@gmail.com',
+    // email: 'tess.bernhard@gmail.com',
 
     // email: 'sfeil@mertz.com',
     // email: 'gibson.ramona@hotmail.com',
     
-    password: 'secret12'
-    // email: null,
-    // password: null
+    // password: 'secret12'
+    email: null,
+    password: null
   }
 
   @observable errors = {

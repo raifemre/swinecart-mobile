@@ -55,15 +55,15 @@ class TextField extends Component {
     const { fieldStyle } = styles;
 
     const error = form.errors[field];
-    const borderColor = error ? '#e74c3c' : '#2d3436';
+    const borderColor = error ? '#D63649' : '#2d3436';
 
     const labelStyle = {
       position: 'absolute',
       left: 10,
-      fontFamily: 'OpenSans-Bold',
+      fontFamily: 'Rubik-Medium',
       top: this.isFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [7, -22],
+        outputRange: [15, -22],
       }),
       fontSize: this.isFocused.interpolate({
         inputRange: [0, 1],
@@ -71,12 +71,12 @@ class TextField extends Component {
       }),
       color: this.isFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: ['#7f8c8d', '#000'],
+        outputRange: ['#7f8c8d', '#2E384D'],
       }),
     };
 
     return (
-      <View style={{ marginVertical: 10, paddingTop: 0 }}>
+      <View style={{ marginVertical: 16, paddingTop: 0 }}>
         <View style={[fieldStyle, { borderColor }]}>
           <Placeholder placeholder={placeholder} labelStyle={labelStyle} />
           <Input
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     borderColor: '#2d3436',
     borderWidth: 1.5,
-    height: 42,
+    height: 45,
     flexDirection: 'row',
     borderRadius: 5
   }

@@ -47,6 +47,7 @@ class Login extends Component {
                 text='Login'
                 textColor='#ffffff'
                 textSize={16}
+                style={{ marginTop: 16 }}
               />
             </Block>
           </Block>

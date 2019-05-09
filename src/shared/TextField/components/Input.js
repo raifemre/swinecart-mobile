@@ -17,7 +17,7 @@ function Input(props) {
   return (
     <TextInput
       onChangeText={onChangeText}
-      selectionColor='#000000'
+      selectionColor='#2E384D'
       underlineColorAndroid='transparent'
       style={styles.inputStyle}
       value={value}
@@ -31,9 +31,9 @@ function Input(props) {
 
 const styles = StyleSheet.create({
   inputStyle: {
-    height: 38,
+    height: 45,
     fontSize: 16,
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: 'Rubik-Medium',
     paddingVertical: 0,
     paddingLeft: 10,
     width: width - 42
