@@ -43,7 +43,7 @@ function RequestedCard({ product }) {
         <View style={{ flex: 1 }}>
           <ButtonWrapper
             onPress={onPress}
-            text='See Requests'
+            text='View Requests'
             textColor='#ffffff'
             textSize={12}
             style={{ height: 24 }}

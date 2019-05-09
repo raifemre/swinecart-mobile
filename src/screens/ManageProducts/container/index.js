@@ -46,7 +46,7 @@ class ManageProducts extends Component {
                 onPress={this.navigateToAdd}
               />
             </Left>
-            <BodyWrapper title='Manage Products' />
+            <BodyWrapper title='Product Management' />
             <Right style={flex1}>
               {/* <IconButton marginLeft={0} marginRight={0}
                 size={26}

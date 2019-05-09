@@ -17,7 +17,7 @@ function BodyWrapper({ title }) {
 
 const styles = StyleSheet.create({
   bodyStyle: { flex: 4, alignItems: 'center' },
-  titleStyle: { fontFamily: 'OpenSans-Bold', color: '#ffffff' }
+  titleStyle: { fontFamily: 'Rubik-Bold', color: '#ffffff', letterSpacing: 1 }
 });
 
 export default BodyWrapper;

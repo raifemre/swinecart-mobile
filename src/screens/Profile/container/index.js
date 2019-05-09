@@ -68,10 +68,10 @@ class Profile extends Component {
               />
             </Right>
           </HeaderWrapper>
-          {UserStore.userRole === 'Breeder' 
+          {/* {UserStore.userRole === 'Breeder' 
             && <BreederProfile selectedIndex={this.state.selectedIndex} setIndex={this.setIndex} /> }
           {UserStore.userRole === 'Customer'
-            && <CustomerProfile selectedIndex={this.state.selectedIndex} setIndex={this.setIndex} />}
+            && <CustomerProfile selectedIndex={this.state.selectedIndex} setIndex={this.setIndex} />} */}
         </Container>
       </React.Fragment>
     );

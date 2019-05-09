@@ -43,6 +43,13 @@ ProfileStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+ProductInventoryStack.navigationOptions = ({ navigation }) => {
+  return {
+    // tabBarVisible: false
+    tabBarVisible: navigation.state.index > 0 ? false : true,
+  };
+};
+
 const navigator = createBottomTabNavigator({
   'ManageProducts': {
     screen: ManageProductsStack,
@@ -53,12 +60,12 @@ const navigator = createBottomTabNavigator({
   'Dashboard': {
     screen: Dashboard
   },
-  'Messaging': {
-    screen: MessagingStack
-  },
-  'Notifications': {
-    screen: Notifications
-  },
+  // 'Messaging': {
+  //   screen: MessagingStack
+  // },
+  // 'Notifications': {
+  //   screen: Notifications
+  // },
   'Profile': {
     screen: ProfileStack,
   },
@@ -85,7 +92,7 @@ const navigator = createBottomTabNavigator({
   },
   tabBarOptions: {
     style: {
-      backgroundColor: '#f7f7f7',
+      backgroundColor: '#ffffff',
       borderTopWidth: 0,
       borderTopColor: 'transparent'
     },
