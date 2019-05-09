@@ -1,10 +1,13 @@
 import React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput, Dimensions } from 'react-native';
 import { observer } from 'mobx-react';
+
+const { width } = Dimensions.get('window');
 
 function Input(props) {
 
   const { value, onBlur, onFocus, keyboardType } = props;
+
 
   const onChangeText = value => {
     const { form, field } = this.props;
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Bold',
     paddingVertical: 0,
     paddingLeft: 10,
-    flex: 1,
+    width: width - 34
   }
 });
 
