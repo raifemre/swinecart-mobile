@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Bold',
     paddingVertical: 0,
     paddingLeft: 10,
-    width: width - 68
+    width: width - 75
   }
 });
 

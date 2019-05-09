@@ -27,19 +27,19 @@ class Login extends Component {
       <React.Fragment>
         <SpinnerWithOverlay visible={LoginForm.loading} />
         <Container>
-          <Block center middle flex={1} style={{ padding: 16 }}>
-            <Block center middle flex='disabled' style={{ marginBottom: 30 }}>
+          <Block center middle flex={1} padding>
+            <Block center middle flex='disabled' marginBottom>
               <TextWrapper
                 font={'OpenSans-Bold'}
                 color={'#000000'}
                 text={'Welcome to Swine Cart!'}
-                size={30}
+                size={26}
               />
               <TextWrapper
                 font={'OpenSans-Bold'}
-                color={'#000000'}
+                color={'#9DA3B4'}
                 text={'Login in your account'}
-                size={18}
+                size={16}
               />
             </Block>
             <Block center middle flex='disabled'>
