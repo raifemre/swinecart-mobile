@@ -20,6 +20,7 @@ const colors = {
   card: 'rgba(46,91,255,0.08)',
   shadow: 'rgba(46,91,255,0.07)',
 };
+
 const sizes = {
   // global sizes
   base: 16,
