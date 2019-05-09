@@ -4,12 +4,11 @@ import { observer, inject } from 'mobx-react';
 
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 import ButtonWrapper from '../../../shared/ButtonWrapper';
-import TextWrapper from '../../../shared/TextWrapper';
 import PasswordField from '../../../shared/PasswordField';
 import TextField from '../../../shared/TextField';
 
 import { 
-  Block
+  Block, Text
 } from '../../../shared';
 
 @inject('LoginForm', 'AuthStore')
@@ -29,18 +28,8 @@ class Login extends Component {
         <Container>
           <Block center middle flex={1} padding>
             <Block center middle flex='disabled' style={{ marginBottom: 50 }}>
-              <TextWrapper
-                font={'OpenSans-Bold'}
-                color={'#000000'}
-                text={'Welcome to Swine Cart!'}
-                size={26}
-              />
-              <TextWrapper
-                font={'OpenSans-Bold'}
-                color={'#9DA3B4'}
-                text={'Login in your account'}
-                size={16}
-              />
+              <Text h3>Welcome to Swine Cart!</Text>
+              <Text paragraph color='black3'>Login to your account</Text>
             </Block>
             <Block center middle flex='disabled'>
               <TextField
