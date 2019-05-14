@@ -32,8 +32,7 @@ class ProductRequests extends Component {
 
     const { contentStyle } = styles;
 
-    const { navigation, InventoryStore } = this.props;
-    const { name } = navigation.getParam('product');
+    const { InventoryStore } = this.props;
 
     return (
       <React.Fragment>
@@ -48,7 +47,7 @@ class ProductRequests extends Component {
               <BackButton />
             </Left>
             <BodyWrapper 
-              title={`Requests for ${name}`}
+              title={'Requests'}
             />
             <Right />
           </HeaderWrapper>

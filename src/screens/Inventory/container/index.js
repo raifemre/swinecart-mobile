@@ -16,10 +16,6 @@ import {
 @observer
 class Inventory extends Component {
 
-  setIndex = index => {
-    this.props.InventoryStore.onSelectIndex(index);
-  }
-
   render() {
 
     const { InventoryStore } = this.props;
