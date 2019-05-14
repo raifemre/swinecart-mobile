@@ -24,24 +24,26 @@ class ProductsTabs extends Component {
     <TabBar
       {...props}
       scrollEnabled
+      getLabelText={({route}) => { return route.title }}
       style={{ backgroundColor: '#00695C' }}
-      indicatorStyle={{ backgroundColor: '#ffffff' }}
+      indicatorStyle={{ backgroundColor: '#ffffff', height: 2.5 }}
       labelStyle={{ fontFamily: 'Rubik-Bold', }}
       initialLayout={{ width: Dimensions.get('window').width }}
     />
   )
 
+  renderScene = SceneMap({
+    '1': RequestedProducts,
+    '2': ReservedProducts,
+    '3': OnDeliveryProducts,
+    '4': SoldProducts,
+  })
+
   render() {
     return (
       <TabView
         navigationState={this.state}
-        renderScene={SceneMap({
-          '1': RequestedProducts,
-          '2': ReservedProducts,
-          '3': OnDeliveryProducts,
-          '4': SoldProducts,
-        })}
-
+        renderScene={this.renderScene}
         onIndexChange={index => this.setState({ index })}
         renderTabBar={this.renderTabBar}
         lazy={true}
