@@ -5,12 +5,11 @@ import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
 
-
 import ProductTabs from '../components/ProductTabs';
 
 import { 
   Block
- } from '../../../shared';
+} from '../../../shared';
 
 @inject('InventoryStore')
 @observer
