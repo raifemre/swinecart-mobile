@@ -14,8 +14,8 @@ import ProfileStore from './ProfileStore';
 
 import { formatError } from '../../utils';
 
-import initNotifications from '../../boot/initNotifications';
-import initChat from '../../boot/initChat';
+import initNotifications from '../../core/initNotifications';
+import initChat from '../../core/initChat';
 
 class AuthStore {
   @observable loadingLogout = false;
