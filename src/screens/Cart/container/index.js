@@ -8,7 +8,6 @@ import { observer, inject } from 'mobx-react';
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
 import SpinnerWithOverlay from '../../../shared/SpinnerWithOverlay';
-import Segments from '../../../shared/Segments';
 
 import Items from '../components/Items';
 import Item from '../components/Item';
@@ -49,11 +48,11 @@ class Cart extends Component {
           <HeaderWrapper>
             <BodyWrapper title='Swine Cart' />
           </HeaderWrapper>
-          <Segments
+          {/* <Segments
             values={['Cart Items', 'Requested', 'Reserved', 'On Delivery', 'Sold']}
             selectedIndex={SwineCartStore.selectedIndex}
             onTabPress={this.setIndex}
-          />
+          /> */}
           <View style={contentStyle}>
             {SwineCartStore.selectedIndex === 0 && <Items status='not_requested' CardComponent={Item} />}
             {SwineCartStore.selectedIndex === 1 && <Items status='requested' CardComponent={RequestedItem} />}

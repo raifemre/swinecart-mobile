@@ -6,6 +6,7 @@ import {
 import { Icon } from 'native-base';
 
 import Notifications from '../../screens/Notifications';
+import Dashboard from '../../screens/Dashboard';
 
 import NotificationsIcon from '../../shared/NotificationsIcon';
 
@@ -58,20 +59,20 @@ const navigator = createBottomTabNavigator({
     screen: ProductInventoryStack
   },
   'Dashboard': {
-    screen: DashboardTabs
+    screen: Dashboard
   },
-  // 'Messaging': {
-  //   screen: MessagingStack
-  // },
-  // 'Notifications': {
-  //   screen: Notifications
-  // },
+  'Messaging': {
+    screen: MessagingStack
+  },
+  'Notifications': {
+    screen: Notifications
+  },
   'Profile': {
     screen: ProfileStack,
   },
 },
 {
-  initialRouteName: 'Dashboard',
+  initialRouteName: 'ProductInventory',
   defaultNavigationOptions: ({ navigation }) => {
     const { routeName } = navigation.state;
     return {

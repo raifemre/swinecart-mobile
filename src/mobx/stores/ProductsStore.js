@@ -2,7 +2,6 @@ import {
   observable, action, runInAction, remove, toJS
 } from 'mobx';
 
-import { showMessage } from 'react-native-flash-message';
 
 import { 
   BreederProducts
@@ -103,10 +102,6 @@ class ProductsStore {
         runInAction(() => {
           const index = this.findProduct(id);
           this.products[index].status = status;
-          showMessage({
-            message: `Product is now ${status}!`,
-            type: 'success',
-          });
         });
       }
 
@@ -131,10 +126,6 @@ class ProductsStore {
       else {
         runInAction(() => {
           this._removeProduct(id);
-          showMessage({
-            message: 'Deleted Product!',
-            type: 'success',
-          });
         });
       }
     }

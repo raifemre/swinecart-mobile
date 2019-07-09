@@ -1,18 +1,18 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
-import AuthChecker from '../../screens/AuthChecker';
+// import AuthChecker from '../../screens/AuthChecker';
 
-import BreederTabNavigator from './BreederTabs';
-import CustomerStackNavigator from './CustomerTabs';
+// import CustomerStackNavigator from './CustomerTabs';
+// import BreederTabNavigator from './BreederTabs';
 import PublicStackNavigator from './PublicStack';
 
 const RootNavigator = createSwitchNavigator({
-  AuthChecker: AuthChecker,
+  // AuthChecker: AuthChecker,
   Public: PublicStackNavigator,
-  Customer: CustomerStackNavigator,
-  Breeder: BreederTabNavigator
+  // Customer: CustomerStackNavigator,
+  // Breeder: BreederTabNavigator
 }, {
-  initialRouteName: 'AuthChecker'
+    initialRouteName: 'Public'
 });
 
 

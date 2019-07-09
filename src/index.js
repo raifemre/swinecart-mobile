@@ -1,31 +1,15 @@
 import React from 'React';
-import { configure } from 'mobx';
-import { Provider } from 'mobx-react';
-import { Root } from 'native-base';
+import { mapping, light as lightTheme } from '@eva-design/eva';
+import { ApplicationProvider } from 'react-native-ui-kitten';
+
 import { useScreens } from 'react-native-screens';
-import FlashMessage from 'react-native-flash-message';
-
 import RootNavigator from './navigation/navigators';
-
 import NavigationService from './services/navigation';
-
-import StyleProviderWrapper from './shared/StyleProviderWrapper';
-import stores from './mobx/stores';
-import forms from './mobx/forms';
-
-import MessageToast from './shared/MessageToast';
-
-configure({ enforceActions: 'always' });
 
 useScreens();
 
 export default () => (
-  <Root>
-    <Provider {...stores} {...forms}>
-      <StyleProviderWrapper>
-        <RootNavigator ref={NavigationService.setTopLevelNavigator} />
-      </StyleProviderWrapper>  
-    </Provider>
-    <FlashMessage position='top' MessageComponent={MessageToast} />
-  </Root>
+  <ApplicationProvider mapping={mapping} theme={lightTheme}>
+    <RootNavigator ref={NavigationService.setTopLevelNavigator} />
+  </ApplicationProvider>
 );

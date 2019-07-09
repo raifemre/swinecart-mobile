@@ -14,7 +14,7 @@ import ReviewRatings from '../components/ReviewRatings';
 
 import HeaderWrapper from '../../../shared/HeaderWrapper';
 import BodyWrapper from '../../../shared/BodyWrapper';
-import Segments from '../../../shared/Segments';
+// import Segments from '../../../shared/Segments';
 
 @inject('DashboardStore')
 @observer
@@ -45,11 +45,6 @@ class Dashboard extends Component {
         <HeaderWrapper hasSegment>
           <BodyWrapper title='Dashboard' />
         </HeaderWrapper>
-        <Segments
-          values={['Product Status', 'Reviews']}
-          selectedIndex={selectedIndex}
-          onTabPress={this.setIndex}
-        />
         <Content padder>
           { selectedIndex === 0 && <ProductStats /> }
           { selectedIndex === 1 && <ReviewRatings /> }

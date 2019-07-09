@@ -4,7 +4,6 @@ import { API_URL } from 'react-native-dotenv';
 import CommonStore from '../mobx/stores/CommonStore';
 
 import Navigation from './navigation';
-import { showMessage } from 'react-native-flash-message';
 
 const instance = apisauce.create({
   baseURL: API_URL,
@@ -30,10 +29,6 @@ instance.addResponseTransform(response => {
 
   if (!ok) {
     if (problem === 'NETWORK_ERROR') {
-      showMessage({
-        message: 'Please Try Again later',
-        type: 'danger',
-      });
 
       Navigation.navigate('Login');
 
@@ -44,10 +39,6 @@ instance.addResponseTransform(response => {
         Navigation.navigate('Login');
       }
       else if (status === 404) {
-        showMessage({
-          message: 'Please Try Again later',
-          type: 'danger',
-        });
       }
     }
     if (problem === 'TIMEOUT_ERROR')  {

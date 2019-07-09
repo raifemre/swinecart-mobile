@@ -1,25 +1,5 @@
 import moment from 'moment';
-import { has, set, toJS } from 'mobx';
 import { isString, isObject, keys, camelCase, get, map } from 'lodash';
-
-export function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export function filterNewItems(mobxMap, items, id = 'id') {
-  return items.reduce((array, element) => {
-    const key = `${get(element, id)}`;
-    if(!has(mobxMap, key, element)) {
-      set(mobxMap, key, element);
-      array.push(element);
-    }
-    return array;
-  }, []);
-}
-
-export function ternary(prop, truthValue, t, f) {
-  return prop === truthValue ? t : f;
-}
 
 export function formatError(error) {
   if (isString(error)) {
@@ -125,17 +105,4 @@ export function toDBFormat(toID, userRole, message) {
   };
 
   return newMessage;
-}
-
-export function formatMedia(medias) {
-  return map(medias, media => {
-    const { link } = media;
-    return {
-      source: {
-        uri: link
-      },
-      width: 806,
-      height: 720
-    }
-  });
 }

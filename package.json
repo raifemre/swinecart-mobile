@@ -7,21 +7,17 @@
     "test": "jest"
   },
   "dependencies": {
+    "@eva-design/eva": "^1.0.1",
     "@react-native-community/async-storage": "^1.3.3",
     "apisauce": "^1.0.2",
-    "mobx": "^5.9.4",
-    "mobx-react": "^5.4.3",
     "moment": "^2.24.0",
-    "native-base": "^2.12.1",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-native": "0.59.5",
-    "react-native-check-box": "^2.1.7",
     "react-native-custom-picker": "^0.4.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-divider": "^1.0.3",
     "react-native-fast-image": "^5.3.0",
-    "react-native-flash-message": "^0.1.12",
     "react-native-gesture-handler": "^1.2.0",
     "react-native-gifted-chat": "^0.7.3",
     "react-native-image-carousel": "^0.4.6",
@@ -29,12 +25,12 @@
     "react-native-modal": "^10.0.0",
     "react-native-reanimated": "^1.0.1",
     "react-native-screens": "^1.0.0-alpha.22",
-    "react-native-segmented-control-tab": "^3.4.0",
     "react-native-spinkit": "^1.2.0",
     "react-native-star-rating": "^1.1.0",
     "react-native-super-grid": "^3.0.4",
     "react-native-tab-view": "^2.2.0",
     "react-native-textarea": "^1.0.3",
+    "react-native-ui-kitten": "^4.0.5",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.9.1",
     "react-navigation-tabs": "^2.1.2",
@@ -52,10 +48,5 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "rnpm": {
-    "assets": [
-      "./src/assets/fonts/"
-    ]
   }
 }

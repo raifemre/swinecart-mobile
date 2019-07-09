@@ -23,7 +23,7 @@ class Inventory extends Component {
       <React.Fragment>
         <SpinnerWithOverlay visible={InventoryStore.cancelTranLoading || InventoryStore.confirmSoldLoading} />
         <HeaderWrapper>
-          <BodyWrapper title='Product Inventory' />
+          <BodyWrapper title='Orders' />
         </HeaderWrapper>
         <Block flex={1}>
           <ProductTabs />

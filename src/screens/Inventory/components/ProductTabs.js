@@ -22,10 +22,10 @@ class ProductsTabs extends Component {
 
   renderTabBar = props => (
     <TabBar
-    scrollEnabled
+    // scrollEnabled
     style={{ backgroundColor: '#00695C' }}
     indicatorStyle={{ backgroundColor: '#ffffff', height: 2.5 }}
-    labelStyle={{ fontFamily: 'Rubik-Bold', }}
+    labelStyle={{ fontFamily: 'Rubik-Bold', fontSize: 11, }}
     initialLayout={{ width: Dimensions.get('window').width }}
     {...props}
     />

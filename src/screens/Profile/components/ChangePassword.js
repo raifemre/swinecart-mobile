@@ -23,8 +23,8 @@ class ChangePassword extends Component {
         <View style={{ paddingHorizontal: 5 }}>
           <View style={{ marginTop: 5 }}>
             <PasswordField
-              form={ChangePasswordForm}
               field={'currentPassword'}
+              form={ChangePasswordForm}
               placeholder='Current Password'
             />
             <PasswordField
