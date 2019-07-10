@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { sizes } from '../constants/theme';
+import { sizes } from '../../constants/theme';
 
 function Block(props) {
 
   const { 
-    flex, row, center, middle, right, space, padding, marginBottom,
+    flex, row, center, middle, right, space, padding, paddingTop, marginBottom,
     style, children, ...otherProps
   } = props;
 
@@ -20,6 +20,7 @@ function Block(props) {
     space && { justifyContent: `space-${space}` },
     row && styles.row,
     padding && styles.padding,
+    paddingTop && styles.paddingTop,
     marginBottom && styles.marginBottom,
     style,
   ];
@@ -49,6 +50,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   padding: {
+    padding: sizes.padding,
+  },
+  paddingTop: {
     paddingTop: sizes.padding,
   },
   marginBottom: {
