@@ -19,7 +19,7 @@ function Input(props) {
       label={label}
       labelStyle={textStyles.label}
       caption={caption}
-      captionStyle={textStyles.paragraph}
+      captionTextStyle={textStyles.caption1}
       {...restProps}
     />
   )
