@@ -1,105 +1,76 @@
 import React from 'react';
+
 import {
   createBottomTabNavigator
 } from 'react-navigation';
 
-import { Icon } from 'native-base';
+import {
+  BottomNavigation,
+  BottomNavigationTab,
+} from 'react-native-ui-kitten';
 
-import Notifications from '../../screens/Notifications';
-import Dashboard from '../../screens/Dashboard';
-
-import NotificationsIcon from '../../shared/NotificationsIcon';
-
-import MessagingStack from './MessagingStack';
-import ManageProductsStack from './ManageProductsStack';
-import ProductInventoryStack from './ProductInventoryStack';
 import ProfileStack from './ProfileStack';
-import DashboardTabs from './DashboardTabs';
+import OrdersStack from './OrdersStack';
+import InboxStack from './InboxStack';
 
-const iconMapping = {
-  ManageProducts: 'store',
-  ProductInventory: 'list',
-  Dashboard: 'assessment',
-  Messaging: 'message',
-  Profile: 'account-circle'
-};
+// const iconMapping = {
+//   ManageProducts: 'store',
+//   ProductInventory: 'list',
+//   Dashboard: 'assessment',
+//   Messaging: 'message',
+//   Profile: 'account-circle'
+// };
 
-MessagingStack.navigationOptions = ({ navigation }) => {
-  return {
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-  };
-};
 
-ManageProductsStack.navigationOptions = ({ navigation }) => {
-  return {
-    // tabBarVisible: false
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-  };
-};
+const TabBar = props => {
 
-ProfileStack.navigationOptions = ({ navigation }) => {
-  return {
-    // tabBarVisible: false
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-  };
-};
+  const onTabSelect = selectedIndex => {
+    const { [selectedIndex]: selectedRoute } = props.navigation.state.routes;
 
-ProductInventoryStack.navigationOptions = ({ navigation }) => {
-  return {
-    // tabBarVisible: false
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-  };
-};
+    props.navigation.navigate(selectedRoute.routeName);
+
+  }
+
+  return (
+    <BottomNavigation
+      // appearance='noIndicator'
+      selectedIndex={props.navigation.state.index}
+      onSelect={onTabSelect}>
+      <BottomNavigationTab title='My Products' />
+      <BottomNavigationTab title='Orders' />
+      <BottomNavigationTab title='Dashboard' />
+      <BottomNavigationTab title='Inbox' />
+      <BottomNavigationTab title='Profile' />
+    </BottomNavigation>
+  );
+
+}
 
 const navigator = createBottomTabNavigator({
-  'ManageProducts': {
-    screen: ManageProductsStack,
+  'MyProducts': {
+    screen: ProfileStack,
   },
-  'ProductInventory': {
-    screen: ProductInventoryStack
+  'Orders': {
+    screen: OrdersStack,
   },
   'Dashboard': {
-    screen: Dashboard
+    screen: ProfileStack,
   },
-  'Messaging': {
-    screen: MessagingStack
-  },
-  'Notifications': {
-    screen: Notifications
+  'Inbox': {
+    screen: InboxStack,
   },
   'Profile': {
     screen: ProfileStack,
   },
 },
 {
-  initialRouteName: 'ProductInventory',
+  initialRouteName: 'Inbox',
+  tabBarComponent: TabBar,
   defaultNavigationOptions: ({ navigation }) => {
-    const { routeName } = navigation.state;
-    return {
-      tabBarIcon: ({ focused }) => {
-        if(routeName === 'Notifications') {
-          return (
-            <NotificationsIcon focused={focused} />
-          );
-        }
-        else {
-          return <Icon
-            type='MaterialIcons'
-            name={iconMapping[routeName]}
-            style={{ color: focused ? '#00695C' : '#000000' }} />
-        }
-      }
-    }
   },
   tabBarOptions: {
-    style: {
-      backgroundColor: '#ffffff',
-      borderTopWidth: 0,
-      borderTopColor: 'transparent'
-    },
-    showLabel: false
   },
-  lazy: true,
+  lazy: false,
 });
 
 export default navigator;

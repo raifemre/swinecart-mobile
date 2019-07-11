@@ -8,7 +8,7 @@ import Notifications from '../../screens/Notifications';
 import NotificationsIcon from '../../shared/NotificationsIcon';
 import SwineCartIcon from '../../shared/SwineCartIcon';
 
-import MessagingStack from './MessagingStack';
+import MessagingStack from './InboxStack';
 import ProfileStack from './ProfileStack';
 import ShopStack from './ShopStack';
 import CartStack from './CartStack';

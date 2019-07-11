@@ -1,11 +1,11 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
-import Products from '../../screens/Inventory/components/Products';
-import RequestedCard from '../../screens/Inventory/components/RequestedCard';
-import ReservedCard from '../../screens/Inventory/components/ReservedCard';
-import OnDeliveryCard from '../../screens/Inventory/components/OnDeliveryCard';
-import SoldCard from '../../screens/Inventory/components/SoldCard';
+import Products from '../../screens/Orders/components/Products';
+import RequestedCard from '../../screens/Orders/components/RequestedCard';
+import ReservedCard from '../../screens/Orders/components/ReservedCard';
+import OnDeliveryCard from '../../screens/Orders/components/OnDeliveryCard';
+import SoldCard from '../../screens/Orders/components/SoldCard';
 
 const FirstRoute = () => (
   <Products status='requested' CardComponent={RequestedCard} />

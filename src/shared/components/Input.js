@@ -27,7 +27,4 @@ function Input(props) {
 }
 
 export default withStyles(Input, () => ({
-  containerStyle: {
-
-  }
 }));

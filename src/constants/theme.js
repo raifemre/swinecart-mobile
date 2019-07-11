@@ -50,7 +50,9 @@ const colors = {
   'color-danger-800': '#830844',
   'color-danger-900': '#6C0541',
 
-  'gray1': '#8f9BB3'
+  'gray1': '#8f9BB3',
+  'gray2': '#EDF0F9',
+
 
 };
 
