@@ -17,16 +17,16 @@ function Container(props) {
 
   return (
     <Block middle padding flex={1}>
-      <Block center middle flex='disabled'>
-        <Input />
-        <Input />
-        <Block row>
+      <Block middle flex='disabled'>
+        <Input label='EMAIL' />
+        <Input label='PASSWORD' />
+        <Block row right flex='disabled'>
           <Button
-          textStyle={textStyles.button}
-          size='large'
-          appearance='ghost'
-        >
-          LOGIN
+            textStyle={textStyles.button}
+            size='small'
+            appearance='ghost'
+          >
+            Forgot Password?
         </Button>
         </Block>
       </Block>

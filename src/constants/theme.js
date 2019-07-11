@@ -61,12 +61,14 @@ const textStyles = {
     fontWeight: 'normal',
   },
   paragraph: {
-    fontFamily: 'OpenSans-Italic',
-    // fontWeight: 'normal',
+    fontFamily: 'OpenSans-SemiBold',
+    fontWeight: 'normal',
+    fontSize: 14
   },
   caption1: {
     fontFamily: 'OpenSans-Regular',
     fontWeight: 'normal',
+    fontSize: 30
   },
   caption2: {
     fontFamily: 'OpenSans-SemiBold',
@@ -75,9 +77,10 @@ const textStyles = {
   label: {
     fontFamily: 'OpenSans-Bold',
     fontWeight: 'normal',
+    fontSize: 12
   },
   button: {
-    fontFamily: 'OpenSans-Italic',
+    fontFamily: 'OpenSans-Reguar',
     letterSpacing: 1,
   },
 }

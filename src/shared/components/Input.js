@@ -1,20 +1,33 @@
 import React from 'react';
 import { Input as TextInput } from 'react-native-ui-kitten';
+import {
+  withStyles
+} from 'react-native-ui-kitten/theme';
 
 import { textStyles } from '../../constants/theme';
 
 function Input(props) {
 
-  const { ...restProps } = props;
+  const { label, caption, status, ...restProps } = props;
 
   return (
     <TextInput
-      textStyles={textStyles.paragraph}
+      status={status}
+      textStyle={[textStyles.paragraph]}
       autoCapitalize='none'
       size='small'
+      label={label}
+      labelStyle={textStyles.label}
+      caption={caption}
+      captionStyle={textStyles.paragraph}
+      {...restProps}
     />
   )
 
 }
 
-export default Input;
+export default withStyles(Input, () => ({
+  containerStyle: {
+
+  }
+}));
