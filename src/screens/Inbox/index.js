@@ -1,12 +1,7 @@
 import React, { Fragment, PureComponent } from 'react';
 
-import {
-  TopNavigation, Tab
-} from 'react-native-ui-kitten';
-
-import { 
-  TabView
-} from '../../shared/components';
+import { Tab } from 'react-native-ui-kitten';
+import {  TabView, HeaderBar } from '../../shared/components';
 
 class Container extends PureComponent {
 
@@ -24,10 +19,7 @@ class Container extends PureComponent {
 
     return (
       <Fragment>
-        <TopNavigation
-          title='Inbox'
-          alignment='center'
-        />
+        <HeaderBar title='Inbox' />
         <TabView 
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
