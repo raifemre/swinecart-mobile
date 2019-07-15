@@ -36,7 +36,8 @@ const TabBar = props => {
     <BottomNavigation
       // appearance='noIndicator'
       selectedIndex={props.navigation.state.index}
-      onSelect={onTabSelect}>
+      onSelect={onTabSelect}
+    >
       <BottomNavigationTab title='My Products' />
       <BottomNavigationTab title='Orders' />
       <BottomNavigationTab title='Dashboard' />

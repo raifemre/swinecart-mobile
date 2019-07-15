@@ -1,10 +1,5 @@
 import React, { Fragment, PureComponent } from 'react';
 
-import {
-  TopNavigation
-} from 'react-native-ui-kitten';
-
-
 import { 
   Block
 } from '../../shared/components';
