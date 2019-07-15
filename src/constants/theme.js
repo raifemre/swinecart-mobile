@@ -85,7 +85,7 @@ const textStyles = {
     fontSize: 12
   },
   button: {
-    fontFamily: 'OpenSans-Reguar',
+    fontFamily: 'OpenSans-Regular',
     letterSpacing: 1,
   },
 }

@@ -16,6 +16,7 @@ function ContainerView(props) {
       bouncesZoom={false}
       alwaysBounceVertical={false}
       alwaysBounceHorizontal={false}
+      // showsHorizontalScrollIndicator={false}
       {...props}
     />
   )

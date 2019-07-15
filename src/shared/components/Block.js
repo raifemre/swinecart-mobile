@@ -6,7 +6,9 @@ import { sizes } from '../../constants/theme';
 function Block(props) {
 
   const { 
-    flex, row, center, middle, right, space, padding, paddingTop, marginBottom,
+    flex, row, center, left, middle, right, space, 
+    padding, paddingTop, paddingHorizontal,
+    marginBottom, marginBottom2, marginTop, marginTop2, marginRight,
     style, children, ...otherProps
   } = props;
 
@@ -17,11 +19,17 @@ function Block(props) {
     center && styles.center,
     middle && styles.middle,
     right && styles.right,
+    left && styles.left,
     space && { justifyContent: `space-${space}` },
     row && styles.row,
     padding && styles.padding,
     paddingTop && styles.paddingTop,
+    paddingHorizontal && styles.paddingHorizontal,
+    marginTop && styles.marginTop,
+    marginTop2 && styles.marginTop2,
     marginBottom && styles.marginBottom,
+    marginBottom2 && styles.marginBottom2,
+    marginRight && styles.marginRight,
     style,
   ];
 
@@ -43,6 +51,9 @@ const styles = StyleSheet.create({
   center: {
     alignItems: 'center'
   },
+  left: {
+    justifyContent: 'flex-start',
+  },
   middle: {
     justifyContent: 'center'
   },
@@ -55,8 +66,23 @@ const styles = StyleSheet.create({
   paddingTop: {
     paddingTop: sizes.padding,
   },
+  paddingHorizontal: {
+    paddingHorizontal: sizes.padding,
+  },
+  marginTop: {
+    marginTop: sizes.margin
+  },
+  marginTop2: {
+    marginTop: sizes.margin * 2
+  },
   marginBottom: {
     marginBottom: sizes.margin
+  },
+  marginBottom2: {
+    marginBottom: sizes.margin * 2
+  },
+  marginRight: {
+    marginRight: sizes.margin
   },
 });
 

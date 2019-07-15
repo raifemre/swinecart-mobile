@@ -3,6 +3,8 @@ import Block from './Block';
 import TabView from './TabView';
 import HeaderBar from './HeaderBar';
 import ContainerView from './ContainerView';
+import InfoRow from './InfoRow';
+import InfoSectionTitle from './InfoSectionTitle';
 
 export {
   Input,
@@ -10,4 +12,6 @@ export {
   TabView,
   HeaderBar,
   ContainerView,
+  InfoRow,
+  InfoSectionTitle,
 };
