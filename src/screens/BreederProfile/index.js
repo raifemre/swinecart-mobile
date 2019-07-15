@@ -35,7 +35,7 @@ class Container extends PureComponent {
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
         >
-          <Tab title='Office Information'>
+          <Tab title='Office Info'>
             <Text>Tab 1</Text>
           </Tab>
           <Tab title='Farms'>
