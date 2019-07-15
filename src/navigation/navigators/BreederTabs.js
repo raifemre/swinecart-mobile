@@ -12,6 +12,7 @@ import {
 import ProfileStack from './ProfileStack';
 import OrdersStack from './OrdersStack';
 import InboxStack from './InboxStack';
+import MyProductsStack from './MyProductsStack';
 
 // const iconMapping = {
 //   ManageProducts: 'store',
@@ -47,30 +48,30 @@ const TabBar = props => {
 }
 
 const navigator = createBottomTabNavigator({
-  'MyProducts': {
-    screen: ProfileStack,
+  'MyProductsStack': {
+    screen: MyProductsStack,
   },
-  'Orders': {
+  'OrdersStack': {
     screen: OrdersStack,
   },
   'Dashboard': {
     screen: ProfileStack,
   },
-  'Inbox': {
+  'InboxStack': {
     screen: InboxStack,
   },
-  'Profile': {
+  'ProfileStack': {
     screen: ProfileStack,
   },
 },
 {
-  initialRouteName: 'Inbox',
+  initialRouteName: 'MyProductsStack',
   tabBarComponent: TabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },
   tabBarOptions: {
   },
-  lazy: false,
+  lazy: true,
 });
 
 export default navigator;
