@@ -1,4 +1,5 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { useScreens } from 'react-native-screens';
 
 // import AuthChecker from '../../screens/AuthChecker';
 
@@ -15,5 +16,6 @@ const RootNavigator = createSwitchNavigator({
     initialRouteName: 'Breeder'
 });
 
+useScreens();
 
 export default createAppContainer(RootNavigator);

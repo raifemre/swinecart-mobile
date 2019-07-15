@@ -3773,9 +3773,9 @@ locate-path@^3.0.0:
     path-exists "^3.0.0"
 
 lodash.merge@^4.6.1:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
-  integrity sha512-AOYza4+Hf5z1/0Hztxpm2/xiPZgi/cjMqdnKTUWTBSKchJlxXXuUSxCCl8rJlf4g6yww/j6mA8nC8Hw/EZWxKQ==
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
+  integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
 lodash.pad@^4.1.0:
   version "4.5.1"
@@ -5251,9 +5251,9 @@ react-native-textarea@^1.0.3:
     prop-types "^15.5.10"
 
 react-native-ui-kitten@^4.0.5:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-ui-kitten/-/react-native-ui-kitten-4.0.5.tgz#6ddf0dc582d11b19ae794ac2ff6cbb7a99779b6d"
-  integrity sha512-0/5ss6bexFHcvLJJ5OId7eTbnqz3SOjzPY+UuGa4AW3I01b0Llx6Xp6SriRtpo8LmMB78XpawOCg6t4tutv5nA==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-ui-kitten/-/react-native-ui-kitten-4.1.0.tgz#cd0be68167619df588510ceb42b957ca0ac027f9"
+  integrity sha512-98h082/WDYNDvPvtPcfIGra2ahAOguRJADYo1oDWvxkj6bdeyFp73e25cpIoIP7egX9USY9QrP1QqD7pimJq7g==
   dependencies:
     "@eva-design/dss" "^1.0.1"
     "@eva-design/processor" "^1.0.1"

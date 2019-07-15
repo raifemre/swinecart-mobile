@@ -4,7 +4,14 @@ import {
   TopNavigation
 } from 'react-native-ui-kitten';
 
-class MyProducts extends PureComponent {
+
+import { 
+  Block
+} from '../../shared/components';
+
+import { colors } from '../../constants/theme';
+
+class Container extends PureComponent {
 
   componentDidMount() {
   }
@@ -16,10 +23,12 @@ class MyProducts extends PureComponent {
           title='My Products'
           alignment='center'
         />
+        <Block flex={1} style={{ backgroundColor: colors.gray2 }}>
+        </Block>
       </Fragment>
     );
   }
 
 }
 
-export default MyProducts;
+export default Container;

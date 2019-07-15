@@ -4,6 +4,12 @@ import {
   TopNavigation, TabView, Tab, Text
 } from 'react-native-ui-kitten';
 
+import {
+  Block
+} from '../../shared/components';
+
+import { colors } from '../../constants/theme';
+
 class Container extends PureComponent {
 
   state = {
@@ -28,7 +34,8 @@ class Container extends PureComponent {
           onSelect={this.onSelect}
         >
           <Tab title='Messages'>
-            <Text>Tab 1</Text>
+            <Block center middle flex={1} style={{ backgroundColor: colors.gray2 }}>
+            </Block>
           </Tab>
           <Tab title='Notifications'>
             <Text>Tab 1</Text>
