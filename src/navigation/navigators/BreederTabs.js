@@ -40,7 +40,7 @@ const TabBar = props => {
     >
       <BottomNavigationTab title='My Products' />
       <BottomNavigationTab title='Orders' />
-      <BottomNavigationTab title='Dashboard' />
+      {/* <BottomNavigationTab title='Dashboard' /> */}
       <BottomNavigationTab title='Inbox' />
       <BottomNavigationTab title='Profile' />
     </BottomNavigation>
@@ -55,9 +55,9 @@ const navigator = createBottomTabNavigator({
   'OrdersStack': {
     screen: OrdersStack,
   },
-  'Dashboard': {
-    screen: ProfileStack,
-  },
+  // 'Dashboard': {
+  //   screen: ProfileStack,
+  // },
   'InboxStack': {
     screen: InboxStack,
   },
@@ -66,11 +66,9 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'InboxStack',
+  initialRouteName: 'ProfileStack',
   tabBarComponent: TabBar,
   defaultNavigationOptions: ({ navigation }) => {
-  },
-  tabBarOptions: {
   },
   lazy: true,
 });

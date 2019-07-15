@@ -1,15 +1,12 @@
 import React, { Fragment, PureComponent } from 'react';
 
 import {
-  TopNavigation, TabView, Tab, Text
+  TopNavigation, Tab
 } from 'react-native-ui-kitten';
 
-
-// import { colors } from '../../constants/theme';
-
-// import {
-//   Block
-// } from '../../shared/components';
+import {
+  TabView
+} from '../../shared/components';
 
 class Container extends PureComponent {
 
@@ -35,11 +32,11 @@ class Container extends PureComponent {
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
         >
-          <Tab title='Office Info'>
-            <Text>Tab 1</Text>
+          <Tab title='Office Information'>
+
           </Tab>
           <Tab title='Farms'>
-            <Text>Tab 1</Text>
+
           </Tab>
         </TabView>
       </Fragment>

@@ -35,7 +35,7 @@ class Container extends PureComponent {
           <Tab title='Messages'>
 
           </Tab>
-          <Tab title='Messages'>
+          <Tab title='Notifications'>
 
           </Tab>
         </TabView>
