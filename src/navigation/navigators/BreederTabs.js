@@ -14,6 +14,8 @@ import OrdersStack from './OrdersStack';
 import InboxStack from './InboxStack';
 import MyProductsStack from './MyProductsStack';
 
+import { Icon } from '../../shared/components';
+
 // const iconMapping = {
 //   ManageProducts: 'store',
 //   ProductInventory: 'list',
@@ -38,11 +40,11 @@ const TabBar = props => {
       selectedIndex={props.navigation.state.index}
       onSelect={onTabSelect}
     >
-      <BottomNavigationTab title='My Products' />
-      <BottomNavigationTab title='Orders' />
+      <BottomNavigationTab title='My Products' icon={() => <Icon source={require('../../assets/icons/home.png')}/>} />
+      <BottomNavigationTab title='Orders' icon={() => <Icon source={require('../../assets/icons/list.png')} />}/>
       {/* <BottomNavigationTab title='Dashboard' /> */}
-      <BottomNavigationTab title='Inbox' />
-      <BottomNavigationTab title='Profile' />
+      <BottomNavigationTab title='Inbox' icon={() => <Icon source={require('../../assets/icons/inbox.png')} />}/>
+      <BottomNavigationTab title='Profile' icon={() => <Icon source={require('../../assets/icons/person.png')} />}/>
     </BottomNavigation>
   );
 

@@ -3,6 +3,7 @@ import Block from './Block';
 import TabView from './TabView';
 import HeaderBar from './HeaderBar';
 import ContainerView from './ContainerView';
+import Icon from './Icon';
 import InfoRow from './InfoRow';
 import InfoSectionTitle from './InfoSectionTitle';
 
@@ -12,6 +13,7 @@ export {
   TabView,
   HeaderBar,
   ContainerView,
+  Icon,
   InfoRow,
   InfoSectionTitle,
 };
