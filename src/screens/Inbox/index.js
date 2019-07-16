@@ -4,13 +4,13 @@ import { Tab } from 'react-native-ui-kitten';
 import { TabView, HeaderBar } from '../../shared/components';
 
 import { 
-  ConversationList
+  ConversationList, NotificationList
 } from './components';
 
 class Container extends PureComponent {
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 1
   }
 
   onSelect = selectedIndex => {
@@ -32,7 +32,7 @@ class Container extends PureComponent {
             <ConversationList />
           </Tab>
           <Tab title='Notifications'>
-
+            <NotificationList />
           </Tab>
         </TabView>
       </Fragment>

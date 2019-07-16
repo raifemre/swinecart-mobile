@@ -1,5 +1,7 @@
 import ConversationList from './ConversationList';
+import NotificationList from './NotificationList';
 
 export {
-  ConversationList
+  ConversationList,
+  NotificationList,
 }
