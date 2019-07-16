@@ -12,11 +12,15 @@ import {
   Text, Button
 } from 'react-native-ui-kitten';
 
+
+import NavigationService from '../../../services/navigation';
+
 import { textStyles, colors, sizes } from '../../../constants/theme';
 
 class RequestedCard extends PureComponent {
 
-  onPress = () => {
+  onPressView = () => {
+    NavigationService.navigate('Requests');
   }
 
 
@@ -53,7 +57,7 @@ class RequestedCard extends PureComponent {
               size='tiny'
               style={themedStyle.buttonStyle}
               textStyle={[themedStyle.buttonText, textStyles.button]}
-              onPress={this.onAddToBucket}
+              onPress={this.onPressView}
             >
               View Requests
             </Button>

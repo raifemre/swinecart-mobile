@@ -17,7 +17,7 @@ import data from './data';
 class Container extends PureComponent {
 
   state = {
-    selectedIndex: 2
+    selectedIndex: 0
   }
 
   onSelect = selectedIndex => {

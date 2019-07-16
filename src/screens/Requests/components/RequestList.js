@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 
 import LoadingView from '../../../shared/LoadingView';
 
-import Request from './Request';
+import Request from './Request.bak';
 import { toJS } from 'mobx';
 
 @inject('InventoryStore')
