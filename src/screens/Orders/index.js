@@ -8,6 +8,12 @@ import {
   TabView
 } from '../../shared/components';
 
+import {
+  RequestedCard, ProductGridList
+} from './components'
+
+import data from './data';
+
 class Container extends PureComponent {
 
   state = {
@@ -32,16 +38,16 @@ class Container extends PureComponent {
           onSelect={this.onSelect}
         >
           <Tab title='Requested'>
-
+            <ProductGridList Component={RequestedCard} data={data.data} />
           </Tab>
           <Tab title='Reserved'>
-
+            <ProductGridList Component={RequestedCard} data={data.data} />
           </Tab>
           <Tab title='On Delivery'>
-
+            <ProductGridList Component={RequestedCard} data={data.data} />
           </Tab>
           <Tab title='Sold'>
-
+            <ProductGridList Component={RequestedCard} data={data.data} />
           </Tab>
         </TabView>
       </Fragment>

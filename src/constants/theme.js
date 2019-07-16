@@ -1,5 +1,4 @@
 import { light as defaultTheme } from '@eva-design/eva';
-
 const colors = {
 
   ...defaultTheme,
@@ -51,7 +50,8 @@ const colors = {
   'color-danger-900': '#6C0541',
 
   'gray1': '#8f9BB3',
-  'gray2': '#EDF0F9',
+  'gray2': '#F7F9FC',
+  // 'gray2': '#EDF0F9',
 
 
 };
