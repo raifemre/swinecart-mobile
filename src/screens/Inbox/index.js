@@ -1,7 +1,11 @@
 import React, { Fragment, PureComponent } from 'react';
 
 import { Tab } from 'react-native-ui-kitten';
-import {  TabView, HeaderBar } from '../../shared/components';
+import { TabView, HeaderBar } from '../../shared/components';
+
+import { 
+  ConversationList
+} from './components';
 
 class Container extends PureComponent {
 
@@ -25,7 +29,7 @@ class Container extends PureComponent {
           onSelect={this.onSelect}
         >
           <Tab title='Messages'>
-
+            <ConversationList />
           </Tab>
           <Tab title='Notifications'>
 
