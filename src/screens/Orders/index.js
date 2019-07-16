@@ -9,7 +9,7 @@ import {
 } from '../../shared/components';
 
 import {
-  RequestedCard, ProductGridList
+  RequestedCard, ProductGridList, ReservedCard, OnDeliveryCard, SoldCard
 } from './components'
 
 import data from './data';
@@ -17,7 +17,7 @@ import data from './data';
 class Container extends PureComponent {
 
   state = {
-    selectedIndex: 0
+    selectedIndex: 2
   }
 
   onSelect = selectedIndex => {
@@ -41,13 +41,13 @@ class Container extends PureComponent {
             <ProductGridList Component={RequestedCard} data={data.data} />
           </Tab>
           <Tab title='Reserved'>
-            <ProductGridList Component={RequestedCard} data={data.data} />
+            <ProductGridList Component={ReservedCard} data={data.data} />
           </Tab>
           <Tab title='On Delivery'>
-            <ProductGridList Component={RequestedCard} data={data.data} />
+            <ProductGridList Component={OnDeliveryCard} data={data.data} />
           </Tab>
           <Tab title='Sold'>
-            <ProductGridList Component={RequestedCard} data={data.data} />
+            <ProductGridList Component={SoldCard} data={data.data} />
           </Tab>
         </TabView>
       </Fragment>

@@ -3,72 +3,14 @@
     {
       "name": "F1",
       "type": "Boar",
-      "breed": "Landrace"
+      "breed": "Landrace",
+      "customerName": "Grace Poe"
     },
     {
       "name": "F1",
       "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
-    },
-    {
-      "name": "F1",
-      "type": "Boar",
-      "breed": "Landrace"
+      "breed": "Landrace",
+      "customerName": "Grace Poe"
     }
   ]
 }
