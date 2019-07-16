@@ -7,19 +7,22 @@ import {
 } from 'react-native-ui-kitten';
 
 import Conversation from './Conversation';
-import { Block } from '../../../shared/components';
+import { Block, ContainerView } from '../../../shared/components';
 
 class ConversationList extends PureComponent {
 
   render() {
     return (
-      <Block marginTop style={{ backgroundColor: '#ffffff' }}>
+      <ContainerView style={{ backgroundColor: '#ffffff' }}>
         <Conversation />
         <Conversation />
         <Conversation />
         <Conversation />
         <Conversation />
-      </Block>
+        <Conversation />
+        <Conversation />
+        <Conversation />
+      </ContainerView>
     );
   }
 
