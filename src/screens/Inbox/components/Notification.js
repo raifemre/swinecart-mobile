@@ -35,6 +35,7 @@ class Notification extends PureComponent {
             <Text
               style={themedStyle.userLabel}
               category='s2'
+              appearance='hint'
               adjustsFontSizeToFit={true}
             >
               {'Customer Cecile Carter rated you with 5 (overall average).'}

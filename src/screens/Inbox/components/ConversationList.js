@@ -13,16 +13,14 @@ class ConversationList extends PureComponent {
 
   render() {
     return (
-      <ContainerView style={{ backgroundColor: '#ffffff' }}>
+      <View style={{ backgroundColor: '#ffffff' }}>
         <Conversation />
         <Conversation />
         <Conversation />
         <Conversation />
         <Conversation />
         <Conversation />
-        <Conversation />
-        <Conversation />
-      </ContainerView>
+      </View>
     );
   }
 

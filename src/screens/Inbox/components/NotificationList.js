@@ -13,16 +13,9 @@ class NotificationList extends PureComponent {
 
   render() {
     return (
-      <ContainerView style={{ backgroundColor: '#ffffff' }}>
+      <View style={{ backgroundColor: '#ffffff' }}>
         <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-      </ContainerView>
+      </View>
     );
   }
 
