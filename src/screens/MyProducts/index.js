@@ -10,6 +10,12 @@ import {
 
 import { colors } from '../../constants/theme';
 
+import {
+  RequestedCard, ProductGridList
+} from './components'
+
+import data from './data';
+
 class Container extends PureComponent {
 
   componentDidMount() {
@@ -23,6 +29,7 @@ class Container extends PureComponent {
           alignment='center'
         />
         <Block flex={1} style={{ backgroundColor: colors.gray2 }}>
+          <ProductGridList Component={RequestedCard} data={data.data} />
         </Block>
       </Fragment>
     );

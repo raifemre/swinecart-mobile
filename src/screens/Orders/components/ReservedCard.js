@@ -17,7 +17,6 @@ import { textStyles, colors, sizes } from '../../../constants/theme';
 class ReservedCard extends PureComponent {
 
   onPress = () => {
-    alert('cancel')
   }
 
 

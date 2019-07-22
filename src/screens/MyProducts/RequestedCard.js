@@ -4,34 +4,32 @@ import {
   View, TouchableOpacity, Image
 } from 'react-native';
 
-import {
+import { 
   withStyles
 } from 'react-native-ui-kitten/theme';
 
-import {
+import { 
   Text, Button
 } from 'react-native-ui-kitten';
 
+
+import NavigationService from '../../../services/navigation';
+
 import { textStyles, colors, sizes } from '../../../constants/theme';
 
-class OnDeliveryCard extends PureComponent {
+class RequestedCard extends PureComponent {
 
-  onPress = () => {
-    alert('cancel')
-  }
-  
-  onPressSold = () => {
-    
+  onPressView = () => {
+    NavigationService.navigate('Requests');
   }
 
 
   render() {
 
     const { style, themedStyle, data, ...restProps } = this.props;
-    const { name, type, breed, customerName } = data;
+    const { name, type, breed } = data;
     return (
       <TouchableOpacity
-      activeOpacity={0.95}
         {...restProps}
         style={[themedStyle.container, style]}
         // onPress={this.onPress}
@@ -53,29 +51,15 @@ class OnDeliveryCard extends PureComponent {
               category='c1'>
               {type} - {breed}
             </Text>
-            <Text
-              style={themedStyle.nameLabel}
-              category='c1'>
-              Reserved to {customerName}
-            </Text>
           </View>
           <View style={themedStyle.priceContainer}>
             <Button
               size='tiny'
-              style={[themedStyle.buttonStyle, { marginBottom: sizes.margin / 2, }]}
-              textStyle={[themedStyle.buttonText, textStyles.button]}
-              onPress={this.onAddToBucket}
-            >
-              Confirm Sold
-            </Button>
-            <Button
-              size='tiny'
-              appearance='outline'
               style={themedStyle.buttonStyle}
               textStyle={[themedStyle.buttonText, textStyles.button]}
-              onPress={this.onPress}
+              onPress={this.onPressView}
             >
-              Cancel
+              View Requests
             </Button>
           </View>
         </View>
@@ -84,7 +68,7 @@ class OnDeliveryCard extends PureComponent {
   }
 }
 
-export default withStyles(OnDeliveryCard, () => ({
+export default withStyles(RequestedCard, () => ({
   container: {
     minHeight: 272,
     borderRadius: 12,
@@ -98,7 +82,6 @@ export default withStyles(OnDeliveryCard, () => ({
   },
   priceContainer: {
     alignItems: 'center',
-    marginTop: sizes.padding / 2,
   },
   image: {
     flex: 1,

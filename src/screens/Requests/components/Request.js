@@ -90,6 +90,7 @@ export default withStyles(Request, () => ({
     borderBottomColor: colors.gray2
   },
   priceContainer: {
+    // flexDirection: 'row',
     alignItems: 'center',
     marginTop: sizes.padding / 2,
   },

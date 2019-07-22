@@ -49,7 +49,7 @@ export default withStyles(ProductGridList, () => ({
   container: {
     paddingHorizontal: sizes.padding / 2,
     paddingTop: sizes.padding,
-    paddingBottom: sizes.padding * 3,
+    paddingBottom: sizes.padding / 2,
     backgroundColor: colors.gray2,
   },
   item: {

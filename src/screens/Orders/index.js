@@ -26,6 +26,10 @@ class Container extends PureComponent {
     });
   }
 
+  goToReserved = () => this.onSelect(1);
+  goToOnDelivery = () => this.onSelect(2);
+  goToSold = () => this.onSelect(3);
+
   render() {
     return (
       <Fragment>
@@ -37,17 +41,17 @@ class Container extends PureComponent {
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
         >
-          <Tab title='Requested'>
-            <ProductGridList Component={RequestedCard} data={data.data} />
+          <Tab onSelect={this.onSelect} title='Requested'>
+            <ProductGridList action={this.goToReserved} Component={RequestedCard} data={data.data} />
           </Tab>
-          <Tab title='Reserved'>
-            <ProductGridList Component={ReservedCard} data={data.data} />
+          <Tab onSelect={this.goToOnDelivery} title='Reserved'>
+            <ProductGridList action={this.goToOnDelivery} Component={ReservedCard} data={data.data} />
           </Tab>
-          <Tab title='On Delivery'>
-            <ProductGridList Component={OnDeliveryCard} data={data.data} />
+          <Tab onSelect={this.onSelect} title='On Delivery'>
+            <ProductGridList action={this.goToSold} Component={OnDeliveryCard} data={data.data} />
           </Tab>
-          <Tab title='Sold'>
-            <ProductGridList Component={SoldCard} data={data.data} />
+          <Tab onSelect={this.onSelect} title='Sold'>
+            <ProductGridList action={this.goToSold} Component={SoldCard} data={data.data} />
           </Tab>
         </TabView>
       </Fragment>
