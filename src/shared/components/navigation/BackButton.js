@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import BackIcon from '../../assets/icons/back.png';
+import BackIcon from '../../../assets/icons/back.png';
 
 import HeaderBarButton from './HeaderBarButton';
 
@@ -12,7 +12,7 @@ function BackButton() {
 
   return (
     <HeaderBarButton
-      icon={BackIcon}
+      iconSource={BackIcon}
       onPress={onPress}
     />
   );

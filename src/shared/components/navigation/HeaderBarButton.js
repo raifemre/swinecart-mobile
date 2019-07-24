@@ -7,9 +7,9 @@ import Icon from '../Icon';
 
 function HeaderBarButton(props) {
 
-  const { source, onPress } = props;
+  const { iconSource, onPress } = props;
 
-  const renderIcon = () => <Icon source={source} style={{ width: 26, height: 26 }} />
+  const renderIcon = () => <Icon source={iconSource} style={{ width: 26, height: 26 }} />
 
   return (
     <TopNavigationAction
