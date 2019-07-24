@@ -1,11 +1,7 @@
 import React, { Fragment, PureComponent } from 'react';
 
 import {
-  Tab
-} from 'react-native-ui-kitten';
-
-import {
-  TabView, HeaderBar, ContainerView, InfoRow, Block, InfoSectionTitle
+  HeaderBar, ContainerView, InfoRow, Block
 } from '../../shared/components';
 
 class Container extends PureComponent {
