@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.dylanvann.fastimage.FastImageViewPackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -32,7 +31,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ReanimatedPackage(),
             new AsyncStoragePackage(),
             new VectorIconsPackage(),
-            new FastImageViewPackage(),
             new RNScreensPackage(),
             new RNGestureHandlerPackage()
       );
