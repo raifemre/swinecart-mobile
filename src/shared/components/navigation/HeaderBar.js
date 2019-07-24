@@ -17,7 +17,7 @@ function HeaderBar(props) {
       leftControl={leftControl}
       rightControls={rightControls}
     />
-  ) 
+  )
 
 }
 
