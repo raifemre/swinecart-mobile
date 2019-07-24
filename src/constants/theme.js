@@ -66,6 +66,8 @@ const textStyles = {
   subtitle: {
     fontFamily: 'OpenSans-SemiBold',
     fontWeight: 'normal',
+    fontSize: 16,
+    letterSpacing: 0.5
   },
   paragraph: {
     fontFamily: 'OpenSans-SemiBold',

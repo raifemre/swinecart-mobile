@@ -1,7 +1,7 @@
 import React, { Fragment, memo } from 'react';
 
 import {
-  HeaderBar, ContainerView, InfoRow, Block, SettingsButton
+  HeaderBar, ContainerView, SettingsButton
 } from '../../shared/components';
 
 

@@ -4,10 +4,12 @@ import SettingsIcons from '../../../assets/icons/settings.png';
 
 import HeaderBarButton from './HeaderBarButton';
 
+import NavigationService from '../../../services/navigation';
+
 function SettingsButton() {
 
   const onPress = () => {
-    alert('Settings Button');
+    NavigationService.navigate('Settings');
   }
 
   return (

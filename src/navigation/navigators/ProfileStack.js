@@ -1,11 +1,11 @@
 import { createStackNavigator } from 'react-navigation';
 
 import BreederProfile from '../../screens/BreederProfile';
-// import FarmDetails from '../../screens/FarmDetails';
+import Settings from '../../screens/Settings';
 
 const navigator = createStackNavigator({
   Profile: BreederProfile,
-  // FarmDetails: FarmDetails,
+  Settings: Settings,
 }, {
     initialRouteName: 'Profile',
     defaultNavigationOptions: ({ navigation }) => {

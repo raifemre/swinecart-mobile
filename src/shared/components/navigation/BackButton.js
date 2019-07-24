@@ -4,10 +4,12 @@ import BackIcon from '../../../assets/icons/back.png';
 
 import HeaderBarButton from './HeaderBarButton';
 
+import NavigationService from '../../../services/navigation';
+
 function BackButton() {
 
   const onPress = () => {
-    alert('Back Button');
+    NavigationService.back();
   }
 
   return (

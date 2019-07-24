@@ -7,9 +7,11 @@ import { colors } from '../../constants/theme';
 
 function ContainerView(props) {
 
+  const { themedStyle, backgroundColor = colors.gray2, ...restProps } = props;
+
   return (
     <ScrollView
-      style={props.themedStyle.container}
+      style={[themedStyle.container, { backgroundColor }]}
       bounces={false}
       bouncesZoom={false}
       bounces={false}
@@ -18,7 +20,7 @@ function ContainerView(props) {
       alwaysBounceHorizontal={false}
       // showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
-      {...props}
+      {...restProps}
     />
   )
 
@@ -27,6 +29,5 @@ function ContainerView(props) {
 export default withStyles(ContainerView, () => ({
   container: {
     flex: 1,
-    backgroundColor: colors.gray2,
   }
 }));
