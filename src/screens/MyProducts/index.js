@@ -1,11 +1,11 @@
 import React, { Fragment, PureComponent } from 'react';
 
-import {
-  TopNavigation
-} from 'react-native-ui-kitten';
+// import {
+
+// } from 'react-native-ui-kitten';
 
 import { 
-  Block
+  Block, HeaderBar
 } from '../../shared/components';
 
 import { colors } from '../../constants/theme';
@@ -24,10 +24,7 @@ class Container extends PureComponent {
   render() {
     return (
       <Fragment>
-        <TopNavigation
-          title='My Products'
-          alignment='center'
-        />
+        <HeaderBar title='My Products' />
         <Block flex={1} style={{ backgroundColor: colors.gray2 }}>
           <ProductGridList Component={RequestedCard} data={data.data} />
         </Block>

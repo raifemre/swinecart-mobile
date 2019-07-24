@@ -1,11 +1,11 @@
 import React, { Fragment, PureComponent } from 'react';
 
 import {
-  TopNavigation, Tab
+  Tab
 } from 'react-native-ui-kitten';
 
 import {
-  TabView
+  TabView, HeaderBar
 } from '../../shared/components';
 
 import {
@@ -33,10 +33,7 @@ class Container extends PureComponent {
   render() {
     return (
       <Fragment>
-        <TopNavigation
-          title='Orders'
-          alignment='center'
-        />
+        <HeaderBar title='Orders' />
         <TabView
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
