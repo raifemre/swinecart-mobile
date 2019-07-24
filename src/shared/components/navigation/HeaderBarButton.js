@@ -9,7 +9,7 @@ function HeaderBarButton(props) {
 
   const { iconSource, onPress } = props;
 
-  const renderIcon = () => <Icon source={iconSource} style={{ width: 26, height: 26 }} />
+  const renderIcon = () => <Icon source={iconSource} style={{ width: 24, height: 24 }} />
 
   return (
     <TopNavigationAction

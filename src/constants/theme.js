@@ -60,7 +60,7 @@ const textStyles = {
   headline: {
     fontFamily: 'OpenSans-Bold',
     fontWeight: 'normal',
-    fontSize: 16,
+    fontSize: 18,
     letterSpacing: 0.5
   },
   subtitle: {

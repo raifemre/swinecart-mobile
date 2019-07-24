@@ -8,28 +8,22 @@ import { colors, textStyles } from '../../constants/theme';
 
 class InfoRow extends PureComponent {
 
-
-  renderTextElement = (text, style) => (
-    <Text
-      style={style}
-      appearance='hint'
-    >
-      {text}
-    </Text>
-  )
-
   render() {
 
-    const { themedStyle, title, data } = this.props;
-    const { titleStyle, container, dataStyle } = themedStyle;
+    const { themedStyle, label, data } = this.props;
+    const { labelStyle, container, dataStyle } = themedStyle;
 
     return (
       <Block row center space='between' padding style={container}>
         <Block marginRight flex='disabled'>
-          {this.renderTextElement(title, titleStyle)}
+          <Text style={labelStyle} appearance='hint'>
+            {label}
+          </Text>
         </Block>
         <Block row right>
-          {this.renderTextElement(data, dataStyle)}
+          <Text style={dataStyle} appearance='hint'>
+            {data}
+          </Text>
         </Block>
       </Block>
     )
@@ -42,7 +36,7 @@ export default withStyles(InfoRow, () => ({
     borderBottomWidth: 1,
     borderBottomColor: colors.gray2
   },
-  titleStyle: {
+  labelStyle: {
     ...textStyles.caption2,
   },
   dataStyle: {
