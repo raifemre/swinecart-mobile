@@ -49,9 +49,13 @@ const colors = {
   'color-danger-800': '#830844',
   'color-danger-900': '#6C0541',
 
-  'gray1': '#8f9BB3',
+  'white1': '#FFFFFF',
+  'white2': '#FAFAFA',
+
+  'gray1': '#F2F2F2',
   'gray2': '#F7F9FC',
-  // 'gray2': '#EDF0F9',
+  'gray3': '#6F6F6F',
+  'gray4': '#CFCFCF',
 
 
 };
@@ -76,8 +80,7 @@ const textStyles = {
   },
   caption1: {
     fontFamily: 'OpenSans-Regular',
-    fontWeight: 'normal',
-    fontSize: 12
+    fontWeight: 'normal'
   },
   caption2: {
     fontFamily: 'OpenSans-SemiBold',
@@ -92,16 +95,30 @@ const textStyles = {
     fontFamily: 'OpenSans-Regular',
     letterSpacing: 1,
   },
-}
+};
 
 const sizes = {
   margin: 16,
   padding: 16
-}
+};
 
+const shadowStyles = {
+  shadow1: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+  }
+}
 
 export {
   colors,
   sizes,
-  textStyles
+  textStyles,
+  shadowStyles
 }

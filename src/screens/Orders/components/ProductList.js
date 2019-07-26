@@ -8,12 +8,11 @@ import {
   List
 } from 'react-native-ui-kitten';
 
-
 import {
   colors, sizes
 } from '../../../constants/theme'
 
-class ProductGridList extends PureComponent {
+class ProductList extends PureComponent {
 
   renderProduct = ({ item }) => {
     const { themedStyle, Component, action } = this.props;
@@ -36,16 +35,13 @@ class ProductGridList extends PureComponent {
         contentContainerStyle={[contentContainerStyle, themedStyle.container]}
         data={data}
         renderItem={this.renderProduct}
-        numColumns={2}
       />
     );
   }
 
 }
 
-
-
-export default withStyles(ProductGridList, () => ({
+export default withStyles(ProductList, () => ({
   container: {
     paddingHorizontal: sizes.padding / 2,
     paddingTop: sizes.padding,

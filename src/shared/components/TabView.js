@@ -9,13 +9,14 @@ import { colors } from '../../constants/theme';
 
 function Tabs(props) {
 
-  const { onSelect, selectedIndex, children, tabs, themedStyle } = props;
+  const { onSelect, selectedIndex, children, themedStyle } = props;
 
   return (
     <TabView
       selectedIndex={selectedIndex}
       onSelect={onSelect}
       style={themedStyle.container}
+      tabBarStyle={{ minHeight: 56 }}
     >
       {children}
     </TabView>

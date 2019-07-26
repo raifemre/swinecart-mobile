@@ -28,7 +28,7 @@ class Container extends PureComponent {
           selectedIndex={this.state.selectedIndex}
           onSelect={this.onSelect}
         >
-          <Tab title='Messages'>
+          <Tab title='Messages' style={{ width: 30 }}>
             <ConversationList />
           </Tab>
           <Tab title='Notifications'>
