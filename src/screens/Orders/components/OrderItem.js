@@ -28,7 +28,7 @@ function OrderItem(props) {
   };
 
   const { themedStyle, data } = props;
-  const { name, type, breed, customerName, statusTime, status } = data;
+  const { name, type, breed, customerName, statusTime, status, requests } = data;
 
   return (
     <Block row padding style={themedStyle.container}>
@@ -39,7 +39,12 @@ function OrderItem(props) {
       />
       <Block paddingHorizontal>
         <ProductInfo name={name} type={type} breed={breed} />
-        <OrderStatus customerName={customerName} statusTime={statusTime} status={status} />
+        <OrderStatus
+          customerName={customerName}
+          statusTime={statusTime}
+          status={status}
+          requests={requests}
+        />
         <Button
           size='medium'
           onPress={onPressView}

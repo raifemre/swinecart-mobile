@@ -6,7 +6,7 @@ import { textStyles, colors, sizes } from '../../../constants/theme';
 
 function OrderStatus(props) {
 
-  const { themedStyle, status, customerName, statusTime } = props;
+  const { themedStyle, status, customerName, statusTime, requests } = props;
 
   return (
     <Fragment>
