@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
 
-import BackIcon from '../../../assets/icons/back.png';
-
 import HeaderBarButton from './HeaderBarButton';
 
 import NavigationService from '../../../services/navigation';
@@ -14,7 +12,7 @@ function BackButton() {
 
   return (
     <HeaderBarButton
-      iconSource={BackIcon}
+      iconName='chevron-left'
       onPress={onPress}
     />
   );

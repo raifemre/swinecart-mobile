@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ScrollView } from 'react-native';
 
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { colors } from '../../constants/theme';
+import { colors, sizes } from '../../constants/theme';
 
 function ContainerView(props) {
 
@@ -11,6 +11,7 @@ function ContainerView(props) {
 
   return (
     <ScrollView
+      contentContainerStyle={themedStyle.contentContainer}
       style={[themedStyle.container, { backgroundColor }]}
       bounces={false}
       bouncesZoom={false}
@@ -26,8 +27,11 @@ function ContainerView(props) {
 
 }
 
-export default withStyles(ContainerView, () => ({
+export default memo(withStyles(ContainerView, () => ({
   container: {
-    flex: 1,
+    flex: 1
+  },
+  contentContainer: {
+    paddingBottom: sizes.padding,
   }
-}));
+})));

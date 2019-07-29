@@ -1,14 +1,17 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React, { memo } from 'react';
+import RNIcon from 'react-native-vector-icons/Feather';
 
-export default function Icon(props) {
+function Icon(props) {
 
-  const { style, source } = props;
+  const { name, color = '#ffffff', size = 24 } = props;
 
   return (
-    <Image
-      style={style}
-      source={source}
+    <RNIcon
+      name={name}
+      color={color}
+      size={size}
     />
   );
 }
+
+export default memo(Icon);
