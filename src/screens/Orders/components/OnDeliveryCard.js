@@ -60,7 +60,7 @@ function OnDeliveryCard(props) {
           category='s2'
           style={[textStyles.label, themedStyle.statusStyle]}
         >
-          {'On Delivered'}
+          {'On Delivery'}
         </Text>
         <Text
           category='s2'
