@@ -24,7 +24,7 @@ class Container extends PureComponent {
   render() {
     return (
       <Fragment>
-        <HeaderBar title='My Products' />
+        <HeaderBar title='Products' />
         <Block flex={1} style={{ backgroundColor: colors.gray2 }}>
           <ProductGridList Component={RequestedCard} data={data.data} />
         </Block>

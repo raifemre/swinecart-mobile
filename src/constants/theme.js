@@ -67,7 +67,7 @@ const textStyles = {
     fontFamily: 'OpenSans-Bold',
     fontWeight: 'normal',
     fontSize: 18,
-    letterSpacing: 0.5
+    letterSpacing: 1
   },
   subtitle: {
     fontFamily: 'OpenSans-SemiBold',

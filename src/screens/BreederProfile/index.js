@@ -4,7 +4,6 @@ import {
   HeaderBar, ContainerView, SettingsButton
 } from '../../shared/components';
 
-
 import {
   OfficeInfo
 } from './components';

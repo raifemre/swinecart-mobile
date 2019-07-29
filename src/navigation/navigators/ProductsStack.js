@@ -2,17 +2,17 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import MyProducts from '../../screens/MyProducts';
+import Products from '../../screens/Products';
 
 const navigator = createStackNavigator({
-  MyProducts: MyProducts,
+  Products: Products,
   // AddProduct: AddProduct,
   // EditProduct: EditProduct,
   // FilterProducts: FilterProducts,
   // ProductDetailsBreeder: ProductDetails,
   // ProductMedia: ProductMedia,
 }, {
-    initialRouteName: 'MyProducts',
+    initialRouteName: 'Products',
     defaultNavigationOptions: ({ navigation }) => {
       return {
         header: null
