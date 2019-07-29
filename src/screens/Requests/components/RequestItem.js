@@ -4,11 +4,11 @@ import {
   TouchableOpacity, Image
 } from 'react-native';
 
-import { 
+import {
   withStyles
 } from 'react-native-ui-kitten/theme';
 
-import { 
+import {
   Text, Button, Avatar
 } from 'react-native-ui-kitten';
 
@@ -20,21 +20,20 @@ import NavigationService from '../../../services/navigation';
 
 import { textStyles, colors, sizes } from '../../../constants/theme';
 
-
 import { urls } from '../../../constants/randomImage';
 
 import Chance from 'chance';
 
 const chance = Chance();
 
-function RequestedCard(props) {
-  
+function RequestItem(props) {
+
   const onPressView = () => {
-    NavigationService.navigate('Requests');
+
   }
 
   const { themedStyle, data, index } = props;
-  const { name, type, breed, requests } = data;
+  const { customerProvince, customerName } = data;
 
   return (
     <Block row padding style={themedStyle.container}>
@@ -48,39 +47,35 @@ function RequestedCard(props) {
           category='h6'
           style={[textStyles.headline, themedStyle.nameStyle]}
         >
-          {name}
+          {customerName}
         </Text>
-        <Text 
+        <Text
           category='s2'
           style={[textStyles.caption1, themedStyle.typeStyle]}
         >
-          {type} - {breed}
-        </Text>
-        <Text
-          category='s2'
-          style={[textStyles.label, themedStyle.statusStyle]}
-        >
-          {'Requested'}
-        </Text>
-        <Text
-          category='s2'
-          style={[textStyles.caption1, themedStyle.requestsStyle]}
-        >
-          {`by ${requests} users`}
+          {customerProvince}
         </Text>
         <Button
           size='medium'
           onPress={onPressView}
           style={themedStyle.buttonStyle}
         >
-          View Requests
+          Reserve Product
+        </Button>
+        <Button
+          size='medium'
+          appearance='outline'
+          onPress={onPressView}
+          style={themedStyle.buttonStyle}
+        >
+          Message Customer
         </Button>
       </Block>
     </Block>
   );
 }
 
-export default withStyles(memo(RequestedCard), () => ({
+export default withStyles(memo(RequestItem), () => ({
   container: {
     minHeight: 150,
     overflow: 'hidden',

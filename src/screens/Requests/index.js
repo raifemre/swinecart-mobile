@@ -1,38 +1,29 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, memo } from 'react';
 
 import {
-  TopNavigation
-} from 'react-native-ui-kitten';
-
-import {
-  Block
+  HeaderBar, ContainerView, BackButton,
 } from '../../shared/components';
 
-import { colors } from '../../constants/theme';
-
-import { 
-  Request
+import {
+  RequestItem
 } from './components';
 
-class Container extends PureComponent {
+function Container(props) {
 
-  componentDidMount() {
-  }
-
-  render() {
-    return (
-      <Fragment>
-        <TopNavigation
-          title='Requests'
-          alignment='center'
-        />
-        <Block paddingTop flex={1} style={{ backgroundColor: colors.gray2 }}>
-          <Request />
-        </Block>
-      </Fragment>
-    );
-  }
+  return (
+    <Fragment>
+      <HeaderBar
+        title='Requests'
+        leftControl={<BackButton />}
+      />
+      <ContainerView>
+        <RequestItem data={{ customerProvince: 'Batangas', customerName: 'Cecile Carter' }} />
+        <RequestItem data={{ customerProvince: 'Batangas', customerName: 'Cecile Carter' }} />
+        <RequestItem data={{ customerProvince: 'Batangas', customerName: 'Cecile Carter' }} />
+      </ContainerView>
+    </Fragment>
+  )
 
 }
 
-export default Container;
+export default memo(Container);

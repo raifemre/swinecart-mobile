@@ -1,15 +1,20 @@
 import React, { memo } from 'react';
+
 import {
   TopNavigationAction
 } from 'react-native-ui-kitten';
+
+import {
+  withStyles
+} from 'react-native-ui-kitten/theme';
 
 import Icon from '../Icon';
 
 function HeaderBarButton(props) {
 
-  const { iconSource, onPress } = props;
+  const { iconSource, onPress, themedStyle } = props;
 
-  const renderIcon = () => <Icon source={iconSource} style={{ width: 24, height: 24 }} />
+  const renderIcon = () => <Icon source={iconSource} style={themedStyle.iconStyle} />
 
   return (
     <TopNavigationAction
@@ -20,4 +25,10 @@ function HeaderBarButton(props) {
 
 }
 
-export default memo(HeaderBarButton);
+export default memo(withStyles(HeaderBarButton, () => ({
+  iconStyle: {
+    width: 24,
+    height: 24,
+    color: '#ffffff'
+  }
+})));

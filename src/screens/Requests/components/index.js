@@ -1,5 +1,1 @@
-import Request from './Request';
-
-export {
-  Request
-}
+export { default as RequestItem } from './RequestItem';
