@@ -1,5 +1,4 @@
-import React, { memo } from 'react';
-
+import React, { Fragment, memo } from 'react';
 import {
   TopNavigation
 } from 'react-native-ui-kitten';
@@ -24,14 +23,16 @@ function HeaderBar(props) {
   ];
 
   return (
-    <TopNavigation
-      style={headerBarStyle}
-      title={title}
-      titleStyle={[textStyles.headline, themedStyle.titleStyle]}
-      alignment='center'
-      leftControl={leftControl}
-      rightControls={rightControls}
-    />
+    <Fragment>
+      <TopNavigation
+        style={headerBarStyle}
+        title={title}
+        titleStyle={[textStyles.headline, themedStyle.titleStyle]}
+        alignment='center'
+        leftControl={leftControl}
+        rightControls={rightControls}
+      />
+    </Fragment>
   )
 
 }
@@ -42,5 +43,8 @@ export default memo(withStyles(HeaderBar, theme => ({
   },
   titleStyle: {
     color: '#ffffff'
+  },
+  statusBar: {
+    backgroundColor: theme['color-primary-100'],
   }
 })));
