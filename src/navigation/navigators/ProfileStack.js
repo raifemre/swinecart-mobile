@@ -1,7 +1,8 @@
 import { createStackNavigator } from 'react-navigation';
 
-import BreederProfile from '../../screens/BreederProfile';
-import Settings from '../../screens/Settings';
+import { 
+  BreederProfile, Settings
+} from '../../screens';
 
 const navigator = createStackNavigator({
   Profile: BreederProfile,

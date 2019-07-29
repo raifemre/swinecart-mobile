@@ -2,14 +2,12 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-import Cart from '../../screens/Cart';
-import RequestItem from '../../screens/RequestItem';
-import RateBreeder from '../../screens/RateBreeder';
+import {
+  Cart
+} from '../../screens';
 
 const navigator = createStackNavigator({
-  Cart: Cart,
-  RequestItem: RequestItem,
-  RateBreeder: RateBreeder,
+  Cart: Cart
 }, {
     initialRouteName: 'Cart',
     navigationOptions: ({ navigation }) => {

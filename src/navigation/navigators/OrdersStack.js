@@ -1,7 +1,8 @@
 import { createStackNavigator } from 'react-navigation';
 
-import Orders from '../../screens/Orders';
-import Requests from '../../screens/Requests';
+import {
+  Orders, Requests
+} from '../../screens';
 
 const navigator = createStackNavigator({
   Orders: Orders,
@@ -10,8 +11,7 @@ const navigator = createStackNavigator({
     initialRouteName: 'Orders',
     defaultNavigationOptions: ({ navigation }) => {
       return {
-        header: null,
-        // mode: 'modal'
+        header: null
       }
     }
   });

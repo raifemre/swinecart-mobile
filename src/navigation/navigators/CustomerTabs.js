@@ -1,95 +1,35 @@
-import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import { Icon } from 'native-base';
-
-import Notifications from '../../screens/Notifications';
-
-import NotificationsIcon from '../../shared/NotificationsIcon';
-import SwineCartIcon from '../../shared/SwineCartIcon';
-
-import MessagingStack from './InboxStack';
 import ProfileStack from './ProfileStack';
-import ShopStack from './ShopStack';
-import CartStack from './CartStack';
+import OrdersStack from './OrdersStack';
+import InboxStack from './InboxStack';
+import ProductsStack from './ProductsStack';
 
-const iconMapping = {
-  Shop: 'shop',
-  Cart: 'shopping-cart',
-  Dashboard: 'assessment',
-  Messaging: 'message',
-  Profile: 'account-circle'
-};
-
-MessagingStack.navigationOptions = ({ navigation }) => {
-  return {
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-  };
-};
-
-ShopStack.navigationOptions = ({ navigation }) => {
-  return {
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-  };
-};
-
-CartStack.navigationOptions = ({ navigation }) => {
-  return {
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-  };
-};
+import { CustomerTabBar } from '../components';
 
 const navigator = createBottomTabNavigator({
-  'Shop': {
-    screen: ShopStack
-  },  
-  'Cart': {
-    screen: CartStack
+  'ProductsStack': {
+    screen: ProductsStack,
   },
-  'Messaging': {
-    screen: MessagingStack
+  'OrdersStack': {
+    screen: OrdersStack,
   },
-  'Notifications': {
-    screen: Notifications
+  'Dashboard': {
+    screen: ProfileStack,
   },
-  'Profile': {
+  'InboxStack': {
+    screen: InboxStack,
+  },
+  'ProfileStack': {
     screen: ProfileStack,
   },
 },
-{
-  initialRouteName: 'Shop',
-  navigationOptions: ({ navigation }) => {
-    const { routeName } = navigation.state;
-    return {
-      tabBarIcon: ({ focused }) => {
-        if(routeName === 'Notifications') {
-          return (
-            <NotificationsIcon focused={focused} />
-          );
-        }
-        else if (routeName === 'Cart') {
-          return (
-            <SwineCartIcon focused={focused} />
-          );
-        }
-        else {
-          return <Icon
-            type='MaterialIcons'
-            name={iconMapping[routeName]}
-            style={{ color: focused ? '#00695C' : '#000000' }} />
-        }
-      }
-    }
-  },
-  tabBarOptions: {
-    style: {
-      backgroundColor: '#f7f7f7',
-      borderTopWidth: 0,
-      borderTopColor: 'transparent'
+  {
+    initialRouteName: 'OrdersStack',
+    tabBarComponent: CustomerTabBar,
+    defaultNavigationOptions: ({ navigation }) => {
     },
-    showLabel : false
-  },
-  lazy: true,
-});
+    lazy: true,
+  });
 
 export default navigator;
