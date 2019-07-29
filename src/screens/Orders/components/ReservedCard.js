@@ -34,7 +34,7 @@ function ReservedCard(props) {
   }
 
   const { themedStyle, data, index } = props;
-  const { name, type, breed, requests } = data;
+  const { name, type, breed, customerName, statusTime } = data;
 
   return (
     <Block row padding style={themedStyle.container}>
@@ -60,20 +60,34 @@ function ReservedCard(props) {
           category='s2'
           style={[textStyles.label, themedStyle.statusStyle]}
         >
-          {'Requested'}
+          {'Reserved'}
         </Text>
         <Text
           category='s2'
           style={[textStyles.caption1, themedStyle.requestsStyle]}
         >
-          {`by ${requests} users`}
+          {`to ${customerName}`}
+        </Text>
+        <Text
+          category='s2'
+          style={[textStyles.caption1, themedStyle.requestsStyle]}
+        >
+          {`${statusTime}`}
         </Text>
         <Button
           size='medium'
           onPress={onPressView}
           style={themedStyle.buttonStyle}
         >
-          View Requests
+          Send for Delivery
+        </Button>
+        <Button
+          size='medium'
+          status='danger'
+          onPress={onPressView}
+          style={themedStyle.buttonStyle}
+        >
+          Cancel Transaction
         </Button>
       </Block>
     </Block>
