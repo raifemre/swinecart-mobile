@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ProfileStack from './ProfileStack';
 import OrdersStack from './OrdersStack';
 import InboxStack from './InboxStack';
+import DashboardStack from './DashboardStack';
 import ProductsStack from './ProductsStack';
 
 import { BreederTabBar } from '../components';
@@ -14,8 +15,8 @@ const navigator = createBottomTabNavigator({
   'OrdersStack': {
     screen: OrdersStack,
   },
-  'Dashboard': {
-    screen: ProfileStack,
+  'DashboardStack': {
+    screen: DashboardStack,
   },
   'InboxStack': {
     screen: InboxStack,
