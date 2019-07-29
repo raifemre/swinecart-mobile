@@ -2,9 +2,9 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
-// import Shop from '../../screens/Shop';
-import Login from '../../screens/Login';
-// import Register from '../../screens/Register';
+import { 
+  Login
+} from '../../screens';
 
 const navigator = createStackNavigator({
   // Shop: Shop,

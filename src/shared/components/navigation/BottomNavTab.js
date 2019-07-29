@@ -2,9 +2,9 @@
 import React, { memo } from 'react';
 import { BottomNavigationTab, } from 'react-native-ui-kitten';
 
-import { Icon } from '../../shared/components';
+import { Icon } from '..';
 
-import { colors, textStyles } from '../../constants/theme';
+import { colors, textStyles } from '../../../constants/theme';
 
 function BottomNavTab(props) {
 
