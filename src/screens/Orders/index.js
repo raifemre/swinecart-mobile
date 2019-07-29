@@ -5,7 +5,7 @@ import {
 } from '../../shared/components';
 
 import {
-  RequestedCard, ReservedCard, OnDeliveryCard, SoldCard
+  OrderItem
 } from './components';
 
 function Container(props) {
@@ -16,10 +16,9 @@ function Container(props) {
         title='Orders'
       />
       <ContainerView>
-        <RequestedCard data={{ name: 'SUPERBB LARGEWHITE 708', type: 'Sow', breed: 'Landrace', requests: 2 }} />
-        <ReservedCard data={{ name: 'SUPERBB LARGEWHITE 708', type: 'Sow', breed: 'Landrace', customerName: 'Cecile Carter', statusTime: 'Jul 24 (Wed), 10:30 PM' }} />
-        <OnDeliveryCard data={{ name: 'SUPERBB LARGEWHITE 708', type: 'Sow', breed: 'Landrace', customerName: 'Cecile Carter', statusTime: 'Jul 24 (Wed), 10:30 PM' }} />
-        <SoldCard data={{ name: 'SUPERBB LARGEWHITE 708', type: 'Sow', breed: 'Landrace', customerName: 'Cecile Carter', statusTime: 'Jul 24 (Wed), 10:30 PM' }} />
+        <OrderItem
+          data={{ name: 'SUPERBB LARGEWHITE 708', type: 'Sow', breed: 'Landrace', customerName: 'Cecile Carter', statusTime: 'Jul 24 (Wed), 10:30 PM', status: 'requested' }}
+        />
       </ContainerView>
     </Fragment>
   )
