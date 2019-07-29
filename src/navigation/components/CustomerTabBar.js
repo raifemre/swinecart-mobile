@@ -1,22 +1,12 @@
 
 import React, { memo } from 'react';
-import {
-  BottomNavigation,
-  BottomNavigationTab,
-} from 'react-native-ui-kitten';
-
-import { Icon } from '../../shared/components';
+import { BottomNavigation } from 'react-native-ui-kitten';
 
 import { shadowStyles } from '../../constants/theme';
 
-const MyProductIcon = () => <Icon name='list' color='#00695C' />;
-const OrdersIcon = () => <Icon name='list' color='#00695C' />;
-const DashboardIcon = () => <Icon name='list' color='#00695C' />;
-const InboxIcon = () => <Icon name='list' color='#00695C' />;
-const ProfileIcon = () => <Icon name='list' color='#00695C' />;
+import BottomNavTab from './BottomNavTab';
 
-
-function CustomerTabBar(props) {
+function BreederTabBar(props) {
 
   const onTabSelect = selectedIndex => {
     const { [selectedIndex]: selectedRoute } = props.navigation.state.routes;
@@ -30,14 +20,13 @@ function CustomerTabBar(props) {
       selectedIndex={props.navigation.state.index}
       onSelect={onTabSelect}
     >
-      <BottomNavigationTab title='My Products' icon={MyProductIcon} />
-      <BottomNavigationTab title='Orders' icon={OrdersIcon} />
-      <BottomNavigationTab title='Dashboard' icon={DashboardIcon} />
-      <BottomNavigationTab title='Inbox' icon={InboxIcon} />
-      <BottomNavigationTab title='Profile' icon={ProfileIcon} />
+      <BottomNavTab title='Shop' iconName='shopping-bag' />
+      <BottomNavTab title='Cart' iconName='list' />
+      <BottomNavTab title='Inbox' iconName='inbox' />
+      <BottomNavTab title='Profile' iconName='user' />
     </BottomNavigation>
   );
 
 };
 
-export default memo(CustomerTabBar);
+export default memo(BreederTabBar);

@@ -1,16 +1,11 @@
-import {
-  createBottomTabNavigator
-} from 'react-navigation-tabs';
-
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import ProfileStack from './ProfileStack';
 import OrdersStack from './OrdersStack';
 import InboxStack from './InboxStack';
 import MyProductsStack from './MyProductsStack';
 
-import { 
-  BreederTab
-} from '../components';
+import { BreederTabBar } from '../components';
 
 const navigator = createBottomTabNavigator({
   'MyProductsStack': {
@@ -31,7 +26,7 @@ const navigator = createBottomTabNavigator({
 },
 {
   initialRouteName: 'OrdersStack',
-  tabBarComponent: BreederTab,
+  tabBarComponent: BreederTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },
   lazy: true,

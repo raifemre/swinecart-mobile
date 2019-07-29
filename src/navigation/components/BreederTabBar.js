@@ -1,20 +1,10 @@
 
 import React, { memo } from 'react';
-import {
-  BottomNavigation,
-  BottomNavigationTab,
-} from 'react-native-ui-kitten';
-
-import { Icon } from '../../shared/components';
+import { BottomNavigation } from 'react-native-ui-kitten';
 
 import { shadowStyles } from '../../constants/theme';
 
-const MyProductIcon = () => <Icon name='list' color='#00695C' />;
-const OrdersIcon = () => <Icon name='list' color='#00695C' />;
-const DashboardIcon = () => <Icon name='list' color='#00695C' />;
-const InboxIcon = () => <Icon name='list' color='#00695C' />;
-const ProfileIcon = () => <Icon name='list' color='#00695C' />;
-
+import BottomNavTab from './BottomNavTab';
 
 function BreederTabBar(props) {
 
@@ -30,11 +20,11 @@ function BreederTabBar(props) {
       selectedIndex={props.navigation.state.index}
       onSelect={onTabSelect}
     >
-      <BottomNavigationTab title='My Products' icon={MyProductIcon} />
-      <BottomNavigationTab title='Orders' icon={OrdersIcon} />
-      <BottomNavigationTab title='Dashboard' icon={DashboardIcon} />
-      <BottomNavigationTab title='Inbox' icon={InboxIcon} />
-      <BottomNavigationTab title='Profile' icon={ProfileIcon} />
+      <BottomNavTab title='Products' iconName='shopping-bag' />
+      <BottomNavTab title='Orders' iconName='list' />
+      <BottomNavTab title='Dashboard' iconName='grid' />
+      <BottomNavTab title='Inbox' iconName='inbox' />
+      <BottomNavTab title='Profile' iconName='user' />
     </BottomNavigation>
   );
 

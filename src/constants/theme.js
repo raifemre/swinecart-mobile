@@ -49,6 +49,8 @@ const colors = {
   'color-danger-800': '#830844',
   'color-danger-900': '#6C0541',
 
+  primary: '#00695C',
+
   'white1': '#FFFFFF',
   'white2': '#FAFAFA',
 
