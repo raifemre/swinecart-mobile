@@ -15,7 +15,6 @@ import { createRandomOrders } from '../../../utils/mockdata';
 const orders = createRandomOrders(100);
 
 function OrdersList(props) {
-
   const renderItem = ({ item }) => {
     return (
       <OrderItem

@@ -1,15 +1,15 @@
 import React, { Fragment, memo } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import {
   withStyles
 } from 'react-native-ui-kitten/theme';
 
 import { Avatar } from 'react-native-ui-kitten';
-
 import { Block } from '../../../shared/components';
-
 import { colors } from '../../../constants/theme';
+
+import NavigationService from '../../../services/navigation';
 
 import ProductInfo from './ProductInfo';
 import OrderStatus from './OrderStatus';
@@ -18,12 +18,11 @@ import OrderActions from './OrderActions';
 function OrderItem(props) {
 
   const onPressView = () => {
-    alert('View');
+    NavigationService.navigate('Modal');
   };
 
   const { themedStyle, data } = props;
   const { name, type, breed, customerName, statusTime, status, requests, imageUrl } = data;
-
 
   const innerComponent = () => (
     <Fragment>
@@ -66,7 +65,7 @@ function OrderItem(props) {
   );
 }
 
-export default withStyles(memo(OrderItem), () => ({
+export default withStyles(OrderItem, () => ({
   container: {
     minHeight: 150,
     overflow: 'hidden',
