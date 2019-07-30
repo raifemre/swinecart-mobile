@@ -1,71 +1,72 @@
-import React, { memo } from 'react';
-
+import React, { Fragment, memo } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import {
   withStyles
 } from 'react-native-ui-kitten/theme';
 
-import { Button, Avatar } from 'react-native-ui-kitten';
+import { Avatar } from 'react-native-ui-kitten';
 
 import { Block } from '../../../shared/components';
 
-import NavigationService from '../../../services/navigation';
-
-import { textStyles, colors, sizes } from '../../../constants/theme';
+import { colors } from '../../../constants/theme';
 
 import ProductInfo from './ProductInfo';
 import OrderStatus from './OrderStatus';
-
-import { urls } from '../../../constants/randomImage';
-import Chance from 'chance';
-const chance = Chance();
+import OrderActions from './OrderActions';
 
 function OrderItem(props) {
 
   const onPressView = () => {
-
+    alert('View');
   };
 
   const { themedStyle, data } = props;
-  const { name, type, breed, customerName, statusTime, status, requests } = data;
+  const { name, type, breed, customerName, statusTime, status, requests, imageUrl } = data;
+
+
+  const innerComponent = () => (
+    <Fragment>
+      <Block row padding style={themedStyle.container}>
+        <Avatar
+          shape='round'
+          source={{ uri: imageUrl }}
+          style={themedStyle.imageStyle}
+        />
+        <Block paddingHorizontal>
+          <ProductInfo name={name} type={type} breed={breed} />
+          <OrderStatus
+            customerName={customerName}
+            statusTime={statusTime}
+            status={status}
+            requests={requests}
+          />
+          <OrderActions status={status} />
+        </Block>
+      </Block>
+    </Fragment>
+  );
 
   return (
-    <Block row padding style={themedStyle.container}>
-      <Avatar
-        shape='round'
-        source={{ uri: chance.pickone(urls) }}
-        style={themedStyle.imageStyle}
-      />
-      <Block paddingHorizontal>
-        <ProductInfo name={name} type={type} breed={breed} />
-        <OrderStatus
-          customerName={customerName}
-          statusTime={statusTime}
-          status={status}
-          requests={requests}
-        />
-        <Button
-          size='medium'
+    <Fragment>
+      {
+        status !== 'requested' && 
+
+        <TouchableOpacity
+          activeOpacity={0.65}
           onPress={onPressView}
-          style={themedStyle.buttonStyle}
         >
-          Send for Delivery
-        </Button>
-        <Button
-          size='medium'
-          status='danger'
-          onPress={onPressView}
-          style={themedStyle.buttonStyle}
-        >
-          Cancel Transaction
-        </Button>
-      </Block>
-    </Block>
+          {innerComponent()}
+        </TouchableOpacity>
+      }
+      {
+        status === 'requested' && innerComponent()
+      }
+    </Fragment>
   );
 }
 
-export default memo(withStyles(OrderItem, () => ({
+export default withStyles(memo(OrderItem), () => ({
   container: {
     minHeight: 150,
     overflow: 'hidden',
@@ -79,17 +80,4 @@ export default memo(withStyles(OrderItem, () => ({
     borderWidth: 1,
     borderColor: colors.gray2
   },
-  statusStyle: {
-    marginTop: sizes.margin / 2,
-    color: '#000000',
-    fontSize: 14,
-  },
-  requestsStyle: {
-    color: colors.gray3,
-    fontSize: 14,
-  },
-  buttonStyle: {
-    marginTop: sizes.margin / 4,
-    borderWidth: 0,
-  }
-})));
+}));

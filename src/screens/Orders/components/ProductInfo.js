@@ -30,7 +30,7 @@ function ProductInfo(props) {
   );
 }
 
-export default memo(withStyles(ProductInfo, () => ({
+export default withStyles(memo(ProductInfo), () => ({
   nameStyle: {
     color: '#000000',
     fontSize: 16
@@ -38,4 +38,4 @@ export default memo(withStyles(ProductInfo, () => ({
   typeStyle: {
     fontSize: 14
   }
-})), true);
+}));

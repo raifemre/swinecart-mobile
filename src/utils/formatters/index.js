@@ -1,5 +1,18 @@
-import { upper } from 'lodash';
+import { 
+  parseInt
+} from 'lodash';
+
+import { format } from 'date-fns';
 
 export function capitalize() {
 
+}
+
+export function addS(value, string) {
+  return parseInt(value) > 1 ? `${string}s` : string;
+}
+
+export function formatStatusTime(date) {
+  // return date;
+  return format(date, 'MMM D YYYY (ddd), h:mm A');
 }
