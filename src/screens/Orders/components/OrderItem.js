@@ -6,6 +6,8 @@ import {
 } from 'react-native-ui-kitten/theme';
 
 import { Avatar } from 'react-native-ui-kitten';
+
+import { ModalService } from '../../../services';
 import { Block } from '../../../shared/components';
 import { colors } from '../../../constants/theme';
 
@@ -16,7 +18,7 @@ import OrderActions from './OrderActions';
 function OrderItem(props) {
 
   const onPressView = () => {
-
+    ModalService.showModal('orderDetails', { text: 'hello' });
   };
 
   const { themedStyle, data } = props;

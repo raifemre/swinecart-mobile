@@ -4,7 +4,9 @@ import { withStyles } from 'react-native-ui-kitten/theme';
 
 import { Button } from 'react-native-ui-kitten';
 
-import NavigationService from '../../../services/navigation';
+import {
+  NavigationService
+} from '../../../services';
 
 import { textStyles, sizes } from '../../../constants/theme';
 

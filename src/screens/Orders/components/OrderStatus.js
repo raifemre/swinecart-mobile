@@ -8,16 +8,16 @@ import {
   addS, formatStatusTime
 } from '../../../utils/formatters';
 
-const statusTexts = {
-  'requested'  : ['Requested', 'by'],
-  'reserved'   : ['Reserved', 'to'],
-  'onDelivery' : ['On Delivery', 'to'],
-  'sold'       : ['Sold', 'to'],
-}
-
 function OrderStatus(props) {
 
   const { themedStyle, status, customerName, statusTime, requests } = props;
+
+  const statusTexts = {
+    'requested': ['Requested', 'by'],
+    'reserved': ['Reserved', 'to'],
+    'onDelivery': ['On Delivery', 'to'],
+    'sold': ['Sold', 'to'],
+  };
 
   return (
     <Fragment>

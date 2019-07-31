@@ -1,10 +1,15 @@
+class Modal {
 
-let _navigator;
+  modalContainer;
 
-const navigation = {
-  setTopLevelNavigator(ref) {
-    _navigator = ref;
-  },
+  setModalContainerRef = ref => {
+    this.modalContainer = ref;
+  }
+  
+  showModal = (id, props) => {
+    this.modalContainer.showModal(id, props);
+  }
+
 }
 
-export default navigation;
+export default new Modal();

@@ -1,15 +1,21 @@
 import React, { memo, useState } from 'react';
 import { View } from 'react-native';
 import Modal from 'react-native-modal';
-
 import { Text } from 'react-native-ui-kitten';
 
-function OrderDetailsModal(props) {
+function OrderDetails (props) {
 
   const [ isVisible, setVisible ] = useState(true);
 
-  const hideModal = () => {
+  const { text } = props;
+
+  hideModal = () => {
     setVisible(false);
+    props.hideModal();
+  }
+
+  showModal = () => {
+
   }
 
   return (
@@ -22,7 +28,7 @@ function OrderDetailsModal(props) {
       onBackButtonPress={hideModal}
     >
       <View style={{ backgroundColor: '#ffffff', }}>
-        <Text>I am the modal content!</Text>
+        <Text>{text}</Text>
       </View>
     </Modal>
   );
@@ -30,4 +36,4 @@ function OrderDetailsModal(props) {
 }
 
 
-export default memo(OrderDetailsModal);
+export default memo(OrderDetails);
