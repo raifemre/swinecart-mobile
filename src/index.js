@@ -3,7 +3,10 @@ import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 
 import RootNavigator from './navigation/navigators';
-import NavigationService from './services/navigation';
+import {
+  NavigationService
+} from './services';
+
 import { colors } from './constants/theme';
 
 export default () => (

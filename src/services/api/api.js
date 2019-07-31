@@ -1,9 +1,9 @@
 import apisauce from 'apisauce';
 import { API_URL } from 'react-native-dotenv';
 
-import CommonStore from '../mobx/stores/CommonStore';
+import CommonStore from '../../mobx/stores/CommonStore';
 
-import Navigation from './navigation';
+import Navigation from '../navigation';
 
 const instance = apisauce.create({
   baseURL: API_URL,

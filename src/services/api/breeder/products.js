@@ -1,6 +1,6 @@
 import API from '../api';
 
-import transform from '../../transformers';
+import transform from '../../../transformers';
 
 const URL_PREFIX = '/breeder/products'
 
