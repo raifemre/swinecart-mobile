@@ -9,13 +9,16 @@ function OrderDetails (props) {
 
   const { text } = props;
 
-  hideModal = () => {
+  const hideModal = () => {
     setVisible(false);
-    props.hideModal();
   }
 
-  showModal = () => {
+  const showModal = () => {
 
+  }
+
+  const onModalHide = () => {
+    props.hideModal();
   }
 
   return (
@@ -26,8 +29,10 @@ function OrderDetails (props) {
       isVisible={isVisible}
       onBackdropPress={hideModal}
       onBackButtonPress={hideModal}
+      onModalHide={onModalHide}
+      style={{ margin: 0 }}
     >
-      <View style={{ backgroundColor: '#ffffff', }}>
+      <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
         <Text>{text}</Text>
       </View>
     </Modal>
