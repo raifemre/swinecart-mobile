@@ -68,6 +68,7 @@ function OrderItem(props) {
 export default withStyles(memo(OrderItem), () => ({
   container: {
     minHeight: 150,
+    // maxHeight: 250,
     overflow: 'hidden',
     backgroundColor: colors.white1,
     borderBottomWidth: 1,
