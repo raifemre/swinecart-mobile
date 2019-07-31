@@ -50,7 +50,7 @@ function OrderItem(props) {
         status !== 'requested' && 
 
         <TouchableOpacity
-          activeOpacity={0.65}
+          activeOpacity={0.50}
           onPress={onPressView}
         >
           {innerComponent()}
@@ -63,7 +63,7 @@ function OrderItem(props) {
   );
 }
 
-export default withStyles(OrderItem, () => ({
+export default withStyles(memo(OrderItem), () => ({
   container: {
     minHeight: 150,
     overflow: 'hidden',
