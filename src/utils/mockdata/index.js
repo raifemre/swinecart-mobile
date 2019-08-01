@@ -19,6 +19,9 @@ export function createRandomOrder() {
     statusTime: faker.date.past(),
 
     customerName: faker.name.findName(),
+    dateNeeded: faker.date.future(),
+    requestQuantity: random(1, 99),
+    specialRequest: faker.lorem.paragraphs()
   };
 }
 

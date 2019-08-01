@@ -18,7 +18,7 @@ import OrderActions from './OrderActions';
 function OrderItem(props) {
 
   const onPressView = () => {
-    ModalService.showModal('orderDetails', { text: 'hello' });
+    ModalService.showModal('orderDetails', { data });
   };
 
   const { themedStyle, data } = props;

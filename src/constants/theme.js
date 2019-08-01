@@ -67,6 +67,7 @@ const textStyles = {
     fontFamily: 'OpenSans-Bold',
     fontWeight: 'normal',
     fontSize: 18,
+    lineHeight: 23,
     letterSpacing: 1
   },
   subtitle: {

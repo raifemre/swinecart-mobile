@@ -16,3 +16,7 @@ export function formatStatusTime(date) {
   // return date;
   return format(date, 'MMM D YYYY (ddd), h:mm A');
 }
+
+export function formatDateNeeded(date) {
+  return format(date, 'MMMM D, YYYY')
+}

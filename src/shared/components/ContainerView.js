@@ -7,12 +7,12 @@ import { colors, sizes } from '../../constants/theme';
 
 function ContainerView(props) {
 
-  const { themedStyle, backgroundColor = colors.gray2, ...restProps } = props;
+  const { themedStyle, backgroundColor = colors.gray2, contentContainerStyle, ...restProps } = props;
 
   return (
     <ScrollView
-      contentContainerStyle={themedStyle.contentContainer}
-      style={[themedStyle.container, { backgroundColor }]}
+      contentContainerStyle={[themedStyle.contentContainer, contentContainerStyle]}
+      style={[themedStyle.container, { backgroundColor },]}
       bounces={false}
       bouncesZoom={false}
       bounces={false}
