@@ -13,10 +13,10 @@ function OrderStatus(props) {
   const { themedStyle, status, customerName, statusTime, requests } = props;
 
   const statusTexts = {
-    'requested': ['Requested', 'by'],
-    'reserved': ['Reserved', 'to'],
-    'onDelivery': ['On Delivery', 'to'],
-    'sold': ['Sold', 'to'],
+    'requested': 'Requested',
+    'reserved': 'Reserved',
+    'onDelivery': 'On Delivery',
+    'sold': 'Sold',
   };
 
   return (
@@ -25,7 +25,7 @@ function OrderStatus(props) {
         category='s2'
         style={[textStyles.label, themedStyle.statusStyle]}
       >
-        {statusTexts[status][0]}
+        {statusTexts[status]}
       </Text>
       {
         status === 'requested' &&

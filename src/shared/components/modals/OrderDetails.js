@@ -3,8 +3,9 @@ import Modal from 'react-native-modal';
 import { Button, Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { sizes, textStyles, colors } from '../../../constants/theme';
+import { NavigationService } from '../../../services';
 
+import { sizes, textStyles, colors } from '../../../constants/theme';
 import Block from '../Block';
 import ContainerView from '../ContainerView';
 
@@ -17,7 +18,6 @@ function OrderDetails (props) {
   const { themedStyle, data } = props;
   const { specialRequest, customerName, requestQuantity, dateNeeded } = data;
 
-
   const hideModal = () => {
     setVisible(false);
   }
@@ -28,6 +28,15 @@ function OrderDetails (props) {
 
   const onModalHide = () => {
     props.hideModal();
+  }
+
+  const onPressMessage = () => {
+    NavigationService.navigate('InboxStack');
+    hideModal();
+  }
+
+  const onPressClose = () => {
+    hideModal();
   }
 
   return (
@@ -69,15 +78,26 @@ function OrderDetails (props) {
             <Text style={themedStyle.dataStyle}>{specialRequest}</Text>
           </Block>
         </ContainerView>
-        <Block flex={1} center right style={themedStyle.headerFooterStyle}>
+        <Block flex={1} row center right style={themedStyle.headerFooterStyle}>
           <Block flex={1} center middle>
-            <Button 
-              size='medium' 
+            <Button
+              size='medium'
+              onPress={onPressClose}
               appearance='ghost'
-              onPress={hideModal}
-              textStyle={themedStyle.buttonTextStyle}
+              style={themedStyle.buttonStyle}
+              textStyle={themedStyle.closeTextStyle}
             >
               Close
+            </Button>
+          </Block>
+          <Block flex={1} center middle>
+            <Button
+              size='medium'
+              onPress={onPressMessage}
+              style={themedStyle.buttonStyle}
+              textStyle={themedStyle.messageCustomerTextStyle}
+            >
+              Message
             </Button>
           </Block>
         </Block>
@@ -101,7 +121,14 @@ export default withStyles(memo(OrderDetails), () => ({
   containerViewStyle: {
     paddingHorizontal: sizes.padding
   },
-  buttonTextStyle: {
+  buttonStyle: {
+    borderWidth: 0,
+  },
+  messageCustomerTextStyle: {
+    ...textStyles.button,
+    color: '#ffffff',
+  },
+  closeTextStyle: {
     ...textStyles.button,
     color: '#000000'
   },
