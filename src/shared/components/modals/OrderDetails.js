@@ -102,6 +102,7 @@ export default withStyles(memo(OrderDetails), () => ({
     paddingHorizontal: sizes.padding
   },
   buttonTextStyle: {
+    ...textStyles.button,
     color: '#000000'
   },
   labelStyle: {
