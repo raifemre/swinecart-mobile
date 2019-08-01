@@ -95,11 +95,11 @@ export default withStyles(memo(OrderDetails), () => ({
   },
   containerStyle: {
     backgroundColor: '#ffffff',
-    maxHeight: 400,
+    maxHeight: 450,
     borderRadius: 5
   },
   containerViewStyle: {
-    paddingHorizontal: sizes.padding,
+    paddingHorizontal: sizes.padding
   },
   buttonTextStyle: {
     color: '#000000'

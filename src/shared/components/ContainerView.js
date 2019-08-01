@@ -29,7 +29,8 @@ function ContainerView(props) {
 
 export default memo(withStyles(ContainerView, () => ({
   container: {
-    flex: 1
+    flex: 1,
+    width: '100%'
   },
   contentContainer: {
     paddingBottom: sizes.padding,
