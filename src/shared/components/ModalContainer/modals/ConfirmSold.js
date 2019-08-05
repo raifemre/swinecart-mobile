@@ -36,7 +36,7 @@ function ConfirmSold(props) {
   };
 
   const confirmText = `Confirm that the Product ${productName} was sold to ${customerName}?`;
-  const confirmButtonText = 'Yes, it is sold';
+  const primaryActionText = 'Yes, it is sold';
 
   return (
     <Modal
@@ -76,7 +76,7 @@ function ConfirmSold(props) {
               style={themedStyle.buttonStyle}
               textStyle={themedStyle.primaryActionTextStyle}
             >
-              {confirmButtonText}
+              {primaryActionText}
             </Button>
           </Block>
         </Block>
@@ -111,14 +111,11 @@ export default withStyles(memo(ConfirmSold), () => ({
   confirmTextStyle: {
     ...textStyles.subtitle,
   },
-  blockStyle: {
+  contentStyle: {
     width: '100%',
   },
-  contentStyle: {
-    ...this.blockStyle,
-  },
   footerStyle: {
-    ...this.blockStyle,
+    width: '100%',
     maxHeight: 56,
     padding: sizes.padding / 2,
   }

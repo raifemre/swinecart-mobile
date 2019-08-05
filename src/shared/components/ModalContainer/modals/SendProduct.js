@@ -12,21 +12,19 @@ import Block from '../../Block';
 function SendProduct(props) {
 
   const today = new Date();
+
+  // State
+
   const [isVisible, setVisible] = useState(true);
   const [isCalendarVisible, setCalendarVisible] = useState(false);
   const [deliveryDate, setDeliveryDate] = useState(today);
   const [markedDates, setMarkedDates] = useState(formatMarkedDate(today));
 
-  const { themedStyle, customerName, productName } = props;
-  // const { specialRequest, customerName, requestQuantity, dateNeeded } = data;
-
   const hideModal = () => {
     setVisible(false);
   };
 
-  const showModal = () => {
-
-  };
+  // Modal LifeCycle Handlers
 
   const onModalHide = () => {
     props.hideModal();
@@ -36,7 +34,13 @@ function SendProduct(props) {
     setCalendarVisible(true);
   };
 
-  const onPressSend = () => {
+  // Props
+
+  const { themedStyle } = props;
+
+  // Event Handlers
+
+  const onPressPrimaryAction = () => {
     hideModal();
   };
 
@@ -49,6 +53,7 @@ function SendProduct(props) {
     setMarkedDates({ [dateString]: { selected: true } });
   };
 
+  const primaryActionText = 'Yes, deliver it';
 
   return (
     <Modal
@@ -57,8 +62,6 @@ function SendProduct(props) {
       backdropOpacity={0.60}
       useNativeDriver={true}
       isVisible={isVisible}
-      onSwipeComplete={hideModal}
-      swipeDirection='down'
       onBackdropPress={hideModal}
       onBackButtonPress={hideModal}
       onModalHide={onModalHide}
@@ -66,7 +69,7 @@ function SendProduct(props) {
       style={themedStyle.modalStyle}
     >
       <Block center middle style={themedStyle.containerStyle}>
-        <Block flex={1} center left padding style={themedStyle.headerFooterStyle}>
+        <Block flex={1} center left style={themedStyle.headerStyle}>
           <Text style={textStyles.headline}>Deliver Product to Customer?</Text>
         </Block>
         <Block flex={1} center padding style={{ width: '100%' }}>
@@ -90,8 +93,8 @@ function SendProduct(props) {
             }
           </Block>
         </Block>
-        <Block flex={1} row center paddingHorizontal paddingBottom right style={themedStyle.headerFooterStyle}>
-          <Block flex={1} middle>
+        <Block flex={1} row right style={themedStyle.footerStyle}>
+          <Block flex={1} center middle>
             <Button
               size='medium'
               onPress={onPressClose}
@@ -105,11 +108,11 @@ function SendProduct(props) {
           <Block flex={1} center middle>
             <Button
               size='medium'
-              onPress={onPressSend}
+              onPress={onPressPrimaryAction}
               style={themedStyle.buttonStyle}
-              textStyle={themedStyle.messageCustomerTextStyle}
+              textStyle={themedStyle.primaryActionTextStyle}
             >
-              Yes, deliver it
+              {primaryActionText}
             </Button>
           </Block>
         </Block>
@@ -123,20 +126,12 @@ function SendProduct(props) {
 export default withStyles(memo(SendProduct), () => ({
   modalStyle: {
     flex: 1,
-    justifyContent: 'flex-end',
-    margin: 0,
-    // margin: sizes.margin
-    // margin: sizes.margin
+    margin: sizes.margin
   },
   containerStyle: {
     backgroundColor: '#ffffff',
     maxHeight: 500,
-    // borderRadius: 5
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-  },
-  containerViewStyle: {
-    paddingHorizontal: sizes.padding
+    borderRadius: 5
   },
   buttonStyle: {
     borderWidth: 0,
@@ -154,8 +149,15 @@ export default withStyles(memo(SendProduct), () => ({
     fontSize: 14,
     color: colors.gray3
   },
-  headerFooterStyle: {
-    maxHeight: 56, width: '100%'
+  headerStyle: {
+    maxHeight: 39,
+    padding: sizes.padding / 2,
+    width: '100%',
+  },
+  footerStyle: {
+    width: '100%',
+    maxHeight: 56,
+    padding: sizes.padding / 2,
   },
   calendarStyle: {
     backgroundColor: '#ffffff',

@@ -36,7 +36,7 @@ function CancelTransaction(props) {
   };
 
   const confirmText = `Cancel transaction on Product ${productName} to ${customerName}?`;
-  const confirmButtonText = 'Yes, cancel it';
+  const primaryActionText = 'Yes, cancel it';
 
   return (
     <Modal
@@ -77,7 +77,7 @@ function CancelTransaction(props) {
               style={themedStyle.buttonStyle}
               textStyle={themedStyle.primaryActionTextStyle}
             >
-              {confirmButtonText}
+              {primaryActionText}
             </Button>
           </Block>
         </Block>
@@ -112,14 +112,11 @@ export default withStyles(memo(CancelTransaction), () => ({
   confirmTextStyle: {
     ...textStyles.subtitle,
   },
-  blockStyle: {
+  contentStyle: {
     width: '100%',
   },
-  contentStyle: {
-    ...this.blockStyle,
-  },
   footerStyle: {
-    ...this.blockStyle,
+    width: '100%',
     maxHeight: 56,
     padding: sizes.padding / 2,
   }

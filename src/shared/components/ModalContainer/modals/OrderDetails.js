@@ -13,31 +13,36 @@ import { formatDateNeeded } from '../../../../utils/formatters';
 
 function OrderDetails (props) {
 
-  const [ isVisible, setVisible ] = useState(true);
+  // State
 
-  const { themedStyle, data } = props;
-  const { specialRequest, customerName, requestQuantity, dateNeeded } = data;
+  const [isVisible, setVisible] = useState(true);
 
   const hideModal = () => {
     setVisible(false);
-  }
+  };
 
-  const showModal = () => {
-
-  }
+  // Modal LifeCycle Handlers
 
   const onModalHide = () => {
     props.hideModal();
-  }
+  };
 
-  const onPressMessage = () => {
-    NavigationService.navigate('InboxStack');
+  // Props
+  const { themedStyle, data } = props;
+  const { specialRequest, customerName, requestQuantity, dateNeeded } = data;
+
+  // Button Event Handlers
+
+  const onPressPrimaryAction = () => {
     hideModal();
-  }
+    NavigationService.navigate('InboxStack');
+  };
 
   const onPressClose = () => {
     hideModal();
-  }
+  };
+
+  const primaryActionText = 'Message Customer';
 
   return (
     <Modal
@@ -53,7 +58,7 @@ function OrderDetails (props) {
       style={themedStyle.modalStyle}
     >
       <Block center middle style={themedStyle.containerStyle}>
-        <Block flex={1} center left padding style={themedStyle.headerFooterStyle}>
+        <Block flex={1} center left style={themedStyle.headerStyle}>
           <Text style={textStyles.headline}>Reservation Details</Text>
         </Block>
         <ContainerView 
@@ -78,7 +83,7 @@ function OrderDetails (props) {
             <Text style={themedStyle.dataStyle}>{specialRequest}</Text>
           </Block>
         </ContainerView>
-        <Block flex={1} row center right style={themedStyle.headerFooterStyle}>
+        <Block flex={1} row right style={themedStyle.footerStyle}>
           <Block flex={1} center middle>
             <Button
               size='medium'
@@ -93,11 +98,11 @@ function OrderDetails (props) {
           <Block flex={1} center middle>
             <Button
               size='medium'
-              onPress={onPressMessage}
+              onPress={onPressPrimaryAction}
               style={themedStyle.buttonStyle}
-              textStyle={themedStyle.messageCustomerTextStyle}
+              textStyle={themedStyle.primaryActionTextStyle}
             >
-              Message
+              {primaryActionText}
             </Button>
           </Block>
         </Block>
@@ -141,7 +146,14 @@ export default withStyles(memo(OrderDetails), () => ({
     ...textStyles.caption1,
     fontSize: 14,
   },
-  headerFooterStyle: {
-    maxHeight: 56, width: '100%'
+  headerStyle: {
+    maxHeight: 39,
+    padding: sizes.padding / 2,
+    width: '100%',
+  },
+  footerStyle: {
+    width: '100%',
+    maxHeight: 56,
+    padding: sizes.padding / 2,
   }
 }));
