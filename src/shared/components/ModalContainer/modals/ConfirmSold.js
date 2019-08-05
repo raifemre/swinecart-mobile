@@ -3,32 +3,40 @@ import Modal from 'react-native-modal';
 import { Button, Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { NavigationService } from '../../../../services';
-
 import { sizes, textStyles, colors } from '../../../../constants/theme';
 import Block from '../../Block';
 
 function ConfirmSold(props) {
+  // State
 
   const [isVisible, setVisible] = useState(true);
 
-  const { themedStyle, customerName, productName } = props;
-
   const hideModal = () => {
     setVisible(false);
-  }
+  };
+
+  // Modal LifeCycle Handlers
 
   const onModalHide = () => {
     props.hideModal();
-  }
+  };
+
+  // Props
+  const { themedStyle, data } = props;
+  const { customerName, productName } = data;
+  
+  // Button Event Handlers
 
   const onPressPrimaryAction = () => {
     hideModal();
-  }
+  };
 
   const onPressClose = () => {
     hideModal();
-  }
+  };
+
+  const confirmText = `Confirm that the Product ${productName} was sold to ${customerName}?`;
+  const confirmButtonText = 'Yes, it is sold';
 
   return (
     <Modal
@@ -45,8 +53,8 @@ function ConfirmSold(props) {
     >
       <Block center middle style={themedStyle.containerStyle}>
         <Block flex={1} middle padding style={themedStyle.contentStyle}>
-          <Text style={themedStyle.modalTextStyle}>
-            Confirm that the Product {productName} was sold to {customerName}?
+          <Text style={themedStyle.confirmTextStyle}>
+            {confirmText}
           </Text>
         </Block>
         <Block flex={1} row right style={themedStyle.footerStyle}>
@@ -68,7 +76,7 @@ function ConfirmSold(props) {
               style={themedStyle.buttonStyle}
               textStyle={themedStyle.primaryActionTextStyle}
             >
-              Yes, it is sold
+              {confirmButtonText}
             </Button>
           </Block>
         </Block>
@@ -100,7 +108,7 @@ export default withStyles(memo(ConfirmSold), () => ({
     ...textStyles.button,
     color: colors.gray3
   },
-  modalTextStyle: {
+  confirmTextStyle: {
     ...textStyles.subtitle,
   },
   blockStyle: {

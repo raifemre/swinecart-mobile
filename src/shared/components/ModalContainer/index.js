@@ -14,11 +14,11 @@ class ModalContainer extends PureComponent {
     });
   }
 
-  showModal = (id, props) => {
+  showModal = (id, data) => {
     const Modal = modals[id];
 
     this.setState({
-      CurrentModal: () => <Modal hideModal={this.hideModal} {...props} />
+      CurrentModal: () => <Modal hideModal={this.hideModal} data={data} />
     });
   }
 
