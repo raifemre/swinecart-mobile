@@ -8,7 +8,7 @@ import { colors } from '../../../constants/theme'
 import OrderItem from './OrderItem';
 
 import { createRandomOrders } from '../../../utils/mockdata';
-const orders = createRandomOrders(100);
+const orders = createRandomOrders(4);
 
 function OrdersList(props) {
   const renderItem = ({ item }) => {
@@ -26,8 +26,8 @@ function OrdersList(props) {
       data={orders}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
-      initialNumToRender={5}
-      maxToRenderPerBatch={6}
+      initialNumToRender={4}
+      maxToRenderPerBatch={5}
       showsVerticalScrollIndicator={false}
       style={props.themedStyle.container}
     />

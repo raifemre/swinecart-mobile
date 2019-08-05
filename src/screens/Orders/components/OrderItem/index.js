@@ -7,9 +7,9 @@ import {
 
 import { Avatar } from 'react-native-ui-kitten';
 
-import { ModalService } from '../../../services';
-import { Block } from '../../../shared/components';
-import { colors } from '../../../constants/theme';
+import { ModalService } from '../../../../services';
+import { Block } from '../../../../shared/components';
+import { colors } from '../../../../constants/theme';
 
 import ProductInfo from './ProductInfo';
 import OrderStatus from './OrderStatus';

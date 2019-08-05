@@ -6,7 +6,7 @@ import {
 
 import { Text } from 'react-native-ui-kitten';
 
-import { textStyles } from '../../../constants/theme';
+import { textStyles } from '../../../../constants/theme';
 
 function ProductInfo(props) {
 

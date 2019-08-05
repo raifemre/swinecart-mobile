@@ -2,11 +2,11 @@ import React, { Fragment, memo } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import { Text } from 'react-native-ui-kitten';
 
-import { textStyles, colors, sizes } from '../../../constants/theme';
+import { textStyles, colors, sizes } from '../../../../constants/theme';
 
 import {
   addS, formatStatusTime
-} from '../../../utils/formatters';
+} from '../../../../utils/formatters';
 
 function OrderStatus(props) {
 

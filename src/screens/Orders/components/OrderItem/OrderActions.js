@@ -6,9 +6,9 @@ import { Button } from 'react-native-ui-kitten';
 
 import {
   NavigationService, ModalService
-} from '../../../services';
+} from '../../../../services';
 
-import { textStyles, sizes } from '../../../constants/theme';
+import { textStyles, sizes } from '../../../../constants/theme';
 
 function OrderActions(props) {
 
