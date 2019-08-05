@@ -5118,6 +5118,15 @@ react-native-button@^2.3.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-calendars@^1.204.0:
+  version "1.204.0"
+  resolved "https://registry.yarnpkg.com/react-native-calendars/-/react-native-calendars-1.204.0.tgz#685725b060e9a2d8a5b8ea1755026503d001487e"
+  integrity sha512-OTcO7CPjmEUJ9IHJIS5C2jE+iwKeeXneSVgvtqhSzMx8/PgbzQvJMXSLZ16CFh2kU6tKbHAhocHHU7Ld89N+fg==
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.5.10"
+    xdate "^0.8.0"
+
 react-native-communications@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
@@ -6694,6 +6703,11 @@ xcode@^2.0.0:
   dependencies:
     simple-plist "^1.0.0"
     uuid "^3.3.2"
+
+xdate@^0.8.0:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/xdate/-/xdate-0.8.2.tgz#d7b033c00485d02695baf0044f4eacda3fc961a3"
+  integrity sha1-17AzwASF0CaVuvAET06s2j/JYaM=
 
 xml-name-validator@^3.0.0:
   version "3.0.0"

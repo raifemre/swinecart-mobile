@@ -40,7 +40,7 @@ function OrderItem(props) {
             status={status}
             requests={requests}
           />
-          <OrderActions status={status} />
+          <OrderActions status={status} productName={name} customerName={customerName} />
         </Block>
       </Block>
     </Fragment>

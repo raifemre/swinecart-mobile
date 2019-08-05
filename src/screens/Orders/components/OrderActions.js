@@ -5,12 +5,14 @@ import { withStyles } from 'react-native-ui-kitten/theme';
 import { Button } from 'react-native-ui-kitten';
 
 import {
-  NavigationService
+  NavigationService, ModalService
 } from '../../../services';
 
 import { textStyles, sizes } from '../../../constants/theme';
 
 function OrderActions(props) {
+
+  const { themedStyle, status, customerName, productName } = props;
 
   const onPressView = () => {
     NavigationService.navigate('Requests');
@@ -21,14 +23,13 @@ function OrderActions(props) {
   };
 
   const onPressSend = () => {
-    alert('Send for Delivery');
+    ModalService.showModal('sendProduct', { customerName, productName });
   };
 
   const onPressConfirm = () => {
     alert('Confirm');
   };
 
-  const { themedStyle, status } = props;
 
   return (
     <Fragment>

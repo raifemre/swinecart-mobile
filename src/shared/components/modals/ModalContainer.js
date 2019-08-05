@@ -1,11 +1,13 @@
 import React, { PureComponent, Fragment } from 'react';
 
 import OrderDetails from './OrderDetails';
+import SendProduct from './SendProduct';
 
 class ModalContainer extends PureComponent {
 
   modals = {
-    'orderDetails' : OrderDetails
+    'orderDetails' : OrderDetails,
+    'sendProduct': SendProduct,
   }
 
   state = {
