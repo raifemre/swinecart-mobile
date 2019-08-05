@@ -8,4 +8,4 @@ export { default as ContainerView } from './ContainerView';
 export { default as Icon } from './Icon';
 export { default as InfoRow } from './InfoRow';
 export { default as InfoSectionTitle } from './InfoSectionTitle';
-export { default as ModalContainer } from './modals/ModalContainer';
+export { default as ModalContainer } from './ModalContainer';

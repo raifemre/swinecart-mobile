@@ -8,7 +8,7 @@ import {
   NavigationService, ModalService
 } from './services';
 
-import ModalContainer from './shared/components/modals/ModalContainer';
+import ModalContainer from './shared/components/ModalContainer';
 
 import { colors } from './constants/theme';
 

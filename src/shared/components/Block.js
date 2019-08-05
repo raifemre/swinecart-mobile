@@ -46,6 +46,8 @@ function Block(props) {
 const styles = StyleSheet.create({
   block: {
     flex: 1,
+    margin: 0,
+    padding: 0
   },
   row: {
     flexDirection: 'row'

@@ -3,13 +3,13 @@ import Modal from 'react-native-modal';
 import { Button, Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { NavigationService } from '../../../services';
+import { NavigationService } from '../../../../services';
 
-import { sizes, textStyles, colors } from '../../../constants/theme';
-import Block from '../Block';
-import ContainerView from '../ContainerView';
+import { sizes, textStyles, colors } from '../../../../constants/theme';
+import Block from '../../Block';
+import ContainerView from '../../ContainerView';
 
-import { formatDateNeeded } from '../../../utils/formatters';
+import { formatDateNeeded } from '../../../../utils/formatters';
 
 function OrderDetails (props) {
 
@@ -130,7 +130,7 @@ export default withStyles(memo(OrderDetails), () => ({
   },
   closeTextStyle: {
     ...textStyles.button,
-    color: '#000000'
+    color: colors.gray3
   },
   labelStyle: {
     ...textStyles.caption1,

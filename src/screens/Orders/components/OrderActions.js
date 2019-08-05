@@ -19,11 +19,11 @@ function OrderActions(props) {
   };
 
   const onPressCancel = () => {
-    alert('Cancel Transaction');
+    ModalService.showModal('CancelTransaction', { customerName, productName });
   };
 
   const onPressSend = () => {
-    ModalService.showModal('sendProduct', { customerName, productName });
+    ModalService.showModal('SendProduct', { customerName, productName });
   };
 
   const onPressConfirm = () => {

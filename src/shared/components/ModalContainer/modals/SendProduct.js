@@ -4,17 +4,18 @@ import { Calendar } from 'react-native-calendars';
 import { Button, Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { formatDeliveryDate, formatMarkedDate } from '../../../utils/formatters';
+import { formatDeliveryDate, formatMarkedDate } from '../../../../utils/formatters';
 
-import { sizes, textStyles, colors } from '../../../constants/theme';
-import Block from '../Block';
+import { sizes, textStyles, colors } from '../../../../constants/theme';
+import Block from '../../Block';
 
 function SendProduct(props) {
 
+  const today = new Date();
   const [isVisible, setVisible] = useState(true);
   const [isCalendarVisible, setCalendarVisible] = useState(false);
-  const [deliveryDate, setDeliveryDate] = useState(new Date());
-  const [markedDates, setMarkedDates] = useState(formatMarkedDate(new Date()));
+  const [deliveryDate, setDeliveryDate] = useState(today);
+  const [markedDates, setMarkedDates] = useState(formatMarkedDate(today));
 
   const { themedStyle, customerName, productName } = props;
   // const { specialRequest, customerName, requestQuantity, dateNeeded } = data;
@@ -76,6 +77,7 @@ function SendProduct(props) {
               isCalendarVisible && <Calendar
                 style={themedStyle.calendarContainerStyle}
                 theme={themedStyle.calendarStyle}
+                minDate={today}
                 markedDates={markedDates}
                 onDayPress={onDayPress}
                 monthFormat={'MMMM yyyy'}
