@@ -27,7 +27,7 @@ function OrderActions(props) {
   };
 
   const onPressConfirm = () => {
-    alert('Confirm');
+    ModalService.showModal('ConfirmSold', { customerName, productName });
   };
 
 

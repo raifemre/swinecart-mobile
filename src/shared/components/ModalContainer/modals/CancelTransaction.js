@@ -79,7 +79,6 @@ function CancelTransaction(props) {
 
 }
 
-
 export default withStyles(memo(CancelTransaction), () => ({
   modalStyle: {
     flex: 1,
