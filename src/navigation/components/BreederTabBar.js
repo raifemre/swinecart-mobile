@@ -6,20 +6,18 @@ import { shadowStyles } from '../../constants/theme';
 
 import BottomNavTab from '../../shared/components/navigation/BottomNavTab';
 
-function BreederTabBar(props) {
+function BreederTabBar({ navigation }) {
 
   const onTabSelect = selectedIndex => {
-    const { [selectedIndex]: selectedRoute } = props.navigation.state.routes;
-    props.navigation.navigate(selectedRoute.routeName);
+    const { [selectedIndex]: selectedRoute } = navigation.state.routes;
+    navigation.navigate(selectedRoute.routeName);
   };
-
-  console.log('Tab Bar Render');
 
   return (
     <BottomNavigation
       style={shadowStyles.shadow1}
-      // appearance='noIndicator'
-      selectedIndex={0}
+      appearance='noIndicator'
+      selectedIndex={navigation.state.index}
       onSelect={onTabSelect}
     >
       <BottomNavTab title='Products' iconName='shopping-bag' />
@@ -32,4 +30,8 @@ function BreederTabBar(props) {
 
 };
 
-export default memo(BreederTabBar);
+export default memo(BreederTabBar, (props, nextProps) => {
+  const { navigation: { state: { index: prevIndex } } } = props;
+  const { navigation: { state: { index: nextIndex } } } = nextProps;
+  return prevIndex === nextIndex;
+});

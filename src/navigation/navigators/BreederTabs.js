@@ -26,8 +26,8 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'ProductsStack',
-  // tabBarComponent: BreederTabBar,
+  initialRouteName: 'OrdersStack',
+  tabBarComponent: BreederTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },
   lazy: true,

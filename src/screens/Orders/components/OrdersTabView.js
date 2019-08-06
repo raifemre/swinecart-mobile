@@ -1,18 +1,18 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { colors } from '../../../constants/theme';
+import { colors, textStyles } from '../../../constants/theme';
 
 import OrdersList from './OrdersList';
 
-export default class OrdersTabView extends PureComponent {
+class OrdersTabView extends PureComponent {
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'Requested' },
-      { key: 'second', title: 'Reserved' },
-      { key: 'third', title: 'On Delivery' },
-      { key: 'fourth', title: 'Sold' },
+      { key: 'requested', title: 'Requested' },
+      { key: 'reserved', title: 'Reserved' },
+      { key: 'onDelivery', title: 'On Delivery' },
+      { key: 'sold', title: 'Sold' },
     ],
   };
 
@@ -20,7 +20,6 @@ export default class OrdersTabView extends PureComponent {
   reservedRoute = () => <OrdersList status='reserved' />;
   onDeliveryRoute = () => <OrdersList status='onDelivery' />;
   soldRoute = () => <OrdersList status='sold' />;
-
 
   initialLayout = { 
     height: 0, 
@@ -43,10 +42,10 @@ export default class OrdersTabView extends PureComponent {
   );
 
   renderScene = SceneMap({
-    first: this.requestedRoute,
-    second: this.reservedRoute,
-    third: this.onDeliveryRoute,
-    fourth: this.soldRoute,
+    requested: this.requestedRoute,
+    reserved: this.reservedRoute,
+    onDelivery: this.onDeliveryRoute,
+    sold: this.soldRoute,
   });
 
   onIndexChange = index => this.setState({ index });
@@ -65,10 +64,9 @@ export default class OrdersTabView extends PureComponent {
   }
 }
 
+export default OrdersTabView;
+
 const styles = StyleSheet.create({
-  scene: {
-    flex: 1,
-  },
   tabStyle: {
     width: 'auto',
   },
@@ -83,6 +81,13 @@ const styles = StyleSheet.create({
     shadowRadius: 1.00,
     elevation: 1,
   },
-  labelStyle: { fontFamily: 'OpenSans-Bold', fontSize: 15 },
-  indicatorStyle: { backgroundColor: 'white', height: 4 },
+  labelStyle: { 
+    ...textStyles.paragraph,
+    fontSize: 15,
+  },
+  indicatorStyle: { 
+    backgroundColor: 'white',
+    height: 4
+  },
 });
+
