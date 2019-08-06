@@ -6,10 +6,12 @@ import { colors, textStyles } from '../../../constants/theme';
 import { createRandomOrders } from '../../../utils/mockdata';
 import OrdersList from './OrdersList';
 
+import { EmptyListMessage } from '../../../shared/components';
+
 const requestedProducts = createRandomOrders(0, 'requested');
-const reservedProducts = createRandomOrders(30, 'reserved');
-const onDeliveryProduct = createRandomOrders(20, 'onDelivery');
-const soldProduct = createRandomOrders(0, 'sold');
+const reservedProducts = createRandomOrders(10, 'reserved');
+const onDeliveryProduct = createRandomOrders(10, 'onDelivery');
+const soldProduct = createRandomOrders(10, 'sold');
 
 class OrdersTabView extends PureComponent {
   state = {
@@ -54,6 +56,12 @@ class OrdersTabView extends PureComponent {
     sold: this.soldRoute,
   });
 
+  renderLazyPlaceholder = () => {
+    return (
+      <EmptyListMessage title='Loading Orders...' />
+    );
+  }
+
   onIndexChange = index => this.setState({ index });
 
   render() {
@@ -65,6 +73,8 @@ class OrdersTabView extends PureComponent {
         onIndexChange={this.onIndexChange}
         initialLayout={this.initialLayout}
         lazy={true}
+        lazyPreloadDistance={0}
+        renderLazyPlaceholder={this.renderLazyPlaceholder}
       />
     );
   }
