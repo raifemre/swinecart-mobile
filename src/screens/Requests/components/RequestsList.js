@@ -9,13 +9,7 @@ import RequestItem from './RequestItem';
 
 import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
 
-import { getHeight } from '../../../utils/helpers';
-
-import { createRandomRequests } from '../../../utils/mockdata';
-
-const requests = createRandomRequests(50000);
-
-function RequestsList({ themedStyle }) {
+function RequestsList({ requests, themedStyle }) {
 
   const [isRefreshing, setRefreshing] = useState(false);
 
@@ -35,7 +29,7 @@ function RequestsList({ themedStyle }) {
   });
 
   const renderListEmptyComponent = () => (
-    <EmptyListMessage message={'No Orders!'} />
+    <EmptyListMessage message={'No Requests!'} />
   );
 
   const renderFooterComponent = () => {
@@ -58,8 +52,8 @@ function RequestsList({ themedStyle }) {
         keyExtractor={keyExtractor}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
-        initialNumToRender={6}
-        maxToRenderPerBatch={6}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
         ListEmptyComponent={renderListEmptyComponent}
         ListFooterComponent={renderFooterComponent}
         ListFooterComponentStyle={themedStyle.ListFooterStyle}

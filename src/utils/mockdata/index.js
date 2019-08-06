@@ -40,7 +40,7 @@ export function createRandomOrders(count, status) {
       // status: sample(['requested', 'reserved', 'onDelivery', 'sold']),
       status: status,
       imageUrl: sample(urls),
-      requests: random(1, 30),
+      requests: random(90, 100),
       statusTime: faker.date.past(),
 
       customerName: createFakeName(),

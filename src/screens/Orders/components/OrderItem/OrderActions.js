@@ -12,10 +12,10 @@ import { textStyles, sizes } from '../../../../constants/theme';
 
 function OrderActions(props) {
 
-  const { themedStyle, status, customerName, productName } = props;
+  const { themedStyle, status, customerName, productName, requests } = props;
 
   const onPressView = () => {
-    NavigationService.navigate('Requests');
+    NavigationService.navigate('Requests', { requests });
   };
 
   const onPressCancel = () => {

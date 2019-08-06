@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useState, useEffect } from 'react';
 
 import {
   HeaderBar, BackButton,
@@ -8,7 +8,17 @@ import {
   RequestsList
 } from './components';
 
-function Container(props) {
+import { createRandomRequests } from '../../utils/mockdata';
+
+function Container({ navigation }) {
+
+  const [ requests, setRequests ] = useState(null);
+
+  useEffect(() => {
+    const requestCount = navigation.getParam('requests');
+    const requests = createRandomRequests(requestCount);
+    setRequests(requests);
+  }, []);
 
   return (
     <Fragment>
@@ -16,7 +26,7 @@ function Container(props) {
         title='Requests'
         leftControl={<BackButton />}
       />
-      <RequestsList />
+      <RequestsList requests={requests} />
     </Fragment>
   )
 
