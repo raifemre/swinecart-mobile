@@ -8,3 +8,4 @@ export { default as Icon } from './Icon';
 export { default as InfoRow } from './InfoRow';
 export { default as InfoSectionTitle } from './InfoSectionTitle';
 export { default as ModalContainer } from './ModalContainer';
+export { default as EmptyListMessage } from './EmptyListMessage';

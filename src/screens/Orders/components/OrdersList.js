@@ -7,6 +7,8 @@ import { colors } from '../../../constants/theme'
 
 import OrderItem from './OrderItem';
 
+import { EmptyListMessage } from '../../../shared/components';
+
 import { getHeight } from '../../../utils/helpers';
 
 function OrdersList({ data, status, themedStyle }) {
@@ -25,6 +27,10 @@ function OrdersList({ data, status, themedStyle }) {
     index
   });
 
+  const renderListEmptyComponent = () => (
+    <EmptyListMessage message={'No Orders'}/>
+  );
+
   return (
     <FlatList
       data={data}
@@ -33,15 +39,20 @@ function OrdersList({ data, status, themedStyle }) {
       getItemLayout={getItemLayout}
       keyExtractor={keyExtractor}
       initialNumToRender={5}
+      ListEmptyComponent={renderListEmptyComponent}
       maxToRenderPerBatch={5}
       showsVerticalScrollIndicator={false}
-      style={themedStyle.container}
+      style={themedStyle.containerStyle}
+      contentContainerStyle={themedStyle.contentContainerStyle}
     />
   );
 }
 
 export default withStyles(memo(OrdersList), () => ({
-  container: {
+  containerStyle: {
     backgroundColor: colors.gray2,
+  },
+  contentContainerStyle: {
+    flexGrow: 1
   }
 }));

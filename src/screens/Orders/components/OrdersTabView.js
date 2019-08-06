@@ -6,10 +6,10 @@ import { colors, textStyles } from '../../../constants/theme';
 import { createRandomOrders } from '../../../utils/mockdata';
 import OrdersList from './OrdersList';
 
-const requestedProducts = createRandomOrders(10, 'requested');
-const reservedProducts = createRandomOrders(10, 'reserved');
-const onDeliveryProduct = createRandomOrders(10, 'onDelivery');
-const soldProduct = createRandomOrders(10, 'sold');
+const requestedProducts = createRandomOrders(0, 'requested');
+const reservedProducts = createRandomOrders(30, 'reserved');
+const onDeliveryProduct = createRandomOrders(20, 'onDelivery');
+const soldProduct = createRandomOrders(0, 'sold');
 
 class OrdersTabView extends PureComponent {
   state = {
