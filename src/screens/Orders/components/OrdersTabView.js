@@ -3,7 +3,13 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { colors, textStyles } from '../../../constants/theme';
 
+import { createRandomOrders } from '../../../utils/mockdata';
 import OrdersList from './OrdersList';
+
+const requestedProducts = createRandomOrders(10, 'requested');
+const reservedProducts = createRandomOrders(10, 'reserved');
+const onDeliveryProduct = createRandomOrders(10, 'onDelivery');
+const soldProduct = createRandomOrders(10, 'sold');
 
 class OrdersTabView extends PureComponent {
   state = {
@@ -16,10 +22,10 @@ class OrdersTabView extends PureComponent {
     ],
   };
 
-  requestedRoute = () => <OrdersList status='requested' />;
-  reservedRoute = () => <OrdersList status='reserved' />;
-  onDeliveryRoute = () => <OrdersList status='onDelivery' />;
-  soldRoute = () => <OrdersList status='sold' />;
+  requestedRoute = () => <OrdersList data={requestedProducts} status='requested' />;
+  reservedRoute = () => <OrdersList data={reservedProducts} status='reserved' />;
+  onDeliveryRoute = () => <OrdersList data={onDeliveryProduct} status='onDelivery' />;
+  soldRoute = () => <OrdersList data={soldProduct} status='sold' />;
 
   initialLayout = { 
     height: 0, 

@@ -7,11 +7,9 @@ import { colors } from '../../../constants/theme'
 
 import OrderItem from './OrderItem';
 
-import { createRandomOrders } from '../../../utils/mockdata';
 import { getHeight } from '../../../utils/helpers';
-const orders = createRandomOrders(20);
 
-function OrdersList({ status, themedStyle }) {
+function OrdersList({ data, status, themedStyle }) {
   const renderItem = ({ item }) => {
     return (
       <OrderItem
@@ -29,8 +27,8 @@ function OrdersList({ status, themedStyle }) {
 
   return (
     <FlatList
-      data={orders}
-      extraData={orders}
+      data={data}
+      extraData={data}
       renderItem={renderItem}
       getItemLayout={getItemLayout}
       keyExtractor={keyExtractor}
