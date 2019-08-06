@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
 import {
-  Text, Button, Avatar
+  Text, Button
 } from 'react-native-ui-kitten';
 
 import {
@@ -11,12 +12,12 @@ import {
 
 import { textStyles, colors, sizes } from '../../../constants/theme';
 import { NavigationService, ModalService } from '../../../services';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { getInitials } from '../../../utils/helpers';
 
 function RequestItem(props) {
 
   const { themedStyle, data } = props;
-  const { customerProvince, customerName, imageUrl } = data;
+  const { customerProvince, customerName } = data;
 
   const onPressView = () => {
     ModalService.showModal('OrderDetails', { ...data });
@@ -32,11 +33,13 @@ function RequestItem(props) {
       onPress={onPressView}
     >
       <Block row padding style={themedStyle.container}>
-        <Avatar
-          shape='round'
-          source={{ uri: imageUrl }}
-          style={themedStyle.imageStyle}
-        />
+        <Block center middle flex='disabled' style={themedStyle.avatarStyle}>
+          <Text
+            style={themedStyle.avatarTextStyle}
+          >
+            {getInitials(customerName)}
+          </Text>
+        </Block>
         <Block paddingHorizontal>
           <Text
             category='h6'
@@ -72,11 +75,19 @@ export default withStyles(memo(RequestItem, () => true), () => ({
     borderBottomWidth: 1,
     borderBottomColor: colors.gray1
   },
-  imageStyle: {
+  avatarStyle: {
     width: 96,
     height: 96,
     borderWidth: 1,
-    borderColor: colors.gray2
+    borderColor: colors.gray2,
+    borderRadius: 50,
+    backgroundColor: colors.gray2,
+  },
+  avatarTextStyle: {
+    ...textStyles.caption1,
+    fontSize: 28,
+    lineHeight: 33.6,
+    alignSelf: 'center',
   },
   nameStyle: {
     color: '#000000',

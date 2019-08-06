@@ -7,6 +7,10 @@ function createArray(count) {
   return Array(count).fill(0);
 }
 
+function createFakeName() {
+  return `${faker.name.firstName()} ${faker.name.lastName()}`;
+}
+
 export function createRandomOrder() {
   return {
     id: faker.random.uuid(),
@@ -19,7 +23,7 @@ export function createRandomOrder() {
     requests: random(1, 30),
     statusTime: faker.date.past(),
 
-    customerName: faker.name.findName(),
+    customerName: createFakeName(),
     dateNeeded: faker.date.future(),
     requestQuantity: random(1, 99),
     specialRequest: faker.lorem.paragraphs()
@@ -39,7 +43,7 @@ export function createRandomOrders(count, status) {
       requests: random(1, 30),
       statusTime: faker.date.past(),
 
-      customerName: faker.name.findName(),
+      customerName: createFakeName(),
       dateNeeded: faker.date.future(),
       requestQuantity: random(1, 99),
       specialRequest: faker.lorem.paragraphs()
@@ -51,8 +55,7 @@ export function createRandomRequests(count) {
   return createArray(count).map(() => {
     return {
       id: faker.random.uuid(),
-      imageUrl: faker.image.avatar(),
-      customerName: faker.name.findName(),
+      customerName: createFakeName(),
       customerProvince: faker.address.city(),
       dateNeeded: faker.date.future(),
       requestQuantity: random(1, 99),
