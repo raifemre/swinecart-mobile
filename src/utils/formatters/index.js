@@ -18,7 +18,7 @@ export function formatStatusTime(date) {
 }
 
 export function formatDateNeeded(date) {
-  return format(date, 'MMMM D, YYYY')
+  return format(date, 'MMMM D, YYYY (ddd)')
 }
 
 export function formatDeliveryDate(date) {

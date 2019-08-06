@@ -1,11 +1,11 @@
 import React, { Fragment, memo } from 'react';
 
 import {
-  HeaderBar, ContainerView, BackButton,
+  HeaderBar, BackButton,
 } from '../../shared/components';
 
 import {
-  RequestItem
+  RequestsList
 } from './components';
 
 function Container(props) {
@@ -16,11 +16,7 @@ function Container(props) {
         title='Requests'
         leftControl={<BackButton />}
       />
-      <ContainerView>
-        <RequestItem data={{ customerProvince: 'Batangas', customerName: 'Cecile Carter' }} />
-        <RequestItem data={{ customerProvince: 'Batangas', customerName: 'Cecile Carter' }} />
-        <RequestItem data={{ customerProvince: 'Batangas', customerName: 'Cecile Carter' }} />
-      </ContainerView>
+      <RequestsList />
     </Fragment>
   )
 

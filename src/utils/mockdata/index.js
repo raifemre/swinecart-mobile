@@ -46,3 +46,17 @@ export function createRandomOrders(count, status) {
     };
   });
 }
+
+export function createRandomRequests(count) {
+  return createArray(count).map(() => {
+    return {
+      id: faker.random.uuid(),
+      imageUrl: faker.image.avatar(),
+      customerName: faker.name.findName(),
+      customerProvince: faker.address.city(),
+      dateNeeded: faker.date.future(),
+      requestQuantity: random(1, 99),
+      specialRequest: faker.lorem.paragraphs()
+    };
+  });
+}
