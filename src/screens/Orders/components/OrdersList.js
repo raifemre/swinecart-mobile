@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, useState, memo } from 'react';
 import { FlatList } from 'react-native';
 
 import { withStyles } from 'react-native-ui-kitten/theme';
@@ -7,11 +7,14 @@ import { colors } from '../../../constants/theme'
 
 import OrderItem from './OrderItem';
 
-import { EmptyListMessage, LoadingView } from '../../../shared/components';
+import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
 
 import { getHeight } from '../../../utils/helpers';
 
 function OrdersList({ data, status, themedStyle }) {
+
+  const [isRefreshing, setRefreshing] = useState(false);
+
   const renderItem = ({ item }) => {
     return (
       <OrderItem
@@ -28,8 +31,18 @@ function OrdersList({ data, status, themedStyle }) {
   });
 
   const renderListEmptyComponent = () => (
-    <EmptyListMessage message={'No Orders!'}/>
+    <EmptyListMessage message={'No Orders!'} />
   );
+  
+  const renderFooterComponent = () => {
+    return (
+      <ListFooter isRefreshing={isRefreshing} />
+    )
+  };
+
+  const onEndReached = () => {
+    console.log('End Reached!');
+  };
 
   return (
     <Fragment>
@@ -39,9 +52,13 @@ function OrdersList({ data, status, themedStyle }) {
         renderItem={renderItem}
         getItemLayout={getItemLayout}
         keyExtractor={keyExtractor}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.1}
         initialNumToRender={5}
-        ListEmptyComponent={renderListEmptyComponent}
         maxToRenderPerBatch={5}
+        ListEmptyComponent={renderListEmptyComponent}
+        ListFooterComponent={renderFooterComponent}
+        ListFooterComponentStyle={themedStyle.ListFooterStyle}
         showsVerticalScrollIndicator={false}
         style={themedStyle.containerStyle}
         contentContainerStyle={themedStyle.contentContainerStyle}
@@ -57,5 +74,7 @@ export default withStyles(memo(OrdersList), () => ({
   },
   contentContainerStyle: {
     flexGrow: 1
+  },
+  ListFooterStyle: {
   }
 }));
