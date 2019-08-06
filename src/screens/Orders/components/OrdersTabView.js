@@ -1,75 +1,65 @@
-import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
-import { TabView, TabBar } from 'react-native-tab-view';
+import React, { PureComponent } from 'react';
+import { StyleSheet, Dimensions } from 'react-native';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { colors } from '../../../constants/theme';
 
 import OrdersList from './OrdersList';
 
-const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
-);
-
-const SecondRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-);
-
-const ThirdRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-);
-
-const FourthRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#673ab7' }]} />
-);
-
-export default class OrdersTabView extends React.Component {
+export default class OrdersTabView extends PureComponent {
   state = {
     index: 0,
     routes: [
-      { key: 'first', title: 'Reserved' },
+      { key: 'first', title: 'Requested' },
       { key: 'second', title: 'Reserved' },
-      { key: 'third', title: 'Reserved' },
-      { key: 'fourth', title: 'Reserved' },
+      { key: 'third', title: 'On Delivery' },
+      { key: 'fourth', title: 'Sold' },
     ],
   };
 
+  requestedRoute = () => <OrdersList status='requested' />;
+  reservedRoute = () => <OrdersList status='reserved' />;
+  onDeliveryRoute = () => <OrdersList status='onDelivery' />;
+  soldRoute = () => <OrdersList status='sold' />;
+
+
   initialLayout = { 
     height: 0, 
-    width: Dimensions.get('window').width 
+    width: Dimensions.get('window').width
   };
+
+  getLabelText = ({ route }) => route.title;
 
   renderTabBar = props => (
     <TabBar
       {...props}
-      indicatorStyle={{ backgroundColor: 'white', height: 4 }}
-      style={{ backgroundColor: colors.primary }}
-      tabStyle={{ width: 'auto' }}
+      useNativeDriver={true}
+      getLabelText={this.getLabelText}
+      labelStyle={styles.labelStyle}
+      indicatorStyle={styles.indicatorStyle}
+      style={styles.tabBarStyle}
+      tabStyle={styles.tabStyle
+      }
     />
   );
-  
-  renderScene = ({ route }) => {
-    switch (route.key) {
-      case 'first':
-        return <OrdersList />;
-      case 'second':
-        return <OrdersList />;
-      case 'third':
-        return <OrdersList />;
-      case 'fourth':
-        return <OrdersList />;
-      default:
-        return null;
-    }
-  };
+
+  renderScene = SceneMap({
+    first: this.requestedRoute,
+    second: this.reservedRoute,
+    third: this.onDeliveryRoute,
+    fourth: this.soldRoute,
+  });
+
+  onIndexChange = index => this.setState({ index });
 
   render() {
     return (
       <TabView
-        lazy={false}
         navigationState={this.state}
         renderScene={this.renderScene}
         renderTabBar={this.renderTabBar}
-        onIndexChange={index => this.setState({ index })}
+        onIndexChange={this.onIndexChange}
         initialLayout={this.initialLayout}
+        lazy={true}
       />
     );
   }
@@ -79,12 +69,20 @@ const styles = StyleSheet.create({
   scene: {
     flex: 1,
   },
-  tabBar: {
-    flexDirection: 'row',
+  tabStyle: {
+    width: 'auto',
   },
-  tabItem: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 16,
+  tabBarStyle: {
+    backgroundColor: colors.primary,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.00,
+    elevation: 1,
   },
+  labelStyle: { fontFamily: 'OpenSans-Bold', fontSize: 15 },
+  indicatorStyle: { backgroundColor: 'white', height: 4 },
 });

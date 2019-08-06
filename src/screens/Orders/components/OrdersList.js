@@ -8,9 +8,10 @@ import { colors } from '../../../constants/theme'
 import OrderItem from './OrderItem';
 
 import { createRandomOrders } from '../../../utils/mockdata';
-const orders = createRandomOrders(4);
+import { getHeight } from '../../../utils/helpers';
+const orders = createRandomOrders(20);
 
-function OrdersList(props) {
+function OrdersList({ status, themedStyle }) {
   const renderItem = ({ item }) => {
     return (
       <OrderItem
@@ -20,16 +21,23 @@ function OrdersList(props) {
   };
 
   const keyExtractor = item => item.id;
+  const getItemLayout = (data, index) => ({
+    length: getHeight(status),
+    offset: getHeight(status) * index,
+    index
+  });
 
   return (
     <FlatList
       data={orders}
+      extraData={orders}
       renderItem={renderItem}
+      getItemLayout={getItemLayout}
       keyExtractor={keyExtractor}
-      initialNumToRender={4}
+      initialNumToRender={5}
       maxToRenderPerBatch={5}
       showsVerticalScrollIndicator={false}
-      style={props.themedStyle.container}
+      style={themedStyle.container}
     />
   );
 }

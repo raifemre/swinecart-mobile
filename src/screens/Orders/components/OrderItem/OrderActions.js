@@ -92,7 +92,7 @@ function OrderActions(props) {
   );
 }
 
-export default withStyles(memo(OrderActions), () => ({
+export default withStyles(memo(OrderActions, () => true), () => ({
   buttonStyle: {
     marginTop: sizes.margin / 4,
     borderWidth: 0,

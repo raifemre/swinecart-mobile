@@ -57,7 +57,7 @@ function OrderStatus(props) {
   );
 }
 
-export default withStyles(memo(OrderStatus), () => ({
+export default withStyles(memo(OrderStatus, () => true), () => ({
   statusStyle: {
     marginTop: sizes.margin / 2,
     color: '#000000',

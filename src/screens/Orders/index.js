@@ -2,7 +2,7 @@ import React, { Fragment, memo, useState } from 'react';
 
 import { HeaderBar } from '../../shared/components';
 
-import { OrdersTabView } from './components';
+import { OrdersTabView, OrdersList } from './components';
 
 function Container(props) {
 
@@ -10,6 +10,7 @@ function Container(props) {
     <Fragment>
       <HeaderBar title='Orders' />
       <OrdersTabView />
+      {/* <OrdersList status='requested' /> */}
     </Fragment>
   );
 

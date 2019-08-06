@@ -14,6 +14,7 @@ import { colors } from '../../../../constants/theme';
 import ProductInfo from './ProductInfo';
 import OrderStatus from './OrderStatus';
 import OrderActions from './OrderActions';
+import { getHeight } from '../../../../utils/helpers';
 
 function OrderItem(props) {
 
@@ -24,9 +25,11 @@ function OrderItem(props) {
   const { themedStyle, data } = props;
   const { name, type, breed, customerName, statusTime, status, requests, imageUrl } = data;
 
+  const height = getHeight(status);
+
   const innerComponent = () => (
     <Fragment>
-      <Block row padding style={themedStyle.container}>
+      <Block row padding style={[themedStyle.container, { height }]}>
         <Avatar
           shape='round'
           source={{ uri: imageUrl }}
@@ -65,10 +68,8 @@ function OrderItem(props) {
   );
 }
 
-export default withStyles(memo(OrderItem), () => ({
+export default withStyles(memo(OrderItem, () => true), () => ({
   container: {
-    minHeight: 150,
-    // maxHeight: 250,
     overflow: 'hidden',
     backgroundColor: colors.white1,
     borderBottomWidth: 1,

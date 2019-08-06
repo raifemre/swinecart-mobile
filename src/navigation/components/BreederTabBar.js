@@ -13,11 +13,13 @@ function BreederTabBar(props) {
     props.navigation.navigate(selectedRoute.routeName);
   };
 
+  console.log('Tab Bar Render');
+
   return (
     <BottomNavigation
       style={shadowStyles.shadow1}
       // appearance='noIndicator'
-      selectedIndex={props.navigation.state.index}
+      selectedIndex={0}
       onSelect={onTabSelect}
     >
       <BottomNavTab title='Products' iconName='shopping-bag' />
