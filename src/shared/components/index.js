@@ -9,3 +9,4 @@ export { default as InfoRow } from './InfoRow';
 export { default as InfoSectionTitle } from './InfoSectionTitle';
 export { default as ModalContainer } from './ModalContainer';
 export { default as EmptyListMessage } from './EmptyListMessage';
+export { default as LoadingView } from './LoadingView';

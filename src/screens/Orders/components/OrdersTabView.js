@@ -8,6 +8,7 @@ import OrdersList from './OrdersList';
 
 import { EmptyListMessage } from '../../../shared/components';
 
+// const requestedProducts = null;
 const requestedProducts = createRandomOrders(0, 'requested');
 const reservedProducts = createRandomOrders(10, 'reserved');
 const onDeliveryProduct = createRandomOrders(10, 'onDelivery');
