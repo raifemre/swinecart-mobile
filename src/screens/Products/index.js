@@ -1,37 +1,27 @@
-import React, { Fragment, PureComponent } from 'react';
-
-// import {
-
-// } from 'react-native-ui-kitten';
+import React, { Fragment, memo } from 'react';
 
 import { 
-  Block, HeaderBar
+  Block, HeaderBar, AddProductButton
 } from '../../shared/components';
 
 import { colors } from '../../constants/theme';
 
 import {
-  RequestedCard, ProductGridList
+  ProductGridList
 } from './components'
 
-import data from './data';
 
-class Container extends PureComponent {
+function Container(props) {
 
-  componentDidMount() {
-  }
-
-  render() {
-    return (
-      <Fragment>
-        <HeaderBar title='Products' />
-        <Block flex={1} style={{ backgroundColor: colors.gray2 }}>
-          <ProductGridList Component={RequestedCard} data={data.data} />
-        </Block>
-      </Fragment>
-    );
-  }
+  return (
+    <Fragment>
+      <HeaderBar 
+        title='Products'
+        leftControl={<AddProductButton />}
+      />
+    </Fragment>
+  );
 
 }
-
-export default Container;
+0
+export default memo(Container);

@@ -45,8 +45,7 @@ class OrdersTabView extends PureComponent {
       labelStyle={styles.labelStyle}
       indicatorStyle={styles.indicatorStyle}
       style={styles.tabBarStyle}
-      tabStyle={styles.tabStyle
-      }
+      tabStyle={styles.tabStyle}
     />
   );
 

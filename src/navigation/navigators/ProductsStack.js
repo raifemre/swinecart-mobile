@@ -3,18 +3,26 @@ import {
 } from 'react-navigation';
 
 import {
-  Products
+  Products, AddProduct
 } from '../../screens';
 
 const navigator = createStackNavigator({
   Products: Products,
+  AddProduct: AddProduct,
 }, {
-  initialRouteName: 'Products',
+  initialRouteName: 'AddProduct',
   defaultNavigationOptions: ({ navigation }) => {
     return {
       header: null
     }
   }
 });
+
+navigator.navigationOptions = ({ navigation }) => {
+  return {
+    // tabBarVisible: navigation.state.index > 0 ? false : true,
+    tabBarVisible: false,
+  };
+};
 
 export default navigator;

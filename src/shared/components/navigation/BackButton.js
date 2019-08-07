@@ -4,7 +4,7 @@ import HeaderBarButton from './HeaderBarButton';
 
 import NavigationService from '../../../services/navigation';
 
-function BackButton() {
+function BackButton({ iconName = 'chevron-left' }) {
 
   const onPress = () => {
     NavigationService.back();
@@ -12,11 +12,11 @@ function BackButton() {
 
   return (
     <HeaderBarButton
-      iconName='chevron-left'
+      iconName={iconName}
       onPress={onPress}
     />
   );
 
 }
 
-export default memo(BackButton);
+export default memo(BackButton, () => true);

@@ -1,7 +1,1 @@
-import RequestedCard from './RequestedCard';
-import ProductGridList from './ProductGridList';
-
-export {
-  RequestedCard,
-  ProductGridList,
-}
+export { default as ProductGridList } from './ProductGridList';

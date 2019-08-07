@@ -12,7 +12,6 @@ const navigator = createStackNavigator({
     defaultNavigationOptions: ({ navigation }) => {
       return {
         header: null,
-        mode: 'modal'
       }
     }
   });

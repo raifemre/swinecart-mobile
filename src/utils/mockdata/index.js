@@ -63,3 +63,15 @@ export function createRandomRequests(count) {
     };
   });
 }
+
+export function createRandomProducts(count) {
+  return createArray(count).map(() => {
+    return {
+      id: faker.random.uuid(),
+      name: `${random(1000, 9999)}`,
+      type: sample(['Semen', 'Sow', 'Gilt', 'Boar']),
+      breed: sample(['Landrace', 'Large White', 'Duroc', 'Boar']),
+      status: sample(['hidden', 'displayed', 'requested']),
+    };
+  }); 
+}

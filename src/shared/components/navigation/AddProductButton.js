@@ -4,19 +4,19 @@ import HeaderBarButton from './HeaderBarButton';
 
 import NavigationService from '../../../services/navigation';
 
-function SettingsButton() {
+function AddProductButton() {
 
   const onPress = () => {
-    NavigationService.navigate('Settings');
-  }
+    NavigationService.navigate('AddProduct');
+  };
 
   return (
     <HeaderBarButton
-      iconName='settings'
+      iconName='plus'
       onPress={onPress}
     />
   );
 
 }
 
-export default memo(SettingsButton, () => true);
+export default memo(AddProductButton, () => true);
