@@ -1,22 +1,33 @@
 import React, { memo, useState } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { 
-  Button
-} from 'react-native-ui-kitten';
+import { Button } from 'react-native-ui-kitten';
 
 import { NavigationService } from '../../../services';
-import {
-  Block, ContainerView
-} from '../../../shared/components'
+import { Block } from '../../../shared/components'
 
 import { 
-  textStyles, colors, sizes
+  textStyles, sizes
 } from '../../../constants/theme';
 
 import FormStepIndicator from './FormStepIndicator';
 import Wizard from './Wizard';
+import ProductInfoForm from './ProductInfoForm';
+import SwineInfoForm from './SwineInfoForm';
+import ProductMediaForm from './ProductMediaForm';
 
+const labels = ['Product Information', 'Swine Information', 'Product Media'];
+const steps = [
+  {
+    component: ProductInfoForm
+  },
+  {
+    component: SwineInfoForm
+  },
+  {
+    component: ProductMediaForm
+  },
+];
 
 function AddProductForm({ themedStyle }) {
 
@@ -42,7 +53,6 @@ function AddProductForm({ themedStyle }) {
     }
   };
 
-
   const isLastStep = () => {
     return currentStep === 2;
   };
@@ -54,9 +64,10 @@ function AddProductForm({ themedStyle }) {
   return (
     <Block flex={1}>
       <Block flex='disabled' padding left>
-        <FormStepIndicator currentStep={currentStep} />
+        <FormStepIndicator labels={labels} currentStep={currentStep} />
       </Block>
-      <Wizard 
+      <Wizard
+        steps={steps}
         setWizardRef={setWizardRef}
         setCurrentStep={setCurrentStep}
         currentStep={currentStep}
@@ -78,7 +89,7 @@ function AddProductForm({ themedStyle }) {
             size='large'
             style={themedStyle.buttonStyle}
             textStyle={themedStyle.buttonTextStyle}
-            onPress={onPressNext}s
+            onPress={onPressNext}
           >
             { isLastStep() ? 'Finish' : 'Next' }
           </Button>

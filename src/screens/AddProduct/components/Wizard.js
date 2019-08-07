@@ -2,23 +2,7 @@ import React, { memo } from 'react';
 import clamp from 'lodash/clamp';
 import RNWizard from 'react-native-wizard';
 
-import SwineInfoForm from './SwineInfoForm';
-import ProductInfoForm from './ProductInfoForm';
-import ProductMediaForm from './ProductMediaForm';
-
-function Wizard({ setWizardRef, setCurrentStep, currentStep }) {
-
-  const steps = [
-    {  
-      component: SwineInfoForm
-    },
-    {
-      component: ProductInfoForm
-    },
-    {
-      component: ProductMediaForm
-    },
-  ];
+function Wizard({ steps, setWizardRef, setCurrentStep, currentStep }) {
 
   const onCurrentStep = currentIndex => {
     setCurrentStep(clamp(currentIndex, 0, steps.length - 1));

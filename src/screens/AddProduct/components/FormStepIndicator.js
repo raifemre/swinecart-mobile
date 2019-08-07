@@ -1,13 +1,10 @@
-import React, { Fragment, memo, useState } from 'react';
+import React, { memo } from 'react';
 
 import StepIndicator from 'react-native-step-indicator';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { colors, textStyles } from '../../../constants/theme';
+import { colors } from '../../../constants/theme';
 
-function FormStepIndicator({ currentStep, themedStyle }) {
-
-  const labels = ['Swine Information', 'Product Information', 'Product Media'];
-
+function FormStepIndicator({ labels, currentStep, themedStyle }) {
   return (
     <StepIndicator 
       labels={labels}
