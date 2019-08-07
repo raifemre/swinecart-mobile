@@ -37,7 +37,7 @@ function HeaderBar(props) {
 
 }
 
-export default memo(withStyles(HeaderBar, theme => ({
+export default withStyles(memo(HeaderBar, () => true), theme => ({
   headerBar: {
     backgroundColor: theme['color-primary-500'],
   },
@@ -47,4 +47,4 @@ export default memo(withStyles(HeaderBar, theme => ({
   statusBar: {
     backgroundColor: theme['color-primary-100'],
   }
-})));
+}));

@@ -10,7 +10,7 @@ const navigator = createStackNavigator({
   Products: Products,
   AddProduct: AddProduct,
 }, {
-  initialRouteName: 'AddProduct',
+    initialRouteName: 'AddProduct',
   defaultNavigationOptions: ({ navigation }) => {
     return {
       header: null

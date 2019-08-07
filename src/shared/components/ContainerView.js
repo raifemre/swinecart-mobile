@@ -12,7 +12,7 @@ function ContainerView(props) {
   return (
     <ScrollView
       contentContainerStyle={[themedStyle.contentContainer, contentContainerStyle]}
-      style={[themedStyle.container, { backgroundColor },]}
+      style={[themedStyle.container, { backgroundColor }]}
       bounces={false}
       bouncesZoom={false}
       bounces={false}

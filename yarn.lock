@@ -5249,6 +5249,13 @@ react-native-star-rating@^1.1.0:
     react-native-button "^2.3.0"
     react-native-vector-icons "^4.5.0"
 
+react-native-step-indicator@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/react-native-step-indicator/-/react-native-step-indicator-0.0.11.tgz#18c53692f63c5e6812f80e8f6cc580cf4097e127"
+  integrity sha512-9nDAwN8dyyRp/h9aXw7TXYQkOSGcesfMKU+P3DbrWieFI1wMGzLNTRfND48kyr+AcuCvuJmCIfb66RrSjCB0Og==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-native-super-grid@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-3.0.4.tgz#bc0888f68d0960557dfe445970f96e36a0d61a1d"
@@ -5315,6 +5322,11 @@ react-native-video@^3.2.1:
   dependencies:
     keymirror "0.1.1"
     prop-types "^15.5.10"
+
+react-native-wizard@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-wizard/-/react-native-wizard-1.0.1.tgz#c3d81f15663cd4a0495139249b39cd683d6a77ec"
+  integrity sha512-Xsn3Hu3gnkRb01P+Mhy5/K18/MwPjtB0rviTx1ViZVB+NQqM5oMZvs9L55eNEjGu1rcjA4aNlnCRJugClaXH4g==
 
 react-native@0.59.5:
   version "0.59.5"
