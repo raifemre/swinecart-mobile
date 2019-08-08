@@ -84,10 +84,15 @@ export function createFakeOtherDetails() {
 export function createConversations(count) {
   return createArray(count).map(() => {
     return {
-      id: faker.random.uuid(),
-      userName: createFakeName(), 
-      message: faker.lorem.paragraphs(),
-      createdAt: faker.date.recent()
+      user: {
+        userId: faker.random.uuid(),
+        userName: createFakeName(), 
+      },
+      message: {
+        content: faker.lorem.paragraphs(),
+        createdAt: faker.date.recent(),
+        readAt: sample([faker.date.recent(), null]),
+      }
     };
   });
 }

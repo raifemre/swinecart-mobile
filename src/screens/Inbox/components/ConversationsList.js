@@ -9,9 +9,7 @@ import Conversation from './Conversation';
 
 import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
 
-import { getHeight } from '../../../utils/helpers';
-
-function ConversationsList({ data, status, themedStyle }) {
+function ConversationsList({ data, themedStyle }) {
 
   const [isRefreshing, setRefreshing] = useState(false);
 
@@ -23,7 +21,7 @@ function ConversationsList({ data, status, themedStyle }) {
     );
   };
 
-  const keyExtractor = item => item.id;
+  const keyExtractor = item => item.user.userId;
   const getItemLayout = (data, index) => ({
     length: 80,
     offset: 80 * index,
@@ -75,6 +73,4 @@ export default withStyles(memo(ConversationsList), () => ({
   contentContainerStyle: {
     flexGrow: 1
   },
-  ListFooterStyle: {
-  }
 }));

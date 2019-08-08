@@ -6,17 +6,26 @@ import { withStyles } from 'react-native-ui-kitten/theme';
 
 import { Block, UserAvatar } from '../../../shared/components';
 
-import { textStyles, colors } from '../../../constants/theme';
+import { textStyles, colors, sizes } from '../../../constants/theme';
 import { formatMessageDate } from '../../../utils/formatters';
 
 function Conversation({ themedStyle, data }) {
 
-  const { message, userName, createdAt } = data;
+  const { message, user } = data;
+
+  const { userName } = user;
+  const { content, createdAt, readAt } = message;
 
   const onPressConversation = () => {
 
   };
     
+  const contentStyle = [
+    themedStyle.content,
+    {
+      color: readAt ? colors.gray3 : '#000000',
+    }
+  ];
 
   return (
     <TouchableOpacity
@@ -33,10 +42,10 @@ function Conversation({ themedStyle, data }) {
             {userName}
           </Text>
           <Text
-            style={themedStyle.message}
+            style={contentStyle}
             numberOfLines={1}
           >
-            {message}
+            {content}
           </Text>
         </Block>
         <Text
@@ -45,6 +54,7 @@ function Conversation({ themedStyle, data }) {
         >
           {formatMessageDate(createdAt)}
         </Text>
+        { !readAt && <Block flex='disabled' style={themedStyle.indicator}></Block> }
       </Block>
     </TouchableOpacity>
   );
@@ -64,14 +74,20 @@ export default withStyles(memo(Conversation, () => true), () => ({
     color: '#000000',
     fontSize: 16
   },
-  message: {
-    ...textStyles.caption1,
-    color: colors.gray3,
+  content: {
+    ...textStyles.subtitle,
     fontSize: 13
   },
   createdAt: {
     ...textStyles.caption1,
     color: colors.gray3,
     fontSize: 12
+  },
+  indicator: {
+    width: 15,
+    height: 15,
+    borderRadius: 8,
+    backgroundColor: colors.primary,
+    marginLeft: sizes.margin / 2,
   }
 }));
