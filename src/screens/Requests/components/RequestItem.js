@@ -49,7 +49,7 @@ function RequestItem(props) {
           </Text>
           <Text
             category='s2'
-            style={[textStyles.caption1, themedStyle.typeStyle]}
+            style={[textStyles.caption1, themedStyle.provinceStyle]}
           >
             {customerProvince}
           </Text>
@@ -76,24 +76,24 @@ export default withStyles(memo(RequestItem, () => true), () => ({
     borderBottomColor: colors.gray1
   },
   avatarStyle: {
-    width: 96,
-    height: 96,
+    width: 64,
+    height: 64,
     borderWidth: 1,
-    borderColor: colors.gray2,
+    borderColor: colors.gray1,
     borderRadius: 50,
-    backgroundColor: colors.gray2,
+    backgroundColor: '#ffffff',
   },
   avatarTextStyle: {
     ...textStyles.caption1,
-    fontSize: 28,
-    lineHeight: 33.6,
+    fontSize: 24,
+    lineHeight: 28.8,
     alignSelf: 'center',
   },
   nameStyle: {
     color: '#000000',
     fontSize: 16
   },
-  typeStyle: {
+  provinceStyle: {
     fontSize: 14
   },
   statusStyle: {

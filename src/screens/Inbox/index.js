@@ -2,9 +2,9 @@ import React, { Fragment, PureComponent } from 'react';
 
 import { HeaderBar } from '../../shared/components';
 
-// import { 
-//   ConversationList, NotificationList
-// } from './components';
+import {
+  InboxTabView
+} from './components';
 
 class Container extends PureComponent {
 
@@ -23,6 +23,7 @@ class Container extends PureComponent {
     return (
       <Fragment>
         <HeaderBar title='Inbox' />
+        <InboxTabView />
       </Fragment>
     );
   }

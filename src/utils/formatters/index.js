@@ -29,3 +29,7 @@ export function formatMarkedDate(date) {
   const formattedDate = format(date, 'YYYY-MM-DD');
   return { [formattedDate]: { selected: true } };
 }
+
+export function formatMessageDate(date) {
+  return format(date, 'MMM D')
+}

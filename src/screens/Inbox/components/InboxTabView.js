@@ -3,35 +3,29 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { colors, textStyles, shadowStyles } from '../../../constants/theme';
 
-import { createRandomOrders } from '../../../utils/mockdata';
-import OrdersList from './OrdersList';
+import ConversationsList from './ConversationsList';
+import NotificationsList from './NotificationsList';
 
 import { EmptyListMessage } from '../../../shared/components';
 
-// const requestedProducts = null;
-const requestedProducts = createRandomOrders(10, 'requested');
-const reservedProducts = createRandomOrders(10, 'reserved');
-const onDeliveryProduct = createRandomOrders(10, 'onDelivery');
-const soldProduct = createRandomOrders(10, 'sold');
+import { createConversations } from '../../../utils/mockdata';
 
-class OrdersTabView extends PureComponent {
+const conversations = createConversations(10);
+
+class InboxTabView extends PureComponent {
   state = {
     index: 0,
     routes: [
-      { key: 'requested', title: 'Requested' },
-      { key: 'reserved', title: 'Reserved' },
-      { key: 'onDelivery', title: 'On Delivery' },
-      { key: 'sold', title: 'Sold' },
+      { key: 'conversations', title: 'Conversations' },
+      { key: 'notifications', title: 'Notifications' },
     ],
   };
 
-  requestedRoute = () => <OrdersList data={requestedProducts} status='requested' />;
-  reservedRoute = () => <OrdersList data={reservedProducts} status='reserved' />;
-  onDeliveryRoute = () => <OrdersList data={onDeliveryProduct} status='onDelivery' />;
-  soldRoute = () => <OrdersList data={soldProduct} status='sold' />;
+  conversationsRoute = () => <ConversationsList data={conversations} />;
+  notificationsRoute = () => <NotificationsList />;
 
-  initialLayout = { 
-    height: 0, 
+  initialLayout = {
+    height: 0,
     width: Dimensions.get('window').width
   };
 
@@ -50,10 +44,8 @@ class OrdersTabView extends PureComponent {
   );
 
   renderScene = SceneMap({
-    requested: this.requestedRoute,
-    reserved: this.reservedRoute,
-    onDelivery: this.onDeliveryRoute,
-    sold: this.soldRoute,
+    conversations: this.conversationsRoute,
+    notifications: this.notificationsRoute,
   });
 
   renderLazyPlaceholder = () => {
@@ -80,21 +72,20 @@ class OrdersTabView extends PureComponent {
   }
 }
 
-export default OrdersTabView;
+export default InboxTabView;
 
 const styles = StyleSheet.create({
   tabStyle: {
-    width: 'auto',
   },
   tabBarStyle: {
     ...shadowStyles.shadow1,
     backgroundColor: colors.primary,
   },
-  labelStyle: { 
+  labelStyle: {
     ...textStyles.paragraph,
     fontSize: 15,
   },
-  indicatorStyle: { 
+  indicatorStyle: {
     backgroundColor: 'white',
     height: 4
   },

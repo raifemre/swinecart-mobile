@@ -26,7 +26,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'ProductsStack',
+  initialRouteName: 'InboxStack',
   tabBarComponent: BreederTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },

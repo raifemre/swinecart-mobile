@@ -2,6 +2,7 @@ import { sample, random } from 'lodash';
 import faker from 'faker';
 
 import { urls } from '../../constants/randomImage';
+import { create } from 'apisauce';
 
 function createArray(count) {
   return Array(count).fill(0);
@@ -78,4 +79,15 @@ export function createRandomProducts(count) {
 
 export function createFakeOtherDetails() {
   return faker.lorem.paragraphs();
+}
+
+export function createConversations(count) {
+  return createArray(count).map(() => {
+    return {
+      id: faker.random.uuid(),
+      userName: createFakeName(), 
+      message: faker.lorem.sentence(),
+      createdAt: faker.date.recent()
+    };
+  });
 }

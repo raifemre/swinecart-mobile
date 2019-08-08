@@ -110,12 +110,12 @@ const shadowStyles = {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 0,
     },
-    shadowOpacity: 0.20,
-    shadowRadius: 1.41,
+    shadowOpacity: 0,
+    shadowRadius: 0,
 
-    elevation: 2,
+    elevation: 0,
   }
 }
 
