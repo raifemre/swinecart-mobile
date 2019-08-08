@@ -2,7 +2,7 @@ import {
   parseInt
 } from 'lodash';
 
-import { format } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
 
 export function capitalize() {
 
@@ -31,5 +31,11 @@ export function formatMarkedDate(date) {
 }
 
 export function formatMessageDate(date) {
-  return format(date, 'MMM D')
+  const now = new Date();
+  if (isSameDay(now, date)) {
+    return format(date, 'h:mm a');
+  }
+  else {
+    return format(date, 'MMM D');
+  }
 }

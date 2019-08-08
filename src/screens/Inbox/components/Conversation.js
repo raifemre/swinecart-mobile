@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react';
+import React, { memo } from 'react';
 
 import { TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-ui-kitten'
@@ -6,9 +6,8 @@ import { withStyles } from 'react-native-ui-kitten/theme';
 
 import { Block, UserAvatar } from '../../../shared/components';
 
-import { sizes, textStyles, colors } from '../../../constants/theme';
+import { textStyles, colors } from '../../../constants/theme';
 import { formatMessageDate } from '../../../utils/formatters';
-import { getInitials } from '../../../utils/helpers';
 
 function Conversation({ themedStyle, data }) {
 
@@ -40,6 +39,12 @@ function Conversation({ themedStyle, data }) {
             {message}
           </Text>
         </Block>
+        <Text
+          style={themedStyle.createdAt}
+          numberOfLines={1}
+        >
+          {formatMessageDate(createdAt)}
+        </Text>
       </Block>
     </TouchableOpacity>
   );
@@ -62,6 +67,11 @@ export default withStyles(memo(Conversation), () => ({
   message: {
     ...textStyles.caption1,
     color: colors.gray3,
-    fontSize: 12
+    fontSize: 13
   },
+  createdAt: {
+    ...textStyles.caption1,
+    color: colors.gray3,
+    fontSize: 12
+  }
 }));
