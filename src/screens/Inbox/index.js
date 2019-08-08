@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, memo } from 'react';
 
 import { HeaderBar } from '../../shared/components';
 
@@ -6,28 +6,15 @@ import {
   InboxTabView
 } from './components';
 
-class Container extends PureComponent {
+function Container(props) {
 
-  state = {
-    selectedIndex: 1
-  }
-
-  onSelect = selectedIndex => {
-    this.setState({
-      selectedIndex
-    });
-  }
-
-  render() {
-
-    return (
-      <Fragment>
-        <HeaderBar title='Inbox' />
-        <InboxTabView />
-      </Fragment>
-    );
-  }
+  return (
+    <Fragment>
+      <HeaderBar title='Inbox' />
+      <InboxTabView />
+    </Fragment>
+  )
 
 }
 
-export default Container;
+export default memo(Container, () => true);

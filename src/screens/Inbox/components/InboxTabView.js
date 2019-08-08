@@ -50,7 +50,7 @@ class InboxTabView extends PureComponent {
 
   renderLazyPlaceholder = () => {
     return (
-      <EmptyListMessage title='Loading Orders...' />
+      <EmptyListMessage title='Loading Items...' />
     );
   }
 

@@ -51,7 +51,7 @@ function Conversation({ themedStyle, data }) {
 
 }
 
-export default withStyles(memo(Conversation), () => ({
+export default withStyles(memo(Conversation, () => true), () => ({
   container: {
     height: 80,
     overflow: 'hidden',
