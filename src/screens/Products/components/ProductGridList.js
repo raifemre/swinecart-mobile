@@ -13,13 +13,19 @@ import {
   colors, sizes
 } from '../../../constants/theme'
 
+import Product from './Product';
+
+import { createRandomProducts } from '../../../utils/mockdata';
+
+const data = createRandomProducts(10);
+
 class ProductGridList extends PureComponent {
 
   renderProduct = ({ item }) => {
-    const { themedStyle, Component, action } = this.props;
+    const { themedStyle, action } = this.props;
 
     return (
-      <Component
+      <Product
         action={action}
         data={item}
         style={themedStyle.item}
@@ -30,7 +36,7 @@ class ProductGridList extends PureComponent {
 
   render() {
 
-    const { themedStyle, contentContainerStyle, data } = this.props;
+    const { themedStyle, contentContainerStyle } = this.props;
     return (
       <List
         contentContainerStyle={[contentContainerStyle, themedStyle.container]}

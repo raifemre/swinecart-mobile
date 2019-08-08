@@ -19,6 +19,7 @@ function Container(props) {
         title='Products'
         leftControl={<AddProductButton />}
       />
+      <ProductGridList />
     </Fragment>
   );
 
