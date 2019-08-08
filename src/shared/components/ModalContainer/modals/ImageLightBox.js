@@ -1,13 +1,11 @@
 import React, { memo, useState } from 'react';
 import { Image } from 'react-native';
 import Modal from 'react-native-modal';
-import { Button, Text } from 'react-native-ui-kitten';
+import { Button } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
-
-import { NavigationService } from '../../../../services';
-
-import { sizes, textStyles, colors } from '../../../../constants/theme';
+import { colors } from '../../../../constants/theme';
 import Block from '../../Block';
+import Icon from '../../Icon';
 
 
 function OrderDetails(props) {
@@ -43,7 +41,7 @@ function OrderDetails(props) {
       backdropOpacity={0.60}
       useNativeDriver={true}
       isVisible={isVisible}
-      propagateSwipe={true}
+      propagateSwipe={false}
       onBackdropPress={hideModal}
       onBackButtonPress={hideModal}
       onModalHide={onModalHide}
@@ -51,15 +49,14 @@ function OrderDetails(props) {
     >
       <Block flex={1}>
         <Block row flex={1} center left style={{ maxHeight: 40 }}>
-          <Block flex={'disabled'} left>
+          <Block flex={'disabled'} padding left>
             <Button
               size='medium'
               appearance='ghost'
-              onPress={hideModal}
+              onPress={onPressClose}
+              icon={() => <Icon name='x' />}
               style={themedStyle.buttonStyle}
-              textStyle={themedStyle.closeButtonText}
             >
-              X
           </Button>
           </Block>
         </Block>

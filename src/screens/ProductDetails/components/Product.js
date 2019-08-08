@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { Image } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import { Text } from 'react-native-ui-kitten';
-
 import { sizes, textStyles, colors } from '../../../constants/theme';
 import { urls } from '../../../constants/randomImage';
 
@@ -30,7 +29,7 @@ function Product({ themedStyle }) {
         <Block flex='disabled' marginBottom>
           <Text style={themedStyle.nameStyle}>9901</Text>
           <Text style={themedStyle.typeStyle}>Sow - Landrace</Text>
-          <Text style={themedStyle.birthDateStyle}>105 days old (April 24, 2019)</Text>
+          <Text style={themedStyle.birthDateStyle}>105 days old (Birth date is on April 24, 2019)</Text>
         </Block>
         <SwineInfo />
         <OtherInfo />
