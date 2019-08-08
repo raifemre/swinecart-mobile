@@ -8,6 +8,7 @@ export { default as ModalContainer } from './ModalContainer';
 export { default as EmptyListMessage } from './EmptyListMessage';
 export { default as LoadingView } from './LoadingView';
 export { default as ListFooter } from './ListFooter';
+export { default as UserAvatar } from './UserAvatar';
 
 export { default as HeaderBar } from './navigation/HeaderBar';
 export { default as SettingsButton } from './navigation/SettingsButton';

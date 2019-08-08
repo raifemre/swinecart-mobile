@@ -25,13 +25,13 @@ function ConversationsList({ data, status, themedStyle }) {
 
   const keyExtractor = item => item.id;
   const getItemLayout = (data, index) => ({
-    length: getHeight(status),
-    offset: getHeight(status) * index,
+    length: 80,
+    offset: 80 * index,
     index
   });
 
   const renderListEmptyComponent = () => (
-    <EmptyListMessage message={'No Conversations...'} />
+    <EmptyListMessage message={'No Conversations!'} />
   );
 
   const renderFooterComponent = () => {
@@ -50,12 +50,12 @@ function ConversationsList({ data, status, themedStyle }) {
         data={data}
         extraData={data}
         renderItem={renderItem}
-        // getItemLayout={getItemLayout}
+        getItemLayout={getItemLayout}
         keyExtractor={keyExtractor}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
-        initialNumToRender={5}
-        maxToRenderPerBatch={5}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
         ListEmptyComponent={renderListEmptyComponent}
         ListFooterComponent={renderFooterComponent}
         ListFooterComponentStyle={themedStyle.ListFooterStyle}

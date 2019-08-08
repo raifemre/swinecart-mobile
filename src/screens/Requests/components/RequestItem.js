@@ -7,7 +7,7 @@ import {
 } from 'react-native-ui-kitten';
 
 import {
-  Block
+  Block, UserAvatar
 } from '../../../shared/components';
 
 import { textStyles, colors, sizes } from '../../../constants/theme';
@@ -32,24 +32,16 @@ function RequestItem(props) {
       activeOpacity={0.50}
       onPress={onPressView}
     >
-      <Block row padding style={themedStyle.container}>
-        <Block center middle flex='disabled' style={themedStyle.avatarStyle}>
-          <Text
-            style={themedStyle.avatarTextStyle}
-          >
-            {getInitials(customerName)}
-          </Text>
-        </Block>
+      <Block row padding center style={themedStyle.container}>
+        <UserAvatar userName={customerName} size={64} textSize={20} />
         <Block paddingHorizontal>
           <Text
-            category='h6'
-            style={[textStyles.headline, themedStyle.nameStyle]}
+            style={themedStyle.customerName}
           >
             {customerName}
           </Text>
           <Text
-            category='s2'
-            style={[textStyles.caption1, themedStyle.provinceStyle]}
+            style={themedStyle.province}
           >
             {customerProvince}
           </Text>
@@ -69,31 +61,20 @@ function RequestItem(props) {
 
 export default withStyles(memo(RequestItem, () => true), () => ({
   container: {
-    height: 135,
+    height: 120,
     overflow: 'hidden',
     backgroundColor: colors.white1,
     borderBottomWidth: 1,
     borderBottomColor: colors.gray1
   },
-  avatarStyle: {
-    width: 64,
-    height: 64,
-    borderWidth: 1,
-    borderColor: colors.gray1,
-    borderRadius: 50,
-    backgroundColor: '#ffffff',
-  },
-  avatarTextStyle: {
-    ...textStyles.caption1,
-    fontSize: 24,
-    lineHeight: 28.8,
-    alignSelf: 'center',
-  },
-  nameStyle: {
+  customerName: {
+    ...textStyles.subtitle,
     color: '#000000',
     fontSize: 16
   },
-  provinceStyle: {
+  province: {
+    ...textStyles.caption1,
+    color: colors.gray3,
     fontSize: 14
   },
   statusStyle: {

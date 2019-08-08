@@ -23,8 +23,8 @@ function RequestsList({ requests, themedStyle }) {
 
   const keyExtractor = item => item.id;
   const getItemLayout = (data, index) => ({
-    length: 135,
-    offset: 135 * index,
+    length: 120,
+    offset: 120 * index,
     index
   });
 

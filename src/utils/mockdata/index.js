@@ -86,7 +86,7 @@ export function createConversations(count) {
     return {
       id: faker.random.uuid(),
       userName: createFakeName(), 
-      message: faker.lorem.sentence(),
+      message: faker.lorem.paragraphs(),
       createdAt: faker.date.recent()
     };
   });

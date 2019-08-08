@@ -10,7 +10,7 @@ import { EmptyListMessage } from '../../../shared/components';
 
 import { createConversations } from '../../../utils/mockdata';
 
-const conversations = createConversations(10);
+const conversations = createConversations(500);
 
 class InboxTabView extends PureComponent {
   state = {
