@@ -9,3 +9,4 @@ export { default as Products } from './Products';
 export { default as Requests } from './Requests';
 export { default as Settings } from './Settings';
 export { default as AddProduct } from './AddProduct';
+export { default as ProductDetails } from './ProductDetails';

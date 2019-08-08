@@ -75,3 +75,7 @@ export function createRandomProducts(count) {
     };
   }); 
 }
+
+export function createFakeOtherDetails() {
+  return faker.lorem.paragraphs();
+}

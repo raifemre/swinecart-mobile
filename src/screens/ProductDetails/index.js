@@ -1,23 +1,24 @@
 import React, { Fragment, memo } from 'react';
 
 import {
-  HeaderBar, BackButton, PreviewButton
+  HeaderBar, BackButton, ContainerView
 } from '../../shared/components';
 
-import { 
-  AddProductForm
+import {
+  Product
 } from './components';
 
 function Container(props) {
 
   return (
     <Fragment>
-      <HeaderBar 
-        title='Add Product'
+      <HeaderBar
+        title='Product Details'
         leftControl={<BackButton />}
-        rightControls={<PreviewButton />}
       />
-      <AddProductForm />
+      <ContainerView backgroundColor='#ffffff'>
+        <Product />
+      </ContainerView>
     </Fragment>
   )
 

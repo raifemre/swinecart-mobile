@@ -3,14 +3,15 @@ import {
 } from 'react-navigation';
 
 import {
-  Products, AddProduct
+  Products, AddProduct, ProductDetails
 } from '../../screens';
 
 const navigator = createStackNavigator({
   Products: Products,
   AddProduct: AddProduct,
+  ProductDetails: ProductDetails,
 }, {
-    initialRouteName: 'AddProduct',
+    initialRouteName: 'ProductDetails',
   defaultNavigationOptions: ({ navigation }) => {
     return {
       header: null

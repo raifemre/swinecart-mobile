@@ -2,10 +2,12 @@ import React, { memo } from 'react';
 
 import HeaderBarButton from './HeaderBarButton';
 
+import NavigationService from '../../../services/navigation';
+
 function PreviewButton() {
 
   const onPress = () => {
-    alert('Preview Button');
+    NavigationService.navigate('ProductDetails');
   };
 
   return (

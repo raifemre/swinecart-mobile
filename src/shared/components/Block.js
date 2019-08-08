@@ -7,7 +7,7 @@ function Block(props) {
 
   const { 
     flex, row, center, left, middle, right, space, 
-    padding, padding2, paddingTop, paddingBottom, paddingHorizontal, paddingVertical,
+    padding, padding2, paddingTop, paddingLeft, paddingBottom, paddingHorizontal, paddingVertical,
     marginBottom, marginBottom2, marginTop, marginTop2, marginRight,
     style, children, ...otherProps
   } = props;
@@ -25,6 +25,7 @@ function Block(props) {
     padding && styles.padding,
     padding2 && styles.padding2,
     paddingTop && styles.paddingTop,
+    paddingLeft && styles.paddingLeft,
     paddingBottom && styles.paddingBottom,
     paddingHorizontal && styles.paddingHorizontal,
     paddingVertical && styles.paddingVertical,
@@ -73,6 +74,9 @@ const styles = StyleSheet.create({
   },
   paddingTop: {
     paddingTop: sizes.padding,
+  },
+  paddingLeft: {
+    paddingLeft: sizes.padding,
   },
   paddingBottom: {
     paddingBottom: sizes.padding,

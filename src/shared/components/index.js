@@ -14,3 +14,4 @@ export { default as SettingsButton } from './navigation/SettingsButton';
 export { default as BackButton } from './navigation/BackButton';
 export { default as AddProductButton } from './navigation/AddProductButton';
 export { default as PreviewButton } from './navigation/PreviewButton';
+export { default as ModalCloseButton } from './navigation/ModalCloseButton';
