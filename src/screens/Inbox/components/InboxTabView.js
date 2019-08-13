@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     ...shadowStyles.shadow1,
     backgroundColor: colors.primary,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.gray2,
   },
   labelStyle: {
     ...textStyles.paragraph,

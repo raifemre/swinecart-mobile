@@ -3,18 +3,27 @@ import {
 } from 'react-navigation';
 
 import {
-  Inbox
+  Inbox, Chat
 } from '../../screens';
 
 const navigator = createStackNavigator({
-  Inbox: Inbox
+  Inbox: Inbox,
+  Chat: Chat
 }, {
-    initialRouteName: 'Inbox',
+    initialRouteName: 'Chat',
     defaultNavigationOptions: ({ navigation }) => {
       return {
         header: null
       }
     }
   });
+
+navigator.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarVisible: false,
+    // tabBarVisible: navigation.state.index > 0 ? false : true,
+  };
+};
+
 
 export default navigator;

@@ -9,6 +9,8 @@ import { Block, UserAvatar } from '../../../shared/components';
 import { textStyles, colors, sizes } from '../../../constants/theme';
 import { formatMessageDate } from '../../../utils/formatters';
 
+import NavigationService from '../../../services/navigation';
+
 function Conversation({ themedStyle, data }) {
 
   const { message, user } = data;
@@ -17,7 +19,7 @@ function Conversation({ themedStyle, data }) {
   const { content, createdAt, readAt } = message;
 
   const onPressConversation = () => {
-
+    NavigationService.navigate('Chat', { user });
   };
     
   const contentStyle = [

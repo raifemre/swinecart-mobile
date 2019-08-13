@@ -1,4 +1,5 @@
 import last from 'lodash/last';
+import upperCase from 'lodash/upperCase'
 
 export function getHeight(status) {
   switch (status) {
@@ -10,5 +11,6 @@ export function getHeight(status) {
 
 export function getInitials(fullName) {
   const [ firstName, ...otherNames ] = fullName.split(' ');
-  return firstName[0] + last(otherNames)[0];
+  const initials = firstName[0] + last(otherNames)[0];
+  return upperCase(initials);
 }

@@ -4,6 +4,7 @@ export { default as Dashboard } from './Dashboard';
 export { default as Login } from './Login';
 // export { default as FarmDetails } from './FarmDetails';
 export { default as Inbox } from './Inbox';
+export { default as Chat } from './Chat';
 export { default as Orders } from './Orders';
 export { default as Products } from './Products';
 export { default as Requests } from './Requests';

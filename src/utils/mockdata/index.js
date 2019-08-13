@@ -96,3 +96,22 @@ export function createConversations(count) {
     };
   });
 }
+export function createMessages(count) {
+  return createArray(count).map(() => {
+
+    const user = sample([
+      { name: 'PigCARD', _id: 1 },
+      { name: 'Cecil Carter', _id: 2 },
+    ]);
+
+    return {
+      _id: faker.random.uuid(),
+      text: faker.lorem.sentence(),
+      // createdAt: faker.date.recent(),
+      user: {
+        _id: user._id,
+        name: user.name
+      }
+    }
+  });
+}
