@@ -1,6 +1,6 @@
 import React, { useState, memo, useEffect } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { GiftedChat, Send, InputToolbar, Composer, Bubble, Actions } from 'react-native-gifted-chat';
+import { GiftedChat, Send, InputToolbar, Composer, Bubble, Actions, MessageText } from 'react-native-gifted-chat';
 
 import { 
   LoadingView, UserAvatar, Icon, Block
@@ -52,6 +52,13 @@ function Chat({ themedStyle, user }) {
     />
   );
 
+  const renderMessageText = props => (
+    <MessageText
+      {...props}
+      customTextStyle={themedStyle.customTextStyle}
+    />
+  );
+
   const renderActions = props => (
     <Actions
       {...props}
@@ -71,6 +78,7 @@ function Chat({ themedStyle, user }) {
       renderComposer={renderComposer}
       renderBubble={renderBubble}
       renderActions={renderActions}
+      renderMessageText={renderMessageText}
     />
   );
 
@@ -79,6 +87,10 @@ function Chat({ themedStyle, user }) {
 export default withStyles(memo(Chat), () => ({
   sendIconContainer: {
     margin: 0
+  },
+  customTextStyle: {
+    ...textStyles.caption1,
+    fontSize: 15
   },
   sendContainer: {
     justifyContent: 'center',
@@ -91,7 +103,7 @@ export default withStyles(memo(Chat), () => ({
     marginTop: 0,
     marginBottom: 0,
     paddingHorizontal: sizes.padding,
-    ...textStyles.caption2,
+    ...textStyles.caption1,
   },
   bubbleWrapperStyle: {
     left: {
