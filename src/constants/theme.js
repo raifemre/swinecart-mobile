@@ -58,6 +58,7 @@ const colors = {
   'gray2': '#F7F9FC',
   'gray3': '#6F6F6F',
   'gray4': '#CFCFCF',
+  'gray5': '#8F9BB3',
 
 
 };
@@ -107,15 +108,15 @@ const sizes = {
 
 const shadowStyles = {
   shadow1: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 1,
     },
-    shadowOpacity: 0,
-    shadowRadius: 0,
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
 
-    elevation: 0,
+    elevation: 2,
   }
 }
 

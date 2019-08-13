@@ -25,7 +25,7 @@ function Conversation({ themedStyle, data }) {
   const contentStyle = [
     themedStyle.content,
     {
-      color: readAt ? colors.gray3 : '#000000',
+      color: readAt ? colors.gray5 : '#000000',
     }
   ];
 
@@ -78,11 +78,11 @@ export default withStyles(memo(Conversation, () => true), () => ({
   },
   content: {
     ...textStyles.subtitle,
-    fontSize: 13
+    fontSize: 12
   },
   createdAt: {
     ...textStyles.caption1,
-    color: colors.gray3,
+    color: colors.gray5,
     fontSize: 12
   },
   indicator: {

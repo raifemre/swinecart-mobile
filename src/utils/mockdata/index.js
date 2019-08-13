@@ -96,6 +96,7 @@ export function createConversations(count) {
     };
   });
 }
+
 export function createMessages(count) {
   return createArray(count).map(() => {
 
@@ -113,5 +114,35 @@ export function createMessages(count) {
         name: user.name
       }
     }
+  });
+}
+
+export function createNotifications(count) {
+  return createArray(count).map(() => {
+
+
+    const productRequested = {
+      type: 'ProductRequested',
+      message: 'requested for Product 2390'
+    };
+
+    const breederRated = {
+      type: 'BreederRated',
+      message: 'rated you with 4.5 (overall average)'
+    };
+
+    const fakeNotif = sample([
+      productRequested,
+      breederRated
+    ]);
+
+    return {
+      id: faker.random.uuid(),
+      type: fakeNotif.type,
+      customerName: 'Cecil Carter',
+      message: fakeNotif.message,
+      createdAt: faker.date.recent(),
+      readAt: sample([faker.date.recent(), null]),
+    };
   });
 }

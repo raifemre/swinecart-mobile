@@ -1,8 +1,8 @@
 import { 
-  parseInt
+  parseInt, upperFirst
 } from 'lodash';
 
-import { format, isSameDay } from 'date-fns';
+import { format, isSameDay, distanceInWordsToNow } from 'date-fns';
 
 export function capitalize() {
 
@@ -38,4 +38,7 @@ export function formatMessageDate(date) {
   else {
     return format(date, 'MMM D');
   }
+}
+export function formatCreatedAt(date) {
+  return `${upperFirst(distanceInWordsToNow(date))} ago`;
 }

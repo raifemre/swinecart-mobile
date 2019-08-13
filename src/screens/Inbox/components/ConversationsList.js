@@ -1,4 +1,4 @@
-import React, { Fragment, useState, memo } from 'react';
+import React, { Fragment, useState, memo, useEffect } from 'react';
 import { FlatList } from 'react-native';
 
 import { withStyles } from 'react-native-ui-kitten/theme';
@@ -9,9 +9,17 @@ import Conversation from './Conversation';
 
 import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
 
-function ConversationsList({ data, themedStyle }) {
+import { createConversations } from '../../../utils/mockdata';
 
+function ConversationsList({ themedStyle }) {
+
+  const [conversations, setConversation] = useState(null);
   const [isRefreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    const fakeConversations = createConversations(500);
+    setConversation(fakeConversations);
+  }, []);
 
   const renderItem = ({ item }) => {
     return (
@@ -44,9 +52,9 @@ function ConversationsList({ data, themedStyle }) {
 
   return (
     <Fragment>
-      {data && <FlatList
-        data={data}
-        extraData={data}
+      {conversations && <FlatList
+        data={conversations}
+        extraData={conversations}
         renderItem={renderItem}
         getItemLayout={getItemLayout}
         keyExtractor={keyExtractor}
@@ -61,7 +69,7 @@ function ConversationsList({ data, themedStyle }) {
         style={themedStyle.containerStyle}
         contentContainerStyle={themedStyle.contentContainerStyle}
       />}
-      {!data && <LoadingView />}
+      {!conversations && <LoadingView />}
     </Fragment>
   );
 }

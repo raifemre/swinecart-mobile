@@ -8,20 +8,16 @@ import NotificationsList from './NotificationsList';
 
 import { EmptyListMessage } from '../../../shared/components';
 
-import { createConversations } from '../../../utils/mockdata';
-
-const conversations = createConversations(500);
-
 class InboxTabView extends PureComponent {
   state = {
-    index: 0,
+    index: 1,
     routes: [
       { key: 'conversations', title: 'Conversations' },
       { key: 'notifications', title: 'Notifications' },
     ],
   };
 
-  conversationsRoute = () => <ConversationsList data={conversations} />;
+  conversationsRoute = () => <ConversationsList />;
   notificationsRoute = () => <NotificationsList />;
 
   initialLayout = {
@@ -80,8 +76,6 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     ...shadowStyles.shadow1,
     backgroundColor: colors.primary,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.gray2,
   },
   labelStyle: {
     ...textStyles.paragraph,

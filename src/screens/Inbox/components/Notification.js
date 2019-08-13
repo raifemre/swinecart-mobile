@@ -1,85 +1,98 @@
-import React, { PureComponent } from 'react';
+import React, { memo } from 'react';
 
-import {
-  TouchableOpacity, View
-} from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-ui-kitten'
+import { withStyles } from 'react-native-ui-kitten/theme';
 
-import {
-  Text
-} from 'react-native-ui-kitten'
+import { Block, Icon } from '../../../shared/components';
 
-import {
-  withStyles
-} from 'react-native-ui-kitten/theme';
+import { textStyles, colors, sizes } from '../../../constants/theme';
 
+import NavigationService from '../../../services/navigation';
+import { formatCreatedAt } from '../../../utils/formatters';
 
-import { textStyles, colors } from '../../../constants/theme';
+function Notification({ themedStyle, data }) {
 
+  const { customerName, message, readAt, createdAt, type } = data;
 
-class Notification extends PureComponent {
+  const onPressNotification = () => {
+    if (type === 'BreederRated') {
+      NavigationService.navigate('OrdersStack');
+    }
+    else if (type === 'ProductRequested') {
+      NavigationService.navigate('DashboardStack');
+    }
+  };
 
-  onPressNotification = () => {
-    // alert('yow');
-  }
+  const contentStyle = [
+    themedStyle.readAt,
+    {
+      color: readAt ? colors.gray5 : '#000000',
+    }
+  ];
 
-  render() {
+  const messageStyle = [
+    themedStyle.message,
+    {
+      color: readAt ? colors.gray5 : '#000000',
+    }
+  ];
 
-    const { themedStyle, style } = this.props;
+  const customerNameStyle = [
+    themedStyle.customerName,
+    {
+      color: readAt ? colors.gray5 : '#000000',
+    }
+  ];
 
-    return (
-      <TouchableOpacity
-        style={[themedStyle.container, style]}
-        onPress={this.onPressNotification}>
-        <View style={themedStyle.leftSection}>
-          <View style={themedStyle.messageContainer}>
-            <Text
-              style={themedStyle.userLabel}
-              category='s2'
-              appearance='hint'
-              adjustsFontSizeToFit={true}
-            >
-              {'Customer Cecile Carter rated you with 5 (overall average).'}
-            </Text>
-            <Text
-              style={themedStyle.lastMessageLabel}
-              appearance='hint'
-              category='c1'
-            >
-              {'20 hours ago'}
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
+  return (
+    <TouchableOpacity
+      activeOpacity={0.50}
+      onPress={onPressNotification}
+    >
+      <Block row center padding style={themedStyle.container}>
+        <Block flex={1}>
+          <Text
+            style={customerNameStyle}
+          >
+            {customerName}
+          </Text>
+          <Text
+            style={messageStyle}
+          >
+            {message}
+          </Text>
+          <Text
+            style={contentStyle}
+            numberOfLines={1}
+          >
+            {formatCreatedAt(createdAt)}
+          </Text>
+        </Block>
+      </Block>
+    </TouchableOpacity>
+  );
 
 }
 
-export default withStyles(Notification, () => ({
+export default withStyles(memo(Notification, () => true), () => ({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 16,
+    // height: 100,
+    overflow: 'hidden',
+    backgroundColor: colors.white1,
     borderBottomWidth: 1,
-    borderBottomColor: colors.gray2
+    borderBottomColor: colors.gray1
   },
-  messageContainer: {
-    // flex: 1,
+  customerName: {
+    ...textStyles.headline,
+    fontSize: 16
   },
-  leftSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  message: {
+    ...textStyles.subtitle,
+    fontSize: 13
   },
-  avatar: {
-    marginRight: 16,
-  },
-  userLabel: textStyles.subtitle,
-  lastMessageLabel: textStyles.caption1,
-  dateLabel: textStyles.paragraph,
-  rightSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
+  readAt: {
+    ...textStyles.caption1,
+    fontSize: 12
+  }
 }));
