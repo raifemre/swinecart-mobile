@@ -29,7 +29,7 @@ function OrderItem(props) {
 
   const innerComponent = () => (
     <Fragment>
-      <Block row center padding style={[themedStyle.container, { height }]}>
+      <Block row padding style={[themedStyle.container, { height }]}>
         <Avatar
           shape='round'
           source={{ uri: imageUrl }}

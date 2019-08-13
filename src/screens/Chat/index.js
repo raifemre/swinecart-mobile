@@ -10,12 +10,12 @@ import {
 
 function Container({ navigation }) {
 
-  const [user, setUser] = useState({ userName: 'Cecil Carter' });
+  const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   const user = navigation.getParam('user');
-  //   setUser(user);
-  // }, []);
+  useEffect(() => {
+    const user = navigation.getParam('user');
+    setUser(user);
+  }, []);
 
   return (
     <Fragment>

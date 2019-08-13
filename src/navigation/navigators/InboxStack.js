@@ -10,7 +10,7 @@ const navigator = createStackNavigator({
   Inbox: Inbox,
   Chat: Chat
 }, {
-    initialRouteName: 'Chat',
+    initialRouteName: 'Inbox',
     defaultNavigationOptions: ({ navigation }) => {
       return {
         header: null
@@ -20,8 +20,8 @@ const navigator = createStackNavigator({
 
 navigator.navigationOptions = ({ navigation }) => {
   return {
-    tabBarVisible: false,
-    // tabBarVisible: navigation.state.index > 0 ? false : true,
+    // tabBarVisible: false,
+    tabBarVisible: navigation.state.index > 0 ? false : true,
   };
 };
 
