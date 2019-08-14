@@ -68,13 +68,13 @@ export default withStyles(memo(Product, () => true), () => ({
     ...textStyles.subtitle,
     fontSize: 20,
     lineHeight: 24,
-    color: colors.gray3
+    color: colors.gray5
   },
   birthDateStyle: {
     ...textStyles.caption1,
     fontSize: 14,
     lineHeight: 16.8,
-    color: colors.gray3
+    color: colors.gray5
   },
   swineInfoHeader: {
     ...textStyles.headline,

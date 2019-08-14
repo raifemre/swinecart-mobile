@@ -1,19 +1,14 @@
-import React, { Fragment, memo, useState } from 'react';
-
+import React, { Fragment, memo } from 'react';
 import { HeaderBar } from '../../shared/components';
+import { OrdersList } from './components';
 
-import { OrdersTabView, OrdersList } from './components';
-
-function Container(props) {
-
+function Container() {
   return (
     <Fragment>
       <HeaderBar title='Orders' />
-      <OrdersTabView />
-      {/* <OrdersList status='requested' /> */}
+      <OrdersList />
     </Fragment>
   );
-
 }
 
-export default memo(Container);
+export default memo(Container, () => true);

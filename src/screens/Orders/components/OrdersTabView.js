@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabView, TabBar, SceneMap, TabBarTop } from 'react-native-tab-view';
 import { colors, textStyles, shadowStyles } from '../../../constants/theme';
 
 import { createRandomOrders } from '../../../utils/mockdata';
 import OrdersList from './OrdersList';
 
-import { EmptyListMessage } from '../../../shared/components';
+import { EmptyListMessage, Block } from '../../../shared/components';
 
 // const requestedProducts = null;
 const requestedProducts = createRandomOrders(10, 'requested');
@@ -38,15 +38,17 @@ class OrdersTabView extends PureComponent {
   getLabelText = ({ route }) => route.title;
 
   renderTabBar = props => (
-    <TabBar
-      {...props}
-      useNativeDriver={true}
-      getLabelText={this.getLabelText}
-      labelStyle={styles.labelStyle}
-      indicatorStyle={styles.indicatorStyle}
-      style={styles.tabBarStyle}
-      tabStyle={styles.tabStyle}
-    />
+    // <Block flex='disabled' row>
+      <TabBar
+        {...props}
+        useNativeDriver={true}
+        getLabelText={this.getLabelText}
+        labelStyle={styles.labelStyle}
+        indicatorStyle={styles.indicatorStyle}
+        style={styles.tabBarStyle}
+        tabStyle={styles.tabStyle}
+      />
+    // </Block>
   );
 
   renderScene = SceneMap({
@@ -85,10 +87,12 @@ export default OrdersTabView;
 const styles = StyleSheet.create({
   tabStyle: {
     width: 'auto',
+    borderWidth: 0
   },
   tabBarStyle: {
     ...shadowStyles.shadow1,
     backgroundColor: colors.primary,
+    justifyContent: 'center',
   },
   labelStyle: { 
     ...textStyles.paragraph,

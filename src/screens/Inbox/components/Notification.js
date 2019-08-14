@@ -17,10 +17,10 @@ function Notification({ themedStyle, data }) {
 
   const onPressNotification = () => {
     if (type === 'BreederRated') {
-      NavigationService.navigate('OrdersStack');
+      NavigationService.navigate('DashboardStack');
     }
     else if (type === 'ProductRequested') {
-      NavigationService.navigate('DashboardStack');
+      NavigationService.navigate('OrdersStack');
     }
   };
 

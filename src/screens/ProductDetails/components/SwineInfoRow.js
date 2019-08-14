@@ -31,7 +31,7 @@ export default withStyles(memo(SwineInfoRow, () => true), () => ({
     ...textStyles.caption2,
     fontSize: 16,
     lineHeight: 19.2,
-    color: colors.gray3
+    color: colors.gray5
   },
   swineInfoData: {
     ...textStyles.caption2,
