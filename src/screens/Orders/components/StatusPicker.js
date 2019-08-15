@@ -23,7 +23,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
 
   const toggleMenu = useCallback(() => {
     setIsVisible(!isVisible);
-  }, []);
+  }, [ isVisible ]);
 
   const renderContent = useCallback(()=> {
     return routes.map((route, index) => {

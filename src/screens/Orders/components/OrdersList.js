@@ -19,7 +19,7 @@ function OrdersList({ themedStyle, status }) {
   const [isRefreshing, setRefreshing] = useState([]);
 
   useEffect(() => {
-    const fakeOrders = createRandomOrders(1000, status);
+    const fakeOrders = createRandomOrders(5000, status);
     setOrders(fakeOrders);
   }, []);
 
