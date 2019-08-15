@@ -2,7 +2,7 @@ import React, { Fragment, memo } from 'react';
 
 import {
   HeaderBar, ContainerView, BackButton
-} from '../../shared/components';
+} from '../../../shared/components';
 
 import {
   Section

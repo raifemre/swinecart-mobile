@@ -58,11 +58,12 @@ class InboxTabView extends PureComponent {
         navigationState={this.state}
         renderScene={this.renderScene}
         renderTabBar={this.renderTabBar}
+        renderLazyPlaceholder={this.renderLazyPlaceholder}
         onIndexChange={this.onIndexChange}
         initialLayout={this.initialLayout}
         lazy={true}
         lazyPreloadDistance={0}
-        renderLazyPlaceholder={this.renderLazyPlaceholder}
+        swipeEnabled={false}
       />
     );
   }

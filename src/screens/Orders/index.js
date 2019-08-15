@@ -1,12 +1,12 @@
 import React, { Fragment, memo } from 'react';
 import { HeaderBar } from '../../shared/components';
-import { OrdersList } from './components';
+import { OrdersTabView } from './components';
 
 function Container() {
   return (
     <Fragment>
       <HeaderBar title='Orders' />
-      <OrdersList />
+      <OrdersTabView />
     </Fragment>
   );
 }

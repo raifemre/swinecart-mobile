@@ -1,55 +1,35 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
-import { TabView, TabBar, SceneMap, TabBarTop } from 'react-native-tab-view';
-import { colors, textStyles, shadowStyles } from '../../../constants/theme';
-
-import { createRandomOrders } from '../../../utils/mockdata';
+import { Dimensions } from 'react-native';
+import { TabView, SceneMap } from 'react-native-tab-view';
 import OrdersList from './OrdersList';
+import StatusPicker from './StatusPicker';
 
-import { EmptyListMessage, Block } from '../../../shared/components';
-
-// const requestedProducts = null;
-const requestedProducts = createRandomOrders(10, 'requested');
-const reservedProducts = createRandomOrders(10, 'reserved');
-const onDeliveryProduct = createRandomOrders(10, 'onDelivery');
-const soldProduct = createRandomOrders(10, 'sold');
+import { EmptyListMessage } from '../../../shared/components';
 
 class OrdersTabView extends PureComponent {
   state = {
     index: 0,
     routes: [
-      { key: 'requested', title: 'Requested' },
-      { key: 'reserved', title: 'Reserved' },
-      { key: 'onDelivery', title: 'On Delivery' },
-      { key: 'sold', title: 'Sold' },
+      { key: 'requested', text: 'Requested' },
+      { key: 'reserved', text: 'Reserved' },
+      { key: 'onDelivery', text: 'On Delivery' },
+      { key: 'sold', text: 'Sold' },
     ],
   };
 
-  requestedRoute = () => <OrdersList data={requestedProducts} status='requested' />;
-  reservedRoute = () => <OrdersList data={reservedProducts} status='reserved' />;
-  onDeliveryRoute = () => <OrdersList data={onDeliveryProduct} status='onDelivery' />;
-  soldRoute = () => <OrdersList data={soldProduct} status='sold' />;
+  requestedRoute = () => <OrdersList status='requested' />;
+  reservedRoute = () => <OrdersList status='reserved' />;
+  onDeliveryRoute = () => <OrdersList status='onDelivery' />;
+  soldRoute = () => <OrdersList status='sold' />;
 
   initialLayout = { 
     height: 0, 
     width: Dimensions.get('window').width
   };
 
-  getLabelText = ({ route }) => route.title;
-
-  renderTabBar = props => (
-    // <Block flex='disabled' row>
-      <TabBar
-        {...props}
-        useNativeDriver={true}
-        getLabelText={this.getLabelText}
-        labelStyle={styles.labelStyle}
-        indicatorStyle={styles.indicatorStyle}
-        style={styles.tabBarStyle}
-        tabStyle={styles.tabStyle}
-      />
-    // </Block>
-  );
+  renderTabBar = ({ jumpTo }) => {
+    return <StatusPicker jumpTo={jumpTo} />;
+  };
 
   renderScene = SceneMap({
     requested: this.requestedRoute,
@@ -72,35 +52,15 @@ class OrdersTabView extends PureComponent {
         navigationState={this.state}
         renderScene={this.renderScene}
         renderTabBar={this.renderTabBar}
+        renderLazyPlaceholder={this.renderLazyPlaceholder}
         onIndexChange={this.onIndexChange}
         initialLayout={this.initialLayout}
         lazy={true}
         lazyPreloadDistance={0}
-        renderLazyPlaceholder={this.renderLazyPlaceholder}
+        swipeEnabled={false}
       />
     );
   }
 }
 
 export default OrdersTabView;
-
-const styles = StyleSheet.create({
-  tabStyle: {
-    width: 'auto',
-    borderWidth: 0
-  },
-  tabBarStyle: {
-    ...shadowStyles.shadow1,
-    backgroundColor: colors.primary,
-    justifyContent: 'center',
-  },
-  labelStyle: { 
-    ...textStyles.paragraph,
-    fontSize: 15,
-  },
-  indicatorStyle: { 
-    backgroundColor: 'white',
-    height: 4
-  },
-});
-
