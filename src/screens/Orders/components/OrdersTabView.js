@@ -6,15 +6,14 @@ import StatusPicker from './StatusPicker';
 
 import { EmptyListMessage } from '../../../shared/components';
 
+
+import routes from '../routes';
+
 class OrdersTabView extends PureComponent {
+
   state = {
     index: 0,
-    routes: [
-      { key: 'requested', text: 'Requested' },
-      { key: 'reserved', text: 'Reserved' },
-      { key: 'onDelivery', text: 'On Delivery' },
-      { key: 'sold', text: 'Sold' },
-    ],
+    routes
   };
 
   requestedRoute = () => <OrdersList status='requested' />;
@@ -52,9 +51,9 @@ class OrdersTabView extends PureComponent {
         navigationState={this.state}
         renderScene={this.renderScene}
         renderTabBar={this.renderTabBar}
-        renderLazyPlaceholder={this.renderLazyPlaceholder}
         onIndexChange={this.onIndexChange}
         initialLayout={this.initialLayout}
+        renderLazyPlaceholder={this.renderLazyPlaceholder}
         lazy={true}
         lazyPreloadDistance={0}
         swipeEnabled={false}

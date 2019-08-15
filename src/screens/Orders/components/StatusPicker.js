@@ -1,24 +1,11 @@
-import React, { Fragment, memo, useState } from 'react';
+import React, { memo, useState } from 'react';
+import { withStyles } from 'react-native-ui-kitten/theme';
+import { OverflowMenu, Button, Text } from 'react-native-ui-kitten';
 
-import {
-  withStyles
-} from 'react-native-ui-kitten/theme';
-
-import { 
-  OverflowMenu,
-  Button,
-  Text
-} from 'react-native-ui-kitten';
-
-import { Block, Icon } from '../../../shared/components';
+import { Block } from '../../../shared/components';
 import { colors, sizes, textStyles } from '../../../constants/theme';
 
-const options = [
-  { key: 'requested', text: 'Requested' },
-  { key: 'reserved', text: 'Reserved' },
-  { key: 'onDelivery', text: 'On Delivery' },
-  { key: 'sold', text: 'Sold' },
-];
+import routes from '../routes';
 
 function StatusPicker({ themedStyle, jumpTo }) {
 
@@ -27,14 +14,13 @@ function StatusPicker({ themedStyle, jumpTo }) {
 
   const onItemSelect = index => {
     setIsVisible(false);
-    setStatus(options[index].text);
-    jumpTo(options[index].key);
+    setStatus(routes[index].text);
+    jumpTo(routes[index].key);
   };
 
   const toggleMenu = () => {
     setIsVisible(!isVisible);
   };
-
 
   return (
     <Block row flex='disabled' center middle padding style={themedStyle.container}>
@@ -42,7 +28,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
         Status: 
       </Text>
       <OverflowMenu
-        items={options}
+        items={routes}
         visible={isVisible}
         onSelect={onItemSelect}
         onBackdropPress={toggleMenu}
@@ -50,7 +36,6 @@ function StatusPicker({ themedStyle, jumpTo }) {
       >
         <Button
           size='medium'
-          appearance='outline'
           onPress={toggleMenu}
           style={themedStyle.button}
           textStyle={themedStyle.buttonText}
@@ -72,7 +57,7 @@ export default withStyles(memo(StatusPicker, () => true), () => ({
     width: '100%'
   },
   button: {
-    // borderWidth: 0,
+    borderWidth: 0,
     width: 170,
     marginLeft: sizes.margin,
   },

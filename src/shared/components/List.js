@@ -1,19 +1,13 @@
 import React, { Fragment, useState, memo, useEffect } from 'react';
 import { FlatList } from 'react-native';
-
 import { withStyles } from 'react-native-ui-kitten/theme';
+import { colors } from '../../../constants/theme';
 
-import { colors } from '../../../constants/theme'
-
-import OrderItem from './OrderItem';
-import { 
+import {
   EmptyListMessage, LoadingView, ListFooter
-} from '../../../shared/components';
+} from '../components';
 
-import { getHeight } from '../../../utils/helpers';
-import { createRandomOrders } from '../../../utils/mockdata';
-
-function OrdersList({ themedStyle, status }) {
+function List({ themedStyle, status }) {
 
   const [orders, setOrders] = useState(null);
   const [isRefreshing, setRefreshing] = useState([]);
@@ -43,7 +37,7 @@ function OrdersList({ themedStyle, status }) {
   const renderListEmptyComponent = () => (
     <EmptyListMessage message={'No Orders!'} />
   );
-  
+
   const renderFooterComponent = () => {
     return (
       <ListFooter isRefreshing={isRefreshing} />
@@ -78,7 +72,7 @@ function OrdersList({ themedStyle, status }) {
   );
 }
 
-export default withStyles(memo(OrdersList, () => true), () => ({
+export default withStyles(memo(List, () => true), () => ({
   containerStyle: {
     backgroundColor: colors.gray2,
   },
