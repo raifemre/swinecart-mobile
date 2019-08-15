@@ -10,7 +10,7 @@ import routes from '../routes';
 function StatusPicker({ themedStyle, jumpTo }) {
 
   const [isVisible, setIsVisible] = useState(false);
-  const [status, setStatus] = useState({ text: 'Requested' });
+  const [status, setStatus] = useState(routes[0]);
 
   useEffect(() => {
     jumpTo(status.key);
