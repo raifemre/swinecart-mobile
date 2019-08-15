@@ -3,4 +3,4 @@ export default [
   { key: 'reserved', text: 'Reserved' },
   { key: 'onDelivery', text: 'On Delivery' },
   { key: 'sold', text: 'Sold' },
-]
+];

@@ -6,7 +6,6 @@ import StatusPicker from './StatusPicker';
 
 import { EmptyListMessage } from '../../../shared/components';
 
-
 import routes from '../routes';
 
 class OrdersTabView extends PureComponent {

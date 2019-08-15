@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useCallback, useEffect } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import { Popover, Button, Text, OverflowMenuItem } from 'react-native-ui-kitten';
 
@@ -10,28 +10,28 @@ import routes from '../routes';
 function StatusPicker({ themedStyle, jumpTo }) {
 
   const [isVisible, setIsVisible] = useState(false);
-  const [status, setStatus] = useState('Requested');
+  const [status, setStatus] = useState({ text: 'Requested' });
 
-  const onItemSelect = index => {
+  useEffect(() => {
+    jumpTo(status.key);
+  }, [ status ]);
+
+  const onItemSelect = useCallback(index => {
     setIsVisible(false);
-    setStatus(routes[index].text);
-    jumpTo(routes[index].key);
-  };
+    setStatus(routes[index]);
+  }, []);
 
-  const toggleMenu = () => {
+  const toggleMenu = useCallback(() => {
     setIsVisible(!isVisible);
-  };
+  }, []);
 
   const renderContent = useCallback(()=> {
     return routes.map((route, index) => {
-      
       const onPress = () => onItemSelect(index);
-
       const textStyle = [
         themedStyle.menuItemText,
-        route.text === status && { color: colors.primary }
+        route.text === status.text && { color: colors.primary }
       ];
-
       return (
         <OverflowMenuItem
           key={index}
@@ -62,7 +62,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
           style={themedStyle.button}
           textStyle={themedStyle.buttonText}
         >
-          {status}
+          {status.text}
         </Button>
       </Popover>
     </Block>
