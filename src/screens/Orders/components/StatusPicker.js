@@ -96,8 +96,6 @@ export default withStyles(memo(StatusPicker, () => true), () => ({
     ...textStyles.paragraph,
     fontSize: 14
   },
-  menuItem: {
-  },
   buttonText: {
     ...textStyles.button
   }
