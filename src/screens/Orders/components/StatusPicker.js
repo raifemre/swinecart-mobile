@@ -1,9 +1,9 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { OverflowMenu, Button, Text } from 'react-native-ui-kitten';
+import { Popover, Button, Text, OverflowMenuItem } from 'react-native-ui-kitten';
 
 import { Block } from '../../../shared/components';
-import { colors, sizes, textStyles } from '../../../constants/theme';
+import { colors, sizes, textStyles, shadowStyles } from '../../../constants/theme';
 
 import routes from '../routes';
 
@@ -22,15 +22,37 @@ function StatusPicker({ themedStyle, jumpTo }) {
     setIsVisible(!isVisible);
   };
 
+  const renderContent = useCallback(()=> {
+    return routes.map((route, index) => {
+      
+      const onPress = () => onItemSelect(index);
+
+      const textStyle = [
+        themedStyle.menuItemText,
+        route.text === status && { color: colors.primary }
+      ];
+
+      return (
+        <OverflowMenuItem
+          key={index}
+          text={route.text}
+          textStyle={textStyle}
+          onPress={onPress}
+          style={themedStyle.menuItem}
+        />
+      );
+    });
+  }, [ status ]);
+
   return (
     <Block row flex='disabled' center middle padding style={themedStyle.container}>
       <Text style={themedStyle.statusText}>
-        Status: 
+        Select Status:
       </Text>
-      <OverflowMenu
-        items={routes}
+      <Popover
+        indicatorOffset={0}
+        content={renderContent()}
         visible={isVisible}
-        onSelect={onItemSelect}
         onBackdropPress={toggleMenu}
         style={themedStyle.overflowMenu}
       >
@@ -42,7 +64,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
         >
           {status}
         </Button>
-      </OverflowMenu>
+      </Popover>
     </Block>
   );
 }
@@ -67,8 +89,14 @@ export default withStyles(memo(StatusPicker, () => true), () => ({
     color: colors.gray5
   },
   overflowMenu: {
-    borderColor: colors.gray2,
-    borderWidth: 1
+    ...shadowStyles.shadow1,
+    width: 170
+  },
+  menuItemText: {
+    ...textStyles.paragraph,
+    fontSize: 14
+  },
+  menuItem: {
   },
   buttonText: {
     ...textStyles.button

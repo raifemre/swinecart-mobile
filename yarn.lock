@@ -5376,6 +5376,15 @@ react-native-video@4.4.2:
     prop-types "^15.5.10"
     shaka-player "^2.4.4"
 
+react-native-video@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-5.0.0.tgz#30b58e31f0776bfa8dc71109c25114d4e50d9209"
+  integrity sha512-nSG7Zkc0SE2Pa/sKWvMEPUc9Zlo0iVOFTac0GcXd/U5vTsm4L28leQzJ8K/s+Yc5xfCYaeb9bIWROqw2oiB9Ig==
+  dependencies:
+    keymirror "^0.1.1"
+    prop-types "^15.5.10"
+    shaka-player "^2.4.4"
+
 react-native-wizard@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-wizard/-/react-native-wizard-1.0.1.tgz#c3d81f15663cd4a0495139249b39cd683d6a77ec"
