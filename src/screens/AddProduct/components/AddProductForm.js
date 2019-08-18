@@ -2,12 +2,13 @@ import React, { memo, useState } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
 import { Button } from 'react-native-ui-kitten';
+import HideWithKeyboard from 'react-native-hide-with-keyboard';
 
 import { NavigationService } from '../../../services';
-import { Block } from '../../../shared/components'
+import { Block, ContainerView } from '../../../shared/components'
 
 import { 
-  textStyles, sizes
+  textStyles, sizes, colors, shadowStyles
 } from '../../../constants/theme';
 
 import FormStepIndicator from './FormStepIndicator';
@@ -35,7 +36,10 @@ function AddProductForm({ themedStyle }) {
   const [ wizardRef, setWizardRef ] = useState(null);
 
   const onPressBack = () => {
-    if (!isFirstStep()) {
+    if (isFirstStep()) {
+      NavigationService.back();
+    }
+    else {
       wizardRef && wizardRef.prev();
     }
   };
@@ -59,42 +63,46 @@ function AddProductForm({ themedStyle }) {
 
   const isFirstStep = () => {
     return currentStep === 0;
-  }
+  };
 
   return (
     <Block flex={1}>
-      <Block flex='disabled' padding left>
+      <Block flex='disabled' padding left style={themedStyle.header}>
         <FormStepIndicator labels={labels} currentStep={currentStep} />
       </Block>
-      <Wizard
-        steps={steps}
-        setWizardRef={setWizardRef}
-        setCurrentStep={setCurrentStep}
-        currentStep={currentStep}
-      />
-      <Block row flex='disabled' right style={themedStyle.footerStyle}>
-        <Block style={themedStyle.prevButtonContainerStyle}>
-          <Button
-            size='large'
-            appearance='outline'
-            style={themedStyle.buttonStyle}
-            textStyle={themedStyle.buttonTextStyle}
-            onPress={onPressBack}
+      <ContainerView backgroundColor={colors.white1}>
+        <Wizard
+          steps={steps}
+          setWizardRef={setWizardRef}
+          setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
+        />
+      </ContainerView>
+      <HideWithKeyboard>
+        <Block row flex='disabled' right style={themedStyle.footerStyle}>
+          <Block style={themedStyle.prevButtonContainerStyle}>
+            <Button
+              size='large'
+              appearance='ghost'
+              style={themedStyle.buttonStyle}
+              textStyle={themedStyle.buttonTextStyle}
+              onPress={onPressBack}
             >
-              Back
-          </Button>
-        </Block>
-        <Block style={themedStyle.nextButtonContainerStyle}>
-          <Button
-            size='large'
-            style={themedStyle.buttonStyle}
-            textStyle={themedStyle.buttonTextStyle}
-            onPress={onPressNext}
-          >
-            { isLastStep() ? 'Finish' : 'Next' }
-          </Button>
-        </Block>
-      </Block> 
+              {isFirstStep() ? 'Cancel' : 'Back'}
+            </Button>
+          </Block>
+          <Block style={themedStyle.nextButtonContainerStyle}>
+            <Button
+              size='large'
+              style={themedStyle.buttonStyle}
+              textStyle={themedStyle.buttonTextStyle}
+              onPress={onPressNext}
+            >
+              {isLastStep() ? 'Finish' : 'Next'}
+            </Button>
+          </Block>
+        </Block> 
+      </HideWithKeyboard>
     </Block>
 
   );
@@ -113,7 +121,12 @@ export default withStyles(memo(AddProductForm), () => ({
   buttonTextStyle: {
     ...textStyles.button
   },
+  header: {
+    ...shadowStyles.shadow1
+  },
   footerStyle: {
+    ...shadowStyles.shadow1,
     padding: sizes.padding / 2,
+    backgroundColor: colors.gray2,
   }
 }));

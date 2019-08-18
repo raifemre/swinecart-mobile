@@ -10,7 +10,8 @@ function ProductMediaForm() {
 
   return (
     <Block padding center middle>
-      <Text>ProductMediaForm</Text>
+      <Block padding>
+      </Block>
     </Block>
   );
 }
