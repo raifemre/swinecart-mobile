@@ -8,17 +8,13 @@ import {
   Block
 } from '../../../shared/components';
 
-import { createFakeOtherDetails } from '../../../utils/mockdata';
-
-function OtherInfo({ themedStyle }) {
-
-  const otherDetails = createFakeOtherDetails();
+function OtherInfo({ themedStyle, otherInfo }) {
 
   return (
     <Block flex='disabled' marginBottom marginTop>
       <Text style={themedStyle.header}>Other Information</Text>
       <Block flex='disabled'>
-        <Text style={themedStyle.content}>{otherDetails}</Text>
+        <Text style={themedStyle.content}>{otherInfo}</Text>
       </Block>
     </Block>
   );

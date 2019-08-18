@@ -10,18 +10,24 @@ import {
 
 import SwineInfoRow from './SwineInfoRow';
 
-function SwineInfo({ themedStyle }) {
+import { capitalizeWords } from '../../../utils/formatters';
 
+function SwineInfo({ themedStyle, swineInfo }) {
+  const {
+    adg, fcr, bft, lsba, birthWeight, leftTeats, rightTeats,
+    houseType
+  } = swineInfo;
   return (
     <Block flex='disabled' marginBottom marginTop>
       <Text style={themedStyle.header}>Swine Information</Text>
-      <SwineInfoRow label={'Average Daily Gain'} data={'799 g'} />
-      <SwineInfoRow label={'Feed Conversion Ratio'} data={'2.7 g'} />
-      <SwineInfoRow label={'Backfat Thickness'} data={'17.6 mm'} />
-      <SwineInfoRow label={'Litter Size (Born Alive)'} data={'14'} />
-      <SwineInfoRow label={'Birth Weight'} data={'2196 g'} />
-      <SwineInfoRow label={'Number of Teats'} data={'Left: 7 Right: 6'} />
-      <SwineInfoRow label={'House Type'} data={'Tunnel Ventilated'} />
+      <SwineInfoRow label={'Average Daily Gain'} data={`${adg} g`} />
+      <SwineInfoRow label={'Feed Conversion Ratio'} data={`${fcr} g`} />
+      <SwineInfoRow label={'Backfat Thickness'} data={`${bft} mm`} />
+      <SwineInfoRow label={'Litter Size (Born Alive)'} data={`${lsba}`} />
+      <SwineInfoRow label={'Birth Weight'} data={`${birthWeight} g`} />
+      <SwineInfoRow label={'Left Teats'} data={`${rightTeats}`}/>
+      <SwineInfoRow label={'Right Teats'} data={`${rightTeats}`} />
+      <SwineInfoRow label={'House Type'} data={`${capitalizeWords(houseType)}`} />
     </Block>
   );
 }
@@ -34,5 +40,11 @@ export default withStyles(memo(SwineInfo, () => true), () => ({
     lineHeight: 24,
     color: colors.primary,
     marginBottom: sizes.margin / 2,
+  },
+  swineInfoLabel: {
+    ...textStyles.caption2,
+    fontSize: 16,
+    lineHeight: 19.2,
+    color: colors.gray5
   },
 }));

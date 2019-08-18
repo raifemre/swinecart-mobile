@@ -1,16 +1,19 @@
 import React, { memo } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import { Text } from 'react-native-ui-kitten';
-import { sizes, textStyles, colors } from '../../../constants/theme';
+import { textStyles, colors } from '../../../constants/theme';
 
 import { Block } from '../../../shared/components';
 
-function ProductInfo({ themedStyle }) {
+import { formatBirthdate, addS, capitalizeWords } from '../../../utils/formatters';
+
+function ProductInfo({ themedStyle, productInfo }) {
+  const { name, type, breed, birthDate, age } = productInfo;
   return (
     <Block flex='disabled' marginBottom>
-      <Text style={themedStyle.nameStyle}>9901</Text>
-      <Text style={themedStyle.typeStyle}>Sow - Landrace</Text>
-      <Text style={themedStyle.birthDateStyle}>105 days old (Birth date is on April 24, 2019)</Text>
+      <Text style={themedStyle.nameStyle}>{`${capitalizeWords(name)}`} </Text>
+      <Text style={themedStyle.typeStyle}>{`${capitalizeWords(type)}`} - {`${capitalizeWords(breed)}`}</Text>
+      <Text style={themedStyle.birthDateStyle}>{`${age} ${addS(age, 'day')} old (Birthdate is on ${formatBirthdate(birthDate)}`})</Text>
     </Block>
   );
 }

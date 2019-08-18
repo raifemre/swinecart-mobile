@@ -1,5 +1,6 @@
 import { sample, random } from 'lodash';
 import faker from 'faker';
+import { differenceInDays } from 'date-fns';
 
 import { urls } from '../../constants/randomImage';
 import { create } from 'apisauce';
@@ -147,12 +148,29 @@ export function createNotifications(count) {
 }
 
 export function createProduct() {
+  
+  const birthDate = faker.date.past();
+
   return {
     id: faker.random.uuid(),
-    name: `${random(1000, 9999)}`,
-    type: sample(['Semen', 'Sow', 'Gilt', 'Boar']),
-    breed: sample(['Landrace', 'Large White', 'Duroc', 'Boar']),
-    birthDate: faker.date.recent(),
     primaryPhotoURL: sample(urls),
+    productInfo: {
+      name: `${random(1000, 9999)}`,
+      type: sample(['semen', 'sow', 'gilt', 'boar']),
+      breed: sample(['landrace', 'large white', 'duroc']),
+      age: differenceInDays(new Date(), birthDate),
+      birthDate
+    },
+    swineInfo: {
+      adg: `${random(1, 10, true).toFixed(2)}`,
+      fcr: `${random(1, 10, true).toFixed(2)}`,
+      bft: `${random(1, 10, true).toFixed(2)}`,
+      lsba:  `${random(10, 99)}`,
+      birthWeight: `${random(1, 10, true).toFixed(2)}`,
+      leftTeats:  `${random(10, 99)}`,
+      rightTeats:  `${random(10, 99)}`,
+      houseType: sample(['tunnel ventilated', 'open sided']),
+    },
+    otherInfo: faker.lorem.paragraphs()
   };
 }

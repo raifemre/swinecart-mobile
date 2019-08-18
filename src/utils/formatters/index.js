@@ -1,15 +1,17 @@
 import { 
-  parseInt, upperFirst
+  parseInt, upperFirst, replace, startCase
 } from 'lodash';
 
 import { format, isSameDay, distanceInWordsToNow } from 'date-fns';
 
-export function capitalize() {
-
+export function capitalizeWords(string) {
+  return startCase(string);
 }
 
 export function addS(value, string) {
-  return parseInt(value) > 1 ? `${string}s` : string;
+  const val = parseInt(value);
+  if (val === 0 || val > 1) return `${string}s`;
+  else return string;
 }
 
 export function formatStatusTime(date) {
@@ -39,6 +41,11 @@ export function formatMessageDate(date) {
     return format(date, 'MMM D');
   }
 }
+
 export function formatCreatedAt(date) {
   return `${upperFirst(distanceInWordsToNow(date))} ago`;
+}
+
+export function formatBirthdate(date) {
+  return format(date, 'MMMM D, YYYY');
 }

@@ -26,9 +26,7 @@ export default withStyles(memo(ProductPrimaryImage, () => true), () => ({
   imageStyle: {
     flex: 1,
     width: null,
-    height: 300,
-    borderColor: colors.gray2,
-    borderWidth: 1,
+    height: 300
   },
   imageContainerStyle: {
     width: '100%',

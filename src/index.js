@@ -1,4 +1,4 @@
-import React, { useEffect } from 'React';
+import React, { useEffect, memo } from 'React';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import Orientation from 'react-native-orientation';
@@ -25,4 +25,4 @@ function App() {
     </ApplicationProvider>
   )
 }
-export default App;
+export default memo(App, () => true);

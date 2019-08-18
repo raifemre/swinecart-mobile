@@ -11,10 +11,8 @@ function Container({ navigation }) {
   const [productDetails, setProductDetails] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      const fakeProduct = createProduct();
-      setProductDetails(fakeProduct);
-    }, 1000);
+    const fakeProduct = createProduct();
+    setProductDetails(fakeProduct);
   }, []);
 
   return (

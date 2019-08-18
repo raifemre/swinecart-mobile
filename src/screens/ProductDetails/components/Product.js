@@ -1,9 +1,8 @@
 import React, { Fragment, memo } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { urls } from '../../../constants/randomImage';
 
 import {
-  Block, ContainerView, LoadingPlaceholder
+  Block, ContainerView, LoadingView
 } from '../../../shared/components';
 
 import ProductInfo from './ProductInfo';
@@ -15,20 +14,21 @@ import ProductPrimaryImage from './ProductPrimaryImage';
 
 function Product({ themedStyle, productDetails }) {
   return (
-    <LoadingPlaceholder data={productDetails}>
-      {() => (
-        <ContainerView flex={1}>
+    <Fragment>
+      {
+        productDetails && <ContainerView flex={1}>
           <ProductPrimaryImage photoURL={productDetails.primaryPhotoURL} />
           <Block flex={1} padding style={themedStyle.bodyStyle}>
-            <ProductInfo />
-            <SwineInfo />
-            <OtherInfo />
+            <ProductInfo productInfo={productDetails.productInfo} />
+            <SwineInfo swineInfo={productDetails.swineInfo} />
+            <OtherInfo otherInfo={productDetails.otherInfo} />
             <ProductImages />
             <ProductVideos />
           </Block>
         </ContainerView>
-      )}
-    </LoadingPlaceholder>
+      }
+      { !productDetails && <LoadingView/> }
+    </Fragment>
   );
 }
 
