@@ -1,14 +1,21 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useState, useEffect } from 'react';
 
-import {
-  HeaderBar, BackButton, ContainerView
-} from '../../shared/components';
+import { HeaderBar, BackButton } from '../../shared/components';
 
-import {
-  Product
-} from './components';
+import { Product } from './components';
 
-function Container(props) {
+import { createProduct } from '../../utils/mockdata';
+
+function Container({ navigation }) {
+
+  const [productDetails, setProductDetails] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const fakeProduct = createProduct();
+      setProductDetails(fakeProduct);
+    }, 1000);
+  }, []);
 
   return (
     <Fragment>
@@ -16,12 +23,9 @@ function Container(props) {
         title='Product Details'
         leftControl={<BackButton />}
       />
-      <ContainerView backgroundColor='#ffffff'>
-        <Product />
-      </ContainerView>
+      <Product productDetails={productDetails} />
     </Fragment>
-  )
-
+  );
 }
 
-export default memo(Container);
+export default memo(Container, () => true);

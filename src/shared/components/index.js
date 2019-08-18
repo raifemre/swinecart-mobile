@@ -16,3 +16,5 @@ export { default as BackButton } from './navigation/BackButton';
 export { default as AddProductButton } from './navigation/AddProductButton';
 export { default as PreviewButton } from './navigation/PreviewButton';
 export { default as ModalCloseButton } from './navigation/ModalCloseButton';
+
+export { default as LoadingPlaceholder } from './LoadingPlaceholder';

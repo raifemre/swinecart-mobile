@@ -20,7 +20,7 @@ function SwineInfo({ themedStyle }) {
       <SwineInfoRow label={'Backfat Thickness'} data={'17.6 mm'} />
       <SwineInfoRow label={'Litter Size (Born Alive)'} data={'14'} />
       <SwineInfoRow label={'Birth Weight'} data={'2196 g'} />
-      <SwineInfoRow label={'Number of teats'} data={'Left: 7 Right: 6'} />
+      <SwineInfoRow label={'Number of Teats'} data={'Left: 7 Right: 6'} />
       <SwineInfoRow label={'House Type'} data={'Tunnel Ventilated'} />
     </Block>
   );

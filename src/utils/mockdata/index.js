@@ -120,7 +120,6 @@ export function createMessages(count) {
 export function createNotifications(count) {
   return createArray(count).map(() => {
 
-
     const productRequested = {
       type: 'ProductRequested',
       message: 'requested for Product 2390'
@@ -145,4 +144,15 @@ export function createNotifications(count) {
       readAt: sample([faker.date.recent(), null]),
     };
   });
+}
+
+export function createProduct() {
+  return {
+    id: faker.random.uuid(),
+    name: `${random(1000, 9999)}`,
+    type: sample(['Semen', 'Sow', 'Gilt', 'Boar']),
+    breed: sample(['Landrace', 'Large White', 'Duroc', 'Boar']),
+    birthDate: faker.date.recent(),
+    primaryPhotoURL: sample(urls),
+  };
 }

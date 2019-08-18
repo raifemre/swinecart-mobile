@@ -7,11 +7,11 @@ import Block from './Block'
 
 import { colors, textStyles } from '../../constants/theme';
 
-function LoadingView({ themedStyle }) {
+function LoadingView({ themedStyle, loadingText = 'Loading...' }) {
   return (
     <Block flex={1} center middle style={themedStyle.containerStyle}>
       <Text style={themedStyle.messageTextStyle}>
-        Loading...
+        {loadingText}
       </Text>
     </Block>
   );

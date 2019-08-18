@@ -11,7 +11,7 @@ const navigator = createStackNavigator({
   AddProduct: AddProduct,
   ProductDetails: ProductDetails,
 }, {
-    initialRouteName: 'Products',
+    initialRouteName: 'ProductDetails',
   defaultNavigationOptions: ({ navigation }) => {
     return {
       header: null
@@ -21,8 +21,8 @@ const navigator = createStackNavigator({
 
 navigator.navigationOptions = ({ navigation }) => {
   return {
-    tabBarVisible: navigation.state.index > 0 ? false : true,
-    // tabBarVisible: false,
+    // tabBarVisible: navigation.state.index > 0 ? false : true,
+    tabBarVisible: false,
   };
 };
 
