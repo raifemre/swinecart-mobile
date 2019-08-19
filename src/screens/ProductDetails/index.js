@@ -4,15 +4,13 @@ import { HeaderBar, BackButton } from '../../shared/components';
 
 import { Product } from './components';
 
-import { createProduct } from '../../utils/mockdata';
-
 function Container({ navigation }) {
 
   const [productDetails, setProductDetails] = useState(null);
 
   useEffect(() => {
-    const fakeProduct = createProduct();
-    setProductDetails(fakeProduct);
+    const data = navigation.getParam('data');
+    setProductDetails(data);
   }, []);
 
   return (

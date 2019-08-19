@@ -22,8 +22,8 @@ function Product({ themedStyle, productDetails }) {
             <ProductInfo productInfo={productDetails.productInfo} />
             <SwineInfo swineInfo={productDetails.swineInfo} />
             <OtherInfo otherInfo={productDetails.otherInfo} />
-            <ProductImages />
-            <ProductVideos />
+            <ProductImages productImages={productDetails.productImages} />
+            <ProductVideos productVideos={productDetails.productVideos} />
           </Block>
         </ContainerView>
       }

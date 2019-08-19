@@ -9,7 +9,7 @@ import { sizes, textStyles, colors } from '../../../constants/theme';
 import { urls } from '../../../constants/randomImage';
 
 import {
-  Block
+  Block, Icon
 } from '../../../shared/components';
 
 function ProductVideos({ themedStyle }) {
@@ -25,11 +25,9 @@ function ProductVideos({ themedStyle }) {
         activeOpacity={0.75}
         onPress={onItemPress}
       >
-        <Image
-          style={themedStyle.image}
-          source={{ uri: item }}
-        // resizeMode='cover'
-        />
+        <Block flex={1} center middle>
+          <Icon name='play-circle' color={colors.gray5} size={26} />
+        </Block>
       </ListItem>
     );
   };
@@ -62,18 +60,17 @@ export default withStyles(memo(ProductVideos, () => true), () => ({
     fontSize: 16,
     lineHeight: 19.2,
   },
-  image: {
-    width: 150,
-    height: 120,
-  },
   itemContainer: {
     paddingHorizontal: 0,
     paddingVertical: 0,
     marginHorizontal: sizes.padding,
     overflow: 'hidden',
+    backgroundColor: colors.gray2,
     borderColor: colors.gray2,
     borderWidth: 1,
-    borderRadius: 12
+    borderRadius: 12,
+    width: 150,
+    height: 120,
   },
   listContainer: {
     backgroundColor: '#ffffff',

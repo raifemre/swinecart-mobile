@@ -11,7 +11,7 @@ function ProductInfo({ themedStyle, productInfo }) {
   const { name, type, breed, birthDate, age } = productInfo;
   return (
     <Block flex='disabled' marginBottom>
-      <Text style={themedStyle.nameStyle}>{`${capitalizeWords(name)}`} </Text>
+      <Text style={themedStyle.nameStyle}>{`${capitalizeWords(name)}`}</Text>
       <Text style={themedStyle.typeStyle}>{`${capitalizeWords(type)}`} - {`${capitalizeWords(breed)}`}</Text>
       <Text style={themedStyle.birthDateStyle}>{`${age} ${addS(age, 'day')} old (Birthdate is on ${formatBirthdate(birthDate)}`})</Text>
     </Block>

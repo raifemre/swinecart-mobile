@@ -1,13 +1,11 @@
 import React, { Fragment, memo } from 'react';
 
 import { 
-  Block, HeaderBar, AddProductButton
+  HeaderBar, AddProductButton
 } from '../../shared/components';
 
-import { colors } from '../../constants/theme';
-
 import {
-  ProductGridList
+  ProductsList
 } from './components'
 
 
@@ -19,10 +17,10 @@ function Container(props) {
         title='Products'
         leftControl={<AddProductButton />}
       />
-      <ProductGridList />
+      <ProductsList />
     </Fragment>
   );
 
 }
 0
-export default memo(Container);
+export default memo(Container, () => true);

@@ -15,14 +15,12 @@ function ProductInfo(props) {
   return (
     <Fragment>
       <Text
-        category='h6'
-        style={[textStyles.headline, themedStyle.nameStyle]}
+        style={themedStyle.name}
       >
         {name}
       </Text>
       <Text
-        category='s2'
-        style={[textStyles.caption1, themedStyle.typeStyle]}
+        style={themedStyle.type}
       >
         {type} - {breed}
       </Text>
@@ -31,11 +29,13 @@ function ProductInfo(props) {
 }
 
 export default withStyles(memo(ProductInfo, () => true), () => ({
-  nameStyle: {
+  name: {
+    ...textStyles.headline,
     color: '#000000',
     fontSize: 16
   },
-  typeStyle: {
+  type: {
+    ...textStyles.caption1,
     fontSize: 14
   }
 }));

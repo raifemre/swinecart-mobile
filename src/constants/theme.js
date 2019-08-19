@@ -117,6 +117,17 @@ const shadowStyles = {
     shadowRadius: 1.41,
 
     elevation: 2,
+  },
+  shadow2: {
+    shadowColor: colors.gray2,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.00,
+
+    elevation: 1,
   }
 }
 

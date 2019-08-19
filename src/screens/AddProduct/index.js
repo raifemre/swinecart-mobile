@@ -9,11 +9,11 @@ import {
 } from './components';
 
 function Container(props) {
-
+  
   return (
     <Fragment>
       <HeaderBar 
-        title='Add Product'
+        title=''
         leftControl={<BackButton />}
         rightControls={<PreviewButton />}
       />
@@ -23,4 +23,4 @@ function Container(props) {
 
 }
 
-export default memo(Container);
+export default memo(Container, () => true);

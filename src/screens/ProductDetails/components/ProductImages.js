@@ -6,16 +6,15 @@ import { Text, List, ListItem } from 'react-native-ui-kitten';
 import { ModalService } from '../../../services';
 
 import { sizes, textStyles, colors } from '../../../constants/theme';
-import { urls } from '../../../constants/randomImage';
 
 import {
   Block
 } from '../../../shared/components';
 
-function ProductImages({ themedStyle }) {
+function ProductImages({ themedStyle, productImages }) {
 
   const onItemPress = index => {
-    ModalService.showModal('ImageLightBox', { url: urls[index] });
+    ModalService.showModal('ImageLightBox', { url: productImages[index] });
   };
 
   const renderItem = ({ item }) => {
@@ -28,7 +27,6 @@ function ProductImages({ themedStyle }) {
         <Image
           style={themedStyle.image}
           source={{ uri: item }}
-          // resizeMode='cover'
         />
       </ListItem>
     );
@@ -41,7 +39,7 @@ function ProductImages({ themedStyle }) {
         contentContainerStyle={themedStyle.listContainer}
         horizontal={true}
         showsHorizontalScrollIndicator={true}
-        data={urls}
+        data={productImages}
         renderItem={renderItem}
       />
     </Block>

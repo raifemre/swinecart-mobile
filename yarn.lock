@@ -5319,9 +5319,9 @@ react-native-step-indicator@^0.0.11:
     prop-types "^15.6.0"
 
 react-native-super-grid@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-3.0.4.tgz#bc0888f68d0960557dfe445970f96e36a0d61a1d"
-  integrity sha512-aoK71FGP5sFcLujuODYkAqyFDAZZRpvTeEwwaoXsc0JENhExEG7rGg65T5ELqyykiDOLBihuCLKasK5gLb0WtQ==
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-3.0.9.tgz#31bc66d897420f914cf0fa2f6c550fc06eff13b3"
+  integrity sha512-d/kht8T6604/x3scunXDldmVnLygXUEDKkZtRzv6AWe69H4W1uYhc/6OhaBnTGD9SmuRXMqB8QRFHDTsCLsa0w==
   dependencies:
     prop-types "^15.6.0"
 

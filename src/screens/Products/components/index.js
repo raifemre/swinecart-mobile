@@ -1,1 +1,1 @@
-export { default as ProductGridList } from './ProductGridList';
+export { default as ProductsList } from './ProductsList';

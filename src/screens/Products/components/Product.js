@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect, memo, Fragment } from 'react';
 
 import {
   View, TouchableOpacity, Image
@@ -12,84 +12,156 @@ import {
   Text, Button
 } from 'react-native-ui-kitten';
 
+import {
+  Block, Icon, IconButton
+} from '../../../shared/components'
 
 import NavigationService from '../../../services/navigation';
 
-import { textStyles, colors, sizes } from '../../../constants/theme';
-import { urls } from '../../../constants/randomImage';
+import { addS, capitalizeWords } from '../../../utils/formatters';
 
-import Chance from 'chance';
+import { textStyles, colors, sizes, shadowStyles } from '../../../constants/theme';
 
-const chance = Chance();
+function Product({ themedStyle, data }) {
 
-class RequestedCard extends PureComponent {
+  const { primaryPhotoURL, productInfo, status } = data;
+  const { name, type, breed, age } = productInfo;
 
-  onPressView = () => {
-    NavigationService.navigate('ProductDetails');
-  }
+  const onPressView = () => {
+    NavigationService.navigate('ProductDetails', { data });
+  };
 
+  const onPressEdit = () => {
+    NavigationService.navigate('AddProduct', { data });
+  };
 
-  render() {
+  const onPressToggle = () => {
+    alert('Toggle');
+  };
 
-    const { style, themedStyle, data, ...restProps } = this.props;
-    const { name, type, breed } = data;
-    return (
-      <TouchableOpacity
-        {...restProps}
-        style={[themedStyle.container, style]}
-        onPress={this.onPressView}
+  const onPressDelete = () => {
+    alert('Delete');
+  };
+
+  const isDisplayed = status => {
+    if (status === 'displayed') {
+      return 'Hide Product'
+    }
+    else if (status === 'hidden') {
+      return 'Show Product'
+    }
+   };
+
+  return (
+    <Block
+      style={themedStyle.container}
+    >
+      <TouchableOpacity 
+        style={themedStyle.imageContainer}
+        activeOpacity={0.50}
+        onPress={onPressView}
       >
         <Image
           style={themedStyle.image}
-          source={{ uri: chance.pickone(urls) }}
+          source={{ uri: primaryPhotoURL }}
+          resizeMode='cover'
         />
-        <View style={themedStyle.infoContainer}>
-          <View>
-            <Text
-              style={themedStyle.nameLabel}
-              category='s1'>
-              {name}
-            </Text>
-            <Text
-              style={themedStyle.typeLabel}
-              appearance='hint'
-              category='c1'>
-              {type} - {breed}
-            </Text>
-          </View>
-        </View>
       </TouchableOpacity>
-    );
-  }
+      <Block flex={1} left style={themedStyle.infoContainer}>
+        <Block flex='disabled'row center space='between'>
+          <Text style={themedStyle.name}>
+            {`${capitalizeWords(name)}`}
+          </Text>
+        </Block>
+        <Text style={themedStyle.type}>
+          {`${capitalizeWords(type)}`} - {`${capitalizeWords(breed)}`}
+        </Text>
+        <Text style={themedStyle.age}>
+          {`${age} ${addS(age, 'day')} old`}
+        </Text>
+        <Text style={themedStyle.quantity}>
+          {`Quantity: ${age}`}
+        </Text>
+      </Block>
+      <Block flex='disabled' row right center space='between' style={themedStyle.actionsContainer}>
+        {
+          status === 'requested' 
+            ? null
+            : <Fragment>
+              <IconButton
+                onPress={onPressToggle}
+                iconSize={28}
+                iconName='eye'
+              />
+              <IconButton
+                onPress={onPressEdit}
+                iconSize={28}
+                iconName='edit'
+                style={{ marginLeft: sizes.margin / 2 }}
+              />
+              <IconButton
+                onPress={onPressDelete}
+                iconSize={28}
+                iconName='trash-2'
+              />
+            </Fragment>
+        }
+    </Block> 
+    </Block>
+  );
 }
 
-export default withStyles(RequestedCard, () => ({
+export default withStyles(memo(Product), () => ({
   container: {
-    minHeight: 272,
+    ...shadowStyles.shadow2,
+    minHeight: 200,
     borderRadius: 12,
     overflow: 'hidden',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.white1,
   },
-  infoContainer: {
-    flex: 1,
-    padding: sizes.padding / 2,
-    justifyContent: 'space-between',
-  },
-  priceContainer: {
-    alignItems: 'center',
+  imageContainer: {
+    backgroundColor: 'black',
+    borderBottomColor: colors.gray2,
+    borderBottomWidth: 1,
   },
   image: {
     flex: 1,
     width: null,
-    height: 140,
+    height: 150,
   },
-  nameLabel: textStyles.subtitle,
-  typeLabel: textStyles.caption1,
-  costLabel: textStyles.subtitle,
+  infoContainer: {
+    padding: sizes.padding / 2
+  },
+  actionsContainer: {
+    padding: sizes.padding / 2,
+  },
+  name: {
+    ...textStyles.headline,
+    color: '#000000',
+    fontSize: 16
+  },
+  type: {
+    ...textStyles.caption1,
+    fontSize: 12
+  },
+  age: {
+    ...textStyles.caption1,
+    color: colors.gray5,
+    fontSize: 12
+  },
+  quantity: {
+    marginTop: 8,
+    ...textStyles.caption2,
+    fontSize: 14
+  },
   buttonText: {
-    fontSize: 9
+    ...textStyles.button
   },
-  buttonStyle: {
-    width: '100%'
-  }
+  toggleDisplayButton: {
+    borderWidth: 0,
+    marginBottom: sizes.margin / 2,
+  },
+  button: {
+    borderWidth: 0,
+  },
 }));

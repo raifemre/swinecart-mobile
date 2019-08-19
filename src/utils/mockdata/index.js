@@ -68,13 +68,7 @@ export function createRandomRequests(count) {
 
 export function createRandomProducts(count) {
   return createArray(count).map(() => {
-    return {
-      id: faker.random.uuid(),
-      name: `${random(1000, 9999)}`,
-      type: sample(['Semen', 'Sow', 'Gilt', 'Boar']),
-      breed: sample(['Landrace', 'Large White', 'Duroc', 'Boar']),
-      status: sample(['hidden', 'displayed', 'requested']),
-    };
+    return createProduct();
   }); 
 }
 
@@ -154,6 +148,8 @@ export function createProduct() {
   return {
     id: faker.random.uuid(),
     primaryPhotoURL: sample(urls),
+    status: sample(['hidden', 'displayed', 'requested']),
+    quantity: `${random(50, 200)}`,
     productInfo: {
       name: `${random(1000, 9999)}`,
       type: sample(['semen', 'sow', 'gilt', 'boar']),
@@ -171,6 +167,8 @@ export function createProduct() {
       rightTeats:  `${random(10, 99)}`,
       houseType: sample(['tunnel ventilated', 'open sided']),
     },
-    otherInfo: faker.lorem.paragraphs()
+    otherInfo: faker.lorem.paragraphs(),
+    productImages: urls,
+    productVideos: urls
   };
 }
