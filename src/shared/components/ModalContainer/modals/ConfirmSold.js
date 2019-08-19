@@ -6,6 +6,10 @@ import { withStyles } from 'react-native-ui-kitten/theme';
 import { sizes, textStyles, colors } from '../../../../constants/theme';
 import Block from '../../Block';
 
+import {
+  OrderService
+} from '../../../../services';
+
 function ConfirmSold(props) {
   // State
 
@@ -23,12 +27,17 @@ function ConfirmSold(props) {
 
   // Props
   const { themedStyle, data } = props;
-  const { customerName, productName } = data;
-  
+
+  const productName = data.data.name;
+  const customerName = data.data.reservation.customer_name;
+
   // Button Event Handlers
 
   const onPressPrimaryAction = () => {
-    hideModal();
+    OrderService.confirmSold(data.data)
+      .then(response => {
+        hideModal();
+      });
   };
 
   const onPressClose = () => {

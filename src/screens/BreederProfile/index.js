@@ -15,9 +15,7 @@ function Container(props) {
       <HeaderBar title='Profile'
         rightControls={<SettingsButton />}
       />
-      <ContainerView>
-        <OfficeInfo />
-      </ContainerView>
+      <OfficeInfo />
     </Fragment>
   )
 

@@ -16,19 +16,9 @@ import Wizard from './Wizard';
 import ProductInfoForm from './ProductInfoForm';
 import SwineInfoForm from './SwineInfoForm';
 import ProductMediaForm from './ProductMediaForm';
+import FormFooter from './FormFooter';
 
 const labels = ['Product Information', 'Swine Information', 'Product Media'];
-const steps = [
-  {
-    component: ProductInfoForm
-  },
-  {
-    component: SwineInfoForm
-  },
-  {
-    component: ProductMediaForm
-  },
-];
 
 function AddProductForm({ themedStyle }) {
 
@@ -65,12 +55,38 @@ function AddProductForm({ themedStyle }) {
     return currentStep === 0;
   };
 
+  const steps = [
+    {
+      component: () => (
+        <ProductInfoForm
+          onPressNext={onPressNext}
+          onPressBack={onPressBack}
+          isLastStep={isLastStep}
+          isFirstStep={isLastStep}
+        />
+      )
+    },
+    {
+      component: () => (
+        <SwineInfoForm
+          onPressNext={onPressNext}
+          onPressBack={onPressBack}
+          isLastStep={isLastStep}
+          isFirstStep={isLastStep}
+        />
+      )
+    },
+    {
+      component: ProductMediaForm
+    },
+  ];
+
   return (
     <Block flex={1}>
       <Block flex='disabled' padding left style={themedStyle.header}>
         <FormStepIndicator labels={labels} currentStep={currentStep} />
       </Block>
-      <ContainerView backgroundColor={colors.white1}>
+      <ContainerView backgroundColor={colors.white1} style={{ height: '100%' }}>
         <Wizard
           steps={steps}
           setWizardRef={setWizardRef}
@@ -78,31 +94,6 @@ function AddProductForm({ themedStyle }) {
           currentStep={currentStep}
         />
       </ContainerView>
-      <HideWithKeyboard>
-        <Block row flex='disabled' right style={themedStyle.footerStyle}>
-          <Block style={themedStyle.prevButtonContainerStyle}>
-            <Button
-              size='large'
-              appearance='ghost'
-              style={themedStyle.buttonStyle}
-              textStyle={themedStyle.buttonTextStyle}
-              onPress={onPressBack}
-            >
-              {isFirstStep() ? 'Cancel' : 'Back'}
-            </Button>
-          </Block>
-          <Block style={themedStyle.nextButtonContainerStyle}>
-            <Button
-              size='large'
-              style={themedStyle.buttonStyle}
-              textStyle={themedStyle.buttonTextStyle}
-              onPress={onPressNext}
-            >
-              {isLastStep() ? 'Finish' : 'Next'}
-            </Button>
-          </Block>
-        </Block> 
-      </HideWithKeyboard>
     </Block>
 
   );
@@ -123,10 +114,5 @@ export default withStyles(memo(AddProductForm), () => ({
   },
   header: {
     ...shadowStyles.shadow1
-  },
-  footerStyle: {
-    ...shadowStyles.shadow1,
-    padding: sizes.padding / 2,
-    backgroundColor: colors.gray2,
   }
 }));

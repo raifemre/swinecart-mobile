@@ -4,11 +4,17 @@ import transform from '../../../transformers';
 const URL_PREFIX = '/breeder/inventory';
 
 const service = {
-  async getProducts(status, page, limit) {
-    const { data } = await API.get(`${URL_PREFIX}/products/${status}`, { page, limit });
+  async getOrders(status, page = 1, limit = 1000) {
+    const statusText = {
+      'requested': 'requested',
+      'reserved': 'reserved',
+      'onDelivery': 'on_delivery',
+      'sold': 'sold',
+    };
+    const { data } = await API.get(`${URL_PREFIX}/products/${statusText[status]}`, { page, limit });
     return data;
   },
-  async getProductRequests(id, page, limit) {
+  async getOrderRequests(id, page = 1, limit = 1000) {
     const { data } = await API.get(`${URL_PREFIX}/products/${id}/requests`, { page, limit });
     return data;
   },

@@ -1,7 +1,6 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import apisauce from 'apisauce';
 import { API_URL } from 'react-native-dotenv';
-
-import CommonStore from '../../mobx/stores/CommonStore';
 
 import Navigation from '../navigation';
 
@@ -9,14 +8,13 @@ const instance = apisauce.create({
   baseURL: API_URL,
   timeout: 3000,
   headers: {
-    // 'Accept-Encoding' : 'gzip'
   }
 });
 
-// console.log(API_URL);
+console.log(API_URL);
 
-instance.addRequestTransform(request => {
-  const token = CommonStore.token;
+instance.addAsyncRequestTransform(request => async () => {
+  const token = await AsyncStorage.getItem('token');
   const data = `Bearer ${token}`;
   request.headers['Authorization'] = token ? data : null;
 });
@@ -29,9 +27,6 @@ instance.addResponseTransform(response => {
 
   if (!ok) {
     if (problem === 'NETWORK_ERROR') {
-
-      Navigation.navigate('Login');
-
     }
     if (problem === 'CLIENT_ERROR') {
       // console.log('STATUS CODE:', status);
@@ -45,7 +40,7 @@ instance.addResponseTransform(response => {
       // console.log('timeout');
     }
   }
-  
+
 });
 
 instance.addMonitor(({ config: request, ...response }) => {
@@ -55,7 +50,7 @@ instance.addMonitor(({ config: request, ...response }) => {
   // console.dir('Request Headers: ', reqHeaders);
   // console.dir('Request Token:', reqHeaders.Authorization);
   // console.dir('Request Data: ', reqData);
-  console.dir(resDuration, 'Request Endpoint:', endpoint);
+  // console.dir(resDuration, 'Request Endpoint:', endpoint);
 
   // console.dir('Response Headers: ', resHeaders);
   // console.dir('Response Data: ', resData);

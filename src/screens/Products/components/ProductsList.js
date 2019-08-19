@@ -10,7 +10,11 @@ import {
   EmptyListMessage, LoadingView, ListFooter
 } from '../../../shared/components';
 
-import { createRandomProducts } from '../../../utils/mockdata';
+// import { createRandomProducts } from '../../../utils/mockdata';
+
+import { 
+  ProductsService
+} from '../../../services';
 
 function ProductsList({ themedStyle }) {
 
@@ -18,8 +22,12 @@ function ProductsList({ themedStyle }) {
   const [isRefreshing, setRefreshing] = useState(true);
 
   useEffect(() => {
-    const fakeProducts = createRandomProducts(5);
-    setProducts(fakeProducts);
+    ProductsService.getProducts()
+      .then(response => {
+        if (response && response.data && response.data.products) {
+          setProducts(response.data.products);
+        }
+      });
   }, []);
 
   const renderItem = ({ item }) => {

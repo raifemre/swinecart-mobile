@@ -24,11 +24,12 @@ import { textStyles, colors, sizes, shadowStyles } from '../../../constants/them
 
 function Product({ themedStyle, data }) {
 
-  const { primaryPhotoURL, productInfo, status } = data;
-  const { name, type, breed, age } = productInfo;
+  const { img_path, name, type, breed, age, status, id } = data;
+  // console.log(data);
+  // const { name, type, breed, age } = productInfo;
 
   const onPressView = () => {
-    NavigationService.navigate('ProductDetails', { data });
+    NavigationService.navigate('ProductDetails', { id });
   };
 
   const onPressEdit = () => {
@@ -63,7 +64,7 @@ function Product({ themedStyle, data }) {
       >
         <Image
           style={themedStyle.image}
-          source={{ uri: primaryPhotoURL }}
+          source={{ uri: img_path }}
           resizeMode='cover'
         />
       </TouchableOpacity>
@@ -77,11 +78,11 @@ function Product({ themedStyle, data }) {
           {`${capitalizeWords(type)}`} - {`${capitalizeWords(breed)}`}
         </Text>
         <Text style={themedStyle.age}>
-          {`${age} ${addS(age, 'day')} old`}
+          {`${age - age} ${addS(age - age, 'day')} old`}
         </Text>
-        <Text style={themedStyle.quantity}>
+        {/* <Text style={themedStyle.quantity}>
           {`Quantity: ${age}`}
-        </Text>
+        </Text> */}
       </Block>
       <Block flex='disabled' row right center space='between' style={themedStyle.actionsContainer}>
         {

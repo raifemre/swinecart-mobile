@@ -4,13 +4,21 @@ import { HeaderBar, BackButton } from '../../shared/components';
 
 import { Product } from './components';
 
+import { ProductsService } from '../../services';
+
 function Container({ navigation }) {
 
   const [productDetails, setProductDetails] = useState(null);
 
   useEffect(() => {
-    const data = navigation.getParam('data');
-    setProductDetails(data);
+    const id = navigation.getParam('id');
+    ProductsService.getProductDetails(id)
+      .then(response => {
+        if (response && response.data && response.data.product) {
+          // console.dir(response.data.product);
+          setProductDetails(response.data.product);
+        }
+      });
   }, []);
 
   return (

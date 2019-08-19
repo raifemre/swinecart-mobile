@@ -21,7 +21,7 @@ function RequestsList({ requests, themedStyle }) {
     );
   };
 
-  const keyExtractor = item => item.id;
+  const keyExtractor = item => `${item.customer_id}`;
   const getItemLayout = (data, index) => ({
     length: 120,
     offset: 120 * index,
@@ -39,7 +39,7 @@ function RequestsList({ requests, themedStyle }) {
   };
 
   const onEndReached = () => {
-    console.log('End Reached!');
+
   };
 
   return (

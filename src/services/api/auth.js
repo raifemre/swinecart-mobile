@@ -4,8 +4,8 @@ const URL_PREFIX = '/auth';
 
 const service = {
   async login({ email, password }) {
-    const { data } = await API.post(`${URL_PREFIX}/login`, { email, password });
-    return data;
+    const response = await API.post(`${URL_PREFIX}/login`, { email, password });
+    return response
   },
   async me() {
     const { data } = await API.get(`${URL_PREFIX}/me`);

@@ -29,8 +29,7 @@ function OrderDetails (props) {
 
   // Props
   const { themedStyle, data } = props;
-  const { specialRequest, customerName, requestQuantity, dateNeeded } = data;
-
+  const { customer_name, special_request } = data;
   // Button Event Handlers
 
   const onPressPrimaryAction = () => {
@@ -68,19 +67,19 @@ function OrderDetails (props) {
         >
           <Block flex='disabled' row>
             <Text style={themedStyle.labelStyle}> {'Customer Name: '}</Text>
-            <Text style={themedStyle.dataStyle}>{customerName}</Text>
+            <Text style={themedStyle.dataStyle}>{customer_name}</Text>
           </Block>  
-          <Block flex='disabled' row>
+          {/* <Block flex='disabled' row>
             <Text style={themedStyle.labelStyle}> {'Date Needed: '}</Text>
             <Text style={themedStyle.dataStyle}>{formatDateNeeded(dateNeeded)}</Text>
-          </Block>
-          <Block flex='disabled' row>
+          </Block> */}
+          {/* <Block flex='disabled' row>
             <Text style={themedStyle.labelStyle}> {'Quantity: '}</Text>
             <Text style={themedStyle.dataStyle}>{requestQuantity}</Text>
-          </Block>
+          </Block> */}
           <Block flex='disabled'>
             <Text style={themedStyle.labelStyle}> {'Special Request: '}</Text>
-            <Text style={themedStyle.dataStyle}>{specialRequest}</Text>
+            <Text style={themedStyle.dataStyle}>{special_request}</Text>
           </Block>
         </ContainerView>
         <Block flex={1} row right style={themedStyle.footerStyle}>

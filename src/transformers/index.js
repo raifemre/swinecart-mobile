@@ -93,7 +93,7 @@ function confirmSold(data) {
 }
 
 function sendForDelivery(data) {
-
+  console.dir(data);
   const { reservation, deliveryDate } = data;
 
   const transformedData = {

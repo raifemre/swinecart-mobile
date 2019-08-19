@@ -5,9 +5,9 @@ import { withStyles } from 'react-native-ui-kitten/theme';
 
 import {
   Block
-} from '../../../../shared/components';
+} from '../../../shared/components';
 
-import { textStyles, colors } from '../../../../constants/theme';
+import { textStyles, colors } from '../../../constants/theme';
 
 function Section(props) {
 

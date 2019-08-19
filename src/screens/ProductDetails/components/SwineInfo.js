@@ -14,7 +14,7 @@ import { capitalizeWords } from '../../../utils/formatters';
 
 function SwineInfo({ themedStyle, swineInfo }) {
   const {
-    adg, fcr, bft, lsba, birthWeight, leftTeats, rightTeats,
+    adg, fcr, bft, lsba, birth_weight, left_teats, right_teats,
     houseType
   } = swineInfo;
   return (
@@ -24,10 +24,10 @@ function SwineInfo({ themedStyle, swineInfo }) {
       <SwineInfoRow label={'Feed Conversion Ratio'} data={`${fcr} g`} />
       <SwineInfoRow label={'Backfat Thickness'} data={`${bft} mm`} />
       <SwineInfoRow label={'Litter Size (Born Alive)'} data={`${lsba}`} />
-      <SwineInfoRow label={'Birth Weight'} data={`${birthWeight} g`} />
-      <SwineInfoRow label={'Left Teats'} data={`${rightTeats}`}/>
-      <SwineInfoRow label={'Right Teats'} data={`${rightTeats}`} />
-      <SwineInfoRow label={'House Type'} data={`${capitalizeWords(houseType)}`} />
+      <SwineInfoRow label={'Birth Weight'} data={`${birth_weight} g`} />
+      <SwineInfoRow label={'Left Teats'} data={`${left_teats}`}/>
+      <SwineInfoRow label={'Right Teats'} data={`${right_teats}`} />
+      {/* <SwineInfoRow label={'House Type'} data={`${capitalizeWords(houseType)}`} /> */}
     </Block>
   );
 }

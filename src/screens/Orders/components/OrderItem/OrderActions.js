@@ -12,10 +12,10 @@ import { textStyles, sizes } from '../../../../constants/theme';
 
 function OrderActions(props) {
 
-  const { themedStyle, status, customerName, productName, requests } = props;
+  const { themedStyle, status, customerName, productName, id, data } = props;
 
   const onPressView = () => {
-    NavigationService.navigate('Requests', { requests });
+    NavigationService.navigate('Requests', { id });
   };
 
   const onPressCancel = () => {
@@ -23,11 +23,11 @@ function OrderActions(props) {
   };
 
   const onPressSend = () => {
-    ModalService.showModal('SendProduct', { customerName, productName });
+    ModalService.showModal('SendProduct', { data });
   };
 
   const onPressConfirm = () => {
-    ModalService.showModal('ConfirmSold', { customerName, productName });
+    ModalService.showModal('ConfirmSold', { data });
   };
 
 
@@ -67,7 +67,7 @@ function OrderActions(props) {
         </Fragment>
       }
       {
-        status === 'onDelivery' &&
+        status === 'on_delivery' &&
         <Fragment>
           <Button
             size='medium'

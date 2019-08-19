@@ -17,13 +17,13 @@ function Product({ themedStyle, productDetails }) {
     <Fragment>
       {
         productDetails && <ContainerView flex={1}>
-          <ProductPrimaryImage photoURL={productDetails.primaryPhotoURL} />
+          <ProductPrimaryImage photoURL={productDetails.img_path} />
           <Block flex={1} padding style={themedStyle.bodyStyle}>
-            <ProductInfo productInfo={productDetails.productInfo} />
-            <SwineInfo swineInfo={productDetails.swineInfo} />
-            <OtherInfo otherInfo={productDetails.otherInfo} />
+            <ProductInfo productInfo={productDetails} />
+            <SwineInfo swineInfo={productDetails} />
+            {/* <OtherInfo otherInfo={productDetails} />
             <ProductImages productImages={productDetails.productImages} />
-            <ProductVideos productVideos={productDetails.productVideos} />
+            <ProductVideos productVideos={productDetails.productVideos} /> */}
           </Block>
         </ContainerView>
       }

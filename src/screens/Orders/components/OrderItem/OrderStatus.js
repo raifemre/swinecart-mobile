@@ -10,12 +10,12 @@ import {
 
 function OrderStatus(props) {
 
-  const { themedStyle, status, customerName, statusTime, requests } = props;
+  const { themedStyle, status, customerName, statusTime, requests, data } = props;
 
   const statusTexts = {
     'requested': 'Requested',
     'reserved': 'Reserved',
-    'onDelivery': 'On Delivery',
+    'on_delivery': 'On Delivery',
     'sold': 'Sold',
   };
 
@@ -27,7 +27,7 @@ function OrderStatus(props) {
       >
         {statusTexts[status]}
       </Text>
-      {
+      {/* {
         status === 'requested' &&
         <Text
           category='s2'
@@ -35,7 +35,7 @@ function OrderStatus(props) {
         >
           {`by ${requests} ${addS(requests, 'user')}`}
         </Text> 
-      }
+      } */}
       {
         status !== 'requested' &&
         <Fragment>
@@ -43,13 +43,13 @@ function OrderStatus(props) {
             category='s2'
             style={[textStyles.caption1, themedStyle.requestsStyle]}
           >
-            {`to ${customerName}`}
+            {`to ${data.reservation.customer_name}`}
           </Text>
           <Text
             category='s2'
             style={[textStyles.caption1, themedStyle.requestsStyle]}
           >
-            {`${formatStatusTime(statusTime)}`}
+            {data.reservation.status_time}
           </Text>
         </Fragment>
       }

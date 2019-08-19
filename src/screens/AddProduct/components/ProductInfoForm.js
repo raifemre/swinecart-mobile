@@ -1,23 +1,38 @@
-import React, { memo } from 'react';
+import React, { Fragment, memo } from 'react';
+import { Field, reduxForm } from 'redux-form';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { Text, CheckBox } from 'react-native-ui-kitten';
+import { CheckBox } from 'react-native-ui-kitten';
 
 import {
   Block, Input
 } from '../../../shared/components'
 
-function ProductInfoForm() {
+import FormFooter from './FormFooter';
+
+function ProductInfoForm({ onPressBack, onPressNext, isFirstStep, isLastStep }) {
   return (
-    <Block padding>
-      <Input label='Name' />
-      <Input label='Type' />
-      <Input label='Minimum' />
-      <Input label='Maximum' />
-      <CheckBox text='Yes, this product is unique' />
-      <Input label='Quantity' />
+    <Block flex={1}>
+      <Block flex={1} middle padding>
+        <Field
+          name='name'
+          label='Name'
+          component={Input}
+        />
+        <Input label='Type' />
+        <Input label='Minimum' />
+        <Input label='Maximum' />
+        <CheckBox text='Yes, this product is unique' />
+        <Input label='Quantity' />
+      </Block>
+      <FormFooter
+        onPressNext={onPressNext}
+        onPressBack={onPressBack}
+        isLastStep={isFirstStep}
+        isFirstStep={isLastStep}
+      />
     </Block>
   );
 }
 
-export default withStyles(memo(ProductInfoForm), () => ({
-}));
+export default reduxForm({ form: 'productInfo' })(withStyles(memo(ProductInfoForm), () => ({
+})));

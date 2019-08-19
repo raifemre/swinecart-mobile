@@ -8,12 +8,12 @@ import { Block } from '../../../shared/components';
 import { formatBirthdate, addS, capitalizeWords } from '../../../utils/formatters';
 
 function ProductInfo({ themedStyle, productInfo }) {
-  const { name, type, breed, birthDate, age } = productInfo;
+  const { name, type, breed, birth_date, age } = productInfo;
   return (
     <Block flex='disabled' marginBottom>
       <Text style={themedStyle.nameStyle}>{`${capitalizeWords(name)}`}</Text>
       <Text style={themedStyle.typeStyle}>{`${capitalizeWords(type)}`} - {`${capitalizeWords(breed)}`}</Text>
-      <Text style={themedStyle.birthDateStyle}>{`${age} ${addS(age, 'day')} old (Birthdate is on ${formatBirthdate(birthDate)}`})</Text>
+      <Text style={themedStyle.birthDateStyle}>{`${age} ${addS(age, 'day')} old (Birthdate is on ${birth_date}`})</Text>
     </Block>
   );
 }

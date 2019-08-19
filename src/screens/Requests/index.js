@@ -8,16 +8,19 @@ import {
   RequestsList
 } from './components';
 
-import { createRandomRequests } from '../../utils/mockdata';
+import { OrderService } from '../../services';
 
 function Container({ navigation }) {
 
   const [ requests, setRequests ] = useState(null);
 
   useEffect(() => {
-    const requestCount = navigation.getParam('requests');
-    const requests = createRandomRequests(requestCount);
-    setRequests(requests);
+    const requestId = navigation.getParam('id');
+    OrderService.getOrderRequests(requestId)
+      .then((response) => {
+        const requests = response.data.requests;
+        setRequests(requests);
+      });
   }, []);
 
   return (

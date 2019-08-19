@@ -5,7 +5,7 @@ import transform from '../../../transformers';
 const URL_PREFIX = '/breeder/products'
 
 const service = {
-  async getProducts(page, limit) {
+  async getProducts(page, limit = 1000) {
     const response = await API.get(`${URL_PREFIX}`, { page, limit });
     // console.log(response);
     return response.data;

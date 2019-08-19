@@ -9,6 +9,10 @@ import { formatDeliveryDate, formatMarkedDate } from '../../../../utils/formatte
 import { sizes, textStyles, colors } from '../../../../constants/theme';
 import Block from '../../Block';
 
+import { 
+  OrderService
+} from '../../../../services';
+
 function SendProduct(props) {
 
   const today = new Date();
@@ -41,7 +45,19 @@ function SendProduct(props) {
   // Event Handlers
 
   const onPressPrimaryAction = () => {
-    hideModal();
+
+    const data = {
+      deliveryDate,
+      product_id: props.data.data.id,
+      reservation: props.data.data.reservation
+    };
+
+    OrderService.sendForDelivery(data)
+      .then(response => {
+        console.dir(response);
+        hideModal();
+      });
+
   };
 
   const onPressClose = () => {

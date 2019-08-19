@@ -14,3 +14,11 @@ export function getInitials(fullName) {
   const initials = firstName[0] + last(otherNames)[0];
   return upperCase(initials);
 }
+
+export function normalize(items) {
+  return items.reduce((accu, element, currentIndex) => {
+    accu.ids.push(element.id);
+    accu.entities[element.id] = element;
+    return accu;
+  }, { ids: [], entities: {} });
+}
