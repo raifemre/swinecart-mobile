@@ -1,19 +1,15 @@
 import API from './api';
-
 const URL_PREFIX = '/auth';
 
-const service = {
-  async login({ email, password }) {
-    const response = await API.post(`${URL_PREFIX}/login`, { email, password });
-    return response
+export default {
+  async login(email, password) {
+    return await API.post(`${URL_PREFIX}/login`, { email, password });
   },
-  async me() {
-    const { data } = await API.get(`${URL_PREFIX}/me`);
-    return data;
-  },
-  logout() {
-    return API.post(`${URL_PREFIX}/logout`);
-  }
-}
-
-export default service;
+  // async me() {
+  //   const { data } = await API.get(`${URL_PREFIX}/me`);
+  //   return data;
+  // },
+  // logout() {
+  //   return API.post(`${URL_PREFIX}/logout`);
+  // }
+};

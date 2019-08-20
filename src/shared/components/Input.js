@@ -6,20 +6,17 @@ import {
 
 import { textStyles } from '../../constants/theme';
 
-function Input(props) {
-
-  const { label, caption, status, ...restProps } = props;
-
+function Input({ themedStyle, label, error, ...restProps}) {
   return (
     <TextInput
-      status={status}
-      textStyle={[textStyles.paragraph]}
+      status={error ? 'danger' : 'primary'}
+      textStyle={themedStyle.text}
       autoCapitalize='none'
       size='small'
       label={label}
-      labelStyle={textStyles.label}
-      caption={caption}
-      captionTextStyle={textStyles.caption1}
+      labelStyle={themedStyle.label}
+      caption={error || ''}
+      captionTextStyle={themedStyle.caption}
       {...restProps}
     />
   )
@@ -27,4 +24,14 @@ function Input(props) {
 }
 
 export default withStyles(Input, () => ({
+  text: {
+    ...textStyles.paragraph,
+    fontSize: 16,
+  },
+  label: {
+    ...textStyles.label
+  },
+  caption: {
+    ...textStyles.paragraph,
+  }
 }));

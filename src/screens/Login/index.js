@@ -1,11 +1,5 @@
 import React, { memo } from 'react';
-
-import { withStyles } from 'react-native-ui-kitten/theme';
-
-import { textStyles, colors } from '../../constants/theme';
-
 import { Block } from '../../shared/components';
-
 import { Form } from './components';
 
 function Container(props) {
@@ -16,18 +10,4 @@ function Container(props) {
   );
 }
 
-export default withStyles(memo(Container), () => ({
-  container: {
-    flex: 1
-  },
-  forgotPassword: {
-    ...textStyles.button,
-    color: colors.gray5
-  },
-  buttonText: {
-    ...textStyles.button,
-  },
-  button: {
-    borderWidth: 0
-  }
-}));
+export default memo(Container, () => true);

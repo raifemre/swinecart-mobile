@@ -25,13 +25,10 @@ function OrdersListComponent({ themedStyle, status }) {
   useEffect(() => {
     OrderService
       .getOrders(status)
-      .then(response => {
-        if (response && response.data && response.data.products) {
-          const products = response.data.products;
-          setOrders(products);
-        } 
+      .then(data => {
+        console.log('data', data);
       });
-  }, [ status ]);
+  }, [ ]);
 
   const renderItem = ({ item }) => {
     return (

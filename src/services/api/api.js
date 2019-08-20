@@ -4,7 +4,7 @@ import { API_URL } from 'react-native-dotenv';
 
 import Navigation from '../navigation';
 
-const instance = apisauce.create({
+const api = apisauce.create({
   baseURL: API_URL,
   timeout: 3000,
   headers: {
@@ -13,17 +13,16 @@ const instance = apisauce.create({
 
 console.log(API_URL);
 
-instance.addAsyncRequestTransform(request => async () => {
+api.addAsyncRequestTransform(request => async () => {
   const token = await AsyncStorage.getItem('token');
-  const data = `Bearer ${token}`;
-  request.headers['Authorization'] = token ? data : null;
+  const authorization = `Bearer ${token}`;
+  api.set
 });
 
-instance.addResponseTransform(response => {
+api.addResponseTransform(response => {
 
   const { ok, problem, status } = response;
   const { config, ...res } = response;
-  // console.dir(response);
 
   if (!ok) {
     if (problem === 'NETWORK_ERROR') {
@@ -43,7 +42,7 @@ instance.addResponseTransform(response => {
 
 });
 
-instance.addMonitor(({ config: request, ...response }) => {
+api.addMonitor(({ config: request, ...response }) => {
   const { headers: reqHeaders, data: reqData, url: endpoint } = request;
   const { headers: resHeaders, data: resData, duration: resDuration } = response;
 
@@ -55,24 +54,5 @@ instance.addMonitor(({ config: request, ...response }) => {
   // console.dir('Response Headers: ', resHeaders);
   // console.dir('Response Data: ', resData);
 });
-
-
-const api = {
-  get(url, params = {}, options = {}) {
-    return instance.get(url, params, options);
-  },
-  delete(url, params = {}, options = {}) {
-    return instance.delete(url, params, options);
-  },
-  post(url, data = {}, options = {}) {
-    return instance.post(url, data, options);
-  },
-  put(url, data = {}, options = {}) {
-    return instance.put(url, data, options);
-  },
-  patch(url, data = {}, options = {}) {
-    return instance.patch(url, data, options);
-  }
-};
 
 export default api;

@@ -4,12 +4,8 @@ import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import Orientation from 'react-native-orientation';
 import RootNavigator from './navigation/navigators';
-import AsyncStorage from '@react-native-community/async-storage';
 
-
-import { 
-  NavigationService, ModalService
-} from './services';
+import {  NavigationService, ModalService } from './services';
 
 import ModalContainer from './shared/components/ModalContainer';
 
@@ -21,10 +17,6 @@ function App() {
 
   useEffect(() => {
     Orientation.lockToPortrait();
-    AsyncStorage.getItem('token')
-      .then(token => {
-        if(token) NavigationService.navigate('Breeder');
-      });
   }, []);
 
   return (
