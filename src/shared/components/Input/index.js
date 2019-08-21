@@ -11,7 +11,7 @@ import {
 
 function Input({ themedStyle, onChange, name, values, error, label, ...restProps }) {
   return (
-    <Block flex={'disabled'} marginVertical>
+    <Block flex={'disabled'} style={themedStyle.container}>
       <Label text={label} />
       <Block flex={'disabled'} middle style={themedStyle.textInputContainer}>
         <TextInput
@@ -21,12 +21,15 @@ function Input({ themedStyle, onChange, name, values, error, label, ...restProps
           {...restProps}
         />
       </Block>
-      {error && <ErrorMessage text={label} /> }
+      {/* {error && <ErrorMessage text={label} /> } */}
     </Block>
   );
 }
 
 export default withStyles(memo(Input), () => ({
+  container: {
+    marginVertical: sizes.margin / 2
+  },
   label: {
     ...textStyles.caption2
   },
