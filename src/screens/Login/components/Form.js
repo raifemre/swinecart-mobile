@@ -1,12 +1,18 @@
 import React, { Fragment, memo, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
 import { Block, Input } from '../../../shared/components';
 import LoginButton from './LoginButton';
-
 import { LoginSchema } from '../../../utils/validationSchemas';
 
+import { loginUser } from '../../../redux/actions/auth';
+import { Text } from 'react-native-ui-kitten';
+
 function Form() {
+
+  const dispatch  = useDispatch();
+  const isLoading = useSelector(state => state.auth.isLoggingIn);
 
   const [initialValues, setInitialValues] = useState({
     email: 'jordi11@luettgen.net',
@@ -15,8 +21,9 @@ function Form() {
     // password: ''
   });
 
-  const onPressLogin = values => {
-    console.dir(values);
+
+  const onPressLogin = ({ email, password }) => {
+    dispatch(loginUser(email, password));
   };
 
   return (
@@ -49,6 +56,7 @@ function Form() {
                   secureTextEntry={true}
                 />
                 <LoginButton
+                  isLoading={isLoading}
                   onPress={handleSubmit}
                 />
               </Block>

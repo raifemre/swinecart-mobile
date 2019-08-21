@@ -2,47 +2,39 @@ import AsyncStorage from '@react-native-community/async-storage';
 import apisauce from 'apisauce';
 import { API_URL } from 'react-native-dotenv';
 
-import Navigation from '../navigation';
-
-const api = apisauce.create({
+const base = apisauce.create({
   baseURL: API_URL,
-  timeout: 3000,
+  timeout: 5000,
   headers: {
-  }
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
 });
 
-console.log(API_URL);
-
-api.addAsyncRequestTransform(request => async () => {
+base.addAsyncRequestTransform(request => async () => {
   const token = await AsyncStorage.getItem('token');
   const authorization = `Bearer ${token}`;
-  api.set
 });
 
-api.addResponseTransform(response => {
+base.addResponseTransform(response => {
 
   const { ok, problem, status } = response;
   const { config, ...res } = response;
 
   if (!ok) {
-    if (problem === 'NETWORK_ERROR') {
+    if (problem === 'NETWORK_ERROR') {  
     }
     if (problem === 'CLIENT_ERROR') {
-      // console.log('STATUS CODE:', status);
-      if(status === 401) {
-        Navigation.navigate('Login');
-      }
-      else if (status === 404) {
-      }
     }
-    if (problem === 'TIMEOUT_ERROR')  {
-      // console.log('timeout');
+    if (problem === 'TIMEOUT_ERROR') {
+    }
+    if (problem === 'SERVER_ERROR') {
     }
   }
 
 });
 
-api.addMonitor(({ config: request, ...response }) => {
+base.addMonitor(({ config: request, ...response }) => {
   const { headers: reqHeaders, data: reqData, url: endpoint } = request;
   const { headers: resHeaders, data: resData, duration: resDuration } = response;
 
@@ -54,5 +46,40 @@ api.addMonitor(({ config: request, ...response }) => {
   // console.dir('Response Headers: ', resHeaders);
   // console.dir('Response Data: ', resData);
 });
+
+const promiseHandler = ({ data, ok, problem, status }) => {
+  return new Promise((resolve, reject) => {
+    if (!ok && problem) {
+      reject({ problem, status });
+    }
+    else {
+      resolve(data);
+    }
+  });
+}
+
+const api = {
+  async get(url, params = {}, options = {}) {
+    const response = await base.get(url, params, options);
+    return promiseHandler(response);
+  },
+  delete(url, params = {}, options = {}) {
+    const response = base.delete(url, params, options);
+    return promiseHandler(response)
+  },
+  async post(url, data = {}, options = {}) {
+    const response = await base.post(url, data, options);
+    return promiseHandler(response);
+  },
+  put(url, data = {}, options = {}) {
+    const response = base.put(url, data, options);
+    return promiseHandler(response)
+  },
+  patch(url, data = {}, options = {}) {
+    const response = base.patch(url, data, options);
+    return promiseHandler(response)
+  }
+};
+
 
 export default api;
