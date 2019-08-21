@@ -1,11 +1,15 @@
 import { 
-  parseInt, upperFirst, replace, startCase
+  parseInt, upperFirst, replace, startCase, upperCase
 } from 'lodash';
 
 import { format, isSameDay, distanceInWordsToNow } from 'date-fns';
 
 export function capitalizeWords(string) {
   return startCase(string);
+}
+
+export function uppercaseWord(string) {
+  return upperCase(string);
 }
 
 export function addS(value, string) {

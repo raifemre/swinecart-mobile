@@ -1,20 +1,33 @@
 import React, { Fragment, useState, memo, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { colors } from '../../../constants/theme';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { colors } from '../../../constants/theme'
+
+import OrderItem from './OrderItem';
+import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
+
+import { getHeight } from '../../../utils/helpers';
+
+import { fetchOrders } from '../../../redux/actions';
 
 import {
-  EmptyListMessage, LoadingView, ListFooter
-} from '../components';
+  OrderService
+} from '../../../services';
 
-function List({ themedStyle, status }) {
+function OrdersList({ themedStyle, status }) {
 
   const [orders, setOrders] = useState(null);
-  const [isRefreshing, setRefreshing] = useState([]);
+  const [isRefreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    const fakeOrders = createRandomOrders(1000, status);
-    setOrders(fakeOrders);
+    OrderService
+      .getOrders(status)
+      .then(data => {
+        console.log('data', data);
+      });
   }, []);
 
   const renderItem = ({ item }) => {
@@ -25,7 +38,7 @@ function List({ themedStyle, status }) {
     );
   };
 
-  const keyExtractor = item => item.id;
+  const keyExtractor = item => `${item.id}`;
   const getItemLayout = (data, index) => {
     return {
       length: getHeight(status),
@@ -48,6 +61,18 @@ function List({ themedStyle, status }) {
 
   };
 
+  const onRefresh = () => {
+    OrderService
+      .getOrders(status)
+      .then(response => {
+        if (response && response.data && response.data.products) {
+          setRefreshing(false);
+          const products = response.data.products;
+          setOrders(products);
+        }
+      });
+  };
+
   return (
     <Fragment>
       {orders && <FlatList
@@ -58,8 +83,14 @@ function List({ themedStyle, status }) {
         keyExtractor={keyExtractor}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
-        initialNumToRender={5}
-        maxToRenderPerBatch={5}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+          />
+        }
         ListEmptyComponent={renderListEmptyComponent}
         ListFooterComponent={renderFooterComponent}
         ListFooterComponentStyle={themedStyle.ListFooterStyle}
@@ -72,7 +103,7 @@ function List({ themedStyle, status }) {
   );
 }
 
-export default withStyles(memo(List, () => true), () => ({
+export default withStyles(OrdersList, () => ({
   containerStyle: {
     backgroundColor: colors.gray2,
   },

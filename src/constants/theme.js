@@ -51,6 +51,8 @@ const colors = {
 
   primary: '#00695C',
 
+  danger: '#E21B43',
+
   'white1': '#FFFFFF',
   'white2': '#FAFAFA',
 

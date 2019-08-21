@@ -17,7 +17,7 @@ import {
   OrderService
 } from '../../../services';
 
-function OrdersListComponent({ themedStyle, status }) {
+function OrdersList({ themedStyle, status }) {
 
   const [orders, setOrders] = useState(null);
   const [isRefreshing, setRefreshing] = useState(false);
@@ -103,23 +103,7 @@ function OrdersListComponent({ themedStyle, status }) {
   );
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    // orders: state.orders[props.status].ids,/
-    // orders: state.orders[props.status].entities,
-  };
-};
-
-const mapDispatchToProps = (dispatch, props) => {
-  return bindActionCreators({
-    getOrders: fetchOrders
-  }, dispatch);
-};
-
-
-// const OrdersList = connect(mapStateToProps, mapDispatchToProps)(memo(OrdersListComponent));
-
-export default withStyles(OrdersListComponent, () => ({
+export default withStyles(OrdersList, () => ({
   containerStyle: {
     backgroundColor: colors.gray2,
   },
