@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import Block from '../../Block';
-import { textStyles, colors, sizes } from '../../../../constants/theme';
+import { textStyles, colors } from '../../../../constants/theme';
 
 import { uppercaseWord } from '../../../../utils/formatters'
 

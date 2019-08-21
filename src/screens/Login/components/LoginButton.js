@@ -9,7 +9,7 @@ import { Block } from '../../../shared/components';
 function LoginButton({ themedStyle, onPress }) {
   return (
     <Fragment>
-      <Block flex='disabled' middle>
+      <Block flex='disabled' marginVertical middle>
         <Button
           textStyle={themedStyle.loginButtonText}
           size='large'
