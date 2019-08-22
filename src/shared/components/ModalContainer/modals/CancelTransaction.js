@@ -23,7 +23,9 @@ function CancelTransaction(props) {
 
   // Props
   const { themedStyle, data } = props;
-  const { customerName, productName } = data;
+  const { reservation, product } = data;
+  const { name } = product;
+  const { customerName } = reservation;
 
   // Button Event Handlers
 
@@ -35,7 +37,7 @@ function CancelTransaction(props) {
     hideModal();
   };
 
-  const confirmText = `Cancel transaction on Product ${productName} to ${customerName}?`;
+  const confirmText = `Cancel transaction on Product ${name} to ${customerName}?`;
   const primaryActionText = 'Yes, cancel it';
 
   return (

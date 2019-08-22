@@ -1,12 +1,12 @@
 
 import to from 'await-to-js';
 
-import { 
+import {
   LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE 
 } from '../../types/auth';
 
 import {
-  AuthService
+  AuthService, NavigationService
 } from '../../../services';
 
 export function loginUser(email, password) {
@@ -15,6 +15,8 @@ export function loginUser(email, password) {
     
     const [error, data] = await to(AuthService.login(email, password));
 
+    NavigationService.navigate('Breeder');
+
     if (error) {
       console.dir(error, data);
       dispatch({ type: LOGIN_FAILURE });
@@ -22,6 +24,7 @@ export function loginUser(email, password) {
     else {
       dispatch({ type: LOGIN_SUCCESS });
     }
+
 
   };
 }

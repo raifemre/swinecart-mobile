@@ -40,23 +40,19 @@ function SendProduct(props) {
 
   // Props
 
-  const { themedStyle } = props;
+  const { themedStyle, data } = props;
+  const { product, reservation } = data;
+
 
   // Event Handlers
 
   const onPressPrimaryAction = () => {
 
-    const data = {
-      deliveryDate,
-      product_id: props.data.data.id,
-      reservation: props.data.data.reservation
-    };
-
-    OrderService.sendForDelivery(data)
-      .then(response => {
-        console.dir(response);
-        hideModal();
-      });
+    // const data = {
+    //   deliveryDate,
+    //   product_id: props.data.data.id,
+    //   reservation: props.data.data.reservation
+    // };
 
   };
 

@@ -9,7 +9,7 @@ import { sizes, textStyles, colors } from '../../../../constants/theme';
 import Block from '../../Block';
 import ContainerView from '../../ContainerView';
 
-import { formatDateNeeded } from '../../../../utils/formatters';
+import { formatDateNeeded, formatDeliveryDate } from '../../../../utils/formatters';
 
 function OrderDetails (props) {
 
@@ -29,7 +29,7 @@ function OrderDetails (props) {
 
   // Props
   const { themedStyle, data } = props;
-  const { customer_name, special_request } = data;
+  const { customerName, dateNeeded, deliveryDate, quantity, specialRequest } = data;
   // Button Event Handlers
 
   const onPressPrimaryAction = () => {
@@ -67,19 +67,23 @@ function OrderDetails (props) {
         >
           <Block flex='disabled' row>
             <Text style={themedStyle.labelStyle}> {'Customer Name: '}</Text>
-            <Text style={themedStyle.dataStyle}>{customer_name}</Text>
+            <Text style={themedStyle.dataStyle}>{customerName}</Text>
           </Block>  
-          {/* <Block flex='disabled' row>
+          <Block flex='disabled' row>
             <Text style={themedStyle.labelStyle}> {'Date Needed: '}</Text>
             <Text style={themedStyle.dataStyle}>{formatDateNeeded(dateNeeded)}</Text>
-          </Block> */}
-          {/* <Block flex='disabled' row>
+          </Block>
+          <Block flex='disabled' row>
+            <Text style={themedStyle.labelStyle}> {'Delivery Date: '}</Text>
+            <Text style={themedStyle.dataStyle}>{formatDeliveryDate(deliveryDate)}</Text>
+          </Block>
+          <Block flex='disabled' row>
             <Text style={themedStyle.labelStyle}> {'Quantity: '}</Text>
-            <Text style={themedStyle.dataStyle}>{requestQuantity}</Text>
-          </Block> */}
+            <Text style={themedStyle.dataStyle}>{quantity}</Text>
+          </Block>
           <Block flex='disabled'>
             <Text style={themedStyle.labelStyle}> {'Special Request: '}</Text>
-            <Text style={themedStyle.dataStyle}>{special_request}</Text>
+            <Text style={themedStyle.dataStyle}>{specialRequest}</Text>
           </Block>
         </ContainerView>
         <Block flex={1} row right style={themedStyle.footerStyle}>

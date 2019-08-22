@@ -27,24 +27,25 @@ function ConfirmSold(props) {
 
   // Props
   const { themedStyle, data } = props;
+  const { product, reservation } = data;
 
-  const productName = data.data.name;
-  const customerName = data.data.reservation.customer_name;
+  const { name } = product;
+  const { customerName } = reservation;
 
   // Button Event Handlers
 
   const onPressPrimaryAction = () => {
-    OrderService.confirmSold(data.data)
-      .then(response => {
-        hideModal();
-      });
+    // OrderService.confirmSold(data.data)
+    //   .then(response => {
+    //     hideModal();
+    //   });
   };
 
   const onPressClose = () => {
     hideModal();
   };
 
-  const confirmText = `Confirm that the Product ${productName} was sold to ${customerName}?`;
+  const confirmText = `Confirm that the Product ${name} was sold to ${customerName}?`;
   const primaryActionText = 'Yes, it is sold';
 
   return (

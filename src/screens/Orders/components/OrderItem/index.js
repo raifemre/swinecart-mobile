@@ -19,12 +19,12 @@ import { getHeight } from '../../../../utils/helpers';
 function OrderItem(props) {
   
   const { themedStyle, data } = props;
-  const { name, type, breed, customerName, statusTime, requests, img_path, id } = data;
+  const { status, requestCount, product, reservation } = data;
 
-  const status = (data.reservation && data.reservation.order_status) || data.status;
+  const { id, name, type, breed, image } = product;
 
   const onPressView = () => {
-    ModalService.showModal('OrderDetails', { ...data.reservation });
+    ModalService.showModal('OrderDetails', { ...reservation });
   };
 
   const height = getHeight(status);
@@ -34,19 +34,21 @@ function OrderItem(props) {
       <Block row padding style={[themedStyle.container, { height }]}>
         <Avatar
           shape='round'
-          source={{ uri: img_path }}
+          source={{ uri: image }}
           style={themedStyle.imageStyle}
         />
         <Block paddingHorizontal>
           <ProductInfo name={name} type={type} breed={breed} />
           <OrderStatus
-            data={data}
-            customerName={customerName}
-            statusTime={statusTime}
             status={status}
-            requests={requests}
+            requestCount={requestCount}
+            reservation={reservation}
           />
-          <OrderActions status={status} productName={name} customerName={customerName} id={id} data={data} />
+          <OrderActions 
+            status={status} 
+            product={product}
+            reservation={reservation}
+          />
         </Block>
       </Block>
     </Fragment>

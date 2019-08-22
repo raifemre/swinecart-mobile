@@ -11,24 +11,18 @@ import {
 } from '../../../shared/components';
 
 import { textStyles, colors, sizes } from '../../../constants/theme';
-import { NavigationService, ModalService, OrderService } from '../../../services';
-import { getInitials } from '../../../utils/helpers';
+import { NavigationService, ModalService } from '../../../services';
 
 function RequestItem(props) {
 
   const { themedStyle, data } = props;
-  const { customer_province, customer_name } = data;
+  const { customerProvince, customerName } = data;
 
   const onPressView = () => {
     ModalService.showModal('OrderDetails', { ...data });
   };
 
   const onPressReserve = () => {
-    OrderService.reserveProduct(data)
-      .then(response => {
-        console.log(response);
-      });
-    NavigationService.back();
   };
 
   return (
@@ -37,17 +31,17 @@ function RequestItem(props) {
       onPress={onPressView}
     >
       <Block row padding center style={themedStyle.container}>
-        <UserAvatar userName={customer_name} size={64} textSize={20} />
+        <UserAvatar userName={customerName} size={64} textSize={20} />
         <Block paddingHorizontal>
           <Text
             style={themedStyle.customerName}
           >
-            {customer_name}
+            {customerName}
           </Text>
           <Text
             style={themedStyle.province}
           >
-            {customer_province}
+            {customerProvince}
           </Text>
           <Button
             size='medium'

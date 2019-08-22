@@ -10,7 +10,7 @@ const RootNavigator = createSwitchNavigator({
   // Customer: CustomerStackNavigator,
   Breeder: BreederTabNavigator
 }, {
-    initialRouteName: 'Public'
+    initialRouteName: 'Breeder'
 });
 
 useScreens();

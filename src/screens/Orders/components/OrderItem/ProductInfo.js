@@ -8,6 +8,8 @@ import { Text } from 'react-native-ui-kitten';
 
 import { textStyles } from '../../../../constants/theme';
 
+import { capitalizeWords } from '../../../../utils/formatters';
+
 function ProductInfo(props) {
 
   const { themedStyle, name, type, breed } = props;
@@ -17,12 +19,12 @@ function ProductInfo(props) {
       <Text
         style={themedStyle.name}
       >
-        {name}
+        {capitalizeWords(name)}
       </Text>
       <Text
         style={themedStyle.type}
       >
-        {type} - {breed}
+        {capitalizeWords(type)} - {breed}
       </Text>
     </Fragment>
   );

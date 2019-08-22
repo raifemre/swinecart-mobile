@@ -10,12 +10,13 @@ import {
 
 function OrderStatus(props) {
 
-  const { themedStyle, status, customerName, statusTime, requests, data } = props;
+  const { themedStyle, status, reservation, requestCount } = props;
+  const { customerName, statusTime } = reservation;
 
   const statusTexts = {
     'requested': 'Requested',
     'reserved': 'Reserved',
-    'on_delivery': 'On Delivery',
+    'onDelivery': 'On Delivery',
     'sold': 'Sold',
   };
 
@@ -23,33 +24,33 @@ function OrderStatus(props) {
     <Fragment>
       <Text
         category='s2'
-        style={[textStyles.label, themedStyle.statusStyle]}
+        style={themedStyle.statusStyle}
       >
         {statusTexts[status]}
       </Text>
-      {/* {
+      {
         status === 'requested' &&
         <Text
           category='s2'
-          style={[textStyles.caption1, themedStyle.requestsStyle]}
+          style={themedStyle.requestsStyle}
         >
-          {`by ${requests} ${addS(requests, 'user')}`}
+          {`by ${requestCount} ${addS(requestCount, 'user')}`}
         </Text> 
-      } */}
+      }
       {
         status !== 'requested' &&
         <Fragment>
           <Text
             category='s2'
-            style={[textStyles.caption1, themedStyle.requestsStyle]}
+            style={themedStyle.requestsStyle}
           >
-            {`to ${data.reservation.customer_name}`}
+            {`to ${customerName}`}
           </Text>
           <Text
             category='s2'
-            style={[textStyles.caption1, themedStyle.requestsStyle]}
+            style={themedStyle.requestsStyle}
           >
-            {data.reservation.status_time}
+            {formatStatusTime(statusTime)}
           </Text>
         </Fragment>
       }
@@ -59,11 +60,13 @@ function OrderStatus(props) {
 
 export default withStyles(memo(OrderStatus, () => true), () => ({
   statusStyle: {
+    ...textStyles.label,
     marginTop: sizes.margin / 2,
     color: '#000000',
     fontSize: 14,
   },
   requestsStyle: {
+    ...textStyles.caption1,
     color: colors.gray3,
     fontSize: 14,
   }

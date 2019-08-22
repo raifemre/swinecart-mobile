@@ -21,7 +21,7 @@ function RequestsList({ requests, themedStyle }) {
     );
   };
 
-  const keyExtractor = item => `${item.customer_id}`;
+  const keyExtractor = item => `${item.productId}`;
   const getItemLayout = (data, index) => ({
     length: 120,
     offset: 120 * index,

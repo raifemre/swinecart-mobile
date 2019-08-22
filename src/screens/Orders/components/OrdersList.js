@@ -1,21 +1,17 @@
 import React, { Fragment, useState, memo, useEffect } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-import { colors } from '../../../constants/theme'
+import { colors } from '../../../constants/theme';
 
 import OrderItem from './OrderItem';
 import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
 
 import { getHeight } from '../../../utils/helpers';
+import { createRandomOrders } from '../../../utils/mockdata';
+import { orderMapper } from '../../../utils/mappers';
 
-import { fetchOrders } from '../../../redux/actions';
-
-import { 
-  OrderService
-} from '../../../services';
+// import { fetchOrders } from '../../../redux/actions';
 
 function OrdersList({ themedStyle, status }) {
 
@@ -23,11 +19,10 @@ function OrdersList({ themedStyle, status }) {
   const [isRefreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    OrderService
-      .getOrders(status)
-      .then(data => {
-        console.log('data', data);
-      });
+    const fakeOrders = createRandomOrders(1, status);
+    // console.dir(fakeOrders);
+    const newOrders = fakeOrders.map(orderMapper);
+    setOrders(newOrders);
   }, [ ]);
 
   const renderItem = ({ item }) => {
@@ -38,7 +33,7 @@ function OrdersList({ themedStyle, status }) {
     );
   };
 
-  const keyExtractor = item => `${item.id}`; 
+  const keyExtractor = item => `${item.product.id}`; 
   const getItemLayout = (data, index) => {
     return {
       length: getHeight(status),
@@ -62,15 +57,6 @@ function OrdersList({ themedStyle, status }) {
   };
 
   const onRefresh = () => {
-    OrderService
-      .getOrders(status)
-      .then(response => {
-        if (response && response.data && response.data.products) {
-          setRefreshing(false);
-          const products = response.data.products;
-          setOrders(products);
-        }
-      });
   };
 
   return (

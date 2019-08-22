@@ -8,7 +8,8 @@ import {
   RequestsList
 } from './components';
 
-import { OrderService } from '../../services';
+import { createRandomRequests } from '../../utils/mockdata';
+import { requestMapper } from '../../utils/mappers';
 
 function Container({ navigation }) {
 
@@ -16,11 +17,10 @@ function Container({ navigation }) {
 
   useEffect(() => {
     const requestId = navigation.getParam('id');
-    OrderService.getOrderRequests(requestId)
-      .then((response) => {
-        const requests = response.data.requests;
-        setRequests(requests);
-      });
+    const fakeRequests = createRandomRequests(10);
+    const newRequests = fakeRequests.map(requestMapper);
+    console.dir(newRequests);
+    setRequests(newRequests);
   }, []);
 
   return (

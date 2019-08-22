@@ -12,24 +12,25 @@ import { textStyles, sizes } from '../../../../constants/theme';
 
 function OrderActions(props) {
 
-  const { themedStyle, status, customerName, productName, id, data } = props;
+  const { themedStyle, status, product, reservation } = props;
+  const { id } = product;
+  // const { customerName } = reservation;
 
   const onPressView = () => {
     NavigationService.navigate('Requests', { id });
   };
 
   const onPressCancel = () => {
-    ModalService.showModal('CancelTransaction', { customerName, productName });
+    ModalService.showModal('CancelTransaction', { product, reservation });
   };
 
   const onPressSend = () => {
-    ModalService.showModal('SendProduct', { data });
+    ModalService.showModal('SendProduct', { product, reservation });
   };
 
   const onPressConfirm = () => {
-    ModalService.showModal('ConfirmSold', { data });
+    ModalService.showModal('ConfirmSold', { product, reservation });
   };
-
 
   return (
     <Fragment>
@@ -38,7 +39,7 @@ function OrderActions(props) {
         <Button
           size='medium'
           onPress={onPressView}
-          textStyle={[textStyles.button, themedStyle.buttonTextStyle]}
+          textStyle={themedStyle.buttonTextStyle}
           style={themedStyle.buttonStyle}
         >
           View Requests
@@ -50,7 +51,7 @@ function OrderActions(props) {
           <Button
             size='medium'
             onPress={onPressSend}
-            textStyle={[textStyles.button, themedStyle.buttonTextStyle]}
+            textStyle={themedStyle.buttonTextStyle}
             style={themedStyle.buttonStyle}
           >
             Send for Delivery
@@ -59,7 +60,7 @@ function OrderActions(props) {
             size='medium'
             status='danger'
             onPress={onPressCancel}
-            textStyle={[textStyles.button, themedStyle.buttonTextStyle]}
+            textStyle={themedStyle.buttonTextStyle}
             style={themedStyle.buttonStyle}
           >
             Cancel Transaction
@@ -67,12 +68,12 @@ function OrderActions(props) {
         </Fragment>
       }
       {
-        status === 'on_delivery' &&
+        status === 'onDelivery' &&
         <Fragment>
           <Button
             size='medium'
             onPress={onPressConfirm}
-            textStyle={[textStyles.button, themedStyle.buttonTextStyle]}
+            textStyle={themedStyle.buttonTextStyle}
             style={themedStyle.buttonStyle}
           >
             Confirm Sold
@@ -81,7 +82,7 @@ function OrderActions(props) {
             size='medium'
             status='danger'
             onPress={onPressCancel}
-            textStyle={[textStyles.button, themedStyle.buttonTextStyle]}
+            textStyle={themedStyle.buttonTextStyle}
             style={themedStyle.buttonStyle}
           >
             Cancel Transaction
@@ -94,6 +95,7 @@ function OrderActions(props) {
 
 export default withStyles(memo(OrderActions, () => true), () => ({
   buttonStyle: {
+    ...textStyles.button,
     marginTop: sizes.margin / 4,
     borderWidth: 0,
   }
