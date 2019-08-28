@@ -1,5 +1,4 @@
 import React, { Fragment, memo } from 'react';
-import { Field, reduxForm } from 'redux-form';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import { CheckBox } from 'react-native-ui-kitten';
 
@@ -12,7 +11,7 @@ import FormFooter from './FormFooter';
 function ProductInfoForm({ onPressBack, onPressNext, isFirstStep, isLastStep }) {
   return (
     <Block flex={1}>
-      <Block flex={1} middle padding>
+      {/* <Block flex={1} middle padding>
         <Field
           name='name'
           label='Name'
@@ -29,10 +28,9 @@ function ProductInfoForm({ onPressBack, onPressNext, isFirstStep, isLastStep }) 
         onPressBack={onPressBack}
         isLastStep={isFirstStep}
         isFirstStep={isLastStep}
-      />
+      /> */}
     </Block>
   );
 }
 
-export default reduxForm({ form: 'productInfo' })(withStyles(memo(ProductInfoForm), () => ({
-})));
+export default memo(ProductInfoForm);

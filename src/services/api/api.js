@@ -4,16 +4,18 @@ import { API_URL } from 'react-native-dotenv';
 
 const base = apisauce.create({
   baseURL: API_URL,
-  timeout: 5000,
+  timeout: 20000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
   },
 });
 
+console.log(API_URL);
+
 base.addAsyncRequestTransform(request => async () => {
   const token = await AsyncStorage.getItem('token');
-  const authorization = `Bearer ${token}`;
+  request.headers.Authorization = `Bearer ${token}`;
 });
 
 base.addResponseTransform(response => {
@@ -41,43 +43,44 @@ base.addMonitor(({ config: request, ...response }) => {
   // console.dir('Request Headers: ', reqHeaders);
   // console.dir('Request Token:', reqHeaders.Authorization);
   // console.dir('Request Data: ', reqData);
-  // console.dir(resDuration, 'Request Endpoint:', endpoint);
+  console.dir(resDuration, 'Request Endpoint:', endpoint);
 
-  // console.dir('Response Headers: ', resHeaders);
   // console.dir('Response Data: ', resData);
+  // console.dir('Response Headers: ', resHeaders);
 });
 
 const promiseHandler = ({ data, ok, problem, status }) => {
   return new Promise((resolve, reject) => {
     if (!ok && problem) {
+      console.log(data);
       reject({ problem, status });
     }
     else {
       resolve(data);
     }
   });
-}
+};
 
 const api = {
   async get(url, params = {}, options = {}) {
     const response = await base.get(url, params, options);
     return promiseHandler(response);
   },
-  delete(url, params = {}, options = {}) {
+  async delete(url, params = {}, options = {}) {
     const response = base.delete(url, params, options);
-    return promiseHandler(response)
+    return promiseHandler(response);
   },
   async post(url, data = {}, options = {}) {
     const response = await base.post(url, data, options);
     return promiseHandler(response);
   },
-  put(url, data = {}, options = {}) {
+  async put(url, data = {}, options = {}) {
     const response = base.put(url, data, options);
-    return promiseHandler(response)
+    return promiseHandler(response);
   },
-  patch(url, data = {}, options = {}) {
+  async patch(url, data = {}, options = {}) {
     const response = base.patch(url, data, options);
-    return promiseHandler(response)
+    return promiseHandler(response);
   }
 };
 

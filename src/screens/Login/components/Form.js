@@ -7,7 +7,6 @@ import LoginButton from './LoginButton';
 import { LoginSchema } from '../../../utils/validationSchemas';
 
 import { loginUser } from '../../../redux/actions/auth';
-import { Text } from 'react-native-ui-kitten';
 
 function Form() {
 
@@ -15,7 +14,7 @@ function Form() {
   const isLoading = useSelector(state => state.auth.isLoggingIn);
 
   const [initialValues, setInitialValues] = useState({
-    email: 'jordi11@luettgen.net',
+    email: 'dcorkery@yahoo.com',
     password: 'secret12',
     // email: '',
     // password: ''

@@ -11,7 +11,6 @@ import {
 function OrderStatus(props) {
 
   const { themedStyle, status, reservation, requestCount } = props;
-  const { customerName, statusTime } = reservation;
 
   const statusTexts = {
     'requested': 'Requested',
@@ -44,13 +43,13 @@ function OrderStatus(props) {
             category='s2'
             style={themedStyle.requestsStyle}
           >
-            {`to ${customerName}`}
+            {`to ${reservation.customerName}`}
           </Text>
           <Text
             category='s2'
             style={themedStyle.requestsStyle}
           >
-            {formatStatusTime(statusTime)}
+            {formatStatusTime(reservation.statusTime)}
           </Text>
         </Fragment>
       }

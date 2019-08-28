@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 import ordersReducer from './ordersReducer';
 import authReducer from './authReducer';
+import requestsReducer from './requestsReducer';
+import productsReducer from './productsReducer';
+import breederProfileReducer from './breederProfileReducer';
 
 export default combineReducers({
-  form: formReducer,
   auth: authReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  requests: requestsReducer,
+  products: productsReducer,
+  breederProfile: breederProfileReducer,
 });

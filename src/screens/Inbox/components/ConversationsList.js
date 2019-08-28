@@ -9,7 +9,6 @@ import Conversation from './Conversation';
 
 import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
 
-import { createConversations } from '../../../utils/mockdata';
 
 function ConversationsList({ themedStyle }) {
 
@@ -17,8 +16,7 @@ function ConversationsList({ themedStyle }) {
   const [isRefreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    const fakeConversations = createConversations(500);
-    setConversation(fakeConversations);
+
   }, []);
 
   const renderItem = ({ item }) => {

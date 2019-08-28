@@ -16,4 +16,11 @@ const navigator = createStackNavigator({
     }
   });
 
+navigator.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarVisible: navigation.state.index > 0 ? false : true,
+    // tabBarVisible: false,
+  };
+};
+
 export default navigator;

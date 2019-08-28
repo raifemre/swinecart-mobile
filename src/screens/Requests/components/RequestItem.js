@@ -55,6 +55,8 @@ function RequestItem(props) {
       </Block>
     </TouchableOpacity>
   );
+
+
 }
 
 export default withStyles(memo(RequestItem, () => true), () => ({

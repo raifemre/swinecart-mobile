@@ -1,24 +1,28 @@
 import React, { memo, useState, useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import { Popover, Button, Text, OverflowMenuItem } from 'react-native-ui-kitten';
 
 import { Block } from '../../../shared/components';
 import { colors, sizes, textStyles, shadowStyles } from '../../../constants/theme';
 
+import { changeStatus } from '../../../redux/actions/orders';
+
 import routes from '../routes';
 
 function StatusPicker({ themedStyle, jumpTo }) {
 
+  const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
-  const [status, setStatus] = useState(routes[0]);
+  const currentStatus = useSelector(state => state.orders.currentStatus);
 
   useEffect(() => {
-    jumpTo(status.key);
-  }, [ status ]);
+    jumpTo(currentStatus.key);
+  }, [ currentStatus ]);
 
   const onItemSelect = useCallback(index => {
     setIsVisible(false);
-    setStatus(routes[index]);
+    dispatch(changeStatus(routes[index]));
   }, []);
 
   const toggleMenu = useCallback(() => {
@@ -30,7 +34,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
       const onPress = () => onItemSelect(index);
       const textStyle = [
         themedStyle.menuItemText,
-        route.text === status.text && { color: colors.primary }
+        route.text === currentStatus.text && { color: colors.primary }
       ];
       return (
         <OverflowMenuItem
@@ -42,7 +46,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
         />
       );
     });
-  }, [ status ]);
+  }, [ currentStatus ]);
 
   return (
     <Block row flex='disabled' center middle padding style={themedStyle.container}>
@@ -62,7 +66,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
           style={themedStyle.button}
           textStyle={themedStyle.buttonText}
         >
-          {status.text}
+          {currentStatus.text}
         </Button>
       </Popover>
     </Block>

@@ -1,63 +1,55 @@
 import React, { Fragment, memo, useState, useEffect } from 'react';
-import { API_URL } from 'react-native-dotenv';
-import {
-  Avatar
-} from 'react-native-ui-kitten';
+import { Avatar } from 'react-native-ui-kitten';
+import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  InfoRow, Block, ContainerView, LoadingView
-} from '../../../shared/components';
+import { InfoRow, Block, ContainerView, LoadingView } from '../../../shared/components';
 
-import { urls } from '../../../constants/randomImage';
+import { colors } from '../../../constants/theme';
 
-import { BreederProfileService } from '../../../services';
+import { getBreederProfile } from '../../../redux/actions/breederProfile';
 
 function OfficeInfo(props) {
 
-  const [ breederProfile, setBreederProfile ] = useState(null);
+  const profile = useSelector(state => state.breederProfile.profile);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    BreederProfileService.getProfile()
-      .then(response => {
-        if (response && response.data && response.data.profile) {
-          setBreederProfile(response.data.profile);
-        }
-      });
+    dispatch(getBreederProfile());
   }, []);
 
   return (
     <Fragment>
       {
-        breederProfile && <ContainerView>
-          <Block marginTop marginBottom>
-            <Block center middle paddingTop flex='disabled'>
+        profile && <ContainerView>
+          <Block marginBottom>
+            <Block center middle paddingTop flex='disabled' style={{ backgroundColor: colors.white1 }}>
               <Avatar
                 shape='rounded'
-                source={{ uri: `http://swinecart.pcaarrd.dost.gov.ph${breederProfile.img_path}` }}
+                source={{ uri: `http://swinecart.pcaarrd.dost.gov.ph${profile.img_path}` }}
                 style={{ width: 128, height: 128 }}
               />
             </Block>
           </Block>
           <Block marginTop marginBottom style={{ backgroundColor: '#ffffff' }}>
-            <InfoRow label='Address Line 1' data={breederProfile.officeAddress_addressLine1} />
-            <InfoRow label='Address Line 2' data={breederProfile.officeAddress_addressLine2} />
-            <InfoRow label='Province' data={breederProfile.officeAddress_province} />
-            <InfoRow label='Postal / Zip Code' data={breederProfile.officeAddress_zipCode}/>
-            <InfoRow label='Landline' data={breederProfile.office_landline}/>
-            <InfoRow label='Mobile' data={breederProfile.office_mobile}/>
+            <InfoRow label='Address Line 1' data={profile.officeAddress_addressLine1} />
+            <InfoRow label='Address Line 2' data={profile.officeAddress_addressLine2} />
+            <InfoRow label='Province' data={profile.officeAddress_province} />
+            <InfoRow label='Postal / Zip Code' data={profile.officeAddress_zipCode}/>
+            <InfoRow label='Landline' data={profile.office_landline}/>
+            <InfoRow label='Mobile' data={profile.office_mobile}/>
           </Block>
           <Block marginTop marginBottom style={{ backgroundColor: '#ffffff' }}>
-            <InfoRow label='Name' data={breederProfile.contactPerson_name}/>
-            <InfoRow label='Mobile' data={breederProfile.contactPerson_mobile}/>
+            <InfoRow label='Name' data={profile.contactPerson_name}/>
+            <InfoRow label='Mobile' data={profile.contactPerson_mobile}/>
           </Block>
           <Block marginTop marginBottom style={{ backgroundColor: '#ffffff' }}>
-            <InfoRow label='Website' data={breederProfile.website}/>
-            <InfoRow label='Produce' data={breederProfile.produce}/>
+            <InfoRow label='Website' data={profile.website}/>
+            <InfoRow label='Produce' data={profile.produce}/>
           </Block>
         </ContainerView>
       }
       {
-        !breederProfile && <LoadingView />
+        !profile && <LoadingView />
       }
     </Fragment>
   );

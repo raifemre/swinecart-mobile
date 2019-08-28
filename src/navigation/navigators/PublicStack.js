@@ -1,15 +1,9 @@
-import {
-  createStackNavigator
-} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
-import { 
-  Login
-} from '../../screens';
+import Login from '../../screens/Login';
 
 const navigator = createStackNavigator({
-  // Shop: Shop,
   Login: Login,
-  // Register: Register
 }, {
   initialRouteName: 'Login',
   defaultNavigationOptions: ({ navigation }) => {

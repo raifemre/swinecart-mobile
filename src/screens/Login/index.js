@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { Block } from '../../shared/components';
+
+import { Block } from 'shared/components';
 import { Form } from './components';
 
 function Container(props) {

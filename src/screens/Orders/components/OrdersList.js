@@ -1,99 +1,45 @@
-import React, { Fragment, useState, memo, useEffect } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
-import { withStyles } from 'react-native-ui-kitten/theme';
-
-import { colors } from '../../../constants/theme';
+import React, { memo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import OrderItem from './OrderItem';
-import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
+import { List } from '../../../shared/components';
 
-import { getHeight } from '../../../utils/helpers';
-import { createRandomOrders } from '../../../utils/mockdata';
-import { orderMapper } from '../../../utils/mappers';
+import { fetchOrders } from '../../../redux/actions/orders';
 
-// import { fetchOrders } from '../../../redux/actions';
+function OrdersList({ status }) {
+  
+  const dispatch = useDispatch();
 
-function OrdersList({ themedStyle, status }) {
-
-  const [orders, setOrders] = useState(null);
-  const [isRefreshing, setRefreshing] = useState(false);
+  const currentStatus = useSelector(state => state.orders.currentStatus);
+  const orders = useSelector(state => state.orders[status]);
+  const isFetching = useSelector(state => state.orders.isFetching);
 
   useEffect(() => {
-    const fakeOrders = createRandomOrders(1, status);
-    // console.dir(fakeOrders);
-    const newOrders = fakeOrders.map(orderMapper);
-    setOrders(newOrders);
+    dispatch(fetchOrders(status));
   }, [ ]);
 
-  const renderItem = ({ item }) => {
-    return (
-      <OrderItem
-        data={item}
-      />
-    );
-  };
-
   const keyExtractor = item => `${item.product.id}`; 
-  const getItemLayout = (data, index) => {
-    return {
-      length: getHeight(status),
-      offset: getHeight(status) * index,
-      index
-    };
-  };
-
-  const renderListEmptyComponent = () => (
-    <EmptyListMessage message={'No Orders!'} />
-  );
-  
-  const renderFooterComponent = () => {
-    return (
-      <ListFooter isRefreshing={isRefreshing} />
-    )
-  };
-
   const onEndReached = () => {
 
   };
 
   const onRefresh = () => {
+    dispatch(fetchOrders(status));
   };
 
   return (
-    <Fragment>
-      {orders && <FlatList
-        data={orders}
-        extraData={orders}
-        renderItem={renderItem}
-        getItemLayout={getItemLayout}
-        keyExtractor={keyExtractor}
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.1}
-        initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-          />
-        }
-        ListEmptyComponent={renderListEmptyComponent}
-        ListFooterComponent={renderFooterComponent}
-        ListFooterComponentStyle={themedStyle.ListFooterStyle}
-        showsVerticalScrollIndicator={false}
-        style={themedStyle.containerStyle}
-        contentContainerStyle={themedStyle.contentContainerStyle}
-      />}
-      {!orders && <LoadingView />}
-    </Fragment>
+    <List
+      data={orders}
+      extraData={orders}
+      Component={OrderItem}
+      keyExtractor={keyExtractor}
+      emptyListMessage={'No Orders!'}
+      isRefreshing={isFetching}
+      onEndReached={onEndReached}
+      onRefresh={onRefresh}
+      isFetching={isFetching}
+    />
   );
 }
 
-export default withStyles(OrdersList, () => ({
-  containerStyle: {
-    backgroundColor: colors.gray2,
-  },
-  contentContainerStyle: {
-    flexGrow: 1
-  }
-}));
+export default memo(OrdersList);

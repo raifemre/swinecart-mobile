@@ -62,6 +62,8 @@ const colors = {
   'gray4': '#CFCFCF',
   'gray5': '#8F9BB3',
 
+  black1: '#000000',
+
 
 };
 

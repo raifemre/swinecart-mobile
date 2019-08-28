@@ -9,16 +9,12 @@ import Notification from './Notification';
 
 import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
 
-import { createNotifications } from '../../../utils/mockdata';
-
 function NotificationList({ themedStyle }) {
 
   const [conversations, setConversation] = useState(null);
   const [isRefreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    const fakeConversations = createNotifications(500);
-    setConversation(fakeConversations);
   }, []);
 
   const renderItem = ({ item }) => {

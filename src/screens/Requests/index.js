@@ -1,38 +1,19 @@
-import React, { Fragment, memo, useState, useEffect } from 'react';
+import React, { Fragment, memo } from 'react';
+import { HeaderBar, BackButton } from '../../shared/components';
 
-import {
-  HeaderBar, BackButton,
-} from '../../shared/components';
+import { RequestsList } from './components';
 
-import {
-  RequestsList
-} from './components';
-
-import { createRandomRequests } from '../../utils/mockdata';
-import { requestMapper } from '../../utils/mappers';
-
-function Container({ navigation }) {
-
-  const [ requests, setRequests ] = useState(null);
-
-  useEffect(() => {
-    const requestId = navigation.getParam('id');
-    const fakeRequests = createRandomRequests(10);
-    const newRequests = fakeRequests.map(requestMapper);
-    console.dir(newRequests);
-    setRequests(newRequests);
-  }, []);
-
+function Container() {
   return (
     <Fragment>
       <HeaderBar
         title='Requests'
         leftControl={<BackButton />}
       />
-      <RequestsList requests={requests} />
+      <RequestsList />
     </Fragment>
   )
 
 }
 
-export default memo(Container);
+export default memo(Container, () => true);

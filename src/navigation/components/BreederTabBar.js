@@ -1,10 +1,9 @@
-
 import React, { memo } from 'react';
 import { BottomNavigation } from 'react-native-ui-kitten';
 
-import { shadowStyles } from '../../constants/theme';
+import { shadowStyles } from 'constants/theme';
 
-import BottomNavTab from '../../shared/components/navigation/BottomNavTab';
+import BottomNavTab from 'shared/components/navigation/BottomNavTab';
 
 function BreederTabBar({ navigation }) {
 
@@ -22,7 +21,7 @@ function BreederTabBar({ navigation }) {
     >
       <BottomNavTab title='Products' iconName='shopping-bag' />
       <BottomNavTab title='Orders' iconName='list' />
-      {/* <BottomNavTab title='Dashboard' iconName='grid' /> */}
+      <BottomNavTab title='Dashboard' iconName='grid' />
       <BottomNavTab title='Inbox' iconName='inbox' />
       <BottomNavTab title='Profile' iconName='user' />
     </BottomNavigation>

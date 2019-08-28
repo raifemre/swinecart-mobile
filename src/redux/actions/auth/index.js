@@ -1,6 +1,5 @@
-
+import AsyncStorage from '@react-native-community/async-storage';
 import to from 'await-to-js';
-
 import {
   LOGIN_SUCCESS, LOGIN_REQUEST, LOGIN_FAILURE 
 } from '../../types/auth';
@@ -15,14 +14,17 @@ export function loginUser(email, password) {
     
     const [error, data] = await to(AuthService.login(email, password));
 
-    NavigationService.navigate('Breeder');
-
     if (error) {
-      console.dir(error, data);
+      console.dir(error);
       dispatch({ type: LOGIN_FAILURE });
     }
     else {
-      dispatch({ type: LOGIN_SUCCESS });
+      if (data) {
+        const { token } = data.data;
+        await AsyncStorage.setItem('token', token);
+        dispatch({ type: LOGIN_SUCCESS });
+        NavigationService.navigate('Breeder');
+      }
     }
 
 

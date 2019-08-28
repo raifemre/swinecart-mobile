@@ -6,7 +6,6 @@ import {
   LoadingView, UserAvatar, Icon, Block
 } from '../../../shared/components';
 
-import { createMessages } from '../../../utils/mockdata';
 import { sizes, colors, textStyles } from '../../../constants/theme';
 
 function Chat({ themedStyle, user }) {
@@ -14,8 +13,6 @@ function Chat({ themedStyle, user }) {
   const [ messages, setMessages ] = useState(null);
 
   useEffect(() => {
-    const fakeMessages = createMessages(500);
-    setMessages(fakeMessages);
   }, []);
 
   const renderLoading = () => <LoadingView />;

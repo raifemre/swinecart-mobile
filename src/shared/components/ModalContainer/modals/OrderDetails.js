@@ -69,14 +69,19 @@ function OrderDetails (props) {
             <Text style={themedStyle.labelStyle}> {'Customer Name: '}</Text>
             <Text style={themedStyle.dataStyle}>{customerName}</Text>
           </Block>  
-          <Block flex='disabled' row>
-            <Text style={themedStyle.labelStyle}> {'Date Needed: '}</Text>
-            <Text style={themedStyle.dataStyle}>{formatDateNeeded(dateNeeded)}</Text>
-          </Block>
-          <Block flex='disabled' row>
-            <Text style={themedStyle.labelStyle}> {'Delivery Date: '}</Text>
-            <Text style={themedStyle.dataStyle}>{formatDeliveryDate(deliveryDate)}</Text>
-          </Block>
+          { dateNeeded &&
+            <Block flex='disabled' row>
+              <Text style={themedStyle.labelStyle}> {'Date Needed: '}</Text>
+              <Text style={themedStyle.dataStyle}>{formatDateNeeded(dateNeeded)}</Text>
+            </Block>
+          }
+          {
+            deliveryDate &&
+            <Block flex='disabled' row>
+              <Text style={themedStyle.labelStyle}> {'Delivery Date: '}</Text>
+              <Text style={themedStyle.dataStyle}>{formatDeliveryDate(deliveryDate)}</Text>
+            </Block>
+          }
           <Block flex='disabled' row>
             <Text style={themedStyle.labelStyle}> {'Quantity: '}</Text>
             <Text style={themedStyle.dataStyle}>{quantity}</Text>

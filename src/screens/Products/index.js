@@ -1,15 +1,18 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { 
-  HeaderBar, AddProductButton
-} from '../../shared/components';
+import {  HeaderBar, AddProductButton } from '../../shared/components';
+import { ProductsList } from './components'
 
-import {
-  ProductsList
-} from './components'
+import { fetchProducts } from '../../redux/actions/products';
 
+function Container() {
+  
+  const dispatch = useDispatch();
 
-function Container(props) {
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
   return (
     <Fragment>

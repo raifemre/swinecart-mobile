@@ -11,7 +11,6 @@ import {
   textStyles, sizes, colors, shadowStyles
 } from '../../../constants/theme';
 
-import FormStepIndicator from './FormStepIndicator';
 import Wizard from './Wizard';
 import ProductInfoForm from './ProductInfoForm';
 import SwineInfoForm from './SwineInfoForm';
@@ -83,9 +82,6 @@ function AddProductForm({ themedStyle }) {
 
   return (
     <Block flex={1}>
-      <Block flex='disabled' padding left style={themedStyle.header}>
-        <FormStepIndicator labels={labels} currentStep={currentStep} />
-      </Block>
       <ContainerView backgroundColor={colors.white1} style={{ height: '100%' }}>
         <Wizard
           steps={steps}

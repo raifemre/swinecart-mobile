@@ -1,6 +1,21 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "allowJs": true
+    "allowJs": true,
+    "baseUrl": "./src",
+    "paths": {
+      "constants/*": [
+        "constants/*"
+      ],
+      "shared/*": [
+        "shared/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ],
+      "services/*": [
+        "utils/*"
+      ],
+    }
   }
 }

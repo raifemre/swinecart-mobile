@@ -9,7 +9,7 @@ export default {
   //   const { data } = await API.get(`${URL_PREFIX}/me`);
   //   return data;
   // },
-  // logout() {
-  //   return API.post(`${URL_PREFIX}/logout`);
-  // }
+  logout() {
+    return API.post(`${URL_PREFIX}/logout`);
+  }
 };

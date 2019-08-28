@@ -1,54 +1,30 @@
-import React, { Fragment, useState, memo, useEffect } from 'react';
+import React, { Fragment, memo } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-import { colors } from '../../../constants/theme'
+import { colors } from '../../constants/theme';
 
-import OrderItem from './OrderItem';
-import { EmptyListMessage, LoadingView, ListFooter } from '../../../shared/components';
+import EmptyListMessage from './EmptyListMessage';
+import LoadingView from './LoadingView';
+import ListFooter from './ListFooter';
 
-import { getHeight } from '../../../utils/helpers';
+function List(props) {
 
-import { fetchOrders } from '../../../redux/actions';
-
-import {
-  OrderService
-} from '../../../services';
-
-function OrdersList({ themedStyle, status }) {
-
-  const [orders, setOrders] = useState(null);
-  const [isRefreshing, setRefreshing] = useState(false);
-
-  useEffect(() => {
-    OrderService
-      .getOrders(status)
-      .then(data => {
-        console.log('data', data);
-      });
-  }, []);
+  const {
+    themedStyle, Component, keyExtractor, emptyListMessage, isRefreshing,
+    onEndReached, onRefresh, isFetching, extraData, data
+  } = props;
 
   const renderItem = ({ item }) => {
     return (
-      <OrderItem
+      <Component
         data={item}
       />
     );
   };
 
-  const keyExtractor = item => `${item.id}`;
-  const getItemLayout = (data, index) => {
-    return {
-      length: getHeight(status),
-      offset: getHeight(status) * index,
-      index
-    };
-  };
-
   const renderListEmptyComponent = () => (
-    <EmptyListMessage message={'No Orders!'} />
+    <EmptyListMessage message={emptyListMessage} />
   );
 
   const renderFooterComponent = () => {
@@ -57,29 +33,13 @@ function OrdersList({ themedStyle, status }) {
     )
   };
 
-  const onEndReached = () => {
-
-  };
-
-  const onRefresh = () => {
-    OrderService
-      .getOrders(status)
-      .then(response => {
-        if (response && response.data && response.data.products) {
-          setRefreshing(false);
-          const products = response.data.products;
-          setOrders(products);
-        }
-      });
-  };
-
   return (
     <Fragment>
-      {orders && <FlatList
-        data={orders}
-        extraData={orders}
+      {isFetching && <LoadingView />}
+      {!isFetching && <FlatList
+        data={data}
+        extraData={extraData}
         renderItem={renderItem}
-        getItemLayout={getItemLayout}
         keyExtractor={keyExtractor}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
@@ -98,16 +58,17 @@ function OrdersList({ themedStyle, status }) {
         style={themedStyle.containerStyle}
         contentContainerStyle={themedStyle.contentContainerStyle}
       />}
-      {!orders && <LoadingView />}
     </Fragment>
   );
 }
 
-export default withStyles(OrdersList, () => ({
+export default withStyles(memo(List), () => ({
   containerStyle: {
     backgroundColor: colors.gray2,
   },
   contentContainerStyle: {
     flexGrow: 1
+  },
+  ListFooterStyle: {
   }
 }));

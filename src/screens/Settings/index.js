@@ -11,8 +11,8 @@ import { NavigationService, AuthService } from '../../services';
 
 function Container(props) {
 
-  const onPressLogout = () => {
-    AuthService.logout();
+  const onPressLogout = async () => {
+    // await AuthService.logout();
     NavigationService.navigate('Public');
   }
 

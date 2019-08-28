@@ -15,9 +15,9 @@ const navigator = createBottomTabNavigator({
   'OrdersStack': {
     screen: OrdersStack,
   },
-  // 'DashboardStack': {
-  //   screen: DashboardStack,
-  // },
+  'DashboardStack': {
+    screen: DashboardStack,
+  },
   'InboxStack': {
     screen: InboxStack,
   },
@@ -26,7 +26,7 @@ const navigator = createBottomTabNavigator({
   },
 },
 {
-  initialRouteName: 'OrdersStack',
+  initialRouteName: 'ProductsStack',
   tabBarComponent: BreederTabBar,
   defaultNavigationOptions: ({ navigation }) => {
   },

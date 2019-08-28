@@ -16,7 +16,8 @@ export const Product = {
   name: 'name',
   type: 'type',
   breed: 'breed',
-  image: 'image'
+  image: 'image',
+  age: 'age'
 };
 
 export const Order = {
@@ -31,6 +32,7 @@ export const Request = {
   swinecart_id: 'swineCartId',
   request_quantity: 'quantity',
   date_needed: 'dateNeeded',
+  delivery_date: 'deliveryDate',
   special_request: 'specialRequest',
   customer_id: 'customerId',
   customer_name: 'customerName',

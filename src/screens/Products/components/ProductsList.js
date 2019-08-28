@@ -1,87 +1,23 @@
-import React, { Fragment, useState, memo, useEffect } from 'react';
-import { FlatGrid } from 'react-native-super-grid';
-import { withStyles } from 'react-native-ui-kitten/theme';
+import React, { Fragment, memo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { colors } from '../../../constants/theme'
+import { GridList } from '../../../shared/components';
 
 import Product from './Product';
 
-import {
-  EmptyListMessage, LoadingView, ListFooter
-} from '../../../shared/components';
+function ProductsList(props) {
 
-// import { createRandomProducts } from '../../../utils/mockdata';
-
-import { 
-  ProductsService
-} from '../../../services';
-
-function ProductsList({ themedStyle }) {
-
-  const [products, setProducts] = useState(null);
-  const [isRefreshing, setRefreshing] = useState(true);
-
-  useEffect(() => {
-    ProductsService.getProducts()
-      .then(response => {
-        if (response && response.data && response.data.products) {
-          setProducts(response.data.products);
-        }
-      });
-  }, []);
-
-  const renderItem = ({ item }) => {
-    return (
-      <Product
-        data={item}
-      />
-    );
-  };
-
-  const renderListEmptyComponent = () => (
-    <EmptyListMessage message={'No Products!'} />
-  );
-
-  const renderFooterComponent = () => {
-    return (
-      <Fragment>
-        {(products && products.length > 0) && <ListFooter isRefreshing={isRefreshing} />}
-      </Fragment>
-    );
-  };
-
-  const onEndReached = () => {
-
-  };
+  const isLoading = useSelector(state => state.products.isLoading);
+  const products = useSelector(state => state.products.byIds);
 
   return (
-    <Fragment>
-      {products && <FlatGrid
-        items={products}
-        itemDimension={150}
-        spacing={8}
-        renderItem={renderItem}
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.1}
-        initialNumToRender={10}
-        maxToRenderPerBatch={2}
-        ListEmptyComponent={renderListEmptyComponent}
-        ListFooterComponent={renderFooterComponent}
-        ListFooterComponentStyle={themedStyle.ListFooterStyle}
-        showsVerticalScrollIndicator={false}
-        style={themedStyle.containerStyle}
-        contentContainerStyle={themedStyle.contentContainerStyle}
-      />}
-      {!products && <LoadingView />}
-    </Fragment>
+    <GridList
+      data={products}
+      Component={Product}
+      isLoading={isLoading}
+    />
   );
+
 }
 
-export default withStyles(memo(ProductsList, () => true), () => ({
-  containerStyle: {
-    backgroundColor: colors.gray2,
-  },
-  contentContainerStyle: {
-    flexGrow: 1
-  }
-}));
+export default memo(ProductsList, () => true);

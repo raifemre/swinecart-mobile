@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { sizes } from '../../constants/theme';
+import { sizes, colors } from 'constants/theme';
 
 function Block(props) {
 
@@ -9,7 +9,7 @@ function Block(props) {
     flex, row, center, left, middle, right, space, 
     padding, padding2, paddingTop, paddingLeft, paddingBottom, paddingHorizontal, paddingVertical,
     marginBottom, marginBottom2, marginTop, marginTop2, margin, marginRight, marginVertical,
-    style, children, ...otherProps
+    style, children, backgroundColor, ...otherProps
   } = props;
 
   const blockStyles = [
@@ -21,6 +21,7 @@ function Block(props) {
     right && styles.right,
     left && styles.left,
     space && { justifyContent: `space-${space}` },
+    backgroundColor && { backgroundColor: colors[backgroundColor] },
     row && styles.row,
     padding && styles.padding,
     padding2 && styles.padding2,
@@ -112,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Block;
+export default memo(Block);
