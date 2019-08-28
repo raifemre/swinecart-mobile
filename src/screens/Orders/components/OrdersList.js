@@ -11,7 +11,7 @@ function OrdersList({ status }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchOrders(status, currentPage, limit));
+    dispatch(fetchOrders(status, 1, limit));
   }, []);
 
   const orders = useSelector(state => state.orders[status].byIds);
@@ -22,7 +22,8 @@ function OrdersList({ status }) {
   const limit = useSelector(state => state.orders[status].limit);
 
   const keyExtractor = item => `${item.product.id}`;
-  const onEndReached = () => {
+
+  const onPressLoadMore = () => {
     dispatch(fetchMoreOrders(status, currentPage, limit));
   };
 
@@ -37,7 +38,7 @@ function OrdersList({ status }) {
       keyExtractor={keyExtractor}
       emptyListMessage={'No Orders!'}
       isRefreshing={isRefreshing}
-      onEndReached={onEndReached}
+      onPressLoadMore={onPressLoadMore}
       onRefresh={onRefresh}
       isLoading={isLoading}
       isLoadingMore={isLoadingMore}

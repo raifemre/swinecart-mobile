@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo} from 'react';
 import { HeaderBar, BackButton } from '../../shared/components';
 
 import { RequestsList } from './components';
@@ -12,8 +12,7 @@ function Container() {
       />
       <RequestsList />
     </Fragment>
-  )
-
+  );
 }
 
 export default memo(Container, () => true);

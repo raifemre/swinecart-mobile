@@ -1,5 +1,5 @@
 import React, { Fragment, memo } from 'react';
-
+import { useDispatch } from 'react-redux';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
 import { Button } from 'react-native-ui-kitten';
@@ -10,14 +10,19 @@ import {
 
 import { textStyles, sizes } from '../../../../constants/theme';
 
+import { setCurrentId } from 'actions/requests';
+
 function OrderActions(props) {
+
+  const dispatch = useDispatch();
 
   const { themedStyle, status, product, reservation } = props;
   const { id } = product;
   // const { customerName } = reservation;
 
   const onPressView = () => {
-    NavigationService.navigate('Requests', { id });
+    dispatch(setCurrentId(id));
+    NavigationService.navigate('Requests');
   };
 
   const onPressCancel = () => {

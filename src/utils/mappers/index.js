@@ -28,13 +28,11 @@ export function reservationMapper(rawData) {
 }
 
 export function requestMapper(rawData) {
-  return rawData.map(data => {
-    return transform(data, (result, value, key) => {
-      if (Request[key]) {
-        result[Request[key]] = value;
-      }
-    }, {});
-  })
+  return transform(rawData, (result, value, key) => {
+    if (Request[key]) {
+      result[Request[key]] = value;
+    }
+  }, {});
 }
 
 export function orderMapper(rawData) {

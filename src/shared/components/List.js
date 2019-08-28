@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { Fragment, memo } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
@@ -12,7 +12,7 @@ function List(props) {
 
   const {
     themedStyle, Component, keyExtractor, emptyListMessage, isRefreshing, 
-    isLoadingMore, onEndReached, onRefresh, isLoading, data
+    isLoadingMore, onPressLoadMore, onRefresh, isLoading, data
   } = props;
 
   const renderItem = ({ item }) => {
@@ -29,11 +29,13 @@ function List(props) {
 
   const renderFooterComponent = () => {
     return (
-      <ListFooter isRefreshing={isLoadingMore} />
+      <Fragment>
+        {data.length > 0 && <ListFooter isLoadingMore={isLoadingMore} onPressLoadMore={onPressLoadMore} />}
+      </Fragment>
     )
   };
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return <LoadingView />;
   }
   else {
@@ -42,8 +44,6 @@ function List(props) {
         data={data}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.1}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
         refreshControl={

@@ -1,47 +1,49 @@
-import React, { useState, memo, useEffect } from 'react';
-import { withNavigation } from 'react-navigation';
+import React, { useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RequestItem from './RequestItem';
 
-import { getOrderRequests } from '../../../redux/actions/requests';
+import { getOrderRequests, getMoreOrderRequests } from '../../../redux/actions/requests';
 
 import { List } from '../../../shared/components';
 
-function RequestsList({ navigation }) {
+function RequestsList() {
   
   const dispatch = useDispatch();
 
-  const isFetching = useSelector(state => state.requests.isFetching);
-  const requests = useSelector(state => state.requests.byId);
-
   useEffect(() => {
-    const requestId = navigation.getParam('id');
-    dispatch(getOrderRequests(requestId));
+    dispatch(getOrderRequests(currentId, 1, limit));
   }, []);
 
-  const keyExtractor = item => `${item.customerId}`;
-  const onEndReached = () => {
+  const currentId = useSelector(state => state.requests.currentId);
+  const requests = useSelector(state => state.requests.byIds);
+  const isLoading = useSelector(state => state.requests.isLoading);
+  const isRefreshing = useSelector(state => state.requests.isRefreshing);
+  const isLoadingMore = useSelector(state => state.requests.isLoadingMore);
+  const currentPage = useSelector(state => state.requests.currentPage);
+  const limit = useSelector(state => state.requests.limit);
 
+  const keyExtractor = item => `${item.customerId}`;
+  const onPressLoadMore = () => {
+    dispatch(getMoreOrderRequests(currentId, currentPage, limit));
   };
 
   const onRefresh = () => {
-    const requestId = navigation.getParam('id');
-    dispatch(getOrderRequests(requestId));
+    dispatch(getOrderRequests(currentId, 1, limit));
   };
 
   return (
     <List
       data={requests}
-      extraData={requests}
       Component={RequestItem}
       keyExtractor={keyExtractor}
       emptyListMessage={'No Requests!'}
-      isRefreshing={isFetching}
-      onEndReached={onEndReached}
+      isRefreshing={isRefreshing}
+      onPressLoadMore={onPressLoadMore}
       onRefresh={onRefresh}
-      isFetching={isFetching}
+      isLoading={isLoading}
+      isLoadingMore={isLoadingMore}
     />
   );
 }
 
-export default withNavigation(memo(RequestsList));
+export default memo(RequestsList);

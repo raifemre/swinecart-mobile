@@ -11,12 +11,12 @@ import {
 
 const statusInitialState = {
   entities: {},
-  byIds: [],
+  byIds: null,
   isLoading: false,
   isRefreshing: false,
   isLoadingMore: false,
   currentPage: 1,
-  limit: 10,
+  limit: 2,
 };
 
 const initialState = {
@@ -51,7 +51,7 @@ export default (state = initialState, { type, payload }) => {
         [payload.status]: updateStatusState(state, payload.status, {
           currentPage: payload.page,
           isLoading: false,
-          byIds: payload.orders
+          byIds: [...payload.orders]
         })
       };
     case FETCH_MORE_ORDERS:
