@@ -28,7 +28,7 @@ function DropdownButton({ themedStyle, onPress, currentStatus, isVisible }) {
 export default withStyles(memo(DropdownButton, () => true), () => ({
   container: {
     borderColor: colors.primary,
-    backgroundColor: colors.white2,
+    backgroundColor: colors.white1,
     width: 200,
     borderWidth: 2,
     borderRadius: 5,

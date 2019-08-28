@@ -4,40 +4,43 @@ import { useSelector, useDispatch } from 'react-redux';
 import OrderItem from './OrderItem';
 import { List } from 'shared/components';
 
-import { fetchOrders } from 'redux/actions/orders';
+import { fetchOrders, fetchMoreOrders } from 'actions/orders';
 
 function OrdersList({ status }) {
 
   const dispatch = useDispatch();
 
-  const currentStatus = useSelector(state => state.orders.currentStatus);
-  const orders = useSelector(state => state.orders[status]);
-  const isFetching = useSelector(state => state.orders.isFetching);
-
   useEffect(() => {
-    dispatch(fetchOrders(status));
+    dispatch(fetchOrders(status, currentPage, limit));
   }, []);
+
+  const orders = useSelector(state => state.orders[status].byIds);
+  const isLoading = useSelector(state => state.orders[status].isLoading);
+  const isRefreshing = useSelector(state => state.orders[status].isRefreshing);
+  const isLoadingMore = useSelector(state => state.orders[status].isLoadingMore);
+  const currentPage = useSelector(state => state.orders[status].currentPage);
+  const limit = useSelector(state => state.orders[status].limit);
 
   const keyExtractor = item => `${item.product.id}`;
   const onEndReached = () => {
-
+    dispatch(fetchMoreOrders(status, currentPage, limit));
   };
 
   const onRefresh = () => {
-    dispatch(fetchOrders(status));
+    dispatch(fetchOrders(status, 1, limit));
   };
 
   return (
     <List
       data={orders}
-      extraData={orders}
       Component={OrderItem}
       keyExtractor={keyExtractor}
       emptyListMessage={'No Orders!'}
-      isRefreshing={isFetching}
+      isRefreshing={isRefreshing}
       onEndReached={onEndReached}
       onRefresh={onRefresh}
-      isFetching={isFetching}
+      isLoading={isLoading}
+      isLoadingMore={isLoadingMore}
     />
   );
 }

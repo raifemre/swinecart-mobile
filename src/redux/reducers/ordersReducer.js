@@ -1,46 +1,75 @@
-
-import { orderMapper } from '../../utils/mappers';
-
 import {
   FETCH_ORDERS,
   FETCH_ORDERS_SUCCESS,
-  CHANGE_STATUS
-} from '../types/orders'
 
-const statuses = [
-  { key: 'requested', text: 'Requested' },
-  { key: 'reserved', text: 'Reserved' },
-  { key: 'onDelivery', text: 'On Delivery' },
-  { key: 'sold', text: 'Sold' },
-];
+  FETCH_MORE_ORDERS,
+  FETCH_MORE_ORDERS_SUCCESS,
+
+  UPDATE_PAGE,
+
+} from '../types/orders';
+
+const statusInitialState = {
+  entities: {},
+  byIds: [],
+  isLoading: false,
+  isRefreshing: false,
+  isLoadingMore: false,
+  currentPage: 1,
+  limit: 10,
+};
 
 const initialState = {
-  currentStatus: statuses[0],
-  'requested' : null,
-  'reserved' : null,
-  'onDelivery' : null,
-  'sold' : null,
-  isFetching: false,
+  'requested': Object.assign({}, statusInitialState),
+  'reserved': Object.assign({}, statusInitialState),
+  'onDelivery': Object.assign({}, statusInitialState),
+  'sold': Object.assign({}, statusInitialState),
 };
+
+const updateStatusState = (state, status, newValues) => {
+  const newStatusState = Object.assign({}, state[status], newValues);
+  return newStatusState;
+};
+
+const updateStatusItems = (state, status, newValues) => {
+  if (newValues.length === 0) return state[status].byIds;
+  return [...state[status].byIds, ...newValues];
+}
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case CHANGE_STATUS:
-      return {
-        ...state,
-        currentStatus: payload.status
-      };
     case FETCH_ORDERS:
       return {
         ...state,
-        isFetching: true,
+        [payload.status]: updateStatusState(state, payload.status, { 
+          isLoading: true 
+        })
       };
     case FETCH_ORDERS_SUCCESS:
-      const { status, orders } = payload;
       return {
         ...state,
-        isFetching: false,
-        [status]: orders.map(orderMapper)
+        [payload.status]: updateStatusState(state, payload.status, {
+          currentPage: payload.page,
+          isLoading: false,
+          byIds: payload.orders
+        })
+      };
+    case FETCH_MORE_ORDERS:
+      return {
+        ...state,
+        [payload.status]: updateStatusState(state, payload.status, {
+          isLoadingMore: true,
+        })
+      };
+    case FETCH_MORE_ORDERS_SUCCESS:
+      return {
+        ...state,
+        [payload.status]: updateStatusState(state, payload.status, {
+          isLoadingMore: false,
+          currentPage: payload.page,
+          isLoading: false,
+          byIds: updateStatusItems(state, payload.status, payload.orders)
+        })
       };
     default: 
       return state;

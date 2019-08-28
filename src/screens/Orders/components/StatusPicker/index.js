@@ -1,13 +1,11 @@
-import React, { memo, useState, useCallback, useEffect } from 'react';
+import React, { memo, useState, useCallback, useEffect, useMemo } from 'react';
 import { withStyles } from 'react-native-ui-kitten/theme';
 import { Popover, OverflowMenuItem } from 'react-native-ui-kitten';
 
 import { Block } from 'shared/components';
 import { colors, sizes, textStyles, shadowStyles } from 'constants/theme';
 
-import {
-  DropdownButton, LabelText
-} from './components';
+import { DropdownButton, LabelText } from './components';
 
 import routes from '../../routes';
 
@@ -29,7 +27,7 @@ function StatusPicker({ themedStyle, jumpTo }) {
     setIsVisible(!isVisible);
   }, [isVisible]);
 
-  const renderContent = useCallback(() => {
+  const content = useMemo(() => {
     return routes.map((route, index) => {
       const onPress = () => onItemSelect(index);
       const textStyle = [
@@ -46,14 +44,14 @@ function StatusPicker({ themedStyle, jumpTo }) {
         />
       );
     });
-  }, [currentStatus]);
+  }, [ currentStatus ]);
 
   return (
     <Block row flex='disabled' center middle padding style={themedStyle.container}>
       <LabelText />
       <Popover
         indicatorOffset={0}
-        content={renderContent()}
+        content={content}
         visible={isVisible}
         onBackdropPress={toggleMenu}
         style={themedStyle.overflowMenu}

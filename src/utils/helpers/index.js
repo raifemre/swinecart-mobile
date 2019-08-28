@@ -22,3 +22,12 @@ export function normalize(items) {
     return accu;
   }, { ids: [], entities: {} });
 }
+
+export function createOrderReducers(orderReducer) {
+  const statuses = ['requested', 'reserved', 'onDelivery', 'sold'];
+
+  return statuses.reduce((a, status) => {
+    a[status] = orderReducer;
+    return a;
+  }, {});
+}
