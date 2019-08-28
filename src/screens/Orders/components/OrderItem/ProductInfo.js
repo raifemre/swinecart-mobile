@@ -1,14 +1,11 @@
 import React, { Fragment, memo } from 'react';
+import { withStyles } from 'react-native-ui-kitten/theme';
 
-import {
-  withStyles
-} from 'react-native-ui-kitten/theme';
+import { textStyles } from 'constants/theme';
+import { capitalizeWords } from 'utils/formatters';
 
-import { Text } from 'react-native-ui-kitten';
+import { Text } from 'shared/components';
 
-import { textStyles } from '../../../../constants/theme';
-
-import { capitalizeWords } from '../../../../utils/formatters';
 
 function ProductInfo(props) {
 

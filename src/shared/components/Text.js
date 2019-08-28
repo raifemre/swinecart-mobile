@@ -9,12 +9,13 @@ function Text(props) {
   const {
     themedStyle, 
     size, color,
-    headline,
+    headline, subtitle,
     ...otherProps
   } = props;
 
   const textStyles = [
     headline && themedStyle.headline,
+    subtitle && themedStyle.subtitle,
     size && { fontSize: size, lineHeight: 1.2 * size },
     color && { color: colors[color] }
   ];

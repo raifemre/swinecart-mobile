@@ -2,12 +2,12 @@ import React, { memo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import OrderItem from './OrderItem';
-import { List } from 'shared/components';
+import { List } from '../../../shared/components';
 
-import { fetchOrders } from 'redux/actions/orders';
+import { fetchOrders } from '../../../redux/actions/orders';
 
 function OrdersList({ status }) {
-
+  
   const dispatch = useDispatch();
 
   const currentStatus = useSelector(state => state.orders.currentStatus);
@@ -16,9 +16,9 @@ function OrdersList({ status }) {
 
   useEffect(() => {
     dispatch(fetchOrders(status));
-  }, []);
+  }, [ ]);
 
-  const keyExtractor = item => `${item.product.id}`;
+  const keyExtractor = item => `${item.product.id}`; 
   const onEndReached = () => {
 
   };
@@ -28,17 +28,18 @@ function OrdersList({ status }) {
   };
 
   return (
-    <List
-      data={orders}
-      extraData={orders}
-      Component={OrderItem}
-      keyExtractor={keyExtractor}
-      emptyListMessage={'No Orders!'}
-      isRefreshing={isFetching}
-      onEndReached={onEndReached}
-      onRefresh={onRefresh}
-      isFetching={isFetching}
-    />
+    null
+    // <List
+    //   data={orders}
+    //   extraData={orders}
+    //   Component={OrderItem}
+    //   keyExtractor={keyExtractor}
+    //   emptyListMessage={'No Orders!'}
+    //   isRefreshing={isFetching}
+    //   onEndReached={onEndReached}
+    //   onRefresh={onRefresh}
+    //   isFetching={isFetching}
+    // />
   );
 }
 

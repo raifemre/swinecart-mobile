@@ -1,35 +1,35 @@
 import React, { memo, useState, useCallback, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { withStyles } from 'react-native-ui-kitten/theme';
-import { Popover, Button, Text, OverflowMenuItem } from 'react-native-ui-kitten';
+import { Popover, OverflowMenuItem } from 'react-native-ui-kitten';
 
-import { Block } from '../../../shared/components';
-import { colors, sizes, textStyles, shadowStyles } from '../../../constants/theme';
+import { Block } from 'shared/components';
+import { colors, sizes, textStyles, shadowStyles } from 'constants/theme';
 
-import { changeStatus } from '../../../redux/actions/orders';
+import {
+  DropdownButton, LabelText
+} from './components';
 
-import routes from '../routes';
+import routes from '../../routes';
 
 function StatusPicker({ themedStyle, jumpTo }) {
 
-  const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
-  const currentStatus = useSelector(state => state.orders.currentStatus);
+  const [currentStatus, setCurrentStatus ] = useState(routes[0]);
 
   useEffect(() => {
     jumpTo(currentStatus.key);
-  }, [ currentStatus ]);
+  }, [currentStatus]);
 
   const onItemSelect = useCallback(index => {
     setIsVisible(false);
-    dispatch(changeStatus(routes[index]));
+    setCurrentStatus(routes[index]);
   }, []);
 
   const toggleMenu = useCallback(() => {
     setIsVisible(!isVisible);
-  }, [ isVisible ]);
+  }, [isVisible]);
 
-  const renderContent = useCallback(()=> {
+  const renderContent = useCallback(() => {
     return routes.map((route, index) => {
       const onPress = () => onItemSelect(index);
       const textStyle = [
@@ -46,13 +46,11 @@ function StatusPicker({ themedStyle, jumpTo }) {
         />
       );
     });
-  }, [ currentStatus ]);
+  }, [currentStatus]);
 
   return (
     <Block row flex='disabled' center middle padding style={themedStyle.container}>
-      <Text style={themedStyle.statusText}>
-        Select Status:
-      </Text>
+      <LabelText />
       <Popover
         indicatorOffset={0}
         content={renderContent()}
@@ -60,14 +58,11 @@ function StatusPicker({ themedStyle, jumpTo }) {
         onBackdropPress={toggleMenu}
         style={themedStyle.overflowMenu}
       >
-        <Button
-          size='medium'
+        <DropdownButton
           onPress={toggleMenu}
-          style={themedStyle.button}
-          textStyle={themedStyle.buttonText}
-        >
-          {currentStatus.text}
-        </Button>
+          isVisible={isVisible}
+          currentStatus={currentStatus}
+        />
       </Popover>
     </Block>
   );
@@ -80,27 +75,17 @@ export default withStyles(memo(StatusPicker, () => true), () => ({
     backgroundColor: colors.white1,
     borderBottomColor: colors.gray2,
     borderBottomWidth: 1,
-    width: '100%'
-  },
-  button: {
-    borderWidth: 0,
-    width: 170,
-    marginLeft: sizes.margin,
-  },
-  statusText: {
-    ...textStyles.subtitle,
-    fontSize: 16,
-    color: colors.gray5
+    width: '100%',
+    minHeight: 100,
   },
   overflowMenu: {
     ...shadowStyles.shadow1,
-    width: 170
+    borderRadius: 5,
+    width: 200,
+    marginLeft: sizes.margin,
   },
   menuItemText: {
     ...textStyles.paragraph,
     fontSize: 14
   },
-  buttonText: {
-    ...textStyles.button
-  }
 }));  
