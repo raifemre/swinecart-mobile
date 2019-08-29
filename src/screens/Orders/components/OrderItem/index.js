@@ -1,5 +1,5 @@
-import React, { Fragment, memo } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import React, { memo } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import {
   withStyles
@@ -8,13 +8,14 @@ import {
 import { Avatar } from 'react-native-ui-kitten';
 
 import { ModalService } from '../../../../services';
-import { Block } from '../../../../shared/components';
-import { colors } from '../../../../constants/theme';
+import { Block } from 'shared/components';
+import { colors } from 'constants/theme';
 
-import ProductInfo from './ProductInfo';
-import OrderStatus from './OrderStatus';
-import OrderActions from './OrderActions';
-import { getHeight } from '../../../../utils/helpers';
+import {
+  ProductInfo,
+  OrderStatus,
+  OrderActions
+} from './components';
 
 function OrderItem(props) {
   
@@ -26,8 +27,6 @@ function OrderItem(props) {
   const onPressView = () => {
     ModalService.showModal('OrderDetails', { ...reservation });
   };
-
-  const height = getHeight(status);
 
   return (
     <TouchableOpacity
