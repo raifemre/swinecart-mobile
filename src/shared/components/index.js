@@ -14,6 +14,7 @@ export { default as UserAvatar } from './UserAvatar';
 export { default as IconButton } from './IconButton';
 export { default as List } from './List';
 export { default as GridList } from './GridList';
+export { default as ProductAvatar } from './ProductAvatar';
 
 export { default as HeaderBar } from './navigation/HeaderBar';
 export { default as SettingsButton } from './navigation/SettingsButton';

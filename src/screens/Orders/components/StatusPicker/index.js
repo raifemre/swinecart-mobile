@@ -71,7 +71,7 @@ export default withStyles(memo(StatusPicker, () => true), () => ({
     paddingVertical: sizes.padding,
     paddingHorizontal: sizes.padding,
     backgroundColor: colors.white1,
-    borderBottomColor: colors.gray2,
+    borderBottomColor: colors.gray1,
     borderBottomWidth: 1,
     width: '100%',
     minHeight: 100,

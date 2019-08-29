@@ -9,7 +9,11 @@ function Block(props) {
     flex, row, center, left, middle, right, space, 
     padding, padding2, paddingTop, paddingLeft, paddingBottom, paddingHorizontal, paddingVertical,
     marginBottom, marginBottom2, marginTop, marginTop2, margin, marginRight, marginLeft, marginVertical,
-    style, children, backgroundColor, ...otherProps
+    borderBottomWidth, borderBottomColor,
+    children, 
+    backgroundColor, 
+    style, 
+    ...otherProps
   } = props;
 
   const blockStyles = [
@@ -23,6 +27,10 @@ function Block(props) {
     space && { justifyContent: `space-${space}` },
     backgroundColor && { backgroundColor: colors[backgroundColor] },
     row && styles.row,
+
+    borderBottomWidth && { borderBottomWidth },
+    borderBottomColor && { borderBottomColor: colors[borderBottomColor] },
+
     padding && styles.padding,
     padding2 && styles.padding2,
     paddingTop && styles.paddingTop,
