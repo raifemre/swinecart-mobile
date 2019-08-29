@@ -22,7 +22,7 @@ export function getOrderRequests(id, page, limit) {
     }
     else {
       const { requests } = data.data;
-      dispatch({  
+      dispatch({
         type: FETCH_REQUESTS_SUCCESS, 
         payload: { 
           requests: map(requests, requestMapper),

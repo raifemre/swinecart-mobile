@@ -1,54 +1,33 @@
 import React, { Fragment, memo } from 'react';
-import { withStyles } from 'react-native-ui-kitten/theme';
-import { Text } from 'react-native-ui-kitten';
+import { Text } from 'shared/components';
+import { addS, formatStatusTime } from 'utils/formatters';
 
-import { textStyles, colors, sizes } from '../../../../constants/theme';
+const statusTexts = {
+  'requested': 'Requested',
+  'reserved': 'Reserved',
+  'onDelivery': 'On Delivery',
+  'sold': 'Sold',
+};
 
-import {
-  addS, formatStatusTime
-} from '../../../../utils/formatters';
-
-function OrderStatus(props) {
-
-  const { themedStyle, status, reservation, requestCount } = props;
-
-  const statusTexts = {
-    'requested': 'Requested',
-    'reserved': 'Reserved',
-    'onDelivery': 'On Delivery',
-    'sold': 'Sold',
-  };
-
+function OrderStatus({ status, reservation, requestCount }) {
   return (
     <Fragment>
-      <Text
-        category='s2'
-        style={themedStyle.statusStyle}
-      >
+      <Text label size={14} color='black1' marginBottom={0.25} marginTop={1}>
         {statusTexts[status]}
       </Text>
       {
         status === 'requested' &&
-        <Text
-          category='s2'
-          style={themedStyle.requestsStyle}
-        >
-          {`by ${requestCount} ${addS(requestCount, 'user')}`}
-        </Text> 
+        <Text caption1 color='gray3' size={14}>
+          {`by ${requestCount} ${addS(requestCount, 'customer')}`}
+        </Text>
       }
       {
         status !== 'requested' &&
         <Fragment>
-          <Text
-            category='s2'
-            style={themedStyle.requestsStyle}
-          >
+          <Text caption1 color='gray3' size={14}>
             {`to ${reservation.customerName}`}
           </Text>
-          <Text
-            category='s2'
-            style={themedStyle.requestsStyle}
-          >
+          <Text caption1 color='gray3' size={14}>
             {formatStatusTime(reservation.statusTime)}
           </Text>
         </Fragment>
@@ -57,16 +36,4 @@ function OrderStatus(props) {
   );
 }
 
-export default withStyles(memo(OrderStatus, () => true), () => ({
-  statusStyle: {
-    ...textStyles.label,
-    marginTop: sizes.margin / 2,
-    color: '#000000',
-    fontSize: 14,
-  },
-  requestsStyle: {
-    ...textStyles.caption1,
-    color: colors.gray3,
-    fontSize: 14,
-  }
-}));
+export default memo(OrderStatus, () => true);

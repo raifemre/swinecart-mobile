@@ -30,7 +30,7 @@ function Block(props) {
     paddingBottom && styles.paddingBottom,
     paddingHorizontal && styles.paddingHorizontal,
     paddingVertical && styles.paddingVertical,
-    marginTop && styles.marginTop,
+    marginTop && { marginTop: sizes.margin * marginTop },
     marginTop2 && styles.marginTop2,
     margin && styles.margin,
     marginVertical && styles.marginVertical,

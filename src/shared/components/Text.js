@@ -8,16 +8,26 @@ function Text(props) {
 
   const {
     themedStyle, 
-    size, color,
-    headline, subtitle,
+    size, color, lineHeight,
+    headline, subtitle, paragraph, caption1, caption2, label,
+    marginTop, marginBottom,
     ...otherProps
   } = props;
 
   const textStyles = [
     headline && themedStyle.headline,
     subtitle && themedStyle.subtitle,
+    paragraph && themedStyle.paragraph,
+    caption1 && themedStyle.caption1,
+    caption2 && themedStyle.caption2,
+    label && themedStyle.label,
     size && { fontSize: size, lineHeight: 1.2 * size },
-    color && { color: colors[color] }
+    lineHeight && { lineHeight },
+    color && { color: colors[color] },
+
+    marginTop && { marginTop: sizes.margin * marginTop, },
+    marginBottom && { marginBottom: sizes.margin * marginBottom, },
+
   ];
 
   return (

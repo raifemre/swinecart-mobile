@@ -6,8 +6,8 @@ const base = apisauce.create({
   baseURL: API_URL,
   timeout: 20000,
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
+    // Accept: "application/json",
+    // "Content-Type": "application/json",
   },
 });
 

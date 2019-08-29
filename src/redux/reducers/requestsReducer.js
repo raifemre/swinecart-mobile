@@ -14,7 +14,7 @@ const initialState = {
   isRefreshing: false,
   isLoadingMore: false,
   currentPage: 1,
-  limit: 1,
+  limit: 10,
 };
 
 const updateItems = (state, newValues) => {

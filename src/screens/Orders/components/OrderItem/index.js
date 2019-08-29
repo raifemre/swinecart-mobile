@@ -21,7 +21,7 @@ function OrderItem(props) {
   const { themedStyle, data } = props;
   const { status, requestCount, product, reservation } = data;
 
-  const { id, name, type, breed, image } = product;
+  const { name, type, breed, image } = product;
 
   const onPressView = () => {
     ModalService.showModal('OrderDetails', { ...reservation });
@@ -29,9 +29,13 @@ function OrderItem(props) {
 
   const height = getHeight(status);
 
-  const innerComponent = () => (
-    <Fragment>
-      <Block row padding style={[themedStyle.container, { height }]}>
+  return (
+    <TouchableOpacity
+      disabled={status === 'requested'}
+      activeOpacity={0.50}
+      onPress={onPressView}
+    >
+      <Block row padding style={[themedStyle.container]}>
         <Avatar
           shape='round'
           source={{ uri: image }}
@@ -39,37 +43,11 @@ function OrderItem(props) {
         />
         <Block paddingHorizontal>
           <ProductInfo name={name} type={type} breed={breed} />
-          <OrderStatus
-            status={status}
-            requestCount={requestCount}
-            reservation={reservation}
-          />
-          <OrderActions 
-            status={status} 
-            product={product}
-            reservation={reservation}
-          />
+          <OrderStatus status={status} requestCount={requestCount} reservation={reservation} />
+          <OrderActions status={status} product={product} reservation={reservation} />
         </Block>
       </Block>
-    </Fragment>
-  );
-
-  return (
-    <Fragment>
-      {
-        status !== 'requested' && 
-
-        <TouchableOpacity
-          activeOpacity={0.50}
-          onPress={onPressView}
-        >
-          {innerComponent()}
-        </TouchableOpacity>
-      }
-      {
-        status === 'requested' && innerComponent()
-      }
-    </Fragment>
+    </TouchableOpacity>
   );
 }
 
