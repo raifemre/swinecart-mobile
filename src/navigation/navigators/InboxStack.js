@@ -4,24 +4,25 @@ import {
 
 import {
   Inbox, Chat
-} from '../../screens';
+} from 'screens';
+
+import transitionConfig from 'constants/transitionConfig';
 
 const navigator = createStackNavigator({
   Inbox: Inbox,
   Chat: Chat
 }, {
-    initialRouteName: 'Inbox',
-    defaultNavigationOptions: ({ navigation }) => {
-      return {
-        header: null
-      }
-    }
-  });
+  initialRouteName: 'Inbox',
+  headerMode: 'none',
+  transitionConfig: transitionConfig,
+  defaultNavigationOptions: {
+  }
+});
 
 navigator.navigationOptions = ({ navigation }) => {
   return {
-    // tabBarVisible: false,
     tabBarVisible: navigation.state.index > 0 ? false : true,
+    // tabBarVisible: false,
   };
 };
 

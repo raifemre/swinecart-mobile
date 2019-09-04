@@ -7,7 +7,7 @@ import {
   withStyles
 } from 'react-native-ui-kitten/theme';
 
-import { textStyles, shadowStyles } from '../../../constants/theme';
+import { colors, textStyles, shadowStyles } from 'constants/theme';
 
 function HeaderBar(props) {
 
@@ -16,7 +16,6 @@ function HeaderBar(props) {
     themedStyle
   } = props;
 
-
   const headerBarStyle = [
     themedStyle.headerBar,
     hasShadow && shadowStyles.shadow1,
@@ -24,10 +23,11 @@ function HeaderBar(props) {
 
   return (
     <Fragment>
+      
       <TopNavigation
         style={headerBarStyle}
         title={title}
-        titleStyle={[textStyles.headline, themedStyle.titleStyle]}
+        titleStyle={themedStyle.titleStyle}
         alignment='center'
         leftControl={leftControl}
         rightControls={rightControls}
@@ -42,7 +42,8 @@ export default withStyles(memo(HeaderBar, () => true), theme => ({
     backgroundColor: theme['color-primary-500'],
   },
   titleStyle: {
-    color: '#ffffff'
+    ...textStyles.headline,
+    color: colors.white1
   },
   statusBar: {
     backgroundColor: theme['color-primary-100'],

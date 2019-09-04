@@ -4,17 +4,18 @@ import {
 
 import {
   Dashboard
-} from '../../screens';
+} from 'screens';
+
+import transitionConfig from 'constants/transitionConfig';
 
 const navigator = createStackNavigator({
   Dashboard: Dashboard
 }, {
-    initialRouteName: 'Dashboard',
-    defaultNavigationOptions: ({ navigation }) => {
-      return {
-        header: null
-      }
-    }
-  });
+  initialRouteName: 'Dashboard',
+  headerMode: 'none',
+  transitionConfig: transitionConfig,
+  defaultNavigationOptions: {
+  }
+});
 
 export default navigator;

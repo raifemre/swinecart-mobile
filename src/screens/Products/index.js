@@ -20,7 +20,7 @@ function Container() {
         title='Products'
         leftControl={<AddProductButton />}
       />
-      <ProductsList />
+      {/* <ProductsList /> */}
     </Fragment>
   );
 

@@ -4,18 +4,19 @@ import {
 
 import {
   Products, AddProduct, ProductDetails
-} from '../../screens';
+} from 'screens';
+
+import transitionConfig from 'constants/transitionConfig';
 
 const navigator = createStackNavigator({
   Products: Products,
   AddProduct: AddProduct,
   ProductDetails: ProductDetails,
 }, {
-    initialRouteName: 'Products',
-  defaultNavigationOptions: ({ navigation }) => {
-    return {
-      header: null
-    }
+  initialRouteName: 'Products',
+  headerMode: 'none',
+  transitionConfig: transitionConfig,
+  defaultNavigationOptions: {
   }
 });
 

@@ -23,7 +23,7 @@ export function loginUser(email, password) {
         const { token } = data.data;
         await AsyncStorage.setItem('token', token);
         dispatch({ type: LOGIN_SUCCESS });
-        NavigationService.navigate('Breeder');
+        // NavigationService.navigate('Breeder');
       }
     }
 

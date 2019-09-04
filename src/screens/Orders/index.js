@@ -7,7 +7,7 @@ function Container() {
     <Fragment>
       <HeaderBar title='Orders' />
       {/* <OrdersList status='requested' /> */}
-      <OrdersTabView />
+      {/* <OrdersTabView /> */}
     </Fragment>
   );
 }

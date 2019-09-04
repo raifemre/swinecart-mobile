@@ -1,15 +1,18 @@
 import { createStackNavigator } from 'react-navigation';
 
-import Login from '../../screens/Login';
+import {
+  Login
+} from 'screens';
+
+import transitionConfig from 'constants/transitionConfig';
 
 const navigator = createStackNavigator({
   Login: Login,
 }, {
   initialRouteName: 'Login',
-  defaultNavigationOptions: ({ navigation }) => {
-    return {
-      header: null
-    }
+  headerMode: 'none',
+  transitionConfig: transitionConfig,
+  defaultNavigationOptions: {
   }
 });
 

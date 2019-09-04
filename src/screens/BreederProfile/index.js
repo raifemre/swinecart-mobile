@@ -1,21 +1,18 @@
 import React, { Fragment, memo } from 'react';
 
-import {
-  HeaderBar, ContainerView, SettingsButton
-} from '../../shared/components';
+import { HeaderBar, SettingsButton } from 'shared/components';
 
-import {
-  OfficeInfo
-} from './components';
+import { OfficeInfo } from './components';
 
 function Container(props) {
-
   return (
     <Fragment>
-      <HeaderBar title='Profile'
+      <HeaderBar
+        title='Profile'
+        hasShadow
         rightControls={<SettingsButton />}
       />
-      <OfficeInfo />
+      {/* <OfficeInfo /> */}
     </Fragment>
   )
 

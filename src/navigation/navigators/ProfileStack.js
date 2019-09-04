@@ -2,19 +2,20 @@ import { createStackNavigator } from 'react-navigation';
 
 import { 
   BreederProfile, Settings
-} from '../../screens';
+} from 'screens';
+
+import transitionConfig from 'constants/transitionConfig';
 
 const navigator = createStackNavigator({
-  Profile: BreederProfile,
+  BreederProfile: BreederProfile,
   Settings: Settings,
 }, {
-    initialRouteName: 'Profile',
-    defaultNavigationOptions: ({ navigation }) => {
-      return {
-        header: null
-      }
-    }
-  });
+  initialRouteName: 'BreederProfile',
+  headerMode: 'none',
+  transitionConfig: transitionConfig,
+  defaultNavigationOptions: {
+  }
+});
 
 navigator.navigationOptions = ({ navigation }) => {
   return {

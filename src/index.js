@@ -1,4 +1,5 @@
 import React, { useEffect, memo } from 'react';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
@@ -25,6 +26,7 @@ function App() {
   return (
     <Provider store={store}>
       <ApplicationProvider mapping={mapping} theme={colors}>
+        <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
         <RootNavigator ref={NavigationService.setTopLevelNavigator} />
         <ModalContainer ref={ModalService.setModalContainerRef} />
       </ApplicationProvider>

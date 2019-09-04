@@ -1,17 +1,15 @@
 import React, { Fragment, memo } from 'react';
 
-import { HeaderBar } from '../../shared/components';
+import { HeaderBar } from 'shared/components';
 
-import {
-  InboxTabView
-} from './components';
+import { InboxTabView } from './components';
 
 function Container(props) {
 
   return (
     <Fragment>
       <HeaderBar title='Inbox' />
-      <InboxTabView />
+      {/* <InboxTabView /> */}
     </Fragment>
   )
 
