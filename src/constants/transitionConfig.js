@@ -6,7 +6,7 @@ import {
 export default () => {
   return {
     transitionSpec: {
-      duration: 1000,
+      duration: 300,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
       useNativeDriver: true,

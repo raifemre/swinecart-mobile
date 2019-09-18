@@ -1,19 +1,20 @@
 import React, { Fragment, memo } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   HeaderBar, ContainerView, BackButton
-} from '../../shared/components';
+} from 'shared/components';
 
 import {
   Section
 } from './components';
-import { NavigationService, AuthService } from '../../services';
 
 function Container(props) {
 
+  const dispatch = useDispatch();
+
   const onPressLogout = async () => {
-    // await AuthService.logout();
-    NavigationService.navigate('Public');
+    dispatch.auth.logout();
   }
 
   return (

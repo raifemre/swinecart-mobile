@@ -11,12 +11,7 @@ const base = apisauce.create({
   },
 });
 
-// console.log(API_URL);
-
-base.addAsyncRequestTransform(request => async () => {
-  const token = await AsyncStorage.getItem('token');
-  request.headers.Authorization = `Bearer ${token}`;
-});
+console.log(API_URL);
 
 base.addResponseTransform(response => {
 
@@ -43,7 +38,7 @@ base.addMonitor(({ config: request, ...response }) => {
   // console.dir('Request Headers: ', reqHeaders);
   // console.dir('Request Token:', reqHeaders.Authorization);
   // console.dir('Request Data: ', reqData);
-  // console.dir(resDuration, 'Request Endpoint:', endpoint);
+  console.dir(resDuration, 'Request Endpoint:', endpoint);
 
   // console.dir('Response Data: ', resData);
   // console.dir('Response Headers: ', resHeaders);
@@ -52,7 +47,6 @@ base.addMonitor(({ config: request, ...response }) => {
 const promiseHandler = ({ data, ok, problem, status }) => {
   return new Promise((resolve, reject) => {
     if (!ok && problem) {
-      // console.log(data);
       reject({ problem, status });
     }
     else {

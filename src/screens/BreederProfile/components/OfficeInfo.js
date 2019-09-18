@@ -2,20 +2,17 @@ import React, { Fragment, memo, useState, useEffect } from 'react';
 import { Avatar } from 'react-native-ui-kitten';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { InfoRow, Block, ContainerView, LoadingView } from '../../../shared/components';
-
-import { colors } from '../../../constants/theme';
-
-import { getBreederProfile } from '../../../redux/actions/breederProfile';
+import { InfoRow, Block, ContainerView, LoadingView } from 'shared/components';
+import { colors } from 'constants/theme';
 
 function OfficeInfo(props) {
 
   const profile = useSelector(state => state.breederProfile.profile);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getBreederProfile());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getBreederProfile());
+  // }, []);
 
   return (
     <Fragment>

@@ -11,13 +11,13 @@ function Container() {
   }, []);
 
   const checkToken = async () => {
-    const token = await AsyncStorage.getItem('token');
-    if (token) {
-      NavigationService.navigate('Breeder');
-    }
-    else {
+    // const token = await AsyncStorage.getItem('token');
+    // if (token) {
+    //   NavigationService.navigate('Breeder');
+    // }
+    // else {
       NavigationService.navigate('Public');
-    }
+    // }
   };
 
   return (

@@ -2,27 +2,24 @@ import React, { Fragment, memo, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
-import { Block, Input } from '../../../shared/components';
+import { Block, Input } from 'shared/components';
 import LoginButton from './LoginButton';
-import { LoginSchema } from '../../../utils/validationSchemas';
-
-import { loginUser } from '../../../redux/actions/auth';
+import { LoginSchema } from 'utils/validationSchemas';
 
 function Form() {
 
   const dispatch  = useDispatch();
-  const isLoading = useSelector(state => state.auth.isLoggingIn);
+  const isLoading = useSelector(state => state.loading.effects.auth.login);
 
   const [initialValues, setInitialValues] = useState({
-    email: 'danny33@murray.org',
+    email: 'gavin11@hudson.biz',
     password: 'secret12',
     // email: '',
     // password: ''
   });
 
-
   const onPressLogin = ({ email, password }) => {
-    dispatch(loginUser(email, password));
+    dispatch.auth.login({ email, password })
   };
 
   return (

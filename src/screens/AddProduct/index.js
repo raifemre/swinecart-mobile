@@ -2,11 +2,11 @@ import React, { Fragment, memo } from 'react';
 
 import {
   HeaderBar, BackButton, PreviewButton
-} from '../../shared/components';
+} from 'shared/components';
 
-import { 
-  AddProductForm
-} from './components';
+// import { 
+//   AddProductForm
+// } from './components';
 
 function Container(props) {
   
@@ -17,7 +17,7 @@ function Container(props) {
         leftControl={<BackButton />}
         rightControls={<PreviewButton />}
       />
-      <AddProductForm />
+      {/* <AddProductForm /> */}
     </Fragment>
   )
 
