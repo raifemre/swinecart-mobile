@@ -19,10 +19,10 @@ function BreederTabBar({ navigation }) {
       selectedIndex={navigation.state.index}
       onSelect={onTabSelect}
     >
-      <BottomNavTab title='Products' iconName='shopping-bag' />
+      {/* <BottomNavTab title='Products' iconName='shopping-bag' />
       <BottomNavTab title='Orders' iconName='list' />
       <BottomNavTab title='Dashboard' iconName='grid' />
-      <BottomNavTab title='Inbox' iconName='inbox' />
+      <BottomNavTab title='Inbox' iconName='inbox' /> */}
       <BottomNavTab title='Profile' iconName='user' />
     </BottomNavigation>
   );

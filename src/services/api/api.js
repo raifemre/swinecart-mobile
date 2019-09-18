@@ -56,6 +56,11 @@ const promiseHandler = ({ data, ok, problem, status }) => {
 };
 
 const api = {
+
+  setAuthToken(token) {
+    base.setHeader('Authorization', token ? `Bearer ${token}` : null);
+  },
+
   async get(url, params = {}, options = {}) {
     const response = await base.get(url, params, options);
     return promiseHandler(response);
@@ -64,7 +69,7 @@ const api = {
     const response = base.delete(url, params, options);
     return promiseHandler(response);
   },
-  async post(url, data = {}, options = {}) {
+    async post(url, data = {}, options = {}) {
     const response = await base.post(url, data, options);
     return promiseHandler(response);
   },

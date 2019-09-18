@@ -1,7 +1,7 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 import AsyncStorage from '@react-native-community/async-storage';
-import { AuthService } from 'services';
+import { AuthService, Api } from 'services';
 
 export default {
   // State
@@ -26,7 +26,6 @@ export default {
 
   // Side Effects
   login: thunk(async (actions, payload) => {
-
     const { email, password } = payload;
 
     actions.setError({ hasError: false });
@@ -39,12 +38,13 @@ export default {
     }
     else {
       const { token } = data.data;
-      actions.saveTokenToStorage({ token });
+      Api.setAuthToken(token);
       actions.setToken({ token });
+      actions.saveTokenToStorage({ token });
     }
 
     actions.setLoggingIn({ isLoggingIn: false });
-    
+
   }),
 
   logout: thunk(async (actions, payload) => {

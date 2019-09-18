@@ -6,6 +6,6 @@ const store = createStore(models, {
 
 });
 
-console.dir(store.getState());
+// console.dir(store.getState());
 
 export default store;
