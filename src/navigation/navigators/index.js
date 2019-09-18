@@ -10,7 +10,7 @@ const RootNavigator = createSwitchNavigator({
   Public: PublicStackNavigator,
   Breeder: BreederTabNavigator
 }, {
-    initialRouteName: 'Public'
+    initialRouteName: 'AuthChecker'
 });
 
 export default createAppContainer(RootNavigator);

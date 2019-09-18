@@ -1,7 +1,7 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 import AsyncStorage from '@react-native-community/async-storage';
-import { AuthService, Api } from 'services';
+import { AuthService, Api, NavigationService } from 'services';
 
 export default {
   // State
@@ -51,9 +51,16 @@ export default {
 
   }),
 
-  getTokenFromStorage: thunk(async (actions, payload) => {
+  checkStorageForToken: thunk(async (actions, payload) => {
     const token = await AsyncStorage.getItem('token');
-    actions.setToken(token);
+    if (token) {
+      Api.setAuthToken(token);
+      actions.setToken({ token });
+      actions.saveTokenToStorage({ token });
+    }
+    else {
+      NavigationService.navigate('Public');
+    }
   }),
 
   saveTokenToStorage: thunk(async (actions, payload) => {

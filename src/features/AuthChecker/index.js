@@ -1,29 +1,21 @@
 import React, { Fragment, memo, useEffect } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
-
-import { NavigationService } from 'services';
+import { useStoreActions } from 'easy-peasy';
 import { Block, Text } from 'shared/components';
 
 function Container() {
 
-  useEffect(() => {
-    checkToken();
-  }, []);
+  const checkStorage = useStoreActions(
+    actions => actions.auth.checkStorageForToken
+  );
 
-  const checkToken = async () => {
-    // const token = await AsyncStorage.getItem('token');
-    // if (token) {
-    //   NavigationService.navigate('Breeder');
-    // }
-    // else {
-      NavigationService.navigate('Public');
-    // }
-  };
+  useEffect(() => {
+    checkStorage();
+  }, []);
 
   return (
     <Fragment>
       <Block flex={1} center middle backgroundColor='primary'>
-        <Text>
+        <Text color='white1' size={24}>
           Loading...
         </Text>
       </Block>
