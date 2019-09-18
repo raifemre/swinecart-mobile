@@ -1,10 +1,20 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useEffect } from 'react';
+import { useStoreActions } from 'easy-peasy';
 
 import { HeaderBar, SettingsButton } from 'shared/components';
 
 import { OfficeInfo } from './components';
 
 function Container(props) {
+
+  const getProfile = useStoreActions(
+    actions => actions.breederProfile.getData
+  );
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return (
     <Fragment>
       <HeaderBar
@@ -12,7 +22,7 @@ function Container(props) {
         hasShadow
         rightControls={<SettingsButton />}
       />
-      {/* <OfficeInfo /> */}
+      <OfficeInfo />
     </Fragment>
   )
 

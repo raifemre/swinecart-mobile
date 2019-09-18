@@ -38,4 +38,19 @@ export const Request = {
   customer_name: 'customerName',
   customer_province: 'customerProvince',
   user_id: 'userId'
-}
+};
+
+export const BreederProfile = {
+  id: 'id',
+  contactPerson_mobile: 'contactPersonMobile',
+  contactPerson_name: 'contactPersonName',
+  img_path: 'logoUrl',
+  officeAddress_addressLine1: 'addressLine1',
+  officeAddress_addressLine2: 'addressLine2',
+  officeAddress_province: 'province',
+  officeAddress_zipCode: 'zipCode',
+  office_landline: 'officeLandline',
+  office_mobile: 'officeMobile',
+  produce: 'produce',
+  website: 'website',
+};

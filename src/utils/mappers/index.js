@@ -1,6 +1,6 @@
 import transform from 'lodash/transform';
 import {
-  Order, Product, Reservation, Request
+  Order, Product, Reservation, Request, BreederProfile
 } from './responseMappings'
 
 const statusTexts = {
@@ -15,6 +15,14 @@ export function productMapper(rawData) {
   return transform(rawData, (result, value, key) => {
     if (Product[key]) {
       result[Product[key]] = value;
+    }
+  }, {});
+}
+
+export function breederProfileMapper(rawData) {
+  return transform(rawData, (result, value, key) => {
+    if (BreederProfile[key]) {
+      result[BreederProfile[key]] = value;
     }
   }, {});
 }

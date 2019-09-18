@@ -1,55 +1,67 @@
-import React, { Fragment, memo, useState, useEffect } from 'react';
+import React, { memo } from 'react';
+import { useStoreState } from 'easy-peasy';
 import { Avatar } from 'react-native-ui-kitten';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { InfoRow, Block, ContainerView, LoadingView } from 'shared/components';
-import { colors } from 'constants/theme';
 
 function OfficeInfo(props) {
-
-  const profile = useSelector(state => state.breederProfile.profile);
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getBreederProfile());
-  // }, []);
-
-  return (
-    <Fragment>
-      {
-        profile && <ContainerView>
-          <Block marginBottom>
-            <Block center middle paddingTop flex='disabled' style={{ backgroundColor: colors.white1 }}>
-              <Avatar
-                shape='rounded'
-                source={{ uri: `http://swinecart.pcaarrd.dost.gov.ph${profile.img_path}` }}
-                style={{ width: 128, height: 128 }}
-              />
-            </Block>
-          </Block>
-          <Block marginTop marginBottom style={{ backgroundColor: '#ffffff' }}>
-            <InfoRow label='Address Line 1' data={profile.officeAddress_addressLine1} />
-            <InfoRow label='Address Line 2' data={profile.officeAddress_addressLine2} />
-            <InfoRow label='Province' data={profile.officeAddress_province} />
-            <InfoRow label='Postal / Zip Code' data={profile.officeAddress_zipCode}/>
-            <InfoRow label='Landline' data={profile.office_landline}/>
-            <InfoRow label='Mobile' data={profile.office_mobile}/>
-          </Block>
-          <Block marginTop marginBottom style={{ backgroundColor: '#ffffff' }}>
-            <InfoRow label='Name' data={profile.contactPerson_name}/>
-            <InfoRow label='Mobile' data={profile.contactPerson_mobile}/>
-          </Block>
-          <Block marginTop marginBottom style={{ backgroundColor: '#ffffff' }}>
-            <InfoRow label='Website' data={profile.website}/>
-            <InfoRow label='Produce' data={profile.produce}/>
-          </Block>
-        </ContainerView>
-      }
-      {
-        !profile && <LoadingView />
-      }
-    </Fragment>
+  
+  const isLoading = useStoreState(
+    state => state.breederProfile.isLoading
   );
+
+  const hasError = useStoreState(
+    state => state.breederProfile.hasError
+  );
+
+  const data = useStoreState(
+    state => state.breederProfile.data
+  );
+
+  
+  if (isLoading) {
+    return (
+      <LoadingView />
+      );
+    }
+    
+  else if (hasError) {
+    return (
+      <LoadingView />
+    );
+  }
+
+  else if (data) {
+    return (
+      <ContainerView>
+        <Block marginBottom>
+          <Block center middle paddingTop flex='disabled' backgroundColor='white1'>
+            <Avatar
+              shape='rounded'
+              source={{ uri: `http://swinecart.pcaarrd.dost.gov.ph${data.logoUrl}` }}
+              style={{ width: 128, height: 128 }}
+            />
+          </Block>
+        </Block>
+        <Block marginTop marginBottom backgroundColor='white1'>
+          <InfoRow label='Address Line 1' data={data.addressLine1} />
+          <InfoRow label='Address Line 2' data={data.addressLine2} />
+          <InfoRow label='Province' data={data.province} />
+          <InfoRow label='Postal / Zip Code' data={data.zipCode} />
+          <InfoRow label='Landline' data={data.landline} />
+          <InfoRow label='Mobile' data={data.mobile} />
+        </Block>
+        <Block marginTop marginBottom backgroundColor='white1'>
+          <InfoRow label='Name' data={data.contactPersonName} />
+          <InfoRow label='Mobile' data={data.contactPersonMobile} />
+        </Block>
+        <Block marginTop marginBottom backgroundColor='white1'>
+          <InfoRow label='Website' data={data.website} />
+          <InfoRow label='Produce' data={data.produce} />
+        </Block>
+      </ContainerView>
+    );
+  };
 
 }
 
