@@ -1,16 +1,16 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
-import BreederTabNavigator from './BreederTabs';
+// import BreederTabNavigator from './BreederTabs';
 import PublicStackNavigator from './PublicStack';
 
-import { AuthChecker } from 'screens';
+import { AuthChecker } from 'features';
 
 const RootNavigator = createSwitchNavigator({
   AuthChecker: AuthChecker,
   Public: PublicStackNavigator,
-  Breeder: BreederTabNavigator
+  // Breeder: BreederTabNavigator
 }, {
-    initialRouteName: 'Breeder'
+    initialRouteName: 'Public'
 });
 
 export default createAppContainer(RootNavigator);

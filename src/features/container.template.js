@@ -2,7 +2,7 @@ import React, { Fragment, memo } from 'react';
 
 import {
   HeaderBar, ContainerView
-} from '../../shared/components';
+} from 'shared/components';
 
 function Container(props) {
 

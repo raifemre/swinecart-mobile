@@ -2,7 +2,7 @@ import React, { useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RequestItem from './RequestItem';
 
-import { getOrderRequests, getMoreOrderRequests } from '../../../redux/actions/requests';
+import { getOrderRequests, getMoreOrderRequests } from '../../../store/actions/requests';
 
 import { List } from '../../../shared/components';
 

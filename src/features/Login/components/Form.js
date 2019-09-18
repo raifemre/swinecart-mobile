@@ -1,25 +1,26 @@
-import React, { Fragment, memo, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Fragment, memo, useState } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Formik } from 'formik';
 
 import { Block, Input } from 'shared/components';
 import LoginButton from './LoginButton';
+
 import { LoginSchema } from 'utils/validationSchemas';
 
 function Form() {
 
-  const dispatch  = useDispatch();
-  const isLoading = useSelector(state => state.loading.effects.auth.login);
+  const isLoggingIn = useStoreState(state => state.auth.isLoggingIn);
+  const loginUser = useStoreActions(actions => actions.auth.login);
 
   const [initialValues, setInitialValues] = useState({
-    email: 'gavin11@hudson.biz',
+    email: 'ardella34@hotmail.com',
     password: 'secret12',
     // email: '',
     // password: ''
   });
 
   const onPressLogin = ({ email, password }) => {
-    dispatch.auth.login({ email, password })
+    loginUser({ email, password });
   };
 
   return (
@@ -52,7 +53,7 @@ function Form() {
                   secureTextEntry={true}
                 />
                 <LoginButton
-                  isLoading={isLoading}
+                  isLoading={isLoggingIn}
                   onPress={handleSubmit}
                 />
               </Block>

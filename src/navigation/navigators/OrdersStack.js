@@ -2,7 +2,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import {
   Orders, Requests
-} from 'screens';
+} from 'features';
 
 import transitionConfig from 'constants/transitionConfig';
 

@@ -24,7 +24,7 @@ function Container() {
     <Fragment>
       <Block flex={1} center middle backgroundColor='primary'>
         <Text>
-
+          Loading...
         </Text>
       </Block>
     </Fragment>

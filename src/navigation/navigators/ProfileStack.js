@@ -2,7 +2,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import { 
   BreederProfile, Settings
-} from 'screens';
+} from 'features';
 
 import transitionConfig from 'constants/transitionConfig';
 

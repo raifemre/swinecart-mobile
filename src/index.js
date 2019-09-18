@@ -1,6 +1,6 @@
 import React, { useEffect, memo } from 'react';
 import { StatusBar } from 'react-native';
-import { Provider } from 'react-redux';
+import { StoreProvider } from 'easy-peasy';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
 import Orientation from 'react-native-orientation';
@@ -12,7 +12,7 @@ import ModalContainer from 'shared/components/ModalContainer';
 
 import { colors } from 'constants/theme';
 
-import store from './redux/store';
+import store from './store';
 
 useScreens();
 
@@ -24,13 +24,13 @@ function App() {
 
 
   return (
-    <Provider store={store}>
+    <StoreProvider store={store}>
       <ApplicationProvider mapping={mapping} theme={colors}>
         <StatusBar backgroundColor={colors.primary} barStyle='light-content' />
         <RootNavigator ref={NavigationService.setTopLevelNavigator} />
         <ModalContainer ref={ModalService.setModalContainerRef} />
       </ApplicationProvider>
-    </Provider>
+    </StoreProvider>
   )
 }
 export default memo(App, () => true);

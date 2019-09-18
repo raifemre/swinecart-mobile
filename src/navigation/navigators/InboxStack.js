@@ -4,7 +4,7 @@ import {
 
 import {
   Inbox, Chat
-} from 'screens';
+} from 'features';
 
 import transitionConfig from 'constants/transitionConfig';
 

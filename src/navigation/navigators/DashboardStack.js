@@ -4,7 +4,7 @@ import {
 
 import {
   Dashboard
-} from 'screens';
+} from 'features';
 
 import transitionConfig from 'constants/transitionConfig';
 

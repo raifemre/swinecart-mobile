@@ -10,8 +10,7 @@ module.exports = {
         'services': './src/services',
         'utils': './src/utils',
         'navigation': './src/navigation',
-        'screens': './src/screens',
-        'actions': './src/redux/actions',
+        'features': './src/features',
       }
     }]
   ],

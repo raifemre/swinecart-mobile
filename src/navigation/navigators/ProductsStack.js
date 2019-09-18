@@ -4,7 +4,7 @@ import {
 
 import {
   Products, AddProduct, ProductDetails
-} from 'screens';
+} from 'features';
 
 import transitionConfig from 'constants/transitionConfig';
 
