@@ -1,7 +1,7 @@
 import transform from 'lodash/transform';
 import {
   Order, Product, Reservation, Request, BreederProfile
-} from './responseMappings'
+} from '../mappings'
 
 const statusTexts = {
   'requested': 'requested',

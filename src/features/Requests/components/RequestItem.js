@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { TouchableOpacity } from 'react-native';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
@@ -18,11 +19,15 @@ function RequestItem(props) {
   const { themedStyle, data } = props;
   const { customerProvince, customerName } = data;
 
+  const reserveProduct = useStoreActions(actions => actions.reservations.reserveProduct);
+
+
   const onPressView = () => {
     ModalService.showModal('OrderDetails', { ...data });
   };
 
   const onPressReserve = () => {
+    reserveProduct({ orderRequest: data });
   };
 
   return (

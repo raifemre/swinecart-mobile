@@ -1,7 +1,7 @@
 import { action, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 import { BreederProfileService } from 'services';
-import { breederProfileMapper } from 'utils/mappers';
+import { breederProfileMapper } from 'utils/mappers/responseMappers';
 
 export default {
   // State

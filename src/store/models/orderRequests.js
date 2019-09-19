@@ -1,9 +1,9 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 import { OrderService } from 'services';
-import { requestMapper } from 'utils/mappers';
+import { requestMapper } from 'utils/mappers/responseMappers';
 
-const LIMIT = 1;
+const LIMIT = 10;
 
 export default {
   currentId: null,
@@ -82,12 +82,14 @@ export default {
     }
     else {
 
-      const transformedData = data.data.requests.map(requestMapper);
-      console.dir(transformedData);
-      actions.setRequests({
-        requests: [...(requests || []), ...transformedData],
-        page: page + 1
-      });
+      if (data.data.requests && data.data.requests.length > 0) {
+        const transformedData = data.data.requests.map(requestMapper);
+
+        actions.setRequests({
+          requests: [...(requests || []), ...transformedData],
+          page: page + 1
+        });
+      }
 
     }
 

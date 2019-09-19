@@ -1,13 +1,13 @@
 import { action, computed, thunk } from 'easy-peasy';
 import to from 'await-to-js';
 import { OrderService } from 'services';
-import { orderMapper } from 'utils/mappers';
+import { orderMapper } from 'utils/mappers/responseMappers';
 
 function orderObjectGetter(state, status) {
   return state.orders.ordersByStatus[status];
 }
 
-const LIMIT = 1;
+const LIMIT = 10;
 
 export default {
   // State
@@ -16,6 +16,30 @@ export default {
   },
   ordersByStatus: {
     requested: {
+      orders: null,
+      page: 1,
+      hasError: false,
+      isLoadingMore: false,
+      isRefreshing: false,
+      isLoading: false,
+    },
+    reserved: {
+      orders: null,
+      page: 1,
+      hasError: false,
+      isLoadingMore: false,
+      isRefreshing: false,
+      isLoading: false,
+    },
+    onDelivery: {
+      orders: null,
+      page: 1,
+      hasError: false,
+      isLoadingMore: false,
+      isRefreshing: false,
+      isLoading: false,
+    },
+    sold: {
       orders: null,
       page: 1,
       hasError: false,
@@ -65,14 +89,12 @@ export default {
 
     }
     else {
-
       const transformedData = data.orders.map(orderMapper);
-
       actions.setOrders({
         orders: [...transformedData],
         status,
         page: page + 1
-      })
+      });
     }
 
     actions.setLoadingByStatus({ isLoading: false, status });
@@ -92,14 +114,15 @@ export default {
       actions.setErrorByStatus({ hasError: true, status });
     }
     else {
-
-      const transformedData = data.orders.map(orderMapper);
-
-      actions.setOrders({
-        orders: [...(orders || []), ...transformedData],
-        status,
-        page: page + 1
-      })
+      
+      if (data.orders && data.orders.length > 0) {
+        const transformedData = data.orders.map(orderMapper);
+        actions.setOrders({
+          orders: [...(orders || []), ...transformedData],
+          status,
+          page: page + 1
+        })
+      }
     }
 
     actions.setLoadingMoreByStatus({ isLoadingMore: false, status });

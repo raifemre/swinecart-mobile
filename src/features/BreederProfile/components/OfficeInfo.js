@@ -47,8 +47,8 @@ function OfficeInfo(props) {
           <InfoRow label='Address Line 2' data={data.addressLine2} />
           <InfoRow label='Province' data={data.province} />
           <InfoRow label='Postal / Zip Code' data={data.zipCode} />
-          <InfoRow label='Landline' data={data.landline} />
-          <InfoRow label='Mobile' data={data.mobile} />
+          <InfoRow label='Landline' data={data.officeLandline} />
+          <InfoRow label='Mobile' data={data.officeMobile} />
         </Block>
         <Block marginTop marginBottom backgroundColor='white1'>
           <InfoRow label='Name' data={data.contactPersonName} />

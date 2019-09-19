@@ -4,7 +4,7 @@ import { API_URL } from 'react-native-dotenv';
 
 const base = apisauce.create({
   baseURL: API_URL,
-  timeout: 20000,
+  timeout: 5000,
   headers: {
     // Accept: "application/json",
     // "Content-Type": "application/json",
@@ -39,7 +39,7 @@ base.addMonitor(({ config: request, ...response }) => {
   // console.dir('Request Token:', reqHeaders.Authorization);
   // console.dir('Request Data: ', reqData);
   console.dir(resDuration, 'Request Endpoint:', endpoint);
-
+  // console.dir(request);
   // console.dir('Response Data: ', resData);
   // console.dir('Response Headers: ', resHeaders);
 });

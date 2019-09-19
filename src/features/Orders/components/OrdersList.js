@@ -40,7 +40,7 @@ function OrdersList({ status }) {
   );
 
   const keyExtractor = item => {
-    return `${item.product.id}`;
+    return item.reservation ? `${item.reservation.id}` : `${item.product.id}`;
   };
 
   const onPressLoadMore = () => {

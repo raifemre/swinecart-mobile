@@ -8,8 +8,8 @@ function Container() {
   return (
     <Fragment>
       <HeaderBar title='Orders' />
-      <OrdersList status='requested' />
-      {/* <OrdersTabView /> */}
+      {/* <OrdersList status='requested' /> */}
+      <OrdersTabView />
     </Fragment>
   );
 }

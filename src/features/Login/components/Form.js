@@ -13,7 +13,7 @@ function Form() {
   const loginUser = useStoreActions(actions => actions.auth.login);
 
   const [initialValues, setInitialValues] = useState({
-    email: 'helena.gleichner@volkman.biz',
+    email: 'ivah55@hotmail.com',
     password: 'secret12',
     // email: '',
     // password: ''
