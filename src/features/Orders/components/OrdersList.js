@@ -1,49 +1,75 @@
 import React, { memo, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+
+import { List, LoadingView } from 'shared/components';
 
 import OrderItem from './OrderItem';
-import { List } from 'shared/components';
 
-import { fetchOrders, fetchMoreOrders } from 'actions/orders';
+function orderObjectGetter(state, status) {
+  return state.orders.ordersByStatus[status];
+}
 
 function OrdersList({ status }) {
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(fetchOrders(status, 1, limit));
+    getOrders({ status });
   }, []);
 
-  const orders = useSelector(state => state.orders[status].byIds);
-  const isLoading = useSelector(state => state.orders[status].isLoading);
-  const isRefreshing = useSelector(state => state.orders[status].isRefreshing);
-  const isLoadingMore = useSelector(state => state.orders[status].isLoadingMore);
-  const currentPage = useSelector(state => state.orders[status].currentPage);
-  const limit = useSelector(state => state.orders[status].limit);
+  const getOrders = useStoreActions(
+    actions => actions.orders.getOrdersByStatus
+  );
 
-  const keyExtractor = item => `${item.product.id}`;
+  const getMoreOrders = useStoreActions(
+    actions => actions.orders.getMoreOrdersByStatus
+  );
+
+  const orders = useStoreState(state =>
+    orderObjectGetter(state, status).orders
+  );
+
+  const isRefreshing = useStoreState(state => 
+    orderObjectGetter(state, status).isRefreshing
+  );
+
+  const isLoadingMore = useStoreState(state =>
+    orderObjectGetter(state, status).isLoadingMore
+  );
+
+  const isLoading = useStoreState(state =>
+    orderObjectGetter(state, status).isLoading
+  );
+
+  const keyExtractor = item => {
+    return `${item.product.id}`;
+  };
 
   const onPressLoadMore = () => {
-    dispatch(fetchMoreOrders(status, currentPage, limit));
+    getMoreOrders({ status });
   };
 
   const onRefresh = () => {
-    dispatch(fetchOrders(status, 1, limit));
+    getOrders({ status });
   };
 
-  return (
-    <List
-      data={orders}
-      Component={OrderItem}
-      keyExtractor={keyExtractor}
-      emptyListMessage={'No Orders!'}
-      isRefreshing={isRefreshing}
-      onPressLoadMore={onPressLoadMore}
-      onRefresh={onRefresh}
-      isLoading={isLoading}
-      isLoadingMore={isLoadingMore}
-    />
-  );
+  if (isLoading) {
+    return (
+      <LoadingView />
+    );
+  }
+  else if (!isLoading && orders) {
+    return (
+      <List
+        data={orders}
+        Component={OrderItem}
+        keyExtractor={keyExtractor}
+        emptyListMessage={'No Orders!'}
+        isRefreshing={isRefreshing}
+        onPressLoadMore={onPressLoadMore}
+        onRefresh={onRefresh}
+        isLoadingMore={isLoadingMore}
+      />
+    );
+  }
 }
 
 export default memo(OrdersList);

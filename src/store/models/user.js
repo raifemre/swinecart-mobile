@@ -20,24 +20,28 @@ export default {
   }),
 
   // Thunk Listeners
-  onUserLogin: thunkOn(
+  onSavetoStorage: thunkOn(
     (actions, storeActions) => storeActions.auth.saveTokenToStorage,
     async (actions, target) => {
 
-      const [error, data] = await to(AuthService.getLoggedInUser());
+      if (target.payload.token) {
+        const [error, data] = await to(AuthService.getLoggedInUser());
 
-      if (error) {
+        if (error) {
+          NavigationService.navigate('Public');
+        }
+        else {
+          const { user } = data.data;
+          const accountType = last(user.userable_type.split('\\'));
 
+          actions.setUserData({ data: user });
+          actions.setAccountType({ accountType });
+          NavigationService.navigate(accountType);
+
+        }
       }
       else {
-        const { user } = data.data;
-        const accountType = last(user.userable_type.split('\\'));
-
-        actions.setUserData({ data: user });
-        actions.setAccountType({ accountType });
-
-        NavigationService.navigate(accountType);
-
+        NavigationService.navigate('Public');
       }
 
     },

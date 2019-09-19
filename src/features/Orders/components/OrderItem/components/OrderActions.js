@@ -9,7 +9,7 @@ function OrderActions(props) {
   const { status, product, reservation } = props;
 
   const onPressView = () => {
-    NavigationService.navigate('Requests');
+    NavigationService.navigate('Requests', { productId: product.id });
   };
 
   const onPressPrimaryAction = () => {

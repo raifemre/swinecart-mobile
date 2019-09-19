@@ -1,5 +1,5 @@
-import React, { Fragment, memo} from 'react';
-import { HeaderBar, BackButton } from '../../shared/components';
+import React, { Fragment, memo } from 'react';
+import { HeaderBar, BackButton } from 'shared/components';
 
 import { RequestsList } from './components';
 

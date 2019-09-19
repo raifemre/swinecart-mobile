@@ -16,10 +16,9 @@ const service = {
   getOrderRequests(id, page = 1, limit = 1000) {
     return API.get(`${URL_PREFIX}/products/${id}/requests`, { page, limit });
   },
-  // async reserveProduct(requestData) {
-  //   const response = await API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, transform('reserveProduct')(requestData));
-  //   return data;
-  // },
+  reserveProduct(requestData) {
+    return API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, requestData);
+  },
   // async sendForDelivery(requestData) {
   //   const response = await API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, transform('sendForDelivery')(requestData));
   //   return data;

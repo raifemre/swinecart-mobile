@@ -19,8 +19,6 @@ function OrderItem({ data }) {
     ModalService.showModal('OrderDetails', { ...reservation });
   }, []);
 
-  console.log(name);
-
   return (
     <TouchableOpacity
       disabled={status === 'requested'}

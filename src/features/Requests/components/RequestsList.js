@@ -1,49 +1,64 @@
 import React, { useEffect, memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { withNavigation } from 'react-navigation';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import RequestItem from './RequestItem';
 
-import { getOrderRequests, getMoreOrderRequests } from '../../../store/actions/requests';
+import { List, LoadingView } from 'shared/components';
 
-import { List } from '../../../shared/components';
-
-function RequestsList() {
+function RequestsList({ navigation }) {
   
-  const dispatch = useDispatch();
+  const id = navigation.getParam('productId');
 
   useEffect(() => {
-    dispatch(getOrderRequests(currentId, 1, limit));
-  }, []);
+    getRequests({ id });
+  }, [ id ]);
 
-  const currentId = useSelector(state => state.requests.currentId);
-  const requests = useSelector(state => state.requests.byIds);
-  const isLoading = useSelector(state => state.requests.isLoading);
-  const isRefreshing = useSelector(state => state.requests.isRefreshing);
-  const isLoadingMore = useSelector(state => state.requests.isLoadingMore);
-  const currentPage = useSelector(state => state.requests.currentPage);
-  const limit = useSelector(state => state.requests.limit);
+  const getRequests = useStoreActions(
+    actions => actions.orderRequests.getRequests
+  );
+
+  const getMoreRequests = useStoreActions(
+    actions => actions.orderRequests.getMoreRequests
+  );
+
+  const requests = useStoreState(state => state.orderRequests.requests);
+
+  const isRefreshing = useStoreState(state => state.orderRequests.isRefreshing);
+
+  const isLoadingMore = useStoreState(state => state.orderRequests.isLoadingMore);
+
+  const isLoading = useStoreState(state => state.orderRequests.isLoading);
 
   const keyExtractor = item => `${item.customerId}`;
+
   const onPressLoadMore = () => {
-    dispatch(getMoreOrderRequests(currentId, currentPage, limit));
+    getMoreRequests({ id });
   };
 
   const onRefresh = () => {
-    dispatch(getOrderRequests(currentId, 1, limit));
+    getRequests({ id });
   };
 
-  return (
-    <List
-      data={requests}
-      Component={RequestItem}
-      keyExtractor={keyExtractor}
-      emptyListMessage={'No Requests!'}
-      isRefreshing={isRefreshing}
-      onPressLoadMore={onPressLoadMore}
-      onRefresh={onRefresh}
-      isLoading={isLoading}
-      isLoadingMore={isLoadingMore}
-    />
-  );
+  if (isLoading) {
+    return (
+      <LoadingView />
+    );
+  }
+
+  else if (!isLoading && requests) {
+    return (
+      <List
+        data={requests}
+        Component={RequestItem}
+        keyExtractor={keyExtractor}
+        emptyListMessage={'No Requests!'}
+        isRefreshing={isRefreshing}
+        onPressLoadMore={onPressLoadMore}
+        onRefresh={onRefresh}
+        isLoadingMore={isLoadingMore}
+      />
+    );
+  }
 }
 
-export default memo(RequestsList);
+export default withNavigation(memo(RequestsList));

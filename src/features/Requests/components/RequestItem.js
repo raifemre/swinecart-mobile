@@ -8,10 +8,10 @@ import {
 
 import {
   Block, UserAvatar
-} from '../../../shared/components';
+} from 'shared/components';
 
-import { textStyles, colors, sizes } from '../../../constants/theme';
-import { NavigationService, ModalService } from '../../../services';
+import { textStyles, colors, sizes } from 'constants/theme';
+import { NavigationService, ModalService } from 'services';
 
 function RequestItem(props) {
 

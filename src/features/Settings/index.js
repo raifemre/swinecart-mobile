@@ -1,5 +1,5 @@
 import React, { Fragment, memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useStoreActions } from 'easy-peasy';
 
 import {
   HeaderBar, ContainerView, BackButton
@@ -11,11 +11,11 @@ import {
 
 function Container(props) {
 
-  const dispatch = useDispatch();
+  const logoutUser = useStoreActions(actions => actions.auth.logout);
 
-  const onPressLogout = async () => {
-    dispatch.auth.logout();
-  }
+  const onPressLogout = () => {
+    logoutUser();
+  };
 
   return (
     <Fragment>

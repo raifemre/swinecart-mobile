@@ -22,16 +22,15 @@ function OfficeInfo(props) {
   if (isLoading) {
     return (
       <LoadingView />
-      );
-    }
-    
+    );
+  }
   else if (hasError) {
     return (
       <LoadingView />
     );
   }
 
-  else if (data) {
+  else if (!isLoading && data) {
     return (
       <ContainerView>
         <Block marginBottom>

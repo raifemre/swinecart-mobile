@@ -1,7 +1,8 @@
 import { createStackNavigator } from 'react-navigation';
 
 import {
-  Orders, Requests
+  Orders, 
+  Requests
 } from 'features';
 
 import transitionConfig from 'constants/transitionConfig';

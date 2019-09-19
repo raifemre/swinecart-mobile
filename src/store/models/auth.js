@@ -48,6 +48,17 @@ export default {
   }),
 
   logout: thunk(async (actions, payload) => {
+    const [error, data] = await to(AuthService.logout());
+
+    if (error) {
+
+    }
+    else {
+      Api.setAuthToken(null);
+      actions.setToken({ token: null });
+      await AsyncStorage.removeItem('token');
+      NavigationService.navigate('Public');
+    }
 
   }),
 
