@@ -1,4 +1,5 @@
 import React, { memo, useState } from 'react';
+import { useStoreActions } from 'easy-peasy';
 import Modal from 'react-native-modal';
 import { Button, Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
@@ -7,9 +8,12 @@ import { sizes, textStyles, colors } from '../../../../constants/theme';
 import Block from '../../Block';
 
 function CancelTransaction(props) {
+
   // State
 
   const [isVisible, setVisible] = useState(true);
+
+  const cancelTransaction = useStoreActions(actions => actions.reservations.cancelTransaction);
 
   const hideModal = () => {
     setVisible(false);
@@ -30,6 +34,7 @@ function CancelTransaction(props) {
   // Button Event Handlers
 
   const onPressPrimaryAction = () => {
+    cancelTransaction({ reservation })
     hideModal();
   };
 

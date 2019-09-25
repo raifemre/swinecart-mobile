@@ -19,18 +19,16 @@ const service = {
   reserveProduct(requestData) {
     return API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, requestData);
   },
-  // async sendForDelivery(requestData) {
-  //   const response = await API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, transform('sendForDelivery')(requestData));
-  //   return data;
-  // },
+  sendForDelivery(requestData) {
+    return API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, requestData);
+  },
   // async cancelTransaction(requestData) {
   //   const response = await API.delete(`${URL_PREFIX}/products/${requestData.id}/order-status`, transform('cancelTransaction')(requestData));
   //   return data;
   // },
-  // async confirmSold(requestData) {
-  //   const response = await API.post(`${URL_PREFIX}/products/${requestData.id}/order-status`, transform('confirmSold')(requestData));
-  //   return data;
-  // }
+  confirmSold(requestData) {
+    return API.post(`${URL_PREFIX}/products/${requestData.product_id}/order-status`, requestData);
+  }
 }
 
 export default service;

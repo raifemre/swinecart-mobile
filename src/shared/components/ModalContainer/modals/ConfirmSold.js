@@ -1,14 +1,15 @@
 import React, { memo, useState } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import Modal from 'react-native-modal';
 import { Button, Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { sizes, textStyles, colors } from '../../../../constants/theme';
+import { sizes, textStyles, colors } from 'constants/theme';
 import Block from '../../Block';
 
 import {
   OrderService
-} from '../../../../services';
+} from 'services';
 
 function ConfirmSold(props) {
   // State
@@ -34,11 +35,11 @@ function ConfirmSold(props) {
 
   // Button Event Handlers
 
+  const confirmSold = useStoreActions(actions => actions.reservations.confirmSold);
+
   const onPressPrimaryAction = () => {
-    // OrderService.confirmSold(data.data)
-    //   .then(response => {
-    //     hideModal();
-    //   });
+    confirmSold({ product, reservation });
+    hideModal();
   };
 
   const onPressClose = () => {

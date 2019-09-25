@@ -9,6 +9,12 @@ function orderObjectGetter(state, status) {
 
 const LIMIT = 10;
 
+const prevStatus = {
+  'reserved': 'requested',
+  'onDelivery': 'reserved',
+  'sold': 'onDelivery',
+};
+
 export default {
   // State
   ordersById: {
@@ -54,6 +60,23 @@ export default {
 
   // Actions
 
+  updateStatus: action((state, payload) => {
+    const { status, product, reservation } = orderMapper(payload.product);
+    if (state.ordersByStatus[prevStatus[status]].orders) {
+      state.ordersByStatus[prevStatus[status]].orders = state.ordersByStatus[prevStatus[status]].orders.filter(p => {
+        if (prevStatus[status] === 'requested') {
+          return p.product.id !== product.id;
+        }
+        else {
+          return p.reservation.id !== reservation.id;
+        }
+      });
+    }
+
+    state.ordersByStatus[status].orders = state.ordersByStatus[status].orders || [];
+    state.ordersByStatus[status].orders.push({ status, product, reservation });
+  }),
+
   setOrders: action((state, payload) => {
     const { orders, status, page } = payload;
     state.ordersByStatus[status].orders = orders;
@@ -76,10 +99,9 @@ export default {
   }),
 
   // Side Effects
-  getOrdersByStatus: thunk(async (actions, payload, { getStoreState }) => {
+  getOrdersByStatus: thunk(async (actions, payload) => {
     
     const { status } = payload;
-    const { page } = orderObjectGetter(getStoreState(), status);
 
     actions.setLoadingByStatus({ isLoading: true, status });
 
@@ -93,7 +115,7 @@ export default {
       actions.setOrders({
         orders: [...transformedData],
         status,
-        page: page + 1
+        page: 2
       });
     }
 

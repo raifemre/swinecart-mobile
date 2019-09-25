@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-
 import { NavigationService, ModalService } from 'services';
 
 import { Button, Block } from 'shared/components';

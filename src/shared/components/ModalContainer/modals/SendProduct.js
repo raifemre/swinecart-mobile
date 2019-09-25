@@ -1,17 +1,18 @@
 import React, { memo, useState } from 'react';
 import Modal from 'react-native-modal';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Calendar } from 'react-native-calendars';
 import { Button, Text } from 'react-native-ui-kitten';
 import { withStyles } from 'react-native-ui-kitten/theme';
 
-import { formatDeliveryDate, formatMarkedDate } from '../../../../utils/formatters';
+import { formatDeliveryDate, formatMarkedDate } from 'utils/formatters';
 
-import { sizes, textStyles, colors } from '../../../../constants/theme';
+import { sizes, textStyles, colors } from 'constants/theme';
 import Block from '../../Block';
 
 import { 
   OrderService
-} from '../../../../services';
+} from 'services';
 
 function SendProduct(props) {
 
@@ -46,13 +47,11 @@ function SendProduct(props) {
 
   // Event Handlers
 
-  const onPressPrimaryAction = () => {
+  const sendForDelivery = useStoreActions(actions => actions.reservations.sendForDelivery);
 
-    // const data = {
-    //   deliveryDate,
-    //   product_id: props.data.data.id,
-    //   reservation: props.data.data.reservation
-    // };
+  const onPressPrimaryAction = () => {
+    sendForDelivery({ deliveryDate, product, reservation });
+    hideModal();
 
   };
 
