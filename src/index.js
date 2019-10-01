@@ -3,7 +3,6 @@ import { StatusBar } from 'react-native';
 import { StoreProvider } from 'easy-peasy';
 import { mapping } from '@eva-design/eva';
 import { ApplicationProvider } from 'react-native-ui-kitten';
-import Orientation from 'react-native-orientation';
 import { useScreens } from 'react-native-screens';
 
 import RootNavigator from './navigation/navigators';
@@ -19,7 +18,7 @@ useScreens();
 function App() {
 
   useEffect(() => {
-    Orientation.lockToPortrait();
+
   }, []);
 
 

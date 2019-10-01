@@ -134,7 +134,7 @@ function SendProduct(props) {
 }
 
 
-export default withStyles(memo(SendProduct), () => ({
+withStyles(memo(SendProduct), () => ({
   modalStyle: {
     flex: 1,
     margin: sizes.margin

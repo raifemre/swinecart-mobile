@@ -13,7 +13,6 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.github.yamill.orientation.OrientationPackage;
 import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
@@ -37,8 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
             new AsyncStoragePackage(),
             new VectorIconsPackage(),
             new RNScreensPackage(),
-            new RNGestureHandlerPackage(),
-            new OrientationPackage()
+            new RNGestureHandlerPackage()
 
       );
     }
