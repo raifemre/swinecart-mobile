@@ -3,15 +3,17 @@ import {
 } from 'react-navigation';
 
 import {
-  Products, AddProduct, ProductDetails
+  Products, 
+  // AddProduct,
+  // ProductDetails
 } from 'features';
 
 import transitionConfig from 'constants/transitionConfig';
 
 const navigator = createStackNavigator({
   Products: Products,
-  AddProduct: AddProduct,
-  ProductDetails: ProductDetails,
+  // ProductDetails: ProductDetails,
+  // AddProduct: AddProduct,
 }, {
   initialRouteName: 'Products',
   headerMode: 'none',
